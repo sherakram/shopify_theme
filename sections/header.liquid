@@ -142,9 +142,6 @@
     <!-- ========== Utilities ========== -->
     <div class="header__utilities">
       <!-- Search -->
-      {% comment %} <a href="{{ routes.search_url }}" class="utility-link search-link" aria-label="Search">
-        {{ 'search.svg' | inline_asset_content }}
-      </a> {% endcomment %}
       <button type="button" class="utility-link search-link" aria-label="Search" 
         data-open-search>{{ 'search.svg' | inline_asset_content }}
       </button>
@@ -168,9 +165,9 @@
           </a>
 
           <!-- Register icon -->
-          <a href="{{ routes.account_register_url }}" class="account-link register-link" aria-label="Register">
+          {% comment %} <a href="{{ routes.account_register_url }}" class="account-link register-link" aria-label="Register">
             {{ 'user-register.svg' | inline_asset_content }}
-          </a>
+          </a> {% endcomment %}
         {% endif %}
       {% endif %}
 
@@ -254,9 +251,9 @@
               </a>
 
               <!-- Register icon -->
-              <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
+              {% comment %} <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
                 {{ 'user-register.svg' | inline_asset_content }}
-              </a>
+              </a> {% endcomment %}
             {% endif %}
           </div>
           

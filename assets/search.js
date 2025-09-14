@@ -55,38 +55,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Predictive Search
-  let timeout;
-  searchInput.addEventListener("input", (e) => {
-    clearTimeout(timeout);
-    const query = e.target.value.trim();
-    if (query.length < 2) {
-      suggestions.innerHTML = "";
-      return;
-    }
+ // Predictive Search
+let timeout;
+searchInput.addEventListener("input", (e) => {
+  clearTimeout(timeout);
+  const query = e.target.value.trim();
+  if (query.length < 2) {
+    suggestions.innerHTML = "";
+    return;
+  }
 
-    timeout = setTimeout(() => {
-      fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,article,page`)
-        .then(res => res.json())
-        .then(data => {
-          let html = "";
-          ["products","collections","articles"].forEach(type => {
-            if (data.resources.results[type].length) {
-              html += `<h4>${type}</h4><ul>`;
-              data.resources.results[type].forEach(item => {
-                html += `
-                  <li>
-                    <a href="${item.url}">
-                      ${item.image ? `<img src="${item.image}" alt="${item.title}" width="40">` : ""}
-                      <span>${item.title}</span>
-                    </a>
-                  </li>`;
-              });
-              html += "</ul>";
-            }
-          });
-          suggestions.innerHTML = html || "<p>No suggestions found.</p>";
+  timeout = setTimeout(() => {
+    fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,article,page`)
+      .then(res => res.json())
+      .then(data => {
+        let html = "";
+        ["products", "collections", "articles"].forEach(type => {
+          if (data.resources.results[type].length) {
+            html += `<h4 class="suggestion-heading">${type}</h4><ul class="suggestion-list">`;
+            data.resources.results[type].forEach(item => {
+              html += `
+                <li class="suggestion-item">
+                  <a href="${item.url}" class="suggestion-link">
+                    ${item.image ? `<img src="${item.image}" alt="${item.title}" class="suggestion-img">` : ""}
+                    <span class="suggestion-title">${item.title}</span>
+                  </a>
+                </li>`;
+            });
+            html += "</ul>";
+          }
         });
-    }, 300);
-  });
+        suggestions.innerHTML = html || "<p class='no-results'>No suggestions found.</p>";
+      });
+  }, 300);
+});
 });

@@ -283,6 +283,7 @@ h1.site-title {
 button.utility-link.search-link {
   border: none;
   background: transparent;
+  cursor: pointer;
 }
 
 /* Bottom Menu */

@@ -13,30 +13,6 @@
   style="--grid-gap: {{ section.settings.grid_gap }}px; --padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;"
   >
   {% for collection in collections %}
-    {% comment %} <a class="collection-card" href="{{ collection.url }}" style="--collection-card-bg: {{ section.settings.card_background }};">
-      {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
-        %}
-      {% else %}
-        {{ 'collection-apparel-4' | placeholder_svg_tag: 'collection-card__image' }}
-      {% endif %}
-
-      <div class="collection-card__content" style="--card-text-align:{{ section.settings.title_alignment }}">
-        <h2 class="collection-title" style="--hover-color:{{ section.settings.card_hover_color }};">{{ collection.title }}</h2> 
-
-        {% if collection.description %}
-          <p class="des">{{ collection.description | strip_html | truncatewords: 15 }}</p>
-        {% endif %}
-
-        <span class="count">{{ collection.all_products_count }} {{ 'collections.general.collection_product_count' | t }}</span>
-      </div>
-    </a> {% endcomment %}
-    
     {% render 'collection-card', collection: collection, section: section %}
   {% endfor %}
 </div>

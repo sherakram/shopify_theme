@@ -29,38 +29,6 @@
   </div>
 </div>
 
-{% comment %} {% if search.performed %}
-  {% if search.results_count == 0 %}
-    <p class="modern-search__no-results">{{ 'search.no_results_html' | t: terms: search.terms }}</p>
-  {% else %}
-    <p class="modern-search__results-count">
-      {{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}
-    </p>
-
-    {% paginate search.results by 20 %}
-      <div class="modern-search__grid">
-        {% for result in search.results %}
-          <div class="modern-search__card">
-            {% assign featured_image = result.featured_image | default: result.image %}
-            {% if featured_image %}
-              {% render 'image', class: 'modern-search__image', image: featured_image, url: result.url, width: 400 %}
-            {% endif %}
-            <div class="modern-search__content">
-              <a href="{{ result.url }}" class="modern-search__card-title">{{ result.title }}</a>
-              {% if result.price %}
-                <div class="modern-search__price">{{ result.price | money_with_currency }}</div>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="modern-search__pagination">
-        {% render 'pagination', pagination: paginate %}
-      </div>
-    {% endpaginate %}
-  {% endif %}
-{% endif %} {% endcomment %}
 
 {% if search.performed %}
   {% if search.results_count == 0 %}
@@ -80,12 +48,7 @@
               {% render 'product-card', product: result %}
             {% when 'collection' %}
               {% render 'collection-card', collection: result %}
-            {% when 'article' %}
-              {% render 'article-card', article: result %}
             {% else %}
-              <div class="modern-search__other">
-                <a href="{{ result.url }}">{{ result.title }}</a>
-              </div>
           {% endcase %}
         {% endfor %}
       </div>
@@ -94,6 +57,7 @@
         {% render 'pagination', pagination: paginate %}
       </div>
     {% endpaginate %}
+
   {% endif %}
 {% endif %}
 
@@ -236,6 +200,39 @@
   .modern-search__btn {
     width: 100%;
     border-radius: 0 0 16px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-search__box {
+    padding: 10px 20px;
+  }
+  .modern-search__box input[type="search"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .modern-search__btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .modern-search__results {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* Extra small screens (320px and below) */
+@media (max-width: 360px) {
+  .modern-search__box {
+    padding: 6px 20px;
+  }
+  .modern-search__box input[type="search"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+  .modern-search__btn {
+    font-size: 13px;
+    padding: 8px;
   }
 }
 {% endstylesheet %}
