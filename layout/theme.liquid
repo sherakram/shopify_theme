@@ -23,6 +23,9 @@
     {{ 'social-icons.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
+
+    {{ 'vendor-swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
   </head>
 
   <body>
@@ -41,5 +44,8 @@
     {% sections 'footer-group' %}
 
     <script src="{{ 'search.js' | asset_url }}" defer></script>
+    
+    <script src="{{ 'vendor-swiper-bundle.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'product-section.js' | asset_url }}" defer></script>
   </body>
 </html>

@@ -1,0 +1,43 @@
+{%- comment -%} snippets/buy-buttons.liquid
+   Expects 'product' and optional 'section_id' in render call
+{%- endcomment -%}
+{% assign section_id = section_id | default: 'global' %}
+<div id="product-form-{{ section_id }}" class="product-form">
+  <form method="post" action="{{ routes.cart_add_url }}" accept-charset="UTF-8" data-product-form>
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <label class="visually-hidden" for="quantity-{{ section_id }}">Quantity</label>
+    <input id="quantity-{{ section_id }}" type="number" name="quantity" value="1" min="1" class="product-qty" />
+
+    <button type="submit" class="btn btn--primary" name="add">Add to cart</button>
+    <button type="button" class="btn btn--secondary" data-direct-checkout>Buy it now</button>
+  </form>
+</div>
+
+<script>
+  // quick AJAX + Buy It Now behaviour (progressive)
+  (function(){
+    const root = document.getElementById('product-form-{{ section_id }}');
+    if (!root) return;
+    const form = root.querySelector('form');
+    const directBtn = root.querySelector('[data-direct-checkout]');
+    form.addEventListener('submit', function(e){
+      // let the browser handle it if JS disabled
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch('/cart/add.js', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(item => {
+          // optional: show mini-cart or toast. For demo just log
+          console.log('added', item);
+        }).catch(console.error);
+    });
+
+    directBtn && directBtn.addEventListener('click', function(){
+      // quick path: submit and go to checkout
+      const fd = new FormData(form);
+      fetch('/cart/add.js', { method: 'POST', body: fd })
+        .then(()=> { window.location = '/checkout'; })
+        .catch(()=> { window.location = '/cart'; });
+    });
+  })();
+</script>
