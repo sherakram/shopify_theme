@@ -56,8 +56,8 @@
 {%- endcomment -%}
 
 <section id="product-section-{{ section.id }}" class="product-section
-  product-section--media-{{ section.settings.media_position }}"
-  style="--product-padding-top: {{ section.settings.padding_top }}px;
+         product-section--media-{{ section.settings.media_position }}"
+         style="--product-padding-top: {{ section.settings.padding_top }}px;
          --product-padding-bottom: {{ section.settings.padding_bottom }}px;
          --media-info-gap: {{ section.settings.media_info_gap }}px;">
   <div class="product-inner" role="region" aria-label="Product details">
@@ -144,15 +144,15 @@
 
             {% when 'recommended_products' %}
               <div class="product-recommendations">
-                {% if recommendations.performed? %}
+                {% if recommendations.performed and recommendations.products_count > 0 %}
                   {% for rec in recommendations.products limit: section.settings.recommendation_count %}
                     <a href="{{ rec.url }}" class="recommendation">
-                      {{ rec | image_url: width: 300, height: 300, crop: 'center' | image_tag: class: 'rec-thumb' }}
+                      {{ rec.featured_image | image_url: width: 300, height: 300, crop: 'center' | image_tag: class: 'rec-thumb' }}
                       <span>{{ rec.title }}</span>
                     </a>
                   {% endfor %}
-                {% else %}
-                  <p class="muted">Recommendations load when the Product Recommendations API is used</p>
+                  {% else %}
+                    <p class="muted">Recommendations load when the Product Recommendations API is used</p>
                 {% endif %}
               </div>
 
