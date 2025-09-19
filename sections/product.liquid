@@ -47,13 +47,7 @@
   {% endform %}
 </div> {% endcomment %}
 
-{%- comment -%}
-  sections/product.liquid
-  - Swiper gallery with zoom button & thumbnails
-  - Customizer settings: media position, gap, paddings
-  - Blocks for title, price, divider, variant picker, buy buttons, description,
-    recommended products, inventory, payment icons, product size (opens pop-up)
-{%- endcomment -%}
+{{ 'product.css' | asset_url | stylesheet_tag }}
 
 <section id="product-section-{{ section.id }}" class="product-section
          product-section--media-{{ section.settings.media_position }}"
@@ -203,6 +197,7 @@
       </div>
     </div>
   </div>
+</section>
 
 
 {% schema %}
@@ -236,22 +231,3 @@
   }
 }
 {% endschema %}
-
-
-<style>
-    /* --- minimal styles for demo (move to assets/product.css in production) --- */
-    .product-section{padding-top:var(--product-padding-top);padding-bottom:var(--product-padding-bottom)}
-    .product-columns{display:flex;gap:var(--media-info-gap);align-items:flex-start}
-    .product-section--media-top .product-columns{flex-direction:column}
-    .product-media-column{flex:1;min-width:320px}
-    .product-info-column{flex:1;min-width:280px}
-    .product-swiper{position:relative}
-    .product-swiper .swiper-slide{display:flex;align-items:center;justify-content:center}
-    .product-zoom-btn{position:absolute;top:12px;right:12px;z-index:20;background:#fff;border:1px solid #eee;padding:8px;border-radius:6px}
-    .product-size-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:20px;z-index:9999}
-    .product-size-modal[aria-hidden="false"]{display:flex}
-    .product-size-modal__panel{background:#fff;padding:20px;border-radius:8px;max-width:900px;width:100%;max-height:90vh;overflow:auto}
-    .visually-hidden{position:absolute !important;left:-9999px !important}
-  </style>
-
-</section>
