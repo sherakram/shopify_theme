@@ -114,16 +114,54 @@
               <hr class="product-divider" />
 
             {% when 'variant_picker' %}
-              <div class="product-variants">
-                <label for="product-select-{{ section.id }}" class="visually-hidden">Choose an option</label>
-                <select id="product-select-{{ section.id }}" class="product-variant-select" aria-label="Variant">
-                  {% for variant in product.variants %}
-                    <option value="{{ variant.id }}" data-variant-title="{{ variant.title }}" {% if forloop.first %}selected{% endif %}>
-                      {{ variant.title }} — {{ variant.price | money }}
-                    </option>
-                  {% endfor %}
-                </select>
-              </div>
+              <variant-picker
+                    class="variant-picker spacing-style variant-picker--left"
+                    style="--color-strikethrough-mix: #000; --padding-block-start: 0px;--padding-block-end: 0px;--padding-inline-start: 0px;--padding-inline-end: 0px;"
+                    data-section-id="{{ section.id }}"
+                    data-product-id="{{ product.id }}"
+                    data-block-id="{{ section.id }}__variant_picker"
+                    data-product-url="{{ product.url }}"
+                    ref="mainVariantPicker"
+                    data-template-product-match="true">
+
+                    <form class="variant-picker__form">
+                      {% for option in product.options_with_values %}
+                        <div class="variant-option variant-option--dropdowns">
+                          <label for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                            {{ option.name }}
+                          </label>
+                          <div class="variant-option__select-wrapper">
+                            <select
+                              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                              name="options[{{ option.name }}]"
+                              class="variant-option__select">
+                              {% for value in option.values %}
+                                {% assign first_variant = product.variants | where: 'option' | first %}
+                                <option
+                                  value="{{ value | escape }}"
+                                  {% if option.selected_value == value %}selected{% endif %}>
+                                  {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                            <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                            </svg>
+                          </div>
+                        </div>
+                      {% endfor %}
+
+                       <noscript>
+                          <select name="id" class="variant-picker__noscript">
+                            {% for variant in product.variants %}
+                              <option value="{{ variant.id }}">
+                                {{ variant.title }} — {{ variant.price | money }}
+                              </option>
+                            {% endfor %}
+                          </select>
+                        </noscript>
+                      </form>      
+              </variant-picker>
 
             {% when 'buy_buttons' %}
               <div class="product-buy">
@@ -151,15 +189,41 @@
               </div>
 
             {% when 'product_inventory' %}
-              <div class="product-inventory" data-inventory>
+              <product-inventory class="product-inventory spacing-style" style="--padding-block-start: 0px; --padding-block-end: 0px; --padding-inline-start: 0px; --padding-inline-end: 0px;" data-product-id="{{ product.id }}">
                 {% assign total_qty = 0 %}
                 {% for variant in product.variants %}
                   {% if variant.inventory_management != nil %}
                     {% assign total_qty = total_qty | plus: variant.inventory_quantity %}
                   {% endif %}
                 {% endfor %}
-                <span>In stock: {{ total_qty }}</span>
-              </div>
+
+                {% if total_qty > 0 %}
+                  <span class="product-inventory__status product-inventory__status--in-stock">
+                    <span class="svg-wrapper product-inventory__icon product-inventory__icon-in_stock">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" fill="none" width="15" height="15">
+                        <circle cx="7.5" cy="7.5" r="7.5" fill="currentColor"></circle>
+                        <circle cx="7.5" cy="7.5" r="5" fill="currentColor" stroke="#FFF"></circle>
+                      </svg>
+                    </span>
+                    <span class="product-inventory__text" role="status" aria-label="Inventory status">
+                      In stock: {{ total_qty }}
+                    </span>
+                  </span>
+                {% else %}
+                  <span class="product-inventory__status product-inventory__status--out-of-stock">
+                    <span class="svg-wrapper product-inventory__icon product-inventory__icon-out_stock">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" fill="none" width="15" height="15">
+                        <circle cx="7.5" cy="7.5" r="7.5" fill="currentColor"></circle>
+                        <path d="M4 4L11 11M11 4L4 11" stroke="#FFF" stroke-width="1.5"/>
+                      </svg>
+                    </span>
+                    <span class="product-inventory__text" role="status" aria-label="Inventory status">
+                      Out of stock
+                    </span>
+                  </span>
+                {% endif %}
+              </product-inventory>
+
 
             {% when 'payment_icons' %}
               <div class="payment-icons">

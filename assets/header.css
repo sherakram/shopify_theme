@@ -222,10 +222,10 @@ h1.site-title {
 
 .cart-count {
   position: absolute;
-  top: -8px;
-  right: -10px;
-  background-color: var(--header-bg);
-  color: var(--header-foreground);
+  top: 0px;
+  right: 0px;
+  background-color: #000;
+  color: #fff;
   border-radius: 50%;
   font-size: 0.75rem;
   width: 18px;

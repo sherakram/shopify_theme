@@ -1,43 +1,136 @@
-{%- comment -%} snippets/buy-buttons.liquid
-   Expects 'product' and optional 'section_id' in render call
-{%- endcomment -%}
 {% assign section_id = section_id | default: 'global' %}
-<div id="product-form-{{ section_id }}" class="product-form">
-  <form method="post" action="{{ routes.cart_add_url }}" accept-charset="UTF-8" data-product-form>
-    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-    <label class="visually-hidden" for="quantity-{{ section_id }}">Quantity</label>
-    <input id="quantity-{{ section_id }}" type="number" name="quantity" value="1" min="1" class="product-qty" />
 
-    <button type="submit" class="btn btn--primary" name="add">Add to cart</button>
-    <button type="button" class="btn btn--secondary" data-direct-checkout>Buy it now</button>
-  </form>
+<div id="product-form-{{ section_id }}" class="product-form">
+  {% form 'product', product, id: "product-form-{{ section_id }}", class: "product-form-element" %}
+    
+    <!-- Hidden input that updates with current variant -->
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+    <div class="product-form-buttons spacing-style product-form-buttons--stacked">
+      <div class="qty-cart">
+        <!-- Quantity Selector -->
+        <div class="quantity-selector" data-quantity>
+          <button type="button" class="quantity-btn minus" aria-label="Decrease quantity">−</button>
+          <input id="quantity-{{ section_id }}" type="number" name="quantity" value="1" min="1" step="1" aria-label="Quantity">
+          <button type="button" class="quantity-btn plus" aria-label="Increase quantity">+</button>
+        </div>
+
+        <!-- Add to cart -->
+        <button type="submit" name="add" class="button add-to-cart-button" data-add-to-cart>
+          <span class="add-to-cart-text">Add to cart</span>
+          <span class="add-to-cart-added">✓ Added</span>
+        </button>
+      </div>
+
+      <!-- Buy it now -->
+      <div class="accelerated-checkout-block">
+        {{ form | payment_button }}
+        {% comment %} <button type="button" class="button buy-now-button" data-direct-checkout>
+          Buy it now
+        </button> {% endcomment %}
+      </div>
+
+    </div>
+  {% endform %}
 </div>
 
 <script>
-  // quick AJAX + Buy It Now behaviour (progressive)
-  (function(){
-    const root = document.getElementById('product-form-{{ section_id }}');
-    if (!root) return;
-    const form = root.querySelector('form');
-    const directBtn = root.querySelector('[data-direct-checkout]');
-    form.addEventListener('submit', function(e){
-      // let the browser handle it if JS disabled
-      e.preventDefault();
-      const formData = new FormData(form);
-      fetch('/cart/add.js', { method: 'POST', body: formData })
-        .then(r => r.json())
-        .then(item => {
-          // optional: show mini-cart or toast. For demo just log
-          console.log('added', item);
-        }).catch(console.error);
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.getElementById("product-form-{{ section_id }}");
+  if (!root) return;
 
-    directBtn && directBtn.addEventListener('click', function(){
-      // quick path: submit and go to checkout
-      const fd = new FormData(form);
-      fetch('/cart/add.js', { method: 'POST', body: fd })
-        .then(()=> { window.location = '/checkout'; })
-        .catch(()=> { window.location = '/cart'; });
-    });
-  })();
+  const form = root.querySelector("form");
+  const variantInput = form.querySelector("input[name='id']");
+  const qtyInput = form.querySelector("input[name='quantity']");
+  const minus = form.querySelector(".quantity-btn.minus");
+  const plus = form.querySelector(".quantity-btn.plus");
+  const addBtn = form.querySelector("[data-add-to-cart]");
+  const directBtn = form.querySelector("[data-direct-checkout]");
+
+  // ✅ Listen for variant changes and update hidden input
+  document.addEventListener("change", (e) => {
+    if (e.target.closest(".variant-option__select")) {
+      const selects = [...document.querySelectorAll(".variant-option__select")];
+      const selectedOptions = selects.map(s => s.value);
+      const variants = {{ product.variants | json }};
+      const match = variants.find(v =>
+        v.options.every((opt, i) => opt === selectedOptions[i])
+      );
+      if (match) {
+        variantInput.value = match.id;
+      }
+    }
+
+    // ✅ Update inventory display when variant changes
+    const inventoryBlock = document.querySelector(".product-inventory .product-inventory__text");
+    if (inventoryBlock) {
+       if (match && match.available) {
+          if (match.inventory_management && match.inventory_quantity !== null) {
+            inventoryBlock.textContent = `In stock: ${match.inventory_quantity}`;
+            inventoryBlock.closest(".product-inventory__status")
+            .classList.remove("product-inventory__status--out-of-stock");
+            inventoryBlock.closest(".product-inventory__status")
+            .classList.add("product-inventory__status--in-stock");
+          } else {
+            inventoryBlock.textContent = "In stock";
+        }
+        } else {
+            inventoryBlock.textContent = "Out of stock";
+            inventoryBlock.closest(".product-inventory__status")
+            .classList.remove("product-inventory__status--in-stock");
+            inventoryBlock.closest(".product-inventory__status")
+           .classList.add("product-inventory__status--out-of-stock");
+          }
+       }
+  });
+
+  // ✅ Quantity buttons
+  minus.addEventListener("click", () => {
+    let value = parseInt(qtyInput.value) || 1;
+    if (value > 1) qtyInput.value = value - 1;
+  });
+
+  plus.addEventListener("click", () => {
+    let value = parseInt(qtyInput.value) || 1;
+    qtyInput.value = value + 1;
+  });
+
+  // ✅ Add to cart (AJAX)
+  form.addEventListener("submit", (e) => {
+    if (e.submitter && e.submitter.hasAttribute("data-direct-checkout")) {
+      return; // handled separately
+    }
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("/cart/add.js", { method: "POST", body: formData })
+      .then(r => {
+        if (!r.ok) throw r;
+        return r.json();
+      })
+      .then(item => {
+        console.log("Added to cart:", item);
+        addBtn.classList.add("added");
+        setTimeout(() => addBtn.classList.remove("added"), 2000);
+      })
+      .catch(err => {
+        console.error("Cart add failed:", err);
+        window.location.href = "/cart";
+      });
+  });
+
+  // ✅ Direct checkout
+  directBtn.addEventListener("click", () => {
+    const formData = new FormData(form);
+
+    fetch("/cart/add.js", { method: "POST", body: formData })
+      .then(r => {
+        if (!r.ok) throw r;
+        return r.json();
+      })
+      .then(() => { window.location.href = "/checkout"; })
+      .catch(() => { window.location.href = "/cart"; });
+  });
+});
 </script>
