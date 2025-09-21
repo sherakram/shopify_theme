@@ -1,53 +1,5 @@
-{% comment %} <div class="product-container">
-  <div class="product-grid">
-    <div class="product-media">
-      {% for media in product.media %}
-        <div class="product-images">
-          {% for image in product.images %}
-            {% render 'image', class: 'product-image', image: image %}
-          {% else %}
-            {{ 'product-apparel-1' | placeholder_svg_tag: 'product-image' }}
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </div>
-    <div class="product-info"></div>
-  </div>
-</div> {% endcomment %}
-
-
-
-{% comment %} <div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div> {% endcomment %}
-
-{% comment %} <div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
-
-    <input type="text" name="quantity" min="1" value="1">
-
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div> {% endcomment %}
-
 {{ 'product.css' | asset_url | stylesheet_tag }}
+
 
 <section id="product-section-{{ section.id }}" class="product-section
          product-section--media-{{ section.settings.media_position }}"
@@ -136,7 +88,6 @@
                               name="options[{{ option.name }}]"
                               class="variant-option__select">
                               {% for value in option.values %}
-                                {% assign first_variant = product.variants | where: 'option' | first %}
                                 <option
                                   value="{{ value | escape }}"
                                   {% if option.selected_value == value %}selected{% endif %}>
@@ -170,7 +121,9 @@
 
             {% when 'product_description' %}
               <div class="product-description">
-                {{ product.description | truncatewords: 80 }}
+                <div class="product-desc-content" data-desc-content>
+                  {{ product.description }}
+                </div>
                 <button class="product-desc-toggle" data-desc-toggle>Read more</button>
               </div>
 
@@ -227,11 +180,15 @@
 
             {% when 'payment_icons' %}
               <div class="payment-icons">
-                {% if section.settings.payment_icons_image != blank %}
-                  {{ section.settings.payment_icons_image | image_url | image_tag }}
-                {% else %}
-                  <!-- Placeholder merchant can replace -->
-                  <span>Payment icons here</span>
+                {% if section.settings.payment_icons_image %}
+                  {% for type in shop.enabled_payment_types %}
+                    {{ type | payment_type_svg_tag }}
+                  {% endfor %}
+                {% elsif section.settings.custom_payment_icons != blank %}
+                  {% assign icons = section.settings.custom_payment_icons | split: ',' %}
+                  {% for icon in icons %}
+                    {{ icon | strip | payment_type_svg_tag }}
+                  {% endfor %}
                 {% endif %}
               </div>
 
@@ -273,21 +230,22 @@
       { "id": "padding_top", "type":"range", "label":"Top padding (px)", "min":0, "max":200, "step":4, "default":40 },
       { "id": "padding_bottom", "type":"range", "label":"Bottom padding (px)", "min":0, "max":200, "step":4, "default":40 },
       { "id":"show_thumbnails","type":"checkbox","label":"Show thumbnails","default":true },
-      { "id":"payment_icons_image","type":"image_picker","label":"Payment icons image" },
+      { "id":"payment_icons_image","type":"checkbox","label":"Show Payment icons", "default":false },
+      { "type": "text","id": "custom_payment_icons","label": "Custom payment icons (comma separated)","default": "visa,master,american-express,paypal" },
       { "id":"size_popup_image","type":"image_picker","label":"Size popup image" },
       { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4}
     ],
     "blocks": [
-      { "type":"title","name":"Title" },
-      { "type":"price","name":"Price" },
+      { "type":"title","name":"Title","limit": 1 },
+      { "type":"price","name":"Price","limit": 1 },
       { "type":"divider","name":"Divider" },
-      { "type":"variant_picker","name":"Variant Picker" },
-      { "type":"buy_buttons","name":"Buy Buttons" },
-      { "type":"product_description","name":"Product Description" },
+      { "type":"variant_picker","name":"Variant Picker","limit": 1 },
+      { "type":"buy_buttons","name":"Buy Buttons","limit": 1 },
+      { "type":"product_description","name":"Product Description","limit": 1 },
       { "type":"recommended_products","name":"Recommended products" },
-      { "type":"product_inventory","name":"Product inventory" },
-      { "type":"payment_icons","name":"Payment icons" },
-      { "type":"product_size","name":"Product size","settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" } ] }
+      { "type":"product_inventory","name":"Product inventory","limit": 1 },
+      { "type":"payment_icons","name":"Payment icons","limit": 1 },
+      { "type":"product_size","name":"Product size","limit": 1,"settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" } ] }
     ],
     "presets": [{ "name": "Product (Swiper)", "category": "Products" }],
   "disabled_on": {

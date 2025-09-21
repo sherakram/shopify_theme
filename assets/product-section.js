@@ -47,6 +47,51 @@
     if (trigger && modal) trigger.addEventListener('click', ()=> modal.setAttribute('aria-hidden','false'));
     if (close) close.addEventListener('click', ()=> modal.setAttribute('aria-hidden','true'));
     if (modal) modal.addEventListener('click', function(e){ if (e.target === modal) modal.setAttribute('aria-hidden','true'); });
+
+
+    // 📌 Read More with truncation toggle
+    const toggleBtn = sectionEl.querySelector('[data-desc-toggle]');
+    const descContent = sectionEl.querySelector('[data-desc-content]');
+    if (toggleBtn && descContent) {
+      const fullText = descContent.innerHTML.trim();
+      if (!fullText) {
+        // no description at all → hide toggle
+        toggleBtn.style.display = "none";
+        return;
+      }
+
+      const words = fullText.split(/\s+/);
+      const limit = 40; // number of words to show when collapsed
+
+      if (words.length <= limit) {
+        // description already short → show full text & hide toggle
+        descContent.innerHTML = fullText;
+        toggleBtn.style.display = "none";
+        return;
+      }
+
+      const truncatedText = words.slice(0, limit).join(" ") + "...";
+      let expanded = false;
+      descContent.innerHTML = truncatedText;
+
+      toggleBtn.addEventListener("click", () => {
+        descContent.classList.add("collapsing");
+
+        setTimeout(() => {
+          if (expanded) {
+            descContent.innerHTML = truncatedText;
+            toggleBtn.textContent = "Read more";
+            expanded = false;
+          } else {
+            descContent.innerHTML = fullText;
+            toggleBtn.textContent = "Read less";
+            expanded = true;
+          }
+          descContent.classList.remove("collapsing");
+        }, 200); // match transition timing
+      });
+    }
+    
   }
 
   function initAll(){
@@ -72,3 +117,4 @@
     ready();
   }
 })();
+
