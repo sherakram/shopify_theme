@@ -10,7 +10,7 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-      <div class="product-media-column">
+      <div class="product-media-column thumbs-{{ section.settings.thumb_position }}">
         <!-- Swiper main -->
         <div class="product-swiper product-swiper-{{ section.id }}">
           <div class="swiper-wrapper">
@@ -225,15 +225,18 @@
 {
   "name": "t:general.product",
   "settings": [
-      { "id": "media_position", "type": "select", "label": "Media position", "options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"},{"value":"top","label":"Top"}], "default":"left" },
-      { "id": "media_info_gap", "type":"range", "label":"Media — Info gap (px)", "min":0, "max":80, "step":2, "default":28 },
-      { "id": "padding_top", "type":"range", "label":"Top padding (px)", "min":0, "max":200, "step":4, "default":40 },
-      { "id": "padding_bottom", "type":"range", "label":"Bottom padding (px)", "min":0, "max":200, "step":4, "default":40 },
-      { "id":"show_thumbnails","type":"checkbox","label":"Show thumbnails","default":true },
-      { "id":"payment_icons_image","type":"checkbox","label":"Show Payment icons", "default":false },
-      { "type": "text","id": "custom_payment_icons","label": "Custom payment icons (comma separated)","default": "visa,master,american-express,paypal" },
+      {"type": "header", "content": "t:general.layout"},
+      { "id": "media_position", "type": "select", "label": "t:general.media_position", "options":[{"value":"left","label":"t:options.alignment.left"},{"value":"right","label":"t:options.alignment.right"}], "default":"left" },
+      { "id": "media_info_gap", "type":"range", "label":"t:general.gap", "min":0, "max":80, "step":2, "default":28 },
+      { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
+      {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
+      { "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },
+      { "type": "text","id": "custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" },
       { "id":"size_popup_image","type":"image_picker","label":"Size popup image" },
-      { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4}
+      { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4},
+      {"type": "header", "content": "t:labels.padding"},
+      { "id": "padding_top", "type":"range", "label":"t:sections.all.padding.padding_top", "min":0, "max":100, "step":4, "default":40 },
+      { "id": "padding_bottom", "type":"range", "label":"t:sections.all.padding.padding_bottom", "min":0, "max":100, "step":4, "default":40 },
     ],
     "blocks": [
       { "type":"title","name":"Title","limit": 1 },

@@ -1,9 +1,22 @@
 .product-section{padding-top:var(--product-padding-top);padding-bottom:var(--product-padding-bottom)}
-.product-columns{display:grid;grid-template-columns: minmax(300px, 1fr) minmax(320px, 1fr);gap:var(--media-info-gap);align-items:flex-start;margin: 0 auto;}
+.product-columns{display:grid;grid-template-columns: minmax(300px, 1fr) minmax(320px, 1fr);gap:var(--media-info-gap);align-items:flex-start;margin: 0 auto;grid-template-areas:"media info";}
 .product-section--media-top .product-columns{flex-direction:column}
 .product-media-column{display:grid;gap:20px;align-items:start;}
+.product-media-column {grid-area: media;}
 .swiper-button-next,.swiper-button-prev{height:20px;color:black;padding-left:12px;padding-right:12px;}
 .product-info-column{display:flex;flex-direction:column;gap:20px;}
+.product-info-column {grid-area: info;}
+
+/* Media left (desktop) */
+.product-section--media-left .product-columns {
+  grid-template-areas: "media info";
+}
+
+/* Media right (desktop) */
+.product-section--media-right .product-columns {
+  grid-template-areas: "info media";
+}
+
 .product-swiper{position:relative;width:100%;aspect-ratio:1/1;border:1px solid #eee;border-radius:12px;overflow:hidden;}
 .product-swiper .swiper-slide{display:flex;align-items:center;justify-content:center}
 .product-zoom-btn{display:none;}
@@ -142,7 +155,7 @@
 }
 
 .quantity-selector input {
-  width: 60px;
+  width: 50px;
   text-align: center;
   border: none;
   font-size: 1rem;
@@ -212,7 +225,6 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
-  margin-top: 8px;
 }
 
 .shopify-payment-button__button--unbranded:hover:not([disabled]) {
@@ -362,31 +374,33 @@ button.product-size-trigger:focus {
 }
 
 /*Responsive*/
-@media (max-width: 480px) {
-  .qty-cart {
-    flex-direction: column;
-  }
-  .quantity-selector,.add-to-cart-button {
-    max-width: 100%;
-    width: 100%;
-  }
-  .quantity-selector {
-  flex: 0 0 50px;
-  }
-}
-
-
-@media (max-width: 900px) {
-  .product-columns {
+@media (max-width: 600px) {
+  .product-columns,
+  .product-section--media-left .product-columns,
+  .product-section--media-right .product-columns {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "info";
   }
+
   .product-media-column {
     grid-template-columns: 1fr;
   }
+
   .product-thumbs {
     flex-direction: row;
     justify-content: center;
   }
 }
 
+@media (min-width: 601px) and (max-width: 1024px) {
+  .product-columns {
+    grid-template-columns: 1fr 1fr; /* equal split */
+    gap: 24px; /* a bit more breathing room on tablets */
+  }
 
+  .product-media-column {
+    gap: 16px;
+  }
+}
