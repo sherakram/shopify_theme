@@ -10,7 +10,7 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-      <div class="product-media-column thumbs-{{ section.settings.thumb_position }}">
+      {% comment %} <div class="product-media-column thumbs-{{ section.settings.thumb_position }}">
         <!-- Swiper main -->
         <div class="product-swiper product-swiper-{{ section.id }}">
           <div class="swiper-wrapper">
@@ -45,7 +45,73 @@
             </div>
           </div>
         {% endif %}
+      </div> {% endcomment %}
+
+      <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
+  
+        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
+          <div class="product-thumbs thumbs-left">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Main Media -->
+        <div class="product-media-column">
+          <div class="product-swiper product-swiper-{{ section.id }}">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-media-id="{{ media.id }}">
+                  {% render 'product-media', media: media %}
+                </div>
+              {% endfor %}
+            </div>
+
+            <!-- zoom / nav -->
+            <button type="button" class="product-zoom-btn" aria-label="Zoom image">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M21 21l-4.35-4.35" />
+                <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </button>
+
+            <div class="swiper-button-prev" aria-hidden="true"></div>
+            <div class="swiper-button-next" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
+          <div class="product-thumbs thumbs-right">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
+          <div class="product-thumbs thumbs-bottom">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
       </div>
+
+      
+
 
       <div class="product-info-column">
         {% comment %} Render blocks chosen in customizer (merchant can reorder) {% endcomment %}

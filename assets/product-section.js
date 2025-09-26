@@ -6,13 +6,29 @@
     // optional thumbs
     const thumbsEl = sectionEl.querySelector('.product-thumbs');
     let thumbsSwiper = null;
+    // if (thumbsEl) {
+    //   thumbsSwiper = new Swiper(thumbsEl, {
+    //     spaceBetween: 8,
+    //     slidesPerView: 4,
+    //     watchSlidesProgress: true,
+    //     slideToClickedSlide: true,
+    //     breakpoints: { 480: { slidesPerView: 5 } }
+    //   });
+    // }
+
     if (thumbsEl) {
+      // detect direction based on wrapper class
+      const isVertical = thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right');
+
       thumbsSwiper = new Swiper(thumbsEl, {
+        direction: isVertical ? 'vertical' : 'horizontal',
         spaceBetween: 8,
-        slidesPerView: 4,
+        slidesPerView: isVertical ? 'auto' : 4,
         watchSlidesProgress: true,
         slideToClickedSlide: true,
-        breakpoints: { 480: { slidesPerView: 5 } }
+        breakpoints: { 
+         480: { slidesPerView: isVertical ? 'auto' : 5 } 
+        }
       });
     }
 
