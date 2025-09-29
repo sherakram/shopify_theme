@@ -110,9 +110,6 @@
         {% endif %}
       </div>
 
-      
-
-
       <div class="product-info-column">
         {% comment %} Render blocks chosen in customizer (merchant can reorder) {% endcomment %}
         {% for block in section.blocks %}
@@ -142,7 +139,7 @@
                     ref="mainVariantPicker"
                     data-template-product-match="true">
 
-                    <form class="variant-picker__form">
+                    {% comment %} <form class="variant-picker__form">
                       {% for option in product.options_with_values %}
                         <div class="variant-option variant-option--dropdowns">
                           <label for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -177,7 +174,97 @@
                             {% endfor %}
                           </select>
                         </noscript>
-                      </form>      
+                    </form>{% endcomment %}
+
+                    <form class="variant-picker__form">
+                      {% for option in product.options_with_values %}
+                        <div class="variant-option variant-option--{{ block.settings.style }}">
+                          <label for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                            {{ option.name }}
+                          </label>
+
+                          {% if block.settings.style == "dropdown" %}
+                            <div class="variant-option__select-wrapper">
+                              <select
+                                id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                                name="options[{{ option.name }}]"
+                                class="variant-option__select">
+                                {% for value in option.values %}
+                                  <option
+                                    value="{{ value | escape }}"
+                                    {% if option.selected_value == value %}selected{% endif %}>
+                                    {{ value }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                              <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                              </svg>
+                            </div>
+
+                          {% elsif block.settings.style == "pills" %}
+                            <div class="variant-option__pills">
+                              {% assign option_handle = option.name | downcase %}
+                              {% assign show_swatch = false %}
+                              {% if block.settings.swatch != 'none' and option_handle contains 'color' %}
+                                {% assign show_swatch = true %}
+                              {% endif %}
+
+                              {% for value in option.values %}
+                                {% assign matching_variant = nil %}
+                                {% for variant in product.variants %}
+                                  {% if variant.option1 == value or variant.option2 == value or variant.option3 == value %}
+                                    {% assign matching_variant = variant %}
+                                  {% break %}
+                                  {% endif %}
+                                {% endfor %}
+
+                                {% if matching_variant and matching_variant.image %}
+                                  {% assign variant_image = matching_variant.image | image_url: '50x50' %}
+                                {% else %}
+                                  {% assign variant_image = nil %}
+                                {% endif %}
+
+                                {% assign input_id = 'Option-' | append: section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0 %}
+
+                                <label for="{{ input_id }}" class="variant-pill
+                                      {% if show_swatch %} variant-swatch-{{ block.settings.swatch }}{% endif %}
+                                      {% if option.selected_value == value %} is-selected{% endif %}">
+                                  <input
+                                    type="radio"
+                                    id="{{ input_id }}"
+                                    name="options[{{ option.name }}]"
+                                    value="{{ value | escape }}"
+                                    {% if option.selected_value == value %}checked{% endif %}>
+
+                                      {% if show_swatch == false %}
+                                        <!-- merchant selected "none" -> visible text -->
+                                        <span class="pill-label">{{ value }}</span>
+
+                                      {% elsif variant_image %}
+                                        <!-- image swatch -->
+                                        <span class="swatch" title="{{ value }}"
+                                          style="background-image: url({{ variant_image }}); background-size: cover; background-position: center;"></span>
+                                        <span class="visually-hidden">{{ value }}</span>
+
+                                      {% elsif option_handle contains 'color' %}
+                                        <!-- color swatch (no visible text inside) -->
+                                        <span class="swatch" title="{{ value }}"
+                                          style="background-color: {{ value | downcase }};"></span>
+                                          <span class="visually-hidden">{{ value }}</span>
+
+                                      {% else %}
+                                        <!-- fallback to text -->
+                                        <span class="pill-label">{{ value }}</span>
+                                    {% endif %}
+                                </label>
+                              {% endfor %}
+                            </div>
+
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </form>
               </variant-picker>
 
             {% when 'buy_buttons' %}
@@ -297,7 +384,7 @@
       { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
       {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
       { "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },
-      { "type": "text","id": "custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" },
+      { "type": "text","id":"custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" },
       { "id":"size_popup_image","type":"image_picker","label":"Size popup image" },
       { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4},
       {"type": "header", "content": "t:labels.padding"},
@@ -308,7 +395,7 @@
       { "type":"title","name":"Title","limit": 1 },
       { "type":"price","name":"Price","limit": 1 },
       { "type":"divider","name":"Divider" },
-      { "type":"variant_picker","name":"Variant Picker","limit": 1 },
+      { "type":"variant_picker","name":"Variant Picker","limit": 1, "settings": [{"type":"select", "label": "Style", "id": "style", "default": "dropdown", "options": [{"value": "dropdown", "label": "Dropdown"},{"value": "pills", "label": "Pills"}]}, {"type": "select", "id": "swatch", "label": "Swatch", "default": "none", "options": [{"value": "circle", "label": "Circle"},{"value": "square", "label": "Square"},{"value": "none","label": "None"}]}] },
       { "type":"buy_buttons","name":"Buy Buttons","limit": 1 },
       { "type":"product_description","name":"Product Description","limit": 1 },
       { "type":"recommended_products","name":"Recommended products" },

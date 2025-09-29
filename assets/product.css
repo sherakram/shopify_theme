@@ -177,6 +177,72 @@
   color: #555;
 }
 
+/* Pills container */
+.variant-option__pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.variant-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+.variant-pill input { display: none; }
+.variant-pill.is-selected {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
+/* Visible text for text-mode pills */
+.pill-label {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Swatches */
+.variant-pill .swatch {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+}
+
+/* shape modifiers */
+.variant-swatch-circle .swatch { border-radius: 50%; }
+.variant-swatch-square .swatch { border-radius: 4px; }
+
+/* hide visible label when swatch-mode is active (optional)
+   — not strictly necessary because we only render .pill-label when not swatch-mode */
+.variant-swatch-circle .pill-label,
+.variant-swatch-square .pill-label {
+  display: none;
+}
+
+/* screen-reader only text */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+
 /*Buttons*/
 .product-form-buttons {
   display: flex;

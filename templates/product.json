@@ -2,7 +2,17 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {},
+      "settings": {
+        "media_position": "left",
+        "media_info_gap": 28,
+        "show_thumbnails": true,
+        "thumb_position": "bottom",
+        "payment_icons_image": false,
+        "custom_payment_icons": "visa,master,american-express,paypal",
+        "recommendation_count": 4,
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
       "blocks": {
         "title": {
           "type": "title"
@@ -14,7 +24,11 @@
           "type": "divider"
         },
         "variant_picker": {
-          "type": "variant_picker"
+          "type": "variant_picker",
+          "settings": {
+            "style": "dropdown",
+            "swatch": "none"
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons"
