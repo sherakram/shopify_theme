@@ -452,6 +452,36 @@ button.product-size-trigger:focus {
   outline-offset: 3px;
 }
 
+.product-size-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.product-size-modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.product-size-modal__panel {
+  background: #fff;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.size-guide-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 
 /*Product description*/
 .product-description {

@@ -10,42 +10,6 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-      {% comment %} <div class="product-media-column thumbs-{{ section.settings.thumb_position }}">
-        <!-- Swiper main -->
-        <div class="product-swiper product-swiper-{{ section.id }}">
-          <div class="swiper-wrapper">
-            {% for media in product.media %}
-              <div class="swiper-slide" data-media-id="{{ media.id }}">
-                {% render 'product-media', media: media %}
-              </div>
-            {% endfor %}
-          </div>
-
-          <!-- zoom / nav -->
-          <button type="button" class="product-zoom-btn" aria-label="Zoom image">
-            <!-- inline magnifier SVG -->
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M21 21l-4.35-4.35" />
-              <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-            </svg>
-          </button>
-
-          <div class="swiper-button-prev" aria-hidden="true"></div>
-          <div class="swiper-button-next" aria-hidden="true"></div>
-        </div>
-
-        {% if section.settings.show_thumbnails %}
-          <div class="product-thumbs product-thumbs-{{ section.id }}">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
-                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-      </div> {% endcomment %}
 
       <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
   
@@ -333,12 +297,12 @@
 
             {% when 'payment_icons' %}
               <div class="payment-icons">
-                {% if section.settings.payment_icons_image %}
+                {% if block.settings.payment_icons_image %}
                   {% for type in shop.enabled_payment_types %}
                     {{ type | payment_type_svg_tag }}
                   {% endfor %}
-                {% elsif section.settings.custom_payment_icons != blank %}
-                  {% assign icons = section.settings.custom_payment_icons | split: ',' %}
+                {% elsif block.settings.custom_payment_icons != blank %}
+                  {% assign icons = block.settings.custom_payment_icons | split: ',' %}
                   {% for icon in icons %}
                     {{ icon | strip | payment_type_svg_tag }}
                   {% endfor %}
@@ -350,6 +314,27 @@
                 <button class="product-size-trigger" data-size-trigger>
                   {{ block.settings.size_label | default: 'Size guide' }}
                 </button>
+
+                <div class="product-size-modal" id="product-size-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-hidden="true">
+                  <div class="product-size-modal__panel" role="document">
+                    <button class="product-size-modal__close" data-size-close aria-label="Close size guide">&times;</button>
+                    <div class="product-size-modal__content">
+                      {% if block.settings.size_popup_image %}
+                        <img
+                          src="{{ block.settings.size_popup_image | image_url: width: 1200 }}"
+                          alt="Size guide"
+                          class="size-guide-img"
+                          loading="lazy"
+                          width="auto"
+                          height="auto"
+                        >
+                      {% else %}
+                        <h2>Size guide</h2>
+                        <p>Add an image or content via the section settings.</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
               </div>
           {% endcase %}
         {% endfor %}
@@ -357,7 +342,7 @@
     </div>
   </div>
 
-  <!-- Size popup (Dawn-like modal) -->
+  <!-- Size popup (Dawn-like modal) 
   <div class="product-size-modal" id="product-size-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="product-size-modal__panel" role="document">
       <button class="product-size-modal__close" data-size-close aria-label="Close size guide">&times;</button>
@@ -370,7 +355,7 @@
         {% endif %}
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
 
 
@@ -383,9 +368,6 @@
       { "id": "media_info_gap", "type":"range", "label":"t:general.gap", "min":0, "max":80, "step":2, "default":28 },
       { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
       {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
-      { "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },
-      { "type": "text","id":"custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" },
-      { "id":"size_popup_image","type":"image_picker","label":"Size popup image" },
       { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4},
       {"type": "header", "content": "t:labels.padding"},
       { "id": "padding_top", "type":"range", "label":"t:sections.all.padding.padding_top", "min":0, "max":100, "step":4, "default":40 },
@@ -400,8 +382,8 @@
       { "type":"product_description","name":"Product Description","limit": 1 },
       { "type":"recommended_products","name":"Recommended products" },
       { "type":"product_inventory","name":"Product inventory","limit": 1 },
-      { "type":"payment_icons","name":"Payment icons","limit": 1 },
-      { "type":"product_size","name":"Product size","limit": 1,"settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" } ] }
+      { "type":"payment_icons","name":"Payment icons","limit": 1, "settings": [{ "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },{ "type": "text","id":"custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" }] },
+      { "type":"product_size","name":"Product size","limit": 1,"settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" }, { "id":"size_popup_image","type":"image_picker","label":"Size popup image" }] }
     ],
     "presets": [{ "name": "Product (Swiper)", "category": "Products" }],
   "disabled_on": {

@@ -43,10 +43,17 @@
           "type":"product_inventory"
         },
         "payment_icons": {
-          "type": "payment_icons"
+          "type": "payment_icons",
+          "settings":{
+            "payment_icons_image": "false",
+            "custom_payment_icons": "visa,master,american-express,paypal"
+          }
         },
         "product_size": {
-          "type": "product_size"
+          "type": "product_size",
+          "settings": {
+            "size_label": "Size guide"
+          }
         }
       },
       "block_order": [
