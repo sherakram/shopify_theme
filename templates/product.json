@@ -1,27 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product",
-      "settings": {
-        "media_position": "left",
-        "media_info_gap": 28,
-        "show_thumbnails": true,
-        "thumb_position": "bottom",
-        "payment_icons_image": false,
-        "custom_payment_icons": "visa,master,american-express,paypal",
-        "recommendation_count": 4,
-        "padding_top": 40,
-        "padding_bottom": 40
-      },
       "blocks": {
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "divider": {
-          "type": "divider"
+          "type": "divider",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -30,30 +31,35 @@
             "swatch": "none"
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons"
-        },
-        "product_description": {
-          "type": "product_description"
-        },
-        "recommended_products": {
-          "type": "recommended_products"
-        },
         "product_inventory": {
-          "type":"product_inventory"
-        },
-        "payment_icons": {
-          "type": "payment_icons",
-          "settings":{
-            "payment_icons_image": "false",
-            "custom_payment_icons": "visa,master,american-express,paypal"
-          }
+          "type": "product_inventory",
+          "settings": {}
         },
         "product_size": {
           "type": "product_size",
           "settings": {
-            "size_label": "Size guide"
+            "size_label": "Size guide",
+            "size_popup_image": "shopify://shop_images/suedesmulesslipper.avif"
           }
+        },
+        "payment_icons": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icons_image": false,
+            "custom_payment_icons": "visa,master,american-express,paypal"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "product_description": {
+          "type": "product_description",
+          "settings": {}
+        },
+        "recommended_products": {
+          "type": "recommended_products",
+          "settings": {}
         }
       },
       "block_order": [
@@ -67,7 +73,16 @@
         "buy_buttons",
         "product_description",
         "recommended_products"
-      ]
+      ],
+      "settings": {
+        "media_position": "left",
+        "media_info_gap": 28,
+        "show_thumbnails": true,
+        "thumb_position": "bottom",
+        "recommendation_count": 4,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
