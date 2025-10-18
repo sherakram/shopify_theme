@@ -398,89 +398,138 @@
   flex-shrink: 0;        
 }
 
-/*Size Guide*/
+/* ---------- Size Guide ---------- */
 button.product-size-trigger {
   background: none;
   border: none;
-  padding: 0;            
-  margin: 0;
   cursor: pointer;
-  display: inline-block;    
-  line-height: 1;           
-  vertical-align: middle;
-  color: inherit;
-  font: inherit;
-  position: relative;       
-  text-decoration: none;    
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #111;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  transition: color 0.25s ease;
 }
 
-/* Modern browsers: use text-decoration with offset/thickness */
-@supports (text-underline-offset: 2px) {
-  button.product-size-trigger {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;   
-    text-underline-offset: 6px; 
-  }
-
-  button.product-size-trigger:hover,
-  button.product-size-trigger:focus {
-    color: #333;
-    text-decoration-color: currentColor;
-  }
+button.product-size-trigger:hover {
+  color: #000;
 }
 
-@supports not (text-underline-offset: 3px) {
-  button.product-size-trigger::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 1px;    
-    background: currentColor;
-    bottom: -3px;           
-    pointer-events: none;
-  }
-
-  button.product-size-trigger:hover::after,
-  button.product-size-trigger:focus::after {
-    background: #333;
-  }
-}
-
-button.product-size-trigger:focus {
-  outline: 2px solid rgba(0,0,0,0.08);
-  outline-offset: 3px;
-}
-
+/* --- Modal Overlay --- */
 .product-size-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
+  padding: 2rem;
+  backdrop-filter: blur(3px);
 }
 
 .product-size-modal[aria-hidden="false"] {
   display: flex;
+  animation: fadeIn 0.3s ease forwards;
 }
 
+/* --- Clickable background overlay --- */
+.product-size-modal__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* --- Modal Panel --- */
 .product-size-modal__panel {
+  position: relative;
   background: #fff;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 700px;
+  width: 100%;
+  padding: 1.5rem;
+  overflow: hidden;
+  animation: slideUp 0.35s ease;
+}
+
+/* --- Close Button --- */
+.product-size-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f3f3f3;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.product-size-modal__close:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* --- Content --- */
+.product-size-modal__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .size-guide-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+  height: 80vh;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
 }
+
+.size-guide-img:hover {
+  transform: scale(1.02);
+}
+
+.size-guide-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.size-guide-placeholder {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .product-size-modal__panel {
+    max-width: 90%;
+    padding: 1rem;
+  }
+  .size-guide-img {
+    max-width: 100%;
+  }
+}
+
 
 
 /*Product description*/

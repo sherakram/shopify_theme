@@ -316,6 +316,7 @@
                 </button>
 
                 <div class="product-size-modal" id="product-size-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-hidden="true">
+
                   <div class="product-size-modal__panel" role="document">
                     <button class="product-size-modal__close" data-size-close aria-label="Close size guide">&times;</button>
                     <div class="product-size-modal__content">
@@ -341,21 +342,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Size popup (Dawn-like modal) 
-  <div class="product-size-modal" id="product-size-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="product-size-modal__panel" role="document">
-      <button class="product-size-modal__close" data-size-close aria-label="Close size guide">&times;</button>
-      <div class="product-size-modal__content">
-        {% if section.settings.size_popup_image != blank %}
-          {{ section.settings.size_popup_image | image_url: width: 1200 | image_tag }}
-        {% else %}
-          <h2>Size guide</h2>
-          <p>Add an image or content via the section settings.</p>
-        {% endif %}
-      </div>
-    </div>
-  </div> -->
 </section>
 
 
