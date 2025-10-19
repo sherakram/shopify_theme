@@ -1,8 +1,8 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
-
 <section id="product-section-{{ section.id }}" class="product-section
-         product-section--media-{{ section.settings.media_position }}"
+         product-section--media-{{ section.settings.media_position }}
+         product-section--{{ section.settings.column_width }}"
          style="--product-padding-top: {{ section.settings.padding_top }}px;
          --product-padding-bottom: {{ section.settings.padding_bottom }}px;
          --media-info-gap: {{ section.settings.media_info_gap }}px;">
@@ -352,6 +352,7 @@
       {"type": "header", "content": "t:general.layout"},
       { "id": "media_position", "type": "select", "label": "t:general.media_position", "options":[{"value":"left","label":"t:options.alignment.left"},{"value":"right","label":"t:options.alignment.right"}], "default":"left" },
       { "id": "media_info_gap", "type":"range", "label":"t:general.gap", "min":0, "max":80, "step":2, "default":28 },
+      {"type": "select", "id": "column_width", "label": "Column Width", "options": [{ "value": "small-media", "label": "Small media / Large info" },{ "value": "equal", "label": "Equal columns" },{ "value": "large-media", "label": "Large media / Small info" }],"default": "equal"},
       { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
       {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
       { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4},
