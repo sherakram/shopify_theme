@@ -33,7 +33,12 @@
         },
         "product_inventory": {
           "type": "product_inventory",
-          "settings": {}
+          "settings": {
+            "show_quantity": true,
+            "low_inventory_threshold": 10,
+            "show_progress_bar": true,
+            "progress_bar_max_value": 50
+          }
         },
         "product_size": {
           "type": "product_size",
