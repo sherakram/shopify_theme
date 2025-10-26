@@ -6,15 +6,6 @@
     // optional thumbs
     const thumbsEl = sectionEl.querySelector('.product-thumbs');
     let thumbsSwiper = null;
-    // if (thumbsEl) {
-    //   thumbsSwiper = new Swiper(thumbsEl, {
-    //     spaceBetween: 8,
-    //     slidesPerView: 4,
-    //     watchSlidesProgress: true,
-    //     slideToClickedSlide: true,
-    //     breakpoints: { 480: { slidesPerView: 5 } }
-    //   });
-    // }
 
     if (thumbsEl) {
       // detect direction based on wrapper class

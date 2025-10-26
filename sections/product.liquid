@@ -90,7 +90,7 @@
               </div>
 
             {% when 'divider' %}
-              <hr class="product-divider" />
+              <hr class="product-divider" role="separator" aria-orientation="horizontal" />
 
             {% when 'variant_picker' %}
               <variant-picker
@@ -101,7 +101,8 @@
                     data-block-id="{{ section.id }}__variant_picker"
                     data-product-url="{{ product.url }}"
                     ref="mainVariantPicker"
-                    data-template-product-match="true">
+                    data-template-product-match="true"
+                    data-variants="{{ product.variants | json | escape }}">
 
                     <form class="variant-picker__form">
                       {% for option in product.options_with_values %}
@@ -351,6 +352,7 @@
   </div>
 </section>
 
+<script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

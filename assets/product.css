@@ -137,11 +137,15 @@
   text-decoration: line-through;
 }
 
+/*Separator*/
 .product-divider {
-  color: #ddd;
+  border: 0;                   
+  height: 1px;                  
+  background-color: #ddd;       
+  margin: 1rem 0;
 }
 
-/*Variantions*/
+/*Variants*/
 .variant-picker {
   display: flex;
   flex-direction: column;
@@ -217,7 +221,12 @@
   font-size: 0.9rem;
   transition: all 0.2s ease;
 }
-.variant-pill input { display: none; }
+.variant-pill input { 
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .variant-pill.is-selected {
   border-color: #000;
   background: #000;

@@ -173,9 +173,9 @@
 
       <!-- Cart -->
       <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart">
-        {% if cart.item_count > 0 %}
-          <span class="cart-count">{{ cart.item_count }}</span>
-        {% endif %}
+        <span class="cart-count {% if cart.item_count == 0 %}is-empty{% endif %}">
+          {{ cart.item_count }}
+        </span>
         {{ 'icon-cart.svg' | inline_asset_content }}
       </a>
     </div>
