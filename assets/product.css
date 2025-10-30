@@ -445,6 +445,85 @@
   flex-shrink: 0;        
 }
 
+/*CountDown Time*/
+.countdown-urgency {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.countdown-urgency:hover {
+  transform: translateY(-3px);
+}
+.countdown-heading {
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.countdown-subheading {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  color: var(--sub-text);
+}
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-family: "Inter", sans-serif;
+}
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+  position: relative;
+  color: var(--unit-color);
+}
+.countdown-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.countdown-label {
+  font-size: 13px;
+  margin-top: 4px;
+  opacity: 0.9;
+  text-transform: lowercase;
+}
+.countdown-separator {
+  font-size: 32px;
+  font-weight: 600;
+  align-self: center;
+  opacity: 0.7;
+  color: var(--unit-color);
+}
+
+/* Flip animation */
+.countdown-value.flip {
+  transform: rotateX(360deg);
+  color: var(--flip-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .countdown-value { font-size: 26px; }
+  .countdown-unit { min-width: 50px; }
+  .countdown-separator { font-size: 26px; }
+}
+
+@media (max-width: 480px) {
+  .countdown-timer {
+    gap: 12px;
+  }
+  .countdown-value { font-size: 22px; }
+  .countdown-label { font-size: 12px; }
+  .countdown-unit { min-width: 44px; }
+}
+
+
 /* ---------- Size Guide ---------- */
 button.product-size-trigger {
   background: none;

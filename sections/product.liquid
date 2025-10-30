@@ -208,56 +208,45 @@
                 <button class="product-desc-toggle" data-desc-toggle>Read more</button>
               </div>
 
-            {% when 'recommended_products' %}
-              <div class="product-recommendations">
-                {% if recommendations.performed and recommendations.products_count > 0 %}
-                  {% for rec in recommendations.products limit: section.settings.recommendation_count %}
-                    <a href="{{ rec.url }}" class="recommendation">
-                      {{ rec.featured_image | image_url: width: 300, height: 300, crop: 'center' | image_tag: class: 'rec-thumb' }}
-                      <span>{{ rec.title }}</span>
-                    </a>
-                  {% endfor %}
-                  {% else %}
-                    <p class="muted">Recommendations load when the Product Recommendations API is used</p>
-                {% endif %}
+            {% when 'countdown_urgency' %}
+              <div class="countdown-urgency"
+                  data-end-date="{{ block.settings.end_date }}"
+                  data-auto-restart="{{ block.settings.auto_restart }}"
+                  data-restart-hours="{{ block.settings.restart_hours }}"
+                  data-hide-expired="{{ block.settings.hide_expired }}"
+                  style="
+                    background-color: {{ block.settings.bg_color }};
+                    color: {{ block.settings.text_color }};
+                    --flip-color: {{ block.settings.flip_color }};
+                    padding: 24px;
+                    border-radius: {{ block.settings.border_radius }}px;
+                    text-align: center;
+                    margin-bottom: 24px;
+                  ">
+      
+                  {% if block.settings.heading_text != blank %}
+                    <h3 class="countdown-heading">{{ block.settings.heading_text }}</h3>
+                  {% endif %}
+      
+                  {% if block.settings.subheading_text != blank %}
+                    <p class="countdown-subheading">{{ block.settings.subheading_text }}</p>
+                  {% endif %}
+
+                  <div class="countdown-timer">
+                    {% assign units = "days,hours,minutes,seconds" | split: "," %}
+                    {% for unit in units %}
+                      <div class="countdown-unit" style="--unit-color:{{ block.settings.unit_color }};">
+                        <span class="countdown-value {{ unit }}">00</span>
+                        <span class="countdown-label">{{ unit }}</span>
+                      </div>
+                      {% unless forloop.last %}
+                        <div class="countdown-separator" style="--unit-color:{{ block.settings.unit_color }};">:</div>
+                      {% endunless %}
+                    {% endfor %}
+                  </div>
               </div>
 
             {% when 'product_inventory' %}
-              {% comment %} <product-inventory class="product-inventory spacing-style" style="--padding-block-start: 0px; --padding-block-end: 0px; --padding-inline-start: 0px; --padding-inline-end: 0px;" data-product-id="{{ product.id }}">
-                {% assign total_qty = 0 %}
-                {% for variant in product.variants %}
-                  {% if variant.inventory_management != nil %}
-                    {% assign total_qty = total_qty | plus: variant.inventory_quantity %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if total_qty > 0 %}
-                  <span class="product-inventory__status product-inventory__status--in-stock">
-                    <span class="svg-wrapper product-inventory__icon product-inventory__icon-in_stock">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" fill="none" width="15" height="15">
-                        <circle cx="7.5" cy="7.5" r="7.5" fill="currentColor"></circle>
-                        <circle cx="7.5" cy="7.5" r="5" fill="currentColor" stroke="#FFF"></circle>
-                      </svg>
-                    </span>
-                    <span class="product-inventory__text" role="status" aria-label="Inventory status">
-                      In stock: {{ total_qty }}
-                    </span>
-                  </span>
-                {% else %}
-                  <span class="product-inventory__status product-inventory__status--out-of-stock">
-                    <span class="svg-wrapper product-inventory__icon product-inventory__icon-out_stock">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" fill="none" width="15" height="15">
-                        <circle cx="7.5" cy="7.5" r="7.5" fill="currentColor"></circle>
-                        <path d="M4 4L11 11M11 4L4 11" stroke="#FFF" stroke-width="1.5"/>
-                      </svg>
-                    </span>
-                    <span class="product-inventory__text" role="status" aria-label="Inventory status">
-                      Out of stock
-                    </span>
-                  </span>
-                {% endif %}
-              </product-inventory> {% endcomment %}
-
               <div class="product-inventory spacing-style" style="--padding-block-start:0; --padding-block-end:0;">
                 {% assign total_qty = 0 %}
                 {% for variant in product.variants %}
@@ -353,6 +342,7 @@
 </section>
 
 <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'countdown-timer.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
@@ -364,7 +354,6 @@
       {"type": "select", "id": "column_width", "label": "Column Width", "options": [{ "value": "small-media", "label": "Small media / Large info" },{ "value": "equal", "label": "Equal columns" },{ "value": "large-media", "label": "Large media / Small info" }],"default": "equal"},
       { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
       {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
-      { "id":"recommendation_count","type":"number","label":"Recommendation count","default":4},
       {"type": "header", "content": "t:labels.padding"},
       { "id": "padding_top", "type":"range", "label":"t:sections.all.padding.padding_top", "min":0, "max":100, "step":4, "default":40 },
       { "id": "padding_bottom", "type":"range", "label":"t:sections.all.padding.padding_bottom", "min":0, "max":100, "step":4, "default":40 },
@@ -376,7 +365,7 @@
       { "type":"variant_picker","name":"Variant Picker","limit": 1, "settings": [{"type":"select", "label": "Style", "id": "style", "default": "dropdown", "options": [{"value": "dropdown", "label": "Dropdown"},{"value": "pills", "label": "Pills"}]}, {"type": "select", "id": "swatch", "label": "Swatch", "default": "none", "options": [{"value": "circle", "label": "Circle"},{"value": "square", "label": "Square"},{"value": "none","label": "None"}]}] },
       { "type":"buy_buttons","name":"Buy Buttons","limit": 1 },
       { "type":"product_description","name":"Product Description","limit": 1 },
-      { "type":"recommended_products","name":"Recommended products" },
+      { "type":"countdown_urgency","name":"CountDown Timer","limit": 1, "settings": [{ "type": "text", "id": "heading_text", "label": "Heading", "default": "Hurry up!" },{ "type": "text", "id": "subheading_text", "label": "Subheading", "default": "Sale ends in:" },{ "type": "color", "id": "bg_color", "label": "Background color", "default": "#6a4cff" },{ "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },{ "type": "color", "id": "unit_color", "label": "Timer color", "default": "#ffffff" },{ "type": "color", "id": "flip_color", "label": "Flip animation color", "default": "#ffcc00" },{ "type": "text", "id": "end_date", "label": "End date/time (YYYY-MM-DD HH:MM)", "default": "2025-12-31 23:59" },{ "type": "range", "id": "border_radius", "label": "Border radius (px)", "min": 0, "max": 30, "step": 2, "default": 12 },{ "type": "checkbox", "id": "auto_restart", "label": "Auto-restart timer (evergreen mode)", "default": true },{ "type": "range", "id": "restart_hours", "label": "Restart after (hours)", "min": 0, "max": 168, "step": 2, "default": 24 },{ "type": "checkbox", "id": "hide_expired", "label": "Hide when expired", "default": false }] },
       { "type":"product_inventory","name":"Product inventory","limit": 1, "settings": [{"type": "checkbox", "id": "show_quantity", "label": "Show quantity when in stock", "default": true},{"type": "range", "id": "low_inventory_threshold", "label": "Low inventory threshold", "min": 0, "max": 50, "step": 5, "default": 10},{"type": "checkbox","id": "show_progress_bar", "label": "Show progress bar", "default": true}, {"type": "number","id": "progress_bar_max_value","label": "Progress bar max value","default": 50}] },
       { "type":"payment_icons","name":"Payment icons","limit": 1, "settings": [{ "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },{ "type": "text","id":"custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" }] },
       { "type":"product_size","name":"Product size","limit": 1,"settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" }, { "id":"size_popup_image","type":"image_picker","label":"Size popup image" }] }
