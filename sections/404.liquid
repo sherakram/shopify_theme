@@ -12,6 +12,13 @@
          src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
          alt="{{ section.settings.title | escape }}"
          class="bg-image"
+         width="2000",
+         height="1500",
+         srcset="{{ section.settings.bg_img_404 | image_url: width: 750 }} 750w,
+                 {{ section.settings.bg_img_404 | image_url: width: 1100 }} 1100w,
+                 {{ section.settings.bg_img_404 | image_url: width: 1500 }} 1500w,
+                 {{ section.settings.bg_img_404 | image_url: width: 2000 }} 2000w,
+                 {{ section.settings.bg_img_404 | image_url: width: 2500 }} 2500w"
         >
         <div class="bg-overlay"></div>
       </div>
