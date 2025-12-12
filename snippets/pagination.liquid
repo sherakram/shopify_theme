@@ -1,0 +1,104 @@
+{%- if pagination.pages > 1 -%}
+  <nav role="navigation" class="pagination-nav" aria-label="Pagination Navigation">
+    <ul class="pagination-list">
+      
+      {%- if pagination.previous -%}
+        <li class="pagination-item pagination-prev">
+          <a href="{{ pagination.previous.url }}" class="pagination-link" aria-label="Previous Page">
+            {{ pagination.previous.title }}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- for part in pagination.parts -%}
+        <li class="pagination-item">
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+          {% elsif part.title == pagination.current_page %}
+            <span class="pagination-link pagination-current">{{ part.title }}</span>
+          {% else %}
+            <span class="pagination-link">{{ part.title }}</span>
+          {% endif %}
+        </li>
+      {%- endfor -%}
+
+      {%- if pagination.next -%}
+        <li class="pagination-item pagination-next">
+          <a href="{{ pagination.next.url }}" class="pagination-link" aria-label="Next Page">
+            {{ pagination.next.title }}
+          </a>
+        </li>
+      {%- endif -%}
+
+    </ul>
+  </nav>
+{%- endif -%}
+
+{% style %}
+
+/* Pagination wrapper */
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-family: inherit;
+}
+
+.pagination-list {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-item {
+  display: inline-flex;
+}
+
+.pagination-link {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 36px;
+  text-align: center;
+}
+
+.pagination-link:hover {
+  background-color: #f5f5f5;
+  border-color: #bbb;
+  color: #000;
+}
+
+.pagination-current {
+  background-color: #333;
+  border-color: #333;
+  color: #fff !important;
+  cursor: default;
+}
+
+.pagination-current:hover {
+  background-color: #333;
+  border-color: #333;
+  color: #fff !important;
+}
+
+.pagination-prev .pagination-link,
+.pagination-next .pagination-link {
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .pagination-link {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+{% endstyle %}

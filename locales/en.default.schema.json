@@ -22,8 +22,10 @@
     "page": "Page",
     "password": "Password",
     "primary": "Primary",
-    "product": "Product",
+    "product": "Product information",
+    "media_position": "Media Position",
     "row": "Row",
+    "gap": "Gap",
     "search": "Search",
     "secondary": "Secondary",
     "section": "Section",
@@ -31,7 +33,15 @@
     "sidebar": "Sidebar",
     "text": "Text",
     "theme": "Theme",
-    "typography": "Typography"
+    "typography": "Typography",
+    "ImageHeight": "Image Height",
+    "card_Grid_Layout": "Card Grid Layout",
+    "desktop_Grid": "Desktop Grid Settings",
+    "tablet_grid_settings": "Tablet Grid Settings",
+    "mobile_grid_settings": "Mobile Grid Settings",
+    "card_shadow": "Card Shadow",
+    "social_media_icons": "Social Media",
+    "filter_and_sorting": "Filters & Sorting"
   },
   "labels": {
     "alignment": "Alignment",
@@ -39,21 +49,62 @@
     "foreground": "Foreground",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
-    "input_corner_radius": "Input corner radius",
+    "corner_radius": "Corner Radius",
     "layout_direction": "Layout direction",
     "menu": "Menu",
     "padding": "Padding",
     "page_margin": "Page margin",
     "page_width": "Page width",
     "show_payment_icons": "Show payment icons",
+    "Show_thumbnails": "Show Thumbnails",
+    "thumbnail_position": "Thumbnail position",
     "text_style": "Text style",
-    "text": "Text"
+    "text": "Text",
+    "textColor": "Text Color",
+    "collection_title": "Collection Title",
+    "bgColor": "Background Title",
+    "desktop_Columns": "Desktop Columns",
+    "max_card_width_desktop": "Max Card Width (Desktop)",
+    "table_columns": "Tablet Columns",
+    "max_card_width_tablet": "Max Card Width (Tablet)",
+    "mobile_columns": "Mobile Columns",
+    "max_card_width_mobile": "Max Card Width (Mobile)",
+    "column_gap": "Column Gap",
+    "row_gap": "Row Gap",
+    "card_shadow_opacity": "Opacity",
+    "card_shadow_horizontal_offset": "Horizontal offset",
+    "card_shadow_vartical_offset": "Vertical offset",
+    "card_shadow_blur": "Blur",
+    "show_social_icons": "Show Social Icons",
+    "icon_style": "Icon Style",
+    "monochrome_color": "Monochrome (use color below)",
+    "brand_colors": "Brand colors",
+    "icon_size": "Icon Size",
+    "icon_gap": "Icon Gap",
+    "icon_corner_radius": "Icon Corner Radius",
+    "monochrome": "Monochrome Color",
+    "hover_color": "Hover Color",
+    "facebook_url": "Facebook URL",
+    "instagram_url": "Instagram URL",
+    "twitter_url": "Twitter / X URL",
+    "youtube_url": "YouTube URL",
+    "linkedin_url": "LinkedIn URL",
+    "pinterest_url": "Pinterest URL",
+    "tiktok_url": "TikTok URL",
+    "drawer_popup": "Use drawer instead of pop-up",
+    "enable_filters": "Enable filters (Search & Discovery)",
+    "sort_selector": "Enable sort selector",
+    "sort_options": "Sort options (Label:Value, comma-separated)",
+    "items_per_page": "Default items per page",
+    "position": "Position"
   },
   "options": {
     "alignment": {
       "left": "Left",
       "center": "Center",
-      "right": "Right"
+      "right": "Right",
+      "top": "Top",
+      "bottom": "Bottom"
     },
     "direction": {
       "horizontal": "Horizontal",
@@ -71,6 +122,14 @@
       "title": "Title",
       "subtitle": "Subtitle",
       "normal": "Normal text"
+    },
+  },
+  "sections": {
+    "all": {
+      "padding": {
+        "padding_top": "Top Padding",
+        "padding_bottom": "Bottom Padding"
+      }
     },
   }
 }

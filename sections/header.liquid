@@ -1,56 +1,309 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+{{ 'header.css' | asset_url | stylesheet_tag }}
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
+<header class="site-header logo-{{ section.settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
+  <div class="container header__container logo-position--{{ section.settings.logo_position }}">
+    
+    <!-- ========== Store Name & Logo ========== -->
+    <div class="logo-wrapper">
+      <h1 class="site-title" style="max-width: {{ settings.logo_max_width }}px;">
+        <a href="{{ routes.root_url }}" class="site-title__link">
+
+          {%- assign display_w = settings.logo_max_width | default: 130 -%}
+          {%- assign w1 = display_w -%}
+          {%- assign w2 = display_w | times: 2 -%}
+
+          {%- assign desktop = settings.logo_image -%}
+          {%- assign mobile  = settings.mobile_logo_image -%}
+          {%- assign dark    = settings.dark_logo_image -%}
+
+          {%- comment -%} compute heights so width/height attributes exist for CLS prevention {%- endcomment -%}
+          {%- if desktop != blank and desktop.width > 0 -%}
+            {%- assign display_h_desktop = desktop.height | times: w1 | divided_by: desktop.width | round -%}
+          {%- else -%}
+            {%- assign display_h_desktop = 50 -%}
+          {%- endif -%}
+
+          {%- if mobile != blank and mobile.width > 0 -%}
+            {%- assign display_h_mobile = mobile.height | times: w1 | divided_by: mobile.width | round -%}
+          {%- else -%}
+            {%- assign display_h_mobile = display_h_desktop -%}
+          {%- endif -%}
+
+          {%- comment -%}
+            Case 1: dark-only (no desktop/mobile) -> render single dark image visible on all devices
+            Case 2: otherwise render (desktop) and/or (mobile) pictures; CSS decides which is visible
+          {%- endcomment -%}
+
+          {%- if dark != blank and desktop == blank and mobile == blank -%}
+            <!-- Dark only (show on all viewports) -->
+            <picture class="logo-picture logo-picture--dark">
+              <img
+                src="{{ dark | image_url: width: w1 }}"
+                srcset="{{ dark | image_url: width: w1 }} 1x, {{ dark | image_url: width: w2 }} 2x"
+                class="site-logo site-logo--dark"
+                alt="{{ shop.name | escape }}"
+                width="{{ w1 }}"
+                height="{{ display_h_desktop }}"
+                loading="lazy"
+              >
+            </picture>
+
+          {%- else -%}
+          {%- if desktop != blank -%}
+            <!-- Desktop picture (hidden on mobile via CSS) -->
+            <picture class="logo-picture logo-picture--desktop">
+              {%- if dark != blank -%}
+                <source media="(prefers-color-scheme: dark)" srcset="{{ dark | image_url: width: w1 }} 1x, {{ dark | image_url: width: w2 }} 2x">
+              {%- endif -%}
+                <img
+                  src="{{ desktop | image_url: width: w1 }}"
+                  srcset="{{ desktop | image_url: width: w1 }} 1x, {{ desktop | image_url: width: w2 }} 2x"
+                  class="site-logo site-logo--desktop"
+                  alt="{{ shop.name | escape }}"
+                  width="{{ w1 }}"
+                  height="{{ display_h_desktop }}"
+                  loading="lazy"
+                >
+            </picture>
+          {%- endif -%}
+
+          {%- if mobile != blank -%}
+            <!-- Mobile picture (hidden on desktop via CSS) -->
+            <picture class="logo-picture logo-picture--mobile">
+              {%- if dark != blank -%}
+                <source media="(prefers-color-scheme: dark)" srcset="{{ dark | image_url: width: w1 }} 1x, {{ dark | image_url: width: w2 }} 2x">
+              {%- endif -%}
+                <img
+                  src="{{ mobile | image_url: width: w1 }}"
+                  srcset="{{ mobile | image_url: width: w1 }} 1x, {{ mobile | image_url: width: w2 }} 2x"
+                  class="site-logo site-logo--mobile"
+                  alt="{{ shop.name | escape }}"
+                  width="{{ w1 }}"
+                  height="{{ display_h_mobile }}"
+                  loading="lazy"
+                >
+            </picture>
+          {%- endif -%}
+          {%- endif -%}
+
+          {%- if desktop == blank and mobile == blank and dark == blank -%}
+            <!-- No images uploaded -->
+            <span class="site-logo--text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </h1>
+    </div>
+
+    <!-- ========== Top Menu ========== -->
+    {% if section.settings.menu != blank %}
+      {% if section.settings.menu_row == 'top' %}
+      <nav class="site-nav" role="navigation" aria-label="Main menu">
+        <ul class="nav__list">
+        {% for link in section.settings.menu.links %}
+          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+            {% if link.links != blank %}
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="submenu-{{ forloop.index }}"
+                data-dropdown-toggle
+              >
+                {{ link.title }}
+                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                {% for child_link in link.links %}
+                  <li role="none">
+                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </nav>
+      {% endif %}
     {% endif %}
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+
+    {% if section.settings.menu_row == 'bottom' and section.settings.logo_position == 'center' %}
+      <div class="header__spacer"></div>
+    {% endif %}
+
+    <!-- ========== Utilities ========== -->
+    <div class="header__utilities">
+      <!-- Search -->
+      <button type="button" class="utility-link search-link" aria-label="Search" 
+        data-open-search>{{ 'search.svg' | inline_asset_content }}
+      </button>
+      {% render 'search-modal' %}
+
+      <!-- Account -->
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="{{ routes.account_url }}" class="account-link" aria-label="My account">
+            {{ 'user-account.svg' | inline_asset_content }}
+          </a>
+
+          <!-- Logout -->
+          <a href="{{ routes.account_logout_url }}" class="account-link logout-link" aria-label="Logout">
+            {{ 'log-out.svg' | inline_asset_content }}
+          </a>
+        {% else %}
+          <!--login-->
+          <a href="{{ routes.account_login_url }}" class="account-link login-link" aria-label="Login">
+            {{ 'log-in.svg' | inline_asset_content }}
+          </a>
+
+        {% endif %}
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      <!-- Cart -->
+      <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart">
+        <span class="cart-count {% if cart.item_count == 0 %}is-empty{% endif %}">
+          {{ cart.item_count }}
+        </span>
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
+
+    <!-- ========== Mobile Menu Button ========== -->
+    <div class="mobile-menu-icon">
+      <button class="menu-icon" type="button" id="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false">
+        {% render 'Menu-icon' %}
+      </button>
+    </div>
+
+    <!-- Mobile-Menu -->
+    <div class="mobile-menu-container" id="mobile-menu-container">
+      <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+        <div class="mobile-menu-drawer">
+           <!-- Mobile-Close-Button -->
+          <div class="close">
+            <span class="menu-name">{{ 'mobile_menu.menu' | t }}</span>
+
+            <button class="close-btn" type="button" id="mobile-menu-close" aria-label="Close mobile menu">
+              {% render 'close-button' %}
+            </button>
+        </div>
+
+        <!-- Mobile-Navigation -->
+        <nav class="mobile-nav" role="navigation" aria-label="Mobile menu">
+          <ul class="mobile_nav__list">
+            {% for link in section.settings.menu.links %}
+              <li class="mobile_nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+                {% if link.links != blank %}
+                  <button
+                    class="mobile-dropdown-toggle"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="mobile-submenu-{{ forloop.index }}"
+                  >
+                    {{ link.title }}
+                    <svg class="mobile-dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <ul class="mobile-dropdown-menu" id="mobile-submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                    {% for child_link in link.links %}
+                      <li role="none">
+                        <a href="{{ child_link.url }}" role="menuitem" class="mobile__dropdown__link">
+                          {{ child_link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <a href="{{ link.url }}" class="mobile__nav__link">{{ link.title }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+
+          <!-- Mobile-account-login -->
+          <div class="mobile-account-links">
+            {% if customer %}
+              <a href="{{ routes.account_url }}" class="mobile-account-link" aria-label="My account">
+                {{ 'user-account.svg' | inline_asset_content }}
+              </a>
+               
+               <!-- Logout icon -->
+               <a href="{{ routes.account_logout_url }}" class="mobile-logout-link logout-link" aria-label="Logout">
+                  {{ 'log-out.svg' | inline_asset_content }}
+               </a>
+            {% else %}
+              <!-- Login icon -->
+              <a href="{{ routes.account_login_url }}" class="mobile-login-link login-link" aria-label="Login">
+                {{ 'log-in.svg' | inline_asset_content }}
+              </a>
+
+              <!-- Register icon -->
+              {% comment %} <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
+                {{ 'user-register.svg' | inline_asset_content }}
+              </a> {% endcomment %}
+            {% endif %}
+          </div>
+          
+        </nav>
+      </div>
+    </div>
+
   </div>
+
+    <!-- ========== Bottom Menu ========== -->
+    {% if section.settings.menu != blank %}
+      {% if section.settings.menu_row == 'bottom' %}
+      <div class="header__row header__row--bottom">
+      <nav class="site-nav" role="navigation" aria-label="Main menu">
+        <ul class="nav__list" style="--menu-position:{{ section.settings.menu_posistion }};">
+        {% for link in section.settings.menu.links %}
+          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+            {% if link.links != blank %}
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="submenu-{{ forloop.index }}"
+                data-dropdown-toggle
+              >
+                {{ link.title }}
+                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                {% for child_link in link.links %}
+                  <li role="none">
+                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </nav>
+      </div>
+      {% endif %}
+    {% endif %}
+
 </header>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+
+<script src="{{ 'header.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -59,7 +312,83 @@
     {
       "type": "link_list",
       "id": "menu",
+      "default": "main-menu",
       "label": "t:labels.menu"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "t:labels.position",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:labels.menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_posistion",
+      "label": "t:labels.position",
+      "options": [
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
+        },
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "menu_row",
+      "label": "t:general.row",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:options.alignment.top"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.alignment.bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
     }
   ]
 }

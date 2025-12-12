@@ -13,6 +13,26 @@
     --page-margin: {{ settings.min_page_margin }}px;
     --color-background: {{ settings.background_color }};
     --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --style-border-radius: {{ settings.corner_radius }}px;
+    /* Card Grid Layout Settings */
+    --grid-cards-columns-desktop: {{ settings.grid_cards_columns_desktop }};
+    --grid-cards-columns-tablet: {{ settings.grid_cards_columns_tablet }};
+    --grid-cards-columns-mobile: {{ settings.grid_cards_columns_mobile }};
+    --grid-cards-column-gap: {{ settings.grid_cards_column_gap }}px;
+    --grid-cards-row-gap: {{ settings.grid_cards_row_gap }}px;
+    --grid-cards-max-width-desktop: {{ settings.grid_cards_max_width_desktop }}px;
+    --grid-cards-max-width-tablet: {{ settings.grid_cards_max_width_tablet }}px;
+    --grid-cards-max-width-mobile: {{ settings.grid_cards_max_width_mobile }}px;
+    /* Card Shadow Settings */
+    --card-shadow-opacity: {{ settings.card_shadow_opacity  | divided_by: 100.0 }};
+    --card-shadow-horizontal-offset: {{ settings.card_horizontal_offset }}px;
+    --card-shadow-vertical-offset: {{ settings.card_vertical_offset }}px;
+    --card-shadow-blur: {{ settings.card_shadow_blur }}px;
+    /* Social Media Settings */
+    --soc-size: {{ settings.social_icon_size }}px;
+    --soc-gap: {{ settings.social_icon_gap }}px;
+    --soc-radius: {{ settings.social_icon_radius }}px;
+    --soc-color: {{ settings.social_icon_color }};
+    --soc-hover: {{ settings.social_icon_hover_color }};
   }
 {% endstyle %}

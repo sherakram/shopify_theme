@@ -1,17 +1,48 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "article",
-      "settings": {}
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": "large"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_align": "left"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "share_bg": "#f7f7f8",
+            "share_dc": "#eee",
+            "share_alignmen": "flex-start"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "enable_dropcap": true
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "title",
+        "share",
+        "content"
+      ],
+      "settings": {
+        "enabled_image": true,
+        "enabled_auth": true,
+        "enabled_date": true,
+        "enabled_title": true
+      }
     }
   },
   "order": [

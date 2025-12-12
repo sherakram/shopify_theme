@@ -1,37 +1,248 @@
-{% comment %}
-  This section is used in the cart template to render /cart page with an
-  overview of the items in customer's cart.
+{{ 'cart.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
-{% endcomment %}
+{%- if cart.item_count > 0 -%}
+  <div class="cart-page-wrapper">
+    <h1 class="cart-page-title">SHOPPING BAG</h1>
+    <p class="cart-item-count">
+      {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}
+    </p>
 
-<h1>{{ 'cart.title' | t }}</h1>
+    <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+      <table class="shop_table shop_table_responsive cart" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="product-remove">Remove</th>
+            <th class="product-thumbnail">Image</th>
+            <th class="product-name">Product Title</th>
+            <th class="product-price">Price</th>
+            <th class="product-quantity">Quantity</th>
+            <th class="product-subtotal">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr class="cart_item">
+              <!-- Remove -->
+              <td class="product-remove" data-title="Remove">
+                <a href="{{ item.url_to_remove }}" class="remove" aria-label="Remove {{ item.product.title }}">
+                  &times;
+                </a>
+              </td>
 
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+              <!-- Thumbnail -->
+              <td class="product-thumbnail" data-title="Image">
+                <a href="{{ item.url }}">
+                  <img
+                    src="{{ item.image | image_url: width: 150 }}"
+                    alt="{{ item.image.alt | escape }}"
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                  >
+                </a>
+              </td>
 
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
+              <!-- Product name & variant -->
+              <td class="product-name" data-title="Product Title">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                {% if item.variant.title != 'Default Title' %}
+                  <p class="variation">Variant: {{ item.variant.title }}</p>
+                {% endif %}
+                {% for property in item.properties %}
+                  {% if property.last != blank %}
+                    {% unless property.first contains '_' %}
+                      <p class="item-property">{{ property.first }}: {{ property.last }}</p>
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+              </td>
+
+              <!-- Price -->
+              <td class="product-price" data-title="Price">
+                <span class="amount">{{ item.price | money }}</span>
+              </td>
+
+              <!-- Quantity -->
+              <td class="product-quantity" data-title="Quantity">
+                <div class="quantity">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="input-text qty text"
+                    aria-label="Quantity for {{ item.product.title }}"
+                  >
+                </div>
+              </td>
+
+              <!-- Subtotal -->
+              <td class="product-subtotal" data-title="Total">
+                <span class="amount">{{ item.line_price | money }}</span>
+              </td>
+            </tr>
+          {% endfor %}
+
+          <!-- Cart Actions Row -->
+          <tr>
+            <td colspan="6" class="actions">
+              <div class="actions-right">
+                <div class="coupon">
+                  <input type="text" name="discount" class="input-text" id="coupon_code" placeholder="Discount code">
+                  <input type="submit" class="button" name="apply_discount" value="Apply Coupon">
+                </div>
+
+              
+                <div class="update_cart">
+                  <input type="submit" class="button" name="update" value="{{ 'cart.update' | t }}">
+                </div>
+              </div>  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Cart Totals -->
+      <div class="cart_totals">
+      <div class="emty-total"></div>
+      <div class="total-box">
+        <h2 cart-total-title>{{ 'cart.title' | t }}</h2>
+        <table class="totatl-cart">
+          <tbody>
+            <tr class="cart-subtotal">
+              <th><strong>{{ 'cart.subtotal' | t }}:</strong></th>
+                <td>
+                  <p class="cart-subprice">
+                    <span>{{ cart.total_price | money }}</span>
+                  </p>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="checkout_cart">
+          <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}" class="button checkout-button" style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">
+        </div>
+      </div>
+      </div>
+
+    </form>
+  </div>
+
+  
+  
+{%- else -%}
+  <div class="empty-cart" style="--cart-padding-top:{{ section.settings.padding_top }}px; --cart-padding-bottom:{{ section.settings.padding_bottom }}px;">
+    <div class="cart-header">
+      {%- if section.settings.show_empty_cart_image != blank -%}
+        <img
+          src="{{ section.settings.empty_cart_image | image_url: width: 300 }}"
+          alt="{{ section.settings.empty_cart_heading | escape }}"
+          width="300px"
+          height="190px"
+          loading="lazy"
+          class="img-fluid mb-4 mr-3"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'img-fluid mb-4 mr-3' }}
+      {%- endif -%}
+    </div>
+    <div class="cart-body">
+      <h1 class="cart-title">{{ section.settings.empty_cart_heading }}</h1>
+      <p class="cart-pickup-line">{{ section.settings.empty_cart_subheading }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-shop button"  style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">
+        {{- section.settings.empty_cart_button_text -}}
+      </a>
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "t:general.cart",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Empty Cart Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_empty_cart_image",
+      "label": "Show empty cart image",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "empty_cart_image",
+      "label": "Empty cart image",
+      "info": "Appears when the cart is empty. Defaults to a shopping bag icon."
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_heading",
+      "label": "Empty cart heading",
+      "default": "Your cart is empty"
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_subheading",
+      "label": "Empty cart subheading",
+      "default": "Add something to make me happy!"
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_button_text",
+      "label": "Empty cart button text",
+      "default": "Continue Shopping"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bg_hover_color",
+      "label": "Button Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Button Text",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "text_hover_color",
+      "label": "Button Text Hover Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {  
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ]
 }
 {% endschema %}

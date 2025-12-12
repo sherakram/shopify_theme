@@ -1,0 +1,22 @@
+<div id="search-modal" class="search-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="search-modal__overlay" data-close></div>
+  <div class="search-modal__content" role="document">
+    <div class="search-close-btn">
+        <span class="search-title">{{ 'search.title' | t }}</span>
+        <button class="search-modal__close" data-close aria-label="Close search">&times;</button>
+    </div>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+      <input
+        type="search"
+        name="q"
+        id="search-input"
+        placeholder="Search products, collections, articles..."
+        autocomplete="off"
+      >
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <div id="search-suggestions" class="search-suggestions"></div>
+  </div>
+</div>

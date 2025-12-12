@@ -1,9 +1,25 @@
+# name: CI
+# on: [push]
+# jobs:
+#   theme-check:
+#     name: Theme Check
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Theme Check
+#         uses: shopify/theme-check-action@v2
+#         with:
+#           token: ${{ github.token }}
+
 name: CI
-on: [push]
+
+on:
+  pull_request:
+    branches: [header-section]  # or your target branch
 
 permissions:
   contents: read
-  checks: write   
+  checks: write
   pull-requests: write
 
 jobs:
@@ -15,4 +31,5 @@ jobs:
       - name: Theme Check
         uses: shopify/theme-check-action@v2
         with:
-          token: ${{  secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+

@@ -1,47 +1,143 @@
-{% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
+{{ 'collection.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
-
-<h1>{{ collection.title }}</h1>
-
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
+<div class="title-header-banner full-width" style="--collection-bg:{{ section.settings.collection_title_bg }};">
+  <h1 class="collection-title-head" style="--collection-title-align:{{ section.settings.collection_title_align }};">{{ collection.title }}</h1>
 </div>
 
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
+{%- comment -%} Determine page size from URL or setting {%- endcomment -%}
+{% assign current_page_size = section.settings.page_size_default %}
+
+{%- render 'filters-sorting' -%}
+
+<div id="CollectionSection-{{ section.id }}">
+  {% paginate collection.products by current_page_size %}
+      <div id="CollectionProductGrid-{{ section.id }}" class="collection-products" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;" tabindex="-1">
+         {% for product in collection.products %}
+            {% render 'Product-card', product: product %}
+         {% endfor %}
+      </div>
+     <div id="CollectionPagination-{{ section.id }}" class="pagination" aria-label="Pagination">
+        {% render 'pagination', pagination: paginate %}
+     </div>
+  {% endpaginate %}
+</div>  
+
+
 
 {% schema %}
 {
   "name": "t:general.collection",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:labels.collection_title"
+    },
+    {
+      "type": "color",
+      "id": "collection_title_bg",
+      "label": "t:labels.bgColor",
+      "default": "#fff"
+    },
+    {
+      "type": "select",
+      "id": "collection_title_align",
+      "label": "t:labels.alignment",
+      "options": [
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
+        },
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:general.collection_card"
+    },
+    {
+      "type": "color",
+      "id": "card_product_bg",
+      "label": "t:labels.background",
+      "default": "#fff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show product reviews",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.filter_and_sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "filters_use_drawer",
+      "label": "t:labels.drawer_popup",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "t:labels.enable_filters",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sort",
+      "label": "t:labels.sort_selector",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sort_options",
+      "label": "t:labels.sort_options",
+      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
+    },
+    {
+      "type": "number",
+      "id": "page_size_default",
+      "label": "t:labels.items_per_page",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ]
 }
 {% endschema %}
