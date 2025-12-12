@@ -1,0 +1,29 @@
+{%- comment -%} snippets/product-media.liquid - expects `media` variable {%- endcomment -%}
+
+<div class="product-media-item">
+  {% assign media_type = media.media_type %}
+  {% case media_type %}
+    {% when 'image' %}
+      <div class="swiper-zoom-container">
+        {{ media | image_url: width: 2048, height: 2048 | image_tag: class: 'product-media__image', alt: media.alt }}
+      </div>
+
+    {% when 'video' %}
+      <div class="product-video">
+        {{ media | video_tag }}
+      </div>
+
+    {% when 'external_video' %}
+      <div class="product-external-video">
+        {{ media | external_video_tag }}
+      </div>
+
+    {% when 'model' %}
+      <div class="product-model">
+        {{ media | model_viewer_tag }}
+      </div>
+
+    {% else %}
+      {{ media | image_url: width: 208 | image_tag: class: 'product-media__image', alt: media.alt }}
+  {% endcase %}
+</div>

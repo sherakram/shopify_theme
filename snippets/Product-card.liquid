@@ -1,0 +1,128 @@
+<div class="collection-product" style="--card-bg:{{ section.settings.card_product_bg }};"> 
+  {% if product.featured_image %}
+    <a href="{{ product.url }}" class="collection-product__image-wrapper">
+      {% render 'image',
+        class: 'collection-product__image',
+        image: product.featured_image,
+        width: 400,
+        height: 400,
+        crop: 'center'
+      %}
+    </a>
+    {% else %}
+        {{ 'product-apparel-3' | placeholder_svg_tag: 'collection-product__image-wrapper, collection-product__image' }}
+  {% endif %}
+
+  <div class="collection-product__content">
+    <h2 class="collection-product__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h2>
+
+    <div class="collection-product__price">
+      {% if product.compare_at_price > product.price %}
+        <span class="price--old">{{ product.compare_at_price | money }}</span>
+        <span class="price--new">{{ product.price | money }}</span>
+      {% else %}
+        <span class="price--regular">{{ product.price | money }}</span>
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_vendor and product.vendor != blank %}
+      <p class="collection-product__vendor">{{ product.vendor }}</p>
+    {% endif %}
+
+    {% if section.settings.show_reviews %}
+      <div class="collection-product__reviews">
+        <!-- Third-party review widget placeholder -->
+        {% comment %} {% render 'star-rating', product: product %} {% endcomment %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% style %}
+
+.collection-product {
+  background: var(--card-bg);
+  border-radius: var(--style-border-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow-horizontal-offset, 0px) var(--card-shadow-vertical-offset, 0px) var(--card-shadow-blur, 10px) rgba(0, 0, 0, var(--card-shadow-opacity, 0.1));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.collection-product:hover {
+  transform: translateY(-6px);
+}
+
+.collection-product__image-wrapper {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-product__image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.collection-product:hover .collection-product__image {
+  transform: scale(1.05);
+}
+
+.collection-product__content {
+  padding: 15px;
+  text-align: left;
+}
+
+.collection-product__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #000;
+}
+
+.collection-product__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.collection-product__price {
+  margin-bottom: 8px;
+}
+
+.price--old {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+.price--new {
+  color: #f39c12;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.price--regular {
+  color: #fff;
+  font-weight: 600;
+}
+
+.collection-product__vendor {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.collection-product__reviews {
+  margin-top: 5px;
+}
+
+{% endstyle %}
+

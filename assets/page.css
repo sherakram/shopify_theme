@@ -1,0 +1,44 @@
+.custom-page-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.main-page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3;
+  text-align: var(--text-align);
+}
+
+.custom-page-content {
+  line-height: 1.5;
+}
+
+.custom-page-content h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.custom-page-content p {
+  margin-bottom: 1rem;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-page-title {
+    font-size: 1.8rem;
+  }
+
+  .custom-page-content {
+    font-size: 0.95rem;
+  }
+
+  .custom-page-content h2 {
+    font-size: 1.2rem;
+  }
+}

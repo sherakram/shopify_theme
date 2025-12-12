@@ -3,9 +3,44 @@
     "name": "theme_info",
     "theme_name": "Skeleton",
     "theme_version": "0.1.0",
-    "theme_author": "Shopify",
+    "theme_author": "Sheraz Akram",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Desktop Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_logo_image",
+        "label": "Mobile Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "dark_logo_image",
+        "label": "Dark Mode Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "label": "Max logo width (PX)",
+        "min": 100,
+        "max": 200,
+        "step": 4,
+        "default": 100
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Displayed at 32 x 32px"
+      }
+    ]
   },
   {
     "name": "t:general.typography",
@@ -35,7 +70,7 @@
             "label": "t:options.page_width.narrow"
           },
           {
-            "value": "110rem",
+            "value": "100%",
             "label": "t:options.page_width.wide"
           }
         ],
@@ -44,7 +79,7 @@
       {
         "type": "range",
         "id": "min_page_margin",
-        "min": 10,
+        "min": 0,
         "max": 100,
         "step": 1,
         "unit": "px",
@@ -67,17 +102,179 @@
         "id": "foreground_color",
         "default": "#333333",
         "label": "t:labels.foreground"
+      }
+    ]
+  },
+  {
+    "name": "t:general.card_Grid_Layout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.desktop_Grid"
       },
       {
         "type": "range",
-        "id": "input_corner_radius",
+        "id": "grid_cards_columns_desktop",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 4,
+        "label": "t:labels.desktop_Columns"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_max_width_desktop",
+        "min": 200,
+        "max": 600,
+        "step": 10,
+        "unit": "px",
+        "default": 300,
+       "label": "t:labels.max_card_width_desktop"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_columns_tablet",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 3,
+        "label": "t:labels.table_columns"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_max_width_tablet",
+        "min": 150,
+        "max": 500,
+        "step": 10,
+        "unit": "px",
+        "default": 300,
+        "label": "t:labels.max_card_width_tablet"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_columns_mobile",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 1,
+        "label": "t:labels.mobile_columns"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_max_width_mobile",
+        "min": 120,
+        "max": 400,
+        "step": 10,
+        "unit": "px",
+        "default": 400,
+        "label": "t:labels.max_card_width_mobile"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_column_gap",
         "min": 0,
-        "max": 10,
+        "max": 50,
+        "step": 5,
+        "unit": "px",
+        "default": 20,
+        "label": "t:labels.column_gap"
+      },
+      {
+        "type": "range",
+        "id": "grid_cards_row_gap",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "unit": "px",
+        "default": 20,
+        "label": "t:labels.row_gap"
+      },
+      {
+        "type": "header",
+        "content": "t:general.card_shadow"
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:labels.card_shadow_opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "card_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:labels.card_shadow_horizontal_offset",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:labels.card_shadow_vartical_offset",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:labels.card_shadow_blur",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "t:labels.corner_radius"
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "min": 0,
+        "max": 20,
         "step": 1,
         "unit": "px",
-        "label": "t:labels.input_corner_radius",
+        "label": "t:labels.corner_radius",
         "default": 4
       }
+    ]
+  },
+  {
+  "name": "t:general.social_media_icons",
+  "settings": [
+      { "type": "checkbox", "id": "show_social_icons", "label": "t:labels.show_social_icons", "default": true },
+
+      { "type": "select", "id": "social_icon_style", "label": "t:labels.icon_style", "default": "mono",
+       "options": [
+         { "value": "mono", "label": "t:labels.monochrome_color" },
+         { "value": "brand", "label": "t:labels.brand_colors" }
+       ]
+      },
+
+      { "type": "range", "id": "social_icon_size", "label": "t:labels.icon_size", "min": 14, "max": 36, "step": 2, "unit": "px", "default": 18 },
+      { "type": "range", "id": "social_icon_gap", "label": "t:labels.icon_gap", "min": 4, "max": 24, "step": 2, "unit": "px", "default": 10 },
+      { "type": "range", "id": "social_icon_radius", "label": "t:labels.icon_corner_radius", "min": 0, "max": 12, "step": 2, "unit": "px", "default": 6 },
+
+      { "type": "color", "id": "social_icon_color", "label": "t:labels.monochrome", "default": "#222222" },
+      { "type": "color", "id": "social_icon_hover_color", "label": "t:labels.hover_color", "default": "#000000" },
+
+      { "type": "text", "id": "social_facebook_url", "label": "t:labels.facebook_url", "placeholder": "https://facebook.com/shopify" },
+      { "type": "text", "id": "social_instagram_url", "label": "t:labels.instagram_url", "placeholder": "https://Instagram.com/shopify" },
+      { "type": "text", "id": "social_twitter_url", "label": "t:labels.twitter_url", "placeholder": "https://Twitter.com/shopify" },
+      { "type": "text", "id": "social_youtube_url", "label": "t:labels.youtube_url", "placeholder": "https://YouTube.com/shopify" },
+      { "type": "text", "id": "social_linkedin_url", "label": "t:labels.linkedin_url", "placeholder": "https://LinkedIn.com/shopify" },
+      { "type": "text", "id": "social_pinterest_url", "label": "t:labels.pinterest_url", "placeholder": "https://Pinterest.com/shopify" },
+      { "type": "text", "id": "social_tiktok_url", "label": "t:labels.tiktok_url", "placeholder": "https://TikTok.com/shopify" }
     ]
   }
 ]

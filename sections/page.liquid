@@ -1,17 +1,102 @@
-{% comment %}
-  This section is used in the page template to render store pages like About us
-  or Contact us.
+{{ 'page.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/page
-{% endcomment %}
+<div class="custom-page-wrapper"
+     style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
 
-<h1>{{ page.title }}</h1>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'title' %}
+          <h1 class="main-page-title" style="margin-bottom: {{ section.settings.title_gap }}px; --text-align:{{ block.settings.title_alignment }};">
+            {{ page.title | escape }}
+          </h1>
+        {% when 'content' %}
+          <div class="custom-page-content">
+            {{ page.content }}
+          </div>
+        {% else %}
+          
+      {% endcase %}
+    {% endfor %}
 
-{{ page.content }}
+</div>
+
 
 {% schema %}
 {
   "name": "t:general.page",
-  "settings": []
+  "settings": [
+    {
+      "type": "range",
+      "id": "title_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Title gap",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.layout"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "t:labels.alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Content",
+      "limit": 1
+    }
+  ]
 }
 {% endschema %}

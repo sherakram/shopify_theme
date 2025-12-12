@@ -1,0 +1,49 @@
+/* =========================
+   Collections Banner
+   ========================= */
+.collections-banner {
+  background: linear-gradient(135deg, #f9fafb, #ffffff);
+  padding: 40px 20px;
+  text-align: var(--heade-align);
+}
+
+.collections-header {
+  font-size: 2.5em;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+    .collections-header {
+        font-size: 2em;
+    }
+}
+
+/* =========================
+   Collections Grid
+   ========================= */
+.collections {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cards-columns-desktop), minmax(0, 1fr));
+  gap: var(--grid-cards-row-gap) var(--grid-cards-column-gap);
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
+  max-width: 100%;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .collections {
+    grid-template-columns: repeat(var(--grid-cards-columns-tablet), minmax(0, 1fr));
+    gap: var(--grid-cards-row-gap) var(--grid-cards-column-gap);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .collections {
+    grid-template-columns: repeat(var(--grid-cards-columns-mobile), minmax(0, 1fr));
+    gap: var(--grid-cards-row-gap) var(--grid-cards-column-gap);
+  }
+}

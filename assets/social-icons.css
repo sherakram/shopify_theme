@@ -1,0 +1,39 @@
+/* Container */
+.social-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--soc-gap, 10px);
+}
+
+/* Each icon link */
+.social-icon {
+  width: var(--soc-size, 18px);
+  height: var(--soc-size, 18px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: var(--share-justify);
+  border-radius: var(--soc-radius, 6px);
+  color: var(--soc-color, #222);
+  transition: color .15s ease, transform .15s ease, background-color .15s ease;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.social-icon svg { width: 100%; height: 100%; display:block; }
+
+/* Hover */
+.social-icon:hover { color: var(--soc-hover, #000); transform: translateY(-1px); }
+
+/* Brand color mode */
+.social-icons.is-brand .social-icon--facebook { color:#1877F2; }
+.social-icons.is-brand .social-icon--instagram{ color:#E4405F; }
+.social-icons.is-brand .social-icon--twitter  { color:#111111; } /* X uses black */
+.social-icons.is-brand .social-icon--youtube  { color:#FF0000; }
+.social-icons.is-brand .social-icon--linkedin { color:#0A66C2; }
+.social-icons.is-brand .social-icon--pinterest{ color:#E60023; }
+.social-icons.is-brand .social-icon--tiktok   { color:#010101; }
+
+/* Optional background chips (uncomment if you want filled pills)
+.social-icon { background: rgba(0,0,0,0.04); }
+.social-icons.is-brand .social-icon { background: rgba(0,0,0,0.06); }
+*/

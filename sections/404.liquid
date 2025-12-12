@@ -1,23 +1,244 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
+{{ 'critical.css' | asset_url | stylesheet_tag }}
+{{ '404.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
+{% if template.name == '404' %}
+<div class="full-404-container shopify-section full-width {{ section.settings.bg_height }} anim-{{ section.settings.background_animation }} speed-{{ section.settings.background_animation_speed }} bg-type-{{ section.settings.background_type }}" style="--bg-404:{{ section.settings.background_color }}; --text-404:{{ settings.foreground_color }}; --overlay-opacity:{{ section.settings.overlay_opacity }};">
+ <div class="main-404-container full-width" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px;">
+  
+  {% if section.settings.background_type == 'image' %}
+   {% if section.settings.bg_img_404 %}
+     <div class="bg-image-wrapper">
+       <img 
+         src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
+         alt="{{ section.settings.title | escape }}"
+         class="bg-image"
+         width="2000",
+         height="1500",
+         srcset="{{ section.settings.bg_img_404 | image_url: width: 750 }} 750w,
+                 {{ section.settings.bg_img_404 | image_url: width: 1100 }} 1100w,
+                 {{ section.settings.bg_img_404 | image_url: width: 1500 }} 1500w,
+                 {{ section.settings.bg_img_404 | image_url: width: 2000 }} 2000w,
+                 {{ section.settings.bg_img_404 | image_url: width: 2500 }} 2500w"
+        >
+        <div class="bg-overlay"></div>
+      </div>
+    {% else %}
+      <div class="bg-image-wrapper">
+       {% assign placeholder_image = 'lifestyle-1' %}
+       {{ placeholder_image | placeholder_svg_tag: 'bg-image' }}
+        <div class="bg-overlay"></div>
+      </div>
+    {% endif %}  
+  {% endif %} 
 
-<h1>{{ '404.title' | t }}</h1>
+  <div class="container_404-content {% if section.settings.enable_box_shadow %} has-shadow{% endif %}" style="--text-align:{{ section.settings.text_align }}; --main-bg:{{ section.settings.main_bg_color }}; --container-radius:{{ section.settings.container_radius }}%;">
+    <h1 class="title" style="--heading-color:{{ section.settings.heading_color }};">{{ section.settings.title }}</h1>
+    <h2 class="sub-404" style="--not-found:{{ section.settings.not_found_color }};">{{ section.settings.notfound }}</h2>
+    <p class="para-404" style="--message-color:{{ section.settings.message_color }};">{{ section.settings.message }}</p>
 
-<p>
-  {{ '404.not_found' | t }}
-</p>
+    <div class="btn-404-container">
+    <a class="btn-404" href="{{ section.settings.button_link_404 }}" style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">{{ section.settings.button_text_404 }}</a>
+    </div>
 
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
+  </div>
+ </div>
+</div> 
+{% endif %}  
+
 
 {% schema %}
 {
   "name": "t:general.404",
-  "settings": []
+  "settings": [
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        { "value": "color", "label": "Color" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img_404",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "select",
+      "id": "bg_height",
+      "label": "Background Height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "background_animation",
+      "label": "Background Animation",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "gradient-slide", "label": "Gradient Slide" },
+        { "value": "pulse", "label": "Pulse" },
+        { "value": "wave", "label": "Wave" }
+      ],
+     "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "background_animation_speed",
+      "label": "Animation Speed",
+      "options": [
+        { "value": "slow", "label": "Slow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "fast", "label": "Fast" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "color",
+      "id": "main_bg_color",
+      "label": "Container Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "label": "Container Radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_box_shadow",
+      "label": "Enable Box Shadow",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page Title",
+      "default": "404"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "notfound",
+      "label": "Not Found Message",
+      "default": "Oops, Page Not Found"
+    },
+    {
+      "type": "color",
+      "id": "not_found_color",
+      "label": "Sub Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "Page that you're looking for isn't found"
+    },
+    {
+      "type": "color",
+      "id": "message_color",
+      "label": "Message Color",
+      "default": "#000000"
+    },
+    {
+      "type": "url",
+      "id": "button_link_404",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text_404",
+      "label": "Button Text",
+      "default": "Back to Home"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bg_hover_color",
+      "label": "Button Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Button Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_hover_color",
+      "label": "Button Text Hover Color",
+      "default": "#ffffff"
+    },
+    {  
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ]
 }
+
 {% endschema %}

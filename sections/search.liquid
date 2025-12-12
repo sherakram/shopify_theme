@@ -1,70 +1,318 @@
-{% comment %}
-  This section is used in the search template to render search results for
-  products, articles, and pages.
+<div class="modern-search full-width" style="
+  --padding-top: {{ section.settings.padding_top }}px;
+  --padding-bottom: {{ section.settings.padding_bottom }}px;
+  --bg-color: {{ section.settings.bg_color }};
+  --title-color: {{ section.settings.title_color }};
+  --btn-bg: {{ section.settings.button_bg }};
+  --btn-text: {{ section.settings.button_text }};
+">
+  <div class="modern-search__wrapper">
+    <h1 class="modern-search__title" style="font-size: {{ section.settings.title_size }}px;">
+      {{ section.settings.custom_title | default: 'Search our store' }}
+    </h1>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/search
-{% endcomment %}
+    <!-- Search box -->
+    <div class="modern-search__box">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input
+          type="search"
+          class="modern-search__input"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ section.settings.search_placeholder }}"
+        >
+        <button type="submit" class="modern-search__btn">
+          {{ section.settings.button_label }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 
-<h1>{{ 'search.title' | t }}</h1>
-
-<form action="{{ routes.search_url }}" method="get" role="search">
-  <input
-    type="search"
-    size="50"
-    name="q"
-    value="{{ search.terms | escape }}"
-    placeholder="{{ 'search.placeholder' | t }}"
-  >
-  <button type="submit">{{ 'search.submit' | t }}</button>
-</form>
 
 {% if search.performed %}
   {% if search.results_count == 0 %}
-    <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+    <p class="modern-search__no-results">
+      {{ 'search.no_results_html' | t: terms: search.terms }}
+    </p>
   {% else %}
-    <p>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
+    <p class="modern-search__results-count">
+      {{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}
+    </p>
 
-    <div class="search-results">
-      {% paginate search.results by 20 %}
-        {% # Search result items may be an article, a page, or a product. %}
+    {% paginate search.results by 20 %}
+      <div class="modern-search__grid">
         {% for result in search.results %}
-          <div class="search-result">
-            {% assign featured_image = result.featured_image | default: result.image %}
-            {% if featured_image %}
-              {% render 'image', class: 'search-result__image', image: featured_image, url: result.url, width: 400 %}
-            {% endif %}
-            <div class="search-result__content">
-              <p>
-                {{ result.title | link_to: result.url }}
-                {% if result.price %}
-                  {{ result.price | money_with_currency }}
-                {% endif %}
-              </p>
-            </div>
-          </div>
+          {% case result.object_type %}
+            {% when 'product' %}
+              {% render 'product-card', product: result %}
+            {% when 'collection' %}
+              {% render 'collection-card', collection: result %}
+            {% else %}
+          {% endcase %}
         {% endfor %}
+      </div>
 
-        {{ paginate | default_pagination }}
-      {% endpaginate %}
-    </div>
+      <div class="modern-search__pagination">
+        {% render 'pagination', pagination: paginate %}
+      </div>
+    {% endpaginate %}
+
   {% endif %}
 {% endif %}
 
+
 {% stylesheet %}
-  .search-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+.modern-search {
+  background: var(--bg-color);
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
+  text-align: center;
+}
+
+.modern-search__title {
+  color: var(--title-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.modern-search__box form {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background: #fff;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.modern-search__input {
+  flex: 1;
+  padding: 14px 18px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.modern-search__btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 14px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modern-search__btn:hover {
+  opacity: 0.9;
+}
+
+
+/* Results count */
+.modern-search__results-count {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  margin: -20px auto 30px;
+  padding: 12px 20px;
+  background: var(--bg-color);
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* No results */
+.modern-search__no-results {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  margin: -20px auto 30px;
+  padding: 12px 20px;
+  background: #fff3f3;
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.modern-search__no-results::before {
+  content: "🔍 ";
+  font-size: 1.2rem;
+  margin-right: 6px;
+}
+
+/* Results grid */
+.modern-search__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.modern-search__card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.modern-search__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.modern-search__content {
+  padding: 16px;
+  text-align: left;
+}
+
+.modern-search__card-title {
+  display: block;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+.modern-search__card-title:hover {
+  color: var(--btn-bg);
+}
+
+.modern-search__price {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.modern-search__no-results {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .modern-search__box form {
+    flex-direction: column;
+    border-radius: 16px;
   }
-  .search-results .prev,
-  .search-results .page,
-  .search-results .next {
-    grid-column: 1 / -1;
+  .modern-search__btn {
+    width: 100%;
+    border-radius: 0 0 16px 16px;
   }
+}
+
+@media (max-width: 480px) {
+  .modern-search__box {
+    padding: 10px 20px;
+  }
+  .modern-search__box input[type="search"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .modern-search__btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .modern-search__results {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* Extra small screens (320px and below) */
+@media (max-width: 360px) {
+  .modern-search__box {
+    padding: 6px 20px;
+  }
+  .modern-search__box input[type="search"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+  .modern-search__btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.search",
-  "settings": []
+  "name": "Modern Search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Heading",
+      "default": "Search our store"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 18,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder text",
+      "default": "Search for products..."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Search"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ]
 }
 {% endschema %}

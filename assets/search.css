@@ -1,0 +1,151 @@
+.search-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.5);
+  z-index: 9999;
+}
+.search-modal.active { display: flex; }
+
+.search-modal {
+  display: none;
+}
+.search-modal.active {
+  display: flex;
+}
+
+.search-modal__content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-close-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
+}
+
+.search-title {
+    font-size: large;
+    font-weight: 600;
+}
+
+.search-modal__close {
+   background: none;
+   border: none;
+   font-size: 1.8rem;
+   cursor: pointer;
+}
+
+form.search-modal__form {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background: #fff;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+input#search-input {
+  flex: 1;
+  padding: 14px 18px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-suggestions {
+  margin-top: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .5rem 0;
+}
+.suggestion-item img { border-radius: 6px; }
+
+
+/*Predictive search*/
+#search-suggestions {
+  padding: 1rem;
+  background: #fff;
+}
+
+.suggestion-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 1rem 0 0.5rem;
+  color: #666;
+}
+
+.suggestion-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestion-item {
+  margin-bottom: 0.75rem;
+}
+
+.suggestion-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.suggestion-link:hover {
+  background: #f7f7f7;
+}
+
+.suggestion-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.suggestion-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.no-results {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+
+

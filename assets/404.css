@@ -1,0 +1,196 @@
+.main-404-container{
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: var(--padding-404-top);
+    padding-bottom: var(--padding-404-bottom);
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.bg-type-color {
+  background-color: var(--bg-404);
+}
+
+.bg-image-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, calc(var(--overlay-opacity) / 100));
+  pointer-events: none; /* so clicks pass through */
+}
+
+/* Height control */
+.full-404-container.small { min-height: 200px; }
+.full-404-container.medium { min-height: 400px; }
+.full-404-container.large { min-height: 600px; }
+
+
+/* Gradient Slide Animation */
+.full-404-container.anim-gradient-slide {
+  background: linear-gradient(270deg, #22b455, #1dd1a1, #22b455);
+  background-size: 600% 600%;
+  animation-name: gradientSlide;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Pulse Animation */
+.full-404-container.anim-pulse {
+  animation-name: pulseBg;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulseBg {
+  0%, 100% { filter: brightness(100%); }
+  50% { filter: brightness(120%); }
+}
+
+/* Wave Animation */
+.full-404-container.anim-wave {
+  background: linear-gradient(45deg, #22b455, #1dd1a1);
+  background-size: 200% 200%;
+  animation-name: waveBg;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes waveBg {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Speed Controls */
+.speed-slow   { animation-duration: 20s; }
+.speed-medium { animation-duration: 10s; }
+.speed-fast   { animation-duration: 5s; }
+
+.container_404-content {
+  width: 550px;
+  height: 350px;
+  border-radius: var(--container-radius);
+  background: var(--main-bg);
+  text-align: var(--text-align);
+  padding: 20px;
+}
+
+.container_404-content.has-shadow{
+  box-shadow: 12px 12px 23px #bebebe, -12px -12px 23px #fff;
+}
+
+.container_404-content h1.title {
+  font-size: 10rem;
+  background: var(--heading-color);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 750;
+}
+.container_404-content h2.sub-404 {
+  color: var(--not-found);
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.container_404-content p.para-404 {
+  color: var(--message-color);
+  font-weight: 450;
+  margin-bottom: 10px;
+}
+
+.btn-404-container {
+    margin: 25px auto;
+}
+
+.container_404-content .btn-404 {
+  padding: 12px 24px;
+  border-radius: 20%;
+  border: none;
+  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));;
+  background-size: 200% auto;
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: 0.3s linear;
+  text-decoration: none;
+}
+.container_404-content .btn-404:hover {
+  background-position: right;
+  color: var(--btn-text-hover);
+}
+
+
+/* Responsive 404 Section */
+@media (max-width: 1024px) {
+  .container_404-content {
+    width: 80%;
+    height: auto;
+    padding: 30px 20px;
+  }
+  .container_404-content h1.title {
+    font-size: 8rem;
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.5rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-404-container {
+    flex-direction: column;
+    padding: 40px 15px;
+  }
+  .container_404-content {
+    width: 100%;
+    height: auto;
+    padding: 20px 15px;
+  }
+  .container_404-content h1.title {
+    font-size: 6rem; /* reduced for tablet */
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.3rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 0.95rem;
+  }
+  .container_404-content .btn-404{
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container_404-content {
+    padding: 15px 12px;
+  }
+  .container_404-content h1.title {
+    font-size: 4rem; /* reduced for small screens */
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.1rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 0.9rem;
+  }
+}
+

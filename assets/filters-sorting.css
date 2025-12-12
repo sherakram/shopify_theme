@@ -1,0 +1,483 @@
+/* ------------------------------
+   Toolbar (Top Bar)
+------------------------------ */
+.fs-toolbar {
+  width: 100%;
+  margin: 40px 0;
+  box-sizing: border-box;
+}
+
+.fs-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+/* Label for sort by */
+.fs-label {
+  font-weight: 600;
+  font-size: 15px;
+  color: #000;
+}
+
+/* Filter toggle button */
+.fs-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+.fs-toggle:hover {
+  color: #111;
+  transform: translateY(-2px);
+}
+.fs-toggle:focus {
+  outline: none;
+}
+
+/* Sort select */
+.fs-select {
+  min-width: 180px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23e0e0e0' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px; /* Make space for custom arrow */
+  transition: border 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fs-select:focus {
+  outline: none;
+  border-color: #000;
+}
+.fs-select option {
+  background-color: #fff; /* Style options in dropdown */
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) { /* Adjusted breakpoint for better tablet support */
+  .fs-form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .fs-toggle {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+
+  .fs-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+    
+  .fs-select {
+    /* width: 100%; */
+    min-width: unset; /* Allow full width */
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/* ------------------------------
+   Modal Popup (Center Overlay)
+------------------------------ */
+.fs-panels {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75); /* Darker overlay */
+  z-index: 1200;
+  padding: 20px;
+  animation: fadeIn 0.4s ease forwards; /* Slightly slower animation */
+}
+.fs-panels[hidden] {
+  display: none;
+}
+
+.fs-panels .fs-panel-inner {
+  width: min(760px, 100%);
+  max-height: 90vh; /* More vertical space */
+  overflow-y: auto; /* Changed to auto for better scroll handling */
+  background: #fff;
+  color: #000;
+  border-radius: 0;
+  padding: 25px 30px; /* More generous padding */
+  box-shadow: 0 20px 60px var(--shadow-color); /* More prominent shadow */
+  border: 1px solid #000;
+  animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; /* Bouncy animation */
+}
+
+.fs-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Increased margin */
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+}
+.fs-panel__title {
+  margin: 0;
+  font-size: 24px; /* Larger title */
+  font-weight: 700;
+  color: #000;
+}
+
+/* Close button (modal + drawer) */
+.fs-close {
+  background: transparent;
+  border: none;
+  color: #000;
+  font-size: 30px; /* Larger close button */
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.fs-close:hover {
+  color: #000;
+  transform: rotate(90deg) scale(1.1); /* Slightly larger on hover */
+}
+
+/* ------------------------------
+   Drawer (Right Side Panel)
+------------------------------ */
+.fs-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: none;
+}
+.fs-drawer .fs-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65); /* Slightly darker backdrop */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fs-drawer .fs-drawer__panel {
+  display: grid;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 400px; /* Slightly wider drawer */
+  max-width: 90%; /* Better max-width for smaller screens */
+  transform: translateX(100%) scale(0.95);
+  transition: transform 0.55s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+              opacity 0.3s ease;
+  background: #fff;
+  color: #000;
+  padding: 25px; /* Increased padding */
+  box-shadow: -15px 0 50px var(--shadow-color); /* More prominent shadow */
+  border-left: 1px solid var(--border-color);
+  overflow-y: auto; /* Ensure scrollability */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.fs-drawer[open] {
+  pointer-events: auto;
+}
+.fs-drawer[open] .fs-drawer__backdrop {
+  pointer-events: auto;
+  opacity: 1;
+}
+.fs-drawer[open] .fs-drawer__panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Drawer header/footer */
+.fs-drawer .fs-panel__header,
+.fs-drawer .fs-panel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px; /* Increased gap */
+  padding: 15px 0;
+  margin-bottom: 0; /* No margin bottom here, handled by padding */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.fs-drawer .fs-panel__header {
+  border-top: none; /* No top border for header */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Add bottom border for header */
+  /* margin-bottom: 20px; */
+}
+
+/* ------------------------------
+   Filter Groups & Inputs
+------------------------------ */
+.fs-group {
+  margin-top: 20px;
+  padding-top: 15px;
+}
+.fs-group__title {
+  font-weight: 700;
+  margin-bottom: 15px; /* Increased margin */
+  display: block;
+  font-size: 16px;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+ul.fs-list {
+    list-style: none;
+    padding: 0;
+}
+
+.fs-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Space between checkboxes */
+}
+.fs-checkbox input[type='checkbox'] {
+  margin-right: 10px; /* Increased space */
+  accent-color: var(--primary-color);
+  width: 18px; /* Larger checkbox */
+  height: 18px;
+  cursor: pointer;
+  border-radius: 4px; /* Slightly rounded checkbox */
+  transition: all 0.2s ease;
+}
+.fs-checkbox input[type='checkbox']:hover {
+  filter: brightness(1.2);
+}
+.fs-list__item label {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fs-list__item label .fs-text {
+  flex-grow: 1;
+}
+.fs-list__item:hover label {
+  color: var(--primary-hover-color);
+}
+.fs-count {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto; /* Pushes count to the right */
+}
+
+/* Price range */
+.fs-price {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Increased gap */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.fs-price .fs-label {
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 14px;
+}
+.fs-price .fs-input {
+  width: 100px;
+  padding: 8px 10px;
+  border-radius: 0;
+  border: 1px solid #000;
+  background: var(--dark-panel-color);
+  color: var(--text-color);
+  font-size: 14px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.fs-price .fs-input:focus {
+  outline: none;
+  border-color: #000;
+}
+.fs-to {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+}
+
+/* Clear single filter */
+.fs-clear {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.fs-clear:hover {
+  color: var(--primary-hover-color);
+  text-decoration: underline;
+}
+
+/* Clear all filters */
+.fs-clear-all {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.fs-clear-all:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+/* Modal pup-up Responsive */ 
+@media (max-width: 768px) {
+    .fs-price {
+      gap: 0;
+    }
+
+    .fs-price .fs-label {
+      padding: 5px;
+    }
+
+    .fs-price .fs-input {
+      width: 79px;
+    }
+}
+
+
+/* ------------------------------
+   Footer Actions (Apply / Clear)
+------------------------------ */
+.fs-actions,
+.fs-panel__footer {
+  display: flex;
+  gap: 15px; /* Increased gap */
+  justify-content: flex-end;
+  margin-top: 25px; /* Increased margin top */
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Separator for footer actions */
+}
+.fs-apply,
+.fs-panel__footer .fs-clear { /* Target the clear button in the footer specifically */
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  min-width: 100px; /* Ensure consistent button size */
+  text-align: center;
+}
+.fs-apply {
+  background: var(--primary-color);
+  border: 1px solid #000;
+  color: #111;
+}
+.fs-apply:hover {
+  transform: translateY(-2px);
+}
+.fs-panel__footer .fs-clear { /* Specific style for footer clear */
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+}
+.fs-panel__footer .fs-clear:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+@media ( max-width: 768px ) {
+  .fs-actions, .fs-panel__footer {
+      justify-content: center;
+    }
+    
+  .fs-apply,
+.fs-panel__footer .fs-clear {
+      min-width: 126px;
+    }  
+}
+
+/* ------------------------------
+   Animations
+------------------------------ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Accessibility */
+.fs-panels:focus {
+  outline: none;
+}
+.fs-drawer__backdrop {
+  cursor: pointer;
+}
+
+/* Visually hidden for accessibility (ensure this is in your global CSS) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Scrollbar styling for modal/drawer content */
+.fs-panels .fs-panel-inner::-webkit-scrollbar,
+.fs-drawer .fs-drawer__panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.fs-panels .fs-panel-inner::-webkit-scrollbar-track,
+.fs-drawer .fs-drawer__panel::-webkit-scrollbar-track {
+  background: var(--dark-bg-color);
+  border-radius: 10px;
+}
+
+.fs-panels .fs-panel-inner::-webkit-scrollbar-thumb,
+.fs-drawer .fs-drawer__panel::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  border: 2px solid var(--dark-bg-color);
+}

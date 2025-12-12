@@ -4,6 +4,27 @@
     "not_found": "Page not found.",
     "back_to_shopping": "Back to shopping"
   },
+  "mobile_menu":{
+    "menu":"Menu"
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "skip_to_product_info": "Skip to product information",
+    "close": "Close",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:",
+    "error": "Error",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "link_messages": {
+      "new_window": "Opens in a new window.",
+      "external": "Opens external website."
+    },
+    "loading": "Loading...",
+    "total_reviews": "total reviews",
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "collapsible_content_title": "Collapsible content",
+    "complementary_products": "Complementary products"
+  },
   "blog": {
     "article_comments": "Comments",
     "article_metadata_html": "{{ date }} by {{ author }}",
@@ -14,10 +35,11 @@
     "comment_form_title": "Add a comment"
   },
   "cart": {
-    "checkout": "Checkout",
-    "title": "Cart",
-    "update": "Update",
-    "remove": "Remove"
+    "checkout": "Proceed to Checkout",
+    "title": "Cart total",
+    "update": "Update cart",
+    "remove": "Remove",
+    "subtotal": "Subtotal"
   },
   "customers": {
     "login": {
@@ -28,7 +50,27 @@
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Collections",
+    "general": {
+      "collection_product_count": "Product",
+      "filters_and_sorting": "Filters and sorting",
+      "filter_products": "Filter products",
+      "items_per_page": "Items per page",
+      "apply": "Apply",
+      "filters": "Filters",
+      "filter": "Filter",
+      "no_filters": "No filters enabled for this collection.",
+      "from": "From",
+      "to": "To",
+      "min_price": "Minimum price",
+      "max_price": "Maximum price",
+      "clear_filter": "Clear filter",
+      "clear_all": "Clear all",
+      "clear": "Clear"
+    },
+    "sorting": {
+      "title": "Sort by"
+    }
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
