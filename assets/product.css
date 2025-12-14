@@ -38,7 +38,7 @@
   grid-template-areas: "info media";
 }
 
-.product-swiper{position:relative;width:100%;aspect-ratio:1/1;border:1px solid #eee;border-radius:12px;overflow:hidden;}
+.product-swiper{position:relative;width:100%;aspect-ratio:1/1;border:1px solid #eee;border-radius:0px;overflow:hidden;}
 .product-swiper .swiper-slide{display:flex;align-items:center;justify-content:center}
 .product-zoom-btn{display:none;}
 .product-size-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:20px;z-index:9999}
@@ -67,7 +67,7 @@
   width: clamp(40px, 8vw, 70px);
   height: clamp(40px, 8vw, 70px);
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 0px;
   cursor: pointer;
   overflow: hidden;
   transition: border-color 0.2s ease;
@@ -180,7 +180,7 @@
   padding-right: 36px;
   font-size: 1rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 0px;
   appearance: none;
   background-color: #fff;
   cursor: pointer;
@@ -216,7 +216,7 @@
   justify-content: center;
   padding: 6px 12px;
   border: 1px solid #ddd;
-  border-radius: 9999px;
+  border-radius: 0px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.2s ease;
@@ -292,7 +292,7 @@
   display: flex;
   align-items: center;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
   height: 46px;
   flex: 0 0 110px;   /* set min width */
@@ -323,17 +323,30 @@
   background: #f7f7f7;
 }
 
+/* Remove number input arrows (Chrome, Safari, Edge) */
+.quantity-selector input[type="number"]::-webkit-inner-spin-button,
+.quantity-selector input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove number input arrows (Firefox) */
+.quantity-selector input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
 /* Add to cart */
 .add-to-cart-button {
   flex: 1;           
-  padding: 14px;
-  border-radius: 10px;
-  background: #000;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 0px;
+  background: transparent;
+  color: #000;
+  text-transform: uppercase;
+  font-size: inherit;
   cursor: pointer;
-  border: none;
+  border: 1px solid #000;
   position: relative;
   transition: background 0.2s ease;
 }
@@ -361,12 +374,12 @@
 /* Buy it now */
 .shopify-payment-button__button--unbranded {
   width: 100%;
-  padding: 14px;
-  border-radius: 10px;
+  padding: 12px 24px;
+  border-radius: 0px;
   background: #000;
   color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  text-transform: uppercase;
+  font-size: inherit;
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -394,11 +407,11 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #28a745;
+  background-color: #428445;
 }
 
 .inventory-dot.out {
-  background-color: #dc3545;
+  background-color: #eb001b;
 }
 
 .inventory-dot.hide-dot {
@@ -407,26 +420,26 @@
 
 .inventory-progress-wrapper {
   width: 100%;
-  height: 6px;
-  border-radius: 4px;
+  height: 3px;
+  border-radius: 0px;
   background: #e9ecef;
   overflow: hidden;
   margin-top: 8px;
 }
 
 .inventory-progress-bar {
-  height: 6px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #28a745 0%, #6cc870 100%);
+  height: 3px;
+  border-radius: 0px;
+  background: linear-gradient(90deg, #428445 0%, #6cc870 100%);
   transition: width 0.3s ease, background-color 0.3s ease;
 }
 
 .inventory-progress-bar.low-stock {
-  background: linear-gradient(90deg, #ff4d4f 0%, #ff7a7a 100%);
+  background: linear-gradient(90deg, #eb001b 0%, #ff7a7a 100%);
 }
 
 .out-of-stock {
-  color: #dc3545;
+  color: #eb001b;
 }
 
 /*Payment icons*/
