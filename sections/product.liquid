@@ -349,29 +349,337 @@
 {
   "name": "t:general.product",
   "settings": [
-      {"type": "header", "content": "t:general.layout"},
-      { "id": "media_position", "type": "select", "label": "t:general.media_position", "options":[{"value":"left","label":"t:options.alignment.left"},{"value":"right","label":"t:options.alignment.right"}], "default":"left" },
-      { "id": "media_info_gap", "type":"range", "label":"t:general.gap", "min":0, "max":80, "step":2, "default":28 },
-      {"type": "select", "id": "column_width", "label": "Column Width", "options": [{ "value": "small-media", "label": "Small media / Large info" },{ "value": "equal", "label": "Equal columns" },{ "value": "large-media", "label": "Large media / Small info" }],"default": "equal"},
-      { "id":"show_thumbnails","type":"checkbox","label":"t:labels.Show_thumbnails","default":true },
-      {"type": "select","id": "thumb_position","label": "t:labels.thumbnail_position", "options": [{ "value": "left", "label": "t:options.alignment.left" },{ "value": "right", "label": "t:options.alignment.right" },{ "value": "bottom", "label": "t:options.alignment.bottom" }], "default": "bottom"},
-      {"type": "header", "content": "t:labels.padding"},
-      { "id": "padding_top", "type":"range", "label":"t:sections.all.padding.padding_top", "min":0, "max":100, "step":4, "default":40 },
-      { "id": "padding_bottom", "type":"range", "label":"t:sections.all.padding.padding_bottom", "min":0, "max":100, "step":4, "default":40 },
+      {
+        "type": "header",
+        "content": "t:general.layout"
+      },
+      { 
+        "id": "media_position",
+        "type": "select",
+        "label": "t:general.media_position",
+        "options":[
+          {
+            "value":"left",
+            "label":"t:options.alignment.left"
+          },
+          {
+            "value":"right",
+            "label":"t:options.alignment.right"
+          }
+        ],
+         "default":"left"
+      },
+      { 
+        "id": "media_info_gap",
+        "type":"range",
+        "label":"t:general.gap",
+        "min":30,
+        "max":120, 
+        "step":2, 
+        "default":60 
+      },
+      {
+        "type": "select", 
+        "id": "column_width", 
+        "label": "Column Width", 
+        "options": [
+          { 
+            "value": "small-media", 
+            "label": "Small media / Large info" 
+          },
+          {
+             "value": "equal", 
+             "label": "Equal columns" 
+          },
+          {
+             "value": "large-media", 
+             "label": "Large media / Small info"
+          }
+        ],
+        "default": "equal"
+      },
+      {
+        "id":"show_thumbnails",
+        "type":"checkbox",
+        "label":"t:labels.Show_thumbnails",
+        "default":true 
+      },
+      {
+        "type": "select",
+        "id": "thumb_position",
+        "label": "t:labels.thumbnail_position", 
+        "options": [
+          { 
+            "value": "left", 
+            "label": "t:options.alignment.left"
+          },
+          {
+            "value": "right",
+            "label": "t:options.alignment.right"
+          },
+          { 
+            "value": "bottom",
+            "label": "t:options.alignment.bottom"
+          }
+        ], 
+        "default": "bottom"
+      },
+      {
+        "type": "header",
+        "content": "t:labels.padding"
+      },
+      {
+        "id": "padding_top",
+        "type":"range", 
+        "label":"t:sections.all.padding.padding_top", 
+        "min":0, 
+        "max":100, 
+        "step":4, 
+        "default":40 
+      },
+      { 
+        "id": "padding_bottom", 
+        "type":"range", 
+        "label":"t:sections.all.padding.padding_bottom", 
+        "min":0, 
+        "max":100, 
+        "step":4, 
+        "default":40 
+      },
     ],
     "blocks": [
-      { "type":"title","name":"Title","limit": 1 },
-      { "type":"price","name":"Price","limit": 1 },
-      { "type":"divider","name":"Divider" },
-      { "type":"variant_picker","name":"Variant Picker","limit": 1, "settings": [{"type":"select", "label": "Style", "id": "style", "default": "dropdown", "options": [{"value": "dropdown", "label": "Dropdown"},{"value": "pills", "label": "Pills"}]}, {"type": "select", "id": "swatch", "label": "Swatch", "default": "none", "options": [{"value": "circle", "label": "Circle"},{"value": "square", "label": "Square"},{"value": "none","label": "None"}]}] },
-      { "type":"buy_buttons","name":"Buy Buttons","limit": 1 },
-      { "type":"product_description","name":"Product Description","limit": 1 },
-      { "type":"countdown_urgency","name":"CountDown Timer","limit": 1, "settings": [{ "type": "text", "id": "heading_text", "label": "Heading", "default": "Hurry up!" },{ "type": "text", "id": "subheading_text", "label": "Subheading", "default": "Sale ends in:" },{ "type": "color", "id": "bg_color", "label": "Background color", "default": "#6a4cff" },{ "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },{ "type": "color", "id": "unit_color", "label": "Timer color", "default": "#ffffff" },{ "type": "color", "id": "flip_color", "label": "Flip animation color", "default": "#ffcc00" },{ "type": "text", "id": "end_date", "label": "End date/time (YYYY-MM-DD HH:MM)", "default": "2025-12-31 23:59" },{ "type": "range", "id": "border_radius", "label": "Border radius (px)", "min": 0, "max": 30, "step": 2, "default": 12 },{ "type": "checkbox", "id": "auto_restart", "label": "Auto-restart timer (evergreen mode)", "default": true },{ "type": "range", "id": "restart_hours", "label": "Restart after (hours)", "min": 0, "max": 168, "step": 2, "default": 24 },{ "type": "checkbox", "id": "hide_expired", "label": "Hide when expired", "default": false }] },
-      { "type":"product_inventory","name":"Product inventory","limit": 1, "settings": [{"type": "checkbox", "id": "show_quantity", "label": "Show quantity when in stock", "default": true},{"type": "range", "id": "low_inventory_threshold", "label": "Low inventory threshold", "min": 0, "max": 50, "step": 5, "default": 10},{"type": "checkbox","id": "show_progress_bar", "label": "Show progress bar", "default": true}, {"type": "number","id": "progress_bar_max_value","label": "Progress bar max value","default": 50}] },
-      { "type":"payment_icons","name":"Payment icons","limit": 1, "settings": [{ "id":"payment_icons_image","type":"checkbox","label":"t:labels.show_payment_icons", "default":false },{ "type": "text","id":"custom_payment_icons","label": "t:labels.show_payment_icons","default": "visa,master,american-express,paypal" }] },
-      { "type":"product_size","name":"Product size","limit": 1,"settings":[ { "id":"size_label","type":"text","label":"Button label","default":"Size guide" }, { "id":"size_popup_image","type":"image_picker","label":"Size popup image" }] }
+      { 
+        "type":"title",
+        "name":"Title",
+        "limit": 1 
+      },
+      { 
+        "type":"price",
+        "name":"Price",
+        "limit": 1 
+      },
+      { 
+        "type":"divider",
+        "name":"Divider" 
+      },
+      { 
+        "type":"variant_picker",
+        "name":"Variant Picker",
+        "limit": 1, 
+        "settings": 
+        [
+          {
+            "type":"select", 
+            "label": "Style", 
+            "id": "style", 
+            "default": "dropdown", 
+            "options": 
+            [
+              {
+                "value": "dropdown", 
+                "label": "Dropdown"
+              },
+              {
+                "value": "pills", 
+                "label": "Pills"
+              }
+            ]
+          }, 
+          {
+            "type": "select", 
+            "id": "swatch", 
+            "label": "Swatch", 
+            "default": "none", 
+            "options": 
+            [
+              {
+                "value": "circle", 
+                "label": "Circle"
+              },
+              {
+                "value": "square", 
+                "label": "Square"
+              },
+              {
+                "value": "none",
+                "label": "None"
+              }
+            ]
+          }
+        ] 
+      },
+      { 
+        "type":"buy_buttons",
+        "name":"Buy Buttons",
+        "limit": 1 
+      },
+      { 
+        "type":"product_description",
+        "name":"Product Description",
+        "limit": 1 
+      },
+      { 
+        "type":"countdown_urgency",
+        "name":"CountDown Timer",
+        "limit": 1, 
+        "settings": 
+        [
+          { 
+            "type": "text", 
+            "id": "heading_text", 
+            "label": "Heading", 
+            "default": "Hurry up!" 
+          },
+          { 
+            "type": "text", 
+            "id": "subheading_text", 
+            "label": "Subheading", 
+            "default": "Sale ends in:" 
+          },
+          { 
+            "type": "color", 
+            "id": "bg_color", 
+            "label": "Background color", 
+            "default": "#ffffff" 
+          },
+          { 
+            "type": "color", 
+            "id": "text_color", 
+            "label": "Text color", 
+            "default": "#000000" 
+          },
+          { 
+            "type": "color", 
+            "id": "unit_color", 
+            "label": "Timer color", 
+            "default": "#000000" 
+          },
+          { 
+            "type": "color", 
+            "id": "flip_color", 
+            "label": "Flip animation color", 
+            "default": "#ffcc00" 
+          },
+          { 
+            "type": "text", 
+            "id": "end_date", 
+            "label": "End date/time (YYYY-MM-DD HH:MM)", 
+            "default": "2025-12-31 23:59" 
+          },
+          { 
+            "type": "range", 
+            "id": "border_radius", 
+            "label": "Border radius (px)", 
+            "min": 0, 
+            "max": 30, 
+            "step": 2, 
+            "default": 0 
+          },
+          { 
+            "type": "checkbox", 
+            "id": "auto_restart", 
+            "label": "Auto-restart timer (evergreen mode)", 
+            "default": true 
+          },
+          { 
+            "type": "range", 
+            "id": "restart_hours", 
+            "label": "Restart after (hours)", 
+            "min": 0, 
+            "max": 168, 
+            "step": 2, 
+            "default": 24 
+          },
+          { 
+            "type": "checkbox", 
+            "id": "hide_expired", 
+            "label": "Hide when expired", 
+            "default": false 
+          }
+        ] 
+      },
+      { 
+        "type":"product_inventory",
+        "name":"Product inventory",
+        "limit": 1, 
+        "settings": 
+        [
+          {
+            "type": "checkbox", 
+            "id": "show_quantity", 
+            "label": "Show quantity when in stock", 
+            "default": true
+          },
+          {
+            "type": "range", 
+            "id": "low_inventory_threshold", 
+            "label": "Low inventory threshold", 
+            "min": 0, 
+            "max": 50, 
+            "step": 5, 
+            "default": 10
+          },
+          {
+            "type": "checkbox",
+            "id": "show_progress_bar", 
+            "label": "Show progress bar", 
+            "default": true
+          }, 
+          {
+            "type": "number",
+            "id": "progress_bar_max_value",
+            "label": "Progress bar max value",
+            "default": 50
+          }
+        ] 
+      },
+      { 
+        "type":"payment_icons",
+        "name":"Payment icons",
+        "limit": 1, 
+        "settings": 
+        [
+          { 
+            "id":"payment_icons_image",
+            "type":"checkbox",
+            "label":"t:labels.show_payment_icons", 
+            "default":false 
+          },
+          { 
+            "type": "text",
+            "id":"custom_payment_icons",
+            "label": "t:labels.show_payment_icons",
+            "default": "visa,master,american-express,paypal" 
+          }
+        ] 
+      },
+      { 
+        "type":"product_size",
+        "name":"Product size",
+        "limit": 1,
+        "settings":
+        [ 
+          { 
+            "id":"size_label",
+            "type":"text",
+            "label":"Button label",
+            "default":"Size guide" 
+          }, 
+          { 
+            "id":"size_popup_image",
+            "type":"image_picker",
+            "label":"Size popup image" 
+          }
+        ] 
+      }
     ],
-    "presets": [{ "name": "Product (Swiper)", "category": "Products" }],
+    "presets": 
+    [
+      { 
+        "name": "Product (Swiper)", 
+        "category": "Products" 
+      }
+    ],
   "disabled_on": {
     "groups": ["header", "footer"]
   }
