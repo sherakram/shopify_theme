@@ -58,12 +58,12 @@
           "settings": {
             "heading_text": "Hurry up!",
             "subheading_text": "Sale ends in:",
-            "bg_color": "#6a4cff",
-            "text_color": "#ffffff",
-            "unit_color": "#ffffff",
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "unit_color": "#000000",
             "flip_color": "#ffcc00",
             "end_date": "2025-12-31 23:59",
-            "border_radius": 12,
+            "border_radius": 0,
             "auto_restart": true,
             "restart_hours": 24,
             "hide_expired": false
@@ -84,7 +84,7 @@
       ],
       "settings": {
         "media_position": "left",
-        "media_info_gap": 28,
+        "media_info_gap": 60,
         "show_thumbnails": true,
         "thumb_position": "bottom",
         "padding_top": 40,

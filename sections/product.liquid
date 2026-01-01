@@ -11,6 +11,21 @@
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
 
+      <!--Grid Layout-->
+      {% comment %} <div class="product-media-wrapper">
+        <!-- Main Media -->
+        <div class="product-media-column">
+            <div class="main-product__media--grid">
+              {% for media in product.media %}
+                <div class="main-product__media--grid-item" data-media-id="{{ media.id }}">
+                  {% render 'product-media', media: media %}
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+      </div> {% endcomment %}
+
+      <!--SlideShow Layout-->
       <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
   
         {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
@@ -349,6 +364,46 @@
 {
   "name": "t:general.product",
   "settings": [
+      {
+        "type": "header",
+        "content": "t:general.media_settings"
+      },
+      {
+        "type": "select",
+        "id": "media_desktop_layout",
+        "label": "t:general.media_desktop_layout",
+        "options": [
+          {
+            "label": "t:general.media_grid",
+            "value": "grid"
+          },
+          {
+            "label": "t:general.media_slideshow",
+            "value": "slideshow"
+          },
+          {
+            "label": "t:general.media_carousel",
+            "value": "carousel"
+          }
+        ],
+        "default": "slideshow"
+      },
+      {
+        "type": "select",
+        "id": "media_mobile_layout",
+        "label": "t:general.media_mobile_layout",
+        "options": [
+          {
+            "label": "t:general.media_slideshow",
+            "value": "slideshow"
+          },
+          {
+            "label": "t:general.media_carousel",
+            "value": "carousel"
+          }
+        ],
+        "default": "slideshow"
+      },
       {
         "type": "header",
         "content": "t:general.layout"
