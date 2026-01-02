@@ -305,9 +305,8 @@
   border: 1px solid #ddd;
   border-radius: 0px;
   overflow: hidden;
-  height: 46px;
-  flex: 0 0 110px;   /* set min width */
-  max-width: 30%;
+  height: 100%;
+  max-width: 35%;
 }
 
 .quantity-selector input {
@@ -359,11 +358,13 @@
   cursor: pointer;
   border: 1px solid #000;
   position: relative;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .add-to-cart-button:hover {
-  background: #333;
+  background: #000;
+  color: #fff;
+  border: none;
 }
 
 /* Add to cart states */
