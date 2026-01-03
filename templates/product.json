@@ -47,7 +47,9 @@
         },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": {}
+          "settings": {
+            "qty_cart_layout": "inline"
+          }
         },
         "product_description": {
           "type": "product_description",

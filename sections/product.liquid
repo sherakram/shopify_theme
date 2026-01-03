@@ -10,11 +10,15 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-
-      <!--Grid Layout-->
-      {% comment %} <div class="product-media-wrapper">
-        <!-- Main Media -->
-        <div class="product-media-column">
+     
+      <div class="product-media
+          media-desktop--{{ section.settings.media_desktop_layout }}
+          media-mobile--{{ section.settings.media_mobile_layout }}"
+        >
+        <!--Grid Layout-->
+        <div class="product-media-wrapper">
+          <!-- Main Media -->
+          <div class="product-media-layout product-media-layout--grid">
             <div class="main-product__media--grid">
               {% for media in product.media %}
                 <div class="main-product__media--grid-item" data-media-id="{{ media.id }}">
@@ -22,73 +26,144 @@
                 </div>
               {% endfor %}
             </div>
+          </div>
         </div>
-      </div> {% endcomment %}
 
-      <!--SlideShow Layout-->
-      <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
+        <!--SlideShow Layout-->
+        <div class="product-media-layout product-media-layout--slideshow">
+          <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
   
-        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
-          <div class="product-thumbs thumbs-left">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
-                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
+              <div class="product-thumbs thumbs-left">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
                 </div>
-              {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Main Media -->
+            <div class="product-media-column">
+              <div class="product-swiper product-swiper-{{ section.id }}">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-media-id="{{ media.id }}">
+                      {% render 'product-media', media: media %}
+                    </div>
+                  {% endfor %}
+                </div>
+
+                <!-- zoom / nav -->
+                <button type="button" class="product-zoom-btn" aria-label="Zoom image">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M21 21l-4.35-4.35" />
+                    <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                </button>
+
+                <div class="swiper-button-prev" aria-hidden="true"></div>
+                <div class="swiper-button-next" aria-hidden="true"></div>
+
+              </div>
             </div>
+
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
+              <div class="product-thumbs thumbs-right">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
+              <div class="product-thumbs thumbs-bottom">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
           </div>
-        {% endif %}
+        </div>
 
-        <!-- Main Media -->
-        <div class="product-media-column">
-          <div class="product-swiper product-swiper-{{ section.id }}">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide" data-media-id="{{ media.id }}">
-                  {% render 'product-media', media: media %}
+        <!--Carousel Layout-->
+        <div class="product-media-layout product-media-layout--carousel">
+          <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
+
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
+              <div class="product-thumbs thumbs-left">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
                 </div>
-              {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="product-media-column">  
+              <div class="product-swiper product-swiper--carousel product-swiper-{{ section.id }}">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide">
+                      {% render 'product-media', media: media %}
+                    </div>
+                  {% endfor %}
+                </div>
+
+                <button type="button" class="product-zoom-btn" aria-label="Zoom image">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M21 21l-4.35-4.35" />
+                    <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                </button>
+
+                <div class="swiper-button-prev" aria-hidden="true"></div>
+                <div class="swiper-button-next" aria-hidden="true"></div>
+
+              </div>
             </div>
 
-            <!-- zoom / nav -->
-            <button type="button" class="product-zoom-btn" aria-label="Zoom image">
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M21 21l-4.35-4.35" />
-                <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-              </svg>
-            </button>
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
+              <div class="product-thumbs thumbs-right">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
 
-            <div class="swiper-button-prev" aria-hidden="true"></div>
-            <div class="swiper-button-next" aria-hidden="true"></div>
+            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
+              <div class="product-thumbs thumbs-bottom">
+                <div class="swiper-wrapper">
+                  {% for media in product.media %}
+                    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
+                      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
 
           </div>
         </div>
 
-        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
-          <div class="product-thumbs thumbs-right">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
-                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
-        {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
-          <div class="product-thumbs thumbs-bottom">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide" data-thumb-id="{{ media.id }}">
-                  {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
       </div>
+
 
       <div class="product-info-column">
         {% comment %} Render blocks chosen in customizer (merchant can reorder) {% endcomment %}
@@ -213,7 +288,7 @@
 
             {% when 'buy_buttons' %}
               <div class="product-buy">
-                {% render 'buy-buttons', product: product, section_id: section.id %}
+                {% render 'buy-buttons', product: product, section_id: section.id, block: block %}
               </div>
 
             {% when 'product_description' %}
@@ -566,7 +641,25 @@
       { 
         "type":"buy_buttons",
         "name":"Buy Buttons",
-        "limit": 1 
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "qty_cart_layout",
+            "label": "Quantity and buttons layout",
+            "default": "inline",
+            "options": [
+              {
+                "value": "inline",
+                "label": "Inline"
+              },
+              {
+                "value": "stacked",
+                "label": "Stacked"
+              }
+            ]
+          }
+        ] 
       },
       { 
         "type":"product_description",

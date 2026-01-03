@@ -7,7 +7,7 @@
     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
     <div class="product-form-buttons spacing-style product-form-buttons--stacked">
-      <div class="qty-cart">
+      <div class="qty-cart qty-cart--{{ block.settings.qty_cart_layout }}">
         <!-- Quantity Selector -->
         <div class="quantity-selector" data-quantity>
           <button type="button" class="quantity-btn minus" aria-label="Decrease quantity">−</button>
@@ -19,6 +19,12 @@
         <button type="submit" name="add" class="button add-to-cart-button" data-add-to-cart>
           <span class="add-to-cart-text">Add to cart</span>
           <span class="add-to-cart-added">✓ Added</span>
+          <span
+            class="add-to-cart-status visually-hidden"
+            aria-live="polite"
+            role="status"
+            data-atc-status
+          ></span>
         </button>
       </div>
 
@@ -107,6 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return r.json();
       })
       .then(item => {
+        const status = form.querySelector('[data-atc-status]');
+        if (status) {
+          status.textContent = 'Added to cart';
+        }
         console.log("Added to cart:", item);
         addBtn.classList.add("added");
         setTimeout(() => addBtn.classList.remove("added"), 2000);

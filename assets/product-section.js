@@ -1,10 +1,23 @@
 (function(){
+  
+  function getVisibleLayout(sectionEl) {
+    return Array.from(
+      sectionEl.querySelectorAll('.product-media-layout')
+    ).find(el => getComputedStyle(el).display !== 'none');
+  }
+
   function initSection(sectionEl){
-    const mainEl = sectionEl.querySelector('.product-swiper');
-    if(!mainEl) return;
+    
+    const visibleLayout = getVisibleLayout(sectionEl);
+    if (!visibleLayout) return;
+
+    const mainEl = visibleLayout.querySelector('.product-swiper');
+    if (!mainEl || mainEl.swiper) return;
+
+    const isCarousel = mainEl.classList.contains('product-swiper--carousel');
 
     // optional thumbs
-    const thumbsEl = sectionEl.querySelector('.product-thumbs');
+    const thumbsEl = visibleLayout.querySelector('.product-thumbs');
     let thumbsSwiper = null;
 
     if (thumbsEl) {
@@ -14,29 +27,36 @@
       thumbsSwiper = new Swiper(thumbsEl, {
         direction: isVertical ? 'vertical' : 'horizontal',
         spaceBetween: 8,
-        slidesPerView: isVertical ? 'auto' : 4,
+        slidesPerView: 'auto',
         watchSlidesProgress: true,
-        slideToClickedSlide: true,
-        breakpoints: { 
-         480: { slidesPerView: isVertical ? 'auto' : 5 } 
-        }
       });
     }
 
     const mainSwiper = new Swiper(mainEl, {
       loop: false,
-      spaceBetween: 12,
+      spaceBetween: 10,
+      slidesPerView: isCarousel ? 1.2 : 1,
+      centeredSlides: false,
       navigation: {
-        nextEl: sectionEl.querySelector('.swiper-button-next'),
-        prevEl: sectionEl.querySelector('.swiper-button-prev')
+        nextEl: visibleLayout.querySelector('.swiper-button-next'),
+        prevEl: visibleLayout.querySelector('.swiper-button-prev')
       },
       thumbs: thumbsSwiper ? { swiper: thumbsSwiper } : undefined,
       zoom: { maxRatio: 3 },
-      a11y: true
+      a11y: true,
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+            750: {
+                slidesPerView: isCarousel ? 1.4 : 1, // Shows more of the next slide on desktop
+                spaceBetween: 20
+            }
+        }
+
     });
 
     // Zoom button behaviour
-    const zoomBtn = sectionEl.querySelector('.product-zoom-btn');
+    const zoomBtn = visibleLayout.querySelector('.product-zoom-btn');
     if (zoomBtn && mainSwiper.zoom) {
       zoomBtn.addEventListener('click', function(){
         if (mainSwiper.zoom.scale && mainSwiper.zoom.scale > 1) {
@@ -124,4 +144,5 @@
     ready();
   }
 })();
+
 
