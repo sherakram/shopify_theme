@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -51,10 +60,6 @@
             "qty_cart_layout": "inline"
           }
         },
-        "product_description": {
-          "type": "product_description",
-          "settings": {}
-        },
         "countdown_urgency": {
           "type": "countdown_urgency",
           "settings": {
@@ -70,6 +75,10 @@
             "restart_hours": 24,
             "hide_expired": false
           }
+        },
+        "product_description": {
+          "type": "product_description",
+          "settings": {}
         }
       },
       "block_order": [
@@ -85,8 +94,11 @@
         "product_description"
       ],
       "settings": {
+        "media_desktop_layout": "carousel",
+        "media_mobile_layout": "slideshow",
         "media_position": "left",
         "media_info_gap": 60,
+        "column_width": "equal",
         "show_thumbnails": true,
         "thumb_position": "bottom",
         "padding_top": 40,
