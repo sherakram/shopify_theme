@@ -1,7 +1,7 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
 
-{% capture product_media_items %}
+{% comment %} {% capture product_media_items %}
   {% for media in product.media %}
     <div class="swiper-slide" data-media-id="{{ media.id }}">
       {% render 'product-media', media: media %}
@@ -15,7 +15,7 @@
       {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
     </div>
   {% endfor %}
-{% endcapture %}
+{% endcapture %} {% endcomment %}
 
 
 <section id="product-section-{{ section.id }}" class="product-section
@@ -29,7 +29,7 @@
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
      
-      <div class="product-media
+      {% comment %} <div class="product-media
           media-desktop--{{ section.settings.media_desktop_layout }}
           media-mobile--{{ section.settings.media_mobile_layout }}"
         >
@@ -144,7 +144,36 @@
           </div>
         </div>
 
+      </div> {% endcomment %}
+
+      <div class="product-media"
+        data-desktop-layout="{{ section.settings.media_desktop_layout }}"
+        data-mobile-layout="{{ section.settings.media_mobile_layout }}">
+
+          {% assign desktop_layout = section.settings.media_desktop_layout %}
+          {% assign mobile_layout = section.settings.media_mobile_layout %}
+
+        <!-- Desktop -->
+        <div class="media-desktop">
+          {% if desktop_layout == 'grid' %}
+            {% render 'product-media-grid', product: product %}
+          {% elsif desktop_layout == 'slideshow' %}
+            {% render 'product-media-slideshow', product: product, section: section %}
+          {% elsif desktop_layout == 'carousel' %}
+            {% render 'product-media-carousel', product: product, section: section %}
+          {% endif %}
+        </div>
+
+        <!-- Mobile -->
+        <div class="media-mobile">
+          {% if mobile_layout == 'slideshow' %}
+            {% render 'product-media-slideshow', product: product, section: section %}
+          {% elsif mobile_layout == 'carousel' %}
+            {% render 'product-media-carousel', product: product, section: section %}
+          {% endif %}
+        </div>
       </div>
+
 
       <div class="product-info-column">
         {% comment %} Render blocks chosen in customizer (merchant can reorder) {% endcomment %}
