@@ -1,23 +1,6 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
 
-{% comment %} {% capture product_media_items %}
-  {% for media in product.media %}
-    <div class="swiper-slide" data-media-id="{{ media.id }}">
-      {% render 'product-media', media: media %}
-    </div>
-  {% endfor %}
-{% endcapture %}
-
-{% capture product_thumb_items %}
-  {% for media in product.media %}
-    <div class="swiper-slide" data-thumb-id="{{ media.id }}">
-      {{ media.preview_image | image_url: width: 200 | image_tag: alt: media.alt }}
-    </div>
-  {% endfor %}
-{% endcapture %} {% endcomment %}
-
-
 <section id="product-section-{{ section.id }}" class="product-section
          product-section--media-{{ section.settings.media_position }}
          product-section--{{ section.settings.column_width }}"
@@ -28,123 +11,6 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-     
-      {% comment %} <div class="product-media
-          media-desktop--{{ section.settings.media_desktop_layout }}
-          media-mobile--{{ section.settings.media_mobile_layout }}"
-        >
-        <!--Grid Layout-->
-        <div class="product-media-wrapper">
-          <!-- Main Media -->
-          <div class="product-media-layout product-media-layout--grid">
-            <div class="main-product__media--grid">
-              {{ product_media_items }}
-            </div>
-          </div>
-        </div>
-
-        <!--SlideShow Layout-->
-        <div class="product-media-layout product-media-layout--slideshow">
-          <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
-  
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
-              <div class="product-thumbs thumbs-left">
-                <div class="swiper-wrapper">
-                   {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-
-            <!-- Main Media -->
-            <div class="product-media-column">
-              <div class="product-swiper product-swiper-{{ section.id }}">
-                <div class="swiper-wrapper">
-                  {{ product_media_items }}
-                </div>
-
-                <!-- zoom / nav -->
-                <button type="button" class="product-zoom-btn" aria-label="Zoom image">
-                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M21 21l-4.35-4.35" />
-                    <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-                  </svg>
-                </button>
-
-                <div class="swiper-button-prev" aria-hidden="true"></div>
-                <div class="swiper-button-next" aria-hidden="true"></div>
-
-              </div>
-            </div>
-
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
-              <div class="product-thumbs thumbs-right">
-                <div class="swiper-wrapper">
-                  {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
-              <div class="product-thumbs thumbs-bottom">
-                <div class="swiper-wrapper">
-                  {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
-        <!--Carousel Layout-->
-        <div class="product-media-layout product-media-layout--carousel">
-          <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
-
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
-              <div class="product-thumbs thumbs-left">
-                <div class="swiper-wrapper">
-                  {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-
-            <div class="product-media-column">  
-              <div class="product-swiper product-swiper--carousel product-swiper-{{ section.id }}">
-                <div class="swiper-wrapper">
-                  {{ product_media_items }}
-                </div>
-
-                <button type="button" class="product-zoom-btn" aria-label="Zoom image">
-                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M21 21l-4.35-4.35" />
-                    <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-                  </svg>
-                </button>
-
-                <div class="swiper-button-prev" aria-hidden="true"></div>
-                <div class="swiper-button-next" aria-hidden="true"></div>
-
-              </div>
-            </div>
-
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
-              <div class="product-thumbs thumbs-right">
-                <div class="swiper-wrapper">
-                  {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
-              <div class="product-thumbs thumbs-bottom">
-                <div class="swiper-wrapper">
-                  {{ product_thumb_items }}
-                </div>
-              </div>
-            {% endif %}
-
-          </div>
-        </div>
-
-      </div> {% endcomment %}
 
       <div class="product-media"
         data-desktop-layout="{{ section.settings.media_desktop_layout }}"
@@ -153,25 +19,25 @@
           {% assign desktop_layout = section.settings.media_desktop_layout %}
           {% assign mobile_layout = section.settings.media_mobile_layout %}
 
-        <!-- Desktop -->
-        <div class="media-desktop">
-          {% if desktop_layout == 'grid' %}
-            {% render 'product-media-grid', product: product %}
-          {% elsif desktop_layout == 'slideshow' %}
-            {% render 'product-media-slideshow', product: product, section: section %}
-          {% elsif desktop_layout == 'carousel' %}
-            {% render 'product-media-carousel', product: product, section: section %}
-          {% endif %}
-        </div>
+          <!-- Desktop -->
+          <div class="media-desktop">
+            {% if desktop_layout == 'grid' %}
+              {% render 'product-media-grid', product: product %}
+            {% elsif desktop_layout == 'slideshow' %}
+              {% render 'product-media-slideshow', product: product, section: section %}
+            {% elsif desktop_layout == 'carousel' %}
+              {% render 'product-media-carousel', product: product, section: section %}
+            {% endif %}
+          </div>
 
-        <!-- Mobile -->
-        <div class="media-mobile">
-          {% if mobile_layout == 'slideshow' %}
-            {% render 'product-media-slideshow', product: product, section: section %}
-          {% elsif mobile_layout == 'carousel' %}
-            {% render 'product-media-carousel', product: product, section: section %}
-          {% endif %}
-        </div>
+          <!-- Mobile -->
+          <div class="media-mobile">
+            {% if mobile_layout == 'slideshow' %}
+              {% render 'product-media-slideshow', product: product, section: section %}
+            {% elsif mobile_layout == 'carousel' %}
+              {% render 'product-media-carousel', product: product, section: section %}
+            {% endif %}
+          </div>
       </div>
 
 

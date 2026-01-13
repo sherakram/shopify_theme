@@ -227,7 +227,7 @@ function initAllProductMedia() {
   if (typeof Swiper === 'undefined') return;
 
   document.querySelectorAll('.shopify-section').forEach(section => {
-    if (section.querySelector('.product-media')) {
+    if (section.querySelector('.product-media-layout')) {
       initProductMedia(section);
     }
   });
@@ -238,13 +238,13 @@ document.addEventListener('DOMContentLoaded', initAllProductMedia);
 
 /* ---------- SHOPIFY CUSTOMIZER SUPPORT ---------- */
 document.addEventListener('shopify:section:load', e => {
-  if (e.target.querySelector('.product-media')) {
+  if (e.target.querySelector('.product-media-layout')) {
     initProductMedia(e.target);
   }
 });
 
 document.addEventListener('shopify:section:select', e => {
-  if (e.target.querySelector('.product-media')) {
+  if (e.target.querySelector('.product-media-layout')) {
     initProductMedia(e.target);
   }
 });
@@ -257,3 +257,53 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(initAllProductMedia, 300);
 });
+
+
+/* ---------- VARIANT CHANGES ---------- */
+(function () {
+
+  function getActiveSwiper(sectionEl) {
+    let swiperEl = sectionEl.querySelector('.media-desktop .product-swiper');
+
+    if (
+      swiperEl &&
+      getComputedStyle(swiperEl.closest('.media-desktop')).display === 'none'
+    ) {
+      swiperEl = sectionEl.querySelector('.media-mobile .product-swiper');
+    }
+
+    if (!swiperEl || !swiperEl.swiper) return null;
+    return swiperEl.swiper;
+  }
+
+  function onVariantChange(sectionEl, variantId) {
+    const swiper = getActiveSwiper(sectionEl);
+    if (!swiper) return;
+
+    let targetIndex = null;
+
+    swiper.slides.forEach((slide, index) => {
+      if (!slide.hasAttribute('data-variant-ids')) return;
+
+      const ids = slide.getAttribute('data-variant-ids').split(',');
+      if (ids.includes(String(variantId))) {
+        targetIndex = index;
+      }
+    });
+
+    if (targetIndex !== null) {
+      swiper.slideTo(targetIndex);
+    }
+  }
+
+  document.addEventListener('variant:change', function (evt) {
+    const sectionEl = evt.target.closest('.shopify-section');
+    if (!sectionEl || !evt.detail || !evt.detail.variant) return;
+
+    onVariantChange(sectionEl, evt.detail.variant.id);
+  });
+
+
+})();
+
+

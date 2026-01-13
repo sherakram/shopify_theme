@@ -4,7 +4,10 @@
       <div class="product-swiper product-swiper--carousel">
         <div class="swiper-wrapper">
           {% for media in product.media %}
-            <div class="swiper-slide" data-media-id="{{ media.id }}">
+
+            <div class="swiper-slide" data-media-id="{{ media.id }}" {% if media.media_type == 'image' and media.variant_ids.size > 0 %}
+                data-variant-ids="{{ media.variant_ids | join: ',' }}"
+              {% endif %}>
               {% render 'product-media', media: media %}
             </div>
           {% endfor %}
