@@ -219,6 +219,8 @@ function initProductMedia(section) {
     },
   });
 
+  mainSwiperEl.swiper = mainSwiper;
+
   window.ProductMediaSwipers.push(mainSwiper);
 }
 
@@ -276,34 +278,92 @@ window.addEventListener('resize', () => {
     return swiperEl.swiper;
   }
 
-  function onVariantChange(sectionEl, variantId) {
-    const swiper = getActiveSwiper(sectionEl);
-    if (!swiper) return;
+  function onVariantChange(sectionEl, variant) {
+    if (!variant || !variant.featured_media) return;
+    
+    const mediaId = String(variant.featured_media.id);
 
-    let targetIndex = null;
+    /* ---------- GRID ---------- */
+    const gridItem = sectionEl.querySelector(
+      `.grid-media-item[data-media-id="${mediaId}"]`
+    );
 
-    swiper.slides.forEach((slide, index) => {
-      if (!slide.hasAttribute('data-variant-ids')) return;
+    if (gridItem) {
+      gridItem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    }
 
-      const ids = slide.getAttribute('data-variant-ids').split(',');
-      if (ids.includes(String(variantId))) {
-        targetIndex = index;
-      }
-    });
+    /* ---------- SWIPER ---------- */
+    const swiperEl =
+    sectionEl.querySelector('.media-desktop .product-swiper') ||
+    sectionEl.querySelector('.media-mobile .product-swiper');
+
+    if (!swiperEl || !swiperEl.swiper) return;
+
+    const swiper = swiperEl.swiper;
+
+    const targetIndex = swiper.slides.findIndex(slide =>
+      slide.dataset.mediaId === mediaId
+    );
 
     if (targetIndex !== null) {
-      swiper.slideTo(targetIndex);
+
+      // 1️⃣ Smooth animation (Theme Store friendly)
+      swiper.slideTo(targetIndex, 400);
+
+      // 2️⃣ Thumbnails ko bhi same slide par le jao
+      if (swiper.thumbs && swiper.thumbs.swiper) {
+        swiper.thumbs.swiper.slideTo(targetIndex);
+
+        // 3️⃣ Active thumbnail class sync
+        swiper.thumbs.swiper.slides.forEach(slide => {
+          slide.classList.remove('is-active');
+        });
+
+        const activeThumb = swiper.thumbs.swiper.slides[targetIndex];
+        if (activeThumb) {
+          activeThumb.classList.add('is-active');
+        }
+      }
+
+      // 4️⃣ Swiper update (hidden slides issue fix)
+      swiper.update();
     }
+
   }
+
 
   document.addEventListener('variant:change', function (evt) {
     const sectionEl = evt.target.closest('.shopify-section');
     if (!sectionEl || !evt.detail || !evt.detail.variant) return;
 
-    onVariantChange(sectionEl, evt.detail.variant.id);
+    onVariantChange(sectionEl, evt.detail.variant);
+    filterMediaByVariant(sectionEl, evt.detail.variant);
   });
 
 
 })();
+
+
+function filterMediaByVariant(sectionEl, variant) {
+  if (!variant) return;
+
+  const variantId = String(variant.id);
+
+  sectionEl.querySelectorAll('[data-media-id]').forEach(el => {
+    const variantIds = el.dataset.variantIds;
+
+    if (!variantIds) {
+      el.style.display = '';
+      return;
+    }
+
+    const ids = variantIds.split(',');
+    el.style.display = ids.includes(variantId) ? '' : 'none';
+  });
+}
+
 
 
