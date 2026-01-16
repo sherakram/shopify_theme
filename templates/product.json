@@ -94,7 +94,7 @@
         "product_description"
       ],
       "settings": {
-        "media_desktop_layout": "grid",
+        "media_desktop_layout": "carousel",
         "media_mobile_layout": "slideshow",
         "media_position": "left",
         "media_info_gap": 60,
