@@ -165,6 +165,36 @@
   height: auto;
 } 
 
+/* Only show grab cursor when swiper is active */
+.product-thumbs.is-swiper {
+  cursor: grab;
+}
+.product-thumbs.is-swiper:active {
+  cursor: grabbing;
+}
+
+/* Prevent ugly overflow when static */
+.product-thumbs.is-static .swiper-wrapper {
+  flex-wrap: wrap;
+}
+
+/* Vertical thumbs max height */
+.product-thumbs.thumbs-left.is-swiper,
+.product-thumbs.thumbs-right.is-swiper {
+  max-height: 360px;
+  overflow: hidden;
+}
+
+/* Bottom thumbs overflow */
+.product-thumbs.thumbs-bottom.is-swiper {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.product-thumbs.is-swiper {
+  outline: 1px dashed red;
+}
+
 
 
 /*Price*/

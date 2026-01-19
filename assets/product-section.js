@@ -161,7 +161,6 @@ function destroyProductMediaSwipers() {
 
 /* ---------- INIT PRODUCT MEDIA ---------- */
 function initProductMedia(section) {
-  destroyProductMediaSwipers();
 
   if (!section) return;
 
@@ -177,23 +176,57 @@ function initProductMedia(section) {
   if (!mainSwiperEl) return;
 
   /* ---------- THUMBNAILS ---------- */
+  // let thumbsSwiper = null;
+  // const thumbsEl = wrapper.querySelector('.product-thumbs');
+
+  // if (thumbsEl) {
+  //   const isVertical =
+  //     thumbsEl.classList.contains('thumbs-left') ||
+  //     thumbsEl.classList.contains('thumbs-right');
+
+  //   thumbsSwiper = new Swiper(thumbsEl, {
+  //     direction: isVertical ? 'vertical' : 'horizontal',
+  //     spaceBetween: 8,
+  //     slidesPerView: 'auto',
+  //     watchSlidesProgress: true,
+  //   });
+
+  //   window.ProductMediaSwipers.push(thumbsSwiper);
+  // }
+
+  /* ---------- THUMBNAILS (AUTO SWIPER) ---------- */
   let thumbsSwiper = null;
   const thumbsEl = wrapper.querySelector('.product-thumbs');
 
   if (thumbsEl) {
+    thumbsEl.classList.remove('is-swiper', 'is-static');
+
+    const slides = thumbsEl.querySelectorAll('.swiper-slide');
     const isVertical =
       thumbsEl.classList.contains('thumbs-left') ||
       thumbsEl.classList.contains('thumbs-right');
 
-    thumbsSwiper = new Swiper(thumbsEl, {
-      direction: isVertical ? 'vertical' : 'horizontal',
-      spaceBetween: 8,
-      slidesPerView: 'auto',
-      watchSlidesProgress: true,
-    });
+    const MAX_VISIBLE = isVertical ? 5 : 6;
 
-    window.ProductMediaSwipers.push(thumbsSwiper);
+    if (slides.length > MAX_VISIBLE) {
+      thumbsEl.classList.add('is-swiper');
+
+      thumbsSwiper = new Swiper(thumbsEl, {
+        direction: isVertical ? 'vertical' : 'horizontal',
+        spaceBetween: 8,
+        slidesPerView: 'auto',
+        freeMode: true,
+        watchSlidesProgress: true,
+        mousewheel: isVertical,
+      });
+
+        window.ProductMediaSwipers.push(thumbsSwiper);
+      } else {
+        thumbsEl.classList.add('is-static');
+    }
   }
+
+
 
   /* ---------- MAIN SWIPER ---------- */
   const isCarousel = mainSwiperEl.classList.contains('product-swiper--carousel');
@@ -227,6 +260,8 @@ function initProductMedia(section) {
 /* ---------- INIT ALL PRODUCT SECTIONS ---------- */
 function initAllProductMedia() {
   if (typeof Swiper === 'undefined') return;
+
+  destroyProductMediaSwipers();
 
   document.querySelectorAll('.shopify-section').forEach(section => {
     if (section.querySelector('.product-media-layout')) {

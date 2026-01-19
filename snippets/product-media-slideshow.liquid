@@ -2,7 +2,7 @@
     <div class="product-media-wrapper product-media-{{ section.settings.thumb_position }}">
   
         {% if section.settings.show_thumbnails and section.settings.thumb_position == 'left' %}
-            <div class="product-thumbs thumbs-left">
+            <div class="product-thumbs thumbs-left swiper">
                 <div class="swiper-wrapper">
                     {% for media in product.media %}
                         <div class="swiper-slide" data-thumb-id="{{ media.id }}">
@@ -42,7 +42,7 @@
         </div>
 
         {% if section.settings.show_thumbnails and section.settings.thumb_position == 'right' %}
-            <div class="product-thumbs thumbs-right">
+            <div class="product-thumbs thumbs-right swiper">
                 <div class="swiper-wrapper">
                     {% for media in product.media %}
                         <div class="swiper-slide" data-thumb-id="{{ media.id }}">
@@ -54,7 +54,7 @@
         {% endif %}
 
         {% if section.settings.show_thumbnails and section.settings.thumb_position == 'bottom' %}
-            <div class="product-thumbs thumbs-bottom">
+            <div class="product-thumbs thumbs-bottom swiper">
                 <div class="swiper-wrapper">
                     {% for media in product.media %}
                         <div class="swiper-slide" data-thumb-id="{{ media.id }}">
