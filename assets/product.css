@@ -90,82 +90,82 @@
 } 
 
 
-
-/* Wrapper controls the layout */ 
+/* Thumbs Layout wrapper */
 .product-media-wrapper {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-} 
-
-/* Common thumbs  */
-.product-thumbs {
-  width: 100%;
-} 
-
-.product-thumbs .swiper-wrapper {
-  display: flex;
 }
 
+/* Thumbnails base */
+.product-thumbs {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+/* Thumb slide */
 .product-thumbs .swiper-slide {
   flex: 0 0 auto;
   width: clamp(40px, 8vw, 70px);
   height: clamp(40px, 8vw, 70px);
   border: 1px solid #ddd;
-  border-radius: 0px;
   cursor: pointer;
   overflow: hidden;
   transition: border-color 0.2s ease;
 }
+
 .product-thumbs .swiper-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .product-thumbs .swiper-slide:hover,
 .product-thumbs .swiper-slide.swiper-slide-thumb-active {
   border-color: #111;
-} 
-
-/* Left */
-.product-media-wrapper.product-media-left .product-thumbs {
-  flex-direction: column;
-  width: clamp(40px, 8vw, 70px);
-  order: 0;
 }
+
+/* LEFT thumbs */
+.product-media-wrapper.product-media-left .product-thumbs {
+  order: 0;
+  flex-direction: column;
+  width: clamp(48px, 8vw, 70px);
+}
+
 .product-media-wrapper.product-media-left .product-media-column {
   order: 1;
-}  
-
-/* Right */
-.product-media-wrapper.product-media-right .product-thumbs {
-  flex-direction: column;
- width: clamp(40px, 8vw, 70px);
-  order: 2;
 }
+
+/* RIGHT thumbs */
+.product-media-wrapper.product-media-right .product-thumbs {
+  order: 2;
+  flex-direction: column;
+  width: clamp(48px, 8vw, 70px);
+}
+
 .product-media-wrapper.product-media-right .product-media-column {
   order: 1;
-} 
+}
+ 
 
 /* Bottom */
-.product-thumbs.thumbs-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 12px;
-  gap: 12px;
-}
 .product-media-wrapper.product-media-bottom {
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
-.product-thumbs.thumbs-bottom .swiper-slide {
-  width: clamp(40px, 8vw, 70px);
-  height: auto;
-} 
 
-/* Only show grab cursor when swiper is active */
+.product-thumbs.thumbs-bottom {
+  margin-top: 12px;
+  gap: 12px;
+}
+
+.product-thumbs.thumbs-bottom .swiper-slide {
+  height: auto;
+}
+
+/* Swiper states */
 .product-thumbs.is-swiper {
   cursor: grab;
 }
@@ -173,28 +173,23 @@
   cursor: grabbing;
 }
 
-/* Prevent ugly overflow when static */
 .product-thumbs.is-static .swiper-wrapper {
   flex-wrap: wrap;
 }
 
-/* Vertical thumbs max height */
+/* Vertical swiper requirement */
 .product-thumbs.thumbs-left.is-swiper,
 .product-thumbs.thumbs-right.is-swiper {
-  max-height: 360px;
+  width: 100%;
+  height: 360px;
   overflow: hidden;
 }
 
-/* Bottom thumbs overflow */
+/* Bottom swiper */
 .product-thumbs.thumbs-bottom.is-swiper {
-  max-width: 100%;
+  justify-content: flex-start;
   overflow: hidden;
 }
-
-.product-thumbs.is-swiper {
-  outline: 1px dashed red;
-}
-
 
 
 /*Price*/
