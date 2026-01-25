@@ -16,22 +16,29 @@
 
 /* Equal columns (default) */
 .product-section--equal .product-columns {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 /* Small media / large info */
 .product-section--small-media .product-columns {
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
 }
 
 /* Large media / small info */
 .product-section--large-media .product-columns {
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
 }
 
+.product-media, .product-info-column {
+  min-width: 0; 
+  overflow: hidden;
+}
 
 .product-section--media-top .product-columns{
-  flex-direction:column
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "media"
+    "info";
 }
 
 .product-media-column{
@@ -232,22 +239,28 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  width: 100%;
 }
 
 .product-thumbs.thumbs-bottom {
   margin-top: 12px;
   width: 100%;
+  max-width: 100%;
+  height: 80px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .product-thumbs.thumbs-bottom .swiper-wrapper {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .product-thumbs.thumbs-bottom .swiper-slide {
-  height: auto;
-}
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+} 
 
 
 /* Swiper states */
@@ -277,7 +290,7 @@
 }
 
 
-/*Price*/
+/*Price Block*/
 .product-price {
   font-size: 1.6rem;
   font-weight: 600;
@@ -292,7 +305,7 @@
   text-decoration: line-through;
 }
 
-/*Separator*/
+/*Separator Block*/
 .product-divider {
   border: 0;                   
   height: 1px;                  
@@ -300,7 +313,7 @@
   margin: 1rem 0;
 }
 
-/*Variants*/
+/*Variants Block*/
 .variant-picker {
   display: flex;
   flex-direction: column;
@@ -414,7 +427,7 @@
 }
 
 
-/*Buttons*/
+/*Buttons Block*/
 .product-form-buttons {
   display: flex;
   flex-direction: column;
@@ -561,7 +574,7 @@
     border: 1px solid #000;
 }
 
-/*Inventory*/
+/*Inventory Block*/
 .product-inventory {
   margin-top: 10px;
   font-size: 0.95rem;
@@ -614,7 +627,7 @@
   color: #eb001b;
 }
 
-/*Payment icons*/
+/*Payment icons Block*/
 .payment-icons {
   display: flex;
   flex-wrap: wrap;        
@@ -630,7 +643,7 @@
   flex-shrink: 0;        
 }
 
-/*CountDown Time*/
+/*CountDown Time Block*/
 .countdown-urgency {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   transition: transform 0.3s ease;
@@ -709,7 +722,7 @@
 }
 
 
-/* ---------- Size Guide ---------- */
+/* ---------- Size Guide Block ---------- */
 button.product-size-trigger {
   background: none;
   border: none;
@@ -843,7 +856,7 @@ button.product-size-trigger:hover {
 
 
 
-/*Product description*/
+/*Product description Block*/
 .product-description {
   font-size: 14px;
   font-style: normal;
