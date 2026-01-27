@@ -173,26 +173,17 @@
 /* Thumbs Layout wrapper */
 .product-media-wrapper {
   display: flex;
+  flex-direction: row;
   gap: 16px;
-  align-items: flex-start;
-}
-
-/* Thumbnails base */
-.product-thumbs {
+  align-items: stretch;
   width: 100%;
-  overflow: hidden;
-}
-
-.product-thumbs .swiper-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-}
+}  
 
 /* Thumb slide */
 .product-thumbs .swiper-slide {
   flex: 0 0 auto;
-  width: clamp(40px, 8vw, 70px);
-  height: clamp(40px, 8vw, 70px);
+  width: 100%;
+  height: auto;
   border: 1px solid #ddd;
   cursor: pointer;
   overflow: hidden;
@@ -202,7 +193,7 @@
 .product-thumbs .swiper-slide img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   background: #f5f5f5;
 }
 
@@ -211,39 +202,59 @@
   border-color: #111;
 }
 
-/* LEFT thumbs */
-.product-media-wrapper.product-media-left .product-thumbs {
-  order: 0;
+/*Left thumbs*/
+.product-media-wrapper.product-media-left {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.product-thumbs.thumbs-left {
+  width: 15%;
+  max-width: 100%;
+  height: 478px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.product-thumbs.thumbs-left .swiper-wrapper {
+  display: flex;
   flex-direction: column;
-  width: clamp(48px, 8vw, 70px);
+} 
+
+/*Right thumbs*/
+.product-media-wrapper.product-media-right {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
 }
 
-.product-media-wrapper.product-media-left .product-media-column {
-  order: 1;
+.product-thumbs.thumbs-right {
+  width: 15%;
+  max-width: 100%;
+  height: 478px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* RIGHT thumbs */
-.product-media-wrapper.product-media-right .product-thumbs {
-  order: 2;
+.product-thumbs.thumbs-right .swiper-wrapper {
+  display: flex;
   flex-direction: column;
-  width: clamp(48px, 8vw, 70px);
-}
-
-.product-media-wrapper.product-media-right .product-media-column {
-  order: 1;
 }
  
-
 /* Bottom */
 .product-media-wrapper.product-media-bottom {
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
 }
 
 .product-thumbs.thumbs-bottom {
-  margin-top: 12px;
   width: 100%;
   max-width: 100%;
   height: 80px;
@@ -275,13 +286,6 @@
   flex-wrap: wrap;
 }
 
-/* Vertical swiper requirement */
-.product-thumbs.thumbs-left.is-swiper,
-.product-thumbs.thumbs-right.is-swiper {
-  width: 100%;
-  height: 360px;
-  overflow: hidden;
-}
 
 /* Bottom swiper */
 .product-thumbs.thumbs-bottom.is-swiper {
