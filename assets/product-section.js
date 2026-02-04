@@ -175,25 +175,6 @@ function initProductMedia(section) {
   const mainSwiperEl = wrapper.querySelector('.product-swiper');
   if (!mainSwiperEl) return;
 
-  /* ---------- THUMBNAILS ---------- */
-  // let thumbsSwiper = null;
-  // const thumbsEl = wrapper.querySelector('.product-thumbs');
-
-  // if (thumbsEl) {
-  //   const isVertical =
-  //     thumbsEl.classList.contains('thumbs-left') ||
-  //     thumbsEl.classList.contains('thumbs-right');
-
-  //   thumbsSwiper = new Swiper(thumbsEl, {
-  //     direction: isVertical ? 'vertical' : 'horizontal',
-  //     spaceBetween: 8,
-  //     slidesPerView: 'auto',
-  //     watchSlidesProgress: true,
-  //   });
-
-  //   window.ProductMediaSwipers.push(thumbsSwiper);
-  // }
-
   /* ---------- THUMBNAILS (AUTO SWIPER) ---------- */
   let thumbsSwiper = null;
   const thumbsEl = wrapper.querySelector('.product-thumbs');
@@ -225,8 +206,6 @@ function initProductMedia(section) {
         thumbsEl.classList.add('is-static');
     }
   }
-
-
 
   /* ---------- MAIN SWIPER ---------- */
   const isCarousel = mainSwiperEl.classList.contains('product-swiper--carousel');
