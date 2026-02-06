@@ -1,0 +1,386 @@
+/*Price Block*/
+.product-price {
+  font-size: 1.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.price--compare {
+  font-size: 1.1rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/*Separator Block*/
+.product-divider {
+  border: 0;                   
+  height: 1px;                  
+  background-color: #ddd;       
+  margin: 1rem 0;
+}
+
+/*Variants Block*/
+.variant-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.variant-picker__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.variant-option {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.variant-option label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.variant-option__select-wrapper {
+  position: relative;
+}
+
+.variant-option__select {
+  width: 100%;
+  padding: 12px;
+  padding-right: 36px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.variant-option__select:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.variant-option__select-wrapper .icon-caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+/* Pills container */
+.variant-option__pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.variant-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+.variant-pill input { 
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.variant-pill.is-selected {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
+/* Visible text for text-mode pills */
+.pill-label {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Swatches */
+.variant-pill .swatch {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+}
+
+/* shape modifiers */
+.variant-swatch-circle .swatch { border-radius: 50%; }
+.variant-swatch-square .swatch { border-radius: 4px; }
+
+/* hide visible label when swatch-mode is active (optional)
+   — not strictly necessary because we only render .pill-label when not swatch-mode */
+.variant-swatch-circle .pill-label,
+.variant-swatch-square .pill-label {
+  display: none;
+}
+
+/*Buttons Block*/
+.product-form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/*Inline*/
+.qty-cart--inline {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.qty-cart--inline .quantity-selector {
+  max-width: 30%;
+}
+
+.qty-cart--inline .add-to-cart-button {
+  flex: 1;
+}
+
+/*stacked*/
+.qty-cart--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.qty-cart--stacked .quantity-selector {
+  max-width: 100%;
+  width: 100%;
+  height: 48px;
+}
+
+.qty-cart--stacked .add-to-cart-button {
+  width: 100%;
+}
+
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+}
+
+.quantity-selector input {
+  width: 100%;
+  text-align: center;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.quantity-btn {
+  width: 46px;
+  height: 46px;
+  background: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background: #f7f7f7;
+}
+
+/* Remove number input arrows (Chrome, Safari, Edge) */
+.quantity-selector input[type="number"]::-webkit-inner-spin-button,
+.quantity-selector input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove number input arrows (Firefox) */
+.quantity-selector input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Add to cart */
+.add-to-cart-button {
+  flex: 1;           
+  padding: 12px 24px;
+  border-radius: 0px;
+  background: transparent;
+  color: #000;
+  text-transform: uppercase;
+  font-size: inherit;
+  cursor: pointer;
+  border: 1px solid #000;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+/* Add to cart states */
+.add-to-cart-added {
+  display: none;
+  margin-left: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.add-to-cart-button.added .add-to-cart-text {
+  display: none;
+}
+
+.add-to-cart-button.added .add-to-cart-added {
+  display: inline;
+}
+
+/* Buy it now */
+.shopify-payment-button__button--unbranded {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 0px;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: inherit;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+/*Inventory Block*/
+.product-inventory {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.inventory-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.inventory-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #428445;
+}
+
+.inventory-dot.out {
+  background-color: #eb001b;
+}
+
+.inventory-dot.hide-dot {
+  display: none;
+}
+
+.inventory-progress-wrapper {
+  width: 100%;
+  height: 3px;
+  border-radius: 0px;
+  background: #e9ecef;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.inventory-progress-bar {
+  height: 3px;
+  border-radius: 0px;
+  background: linear-gradient(90deg, #428445 0%, #6cc870 100%);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.inventory-progress-bar.low-stock {
+  background: linear-gradient(90deg, #eb001b 0%, #ff7a7a 100%);
+}
+
+.out-of-stock {
+  color: #eb001b;
+}
+
+/*Payment icons Block*/
+.payment-icons {
+  display: flex;
+  flex-wrap: wrap;        
+  gap: 1rem;                
+  align-items: center;    
+  justify-content: flex-start; /* align left, or use center if you prefer */
+  max-width: 100%;        
+}
+
+.payment-icons svg {
+  height: 28px;           
+  width: auto;
+  flex-shrink: 0;        
+}
+
+/*Product description Block*/
+.product-description {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.product-desc-content {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.product-desc-content.collapsing {
+  opacity: 0.4;
+}
+
+.product-desc-toggle {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.product-desc-toggle:hover {
+  color: #333;
+}
