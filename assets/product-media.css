@@ -1,9 +1,11 @@
 .product-media-column{
   display:grid;
+  flex: 1;
   gap:20px;
   align-items:start;
   height: 100%;
   width: 100%;
+  min-width: 0;
   grid-area: media;
 }
 
@@ -40,7 +42,7 @@
 .product-swiper{
   position:relative;
   width:100%;
-  aspect-ratio:1/1;
+  height: 100%;
   border:1px solid #eee;
   border-radius:0px;
   overflow:hidden;
@@ -62,9 +64,9 @@
 } 
 
 .product-media-layout--carousel .swiper-slide-active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .product-zoom-btn{
-  display:none;
+  display: none;
 }

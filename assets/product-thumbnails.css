@@ -3,7 +3,7 @@
   display: flex;
   gap: 16px;
   width: 100%;
-  align-items: flex-start;
+  align-items: stretch;
 } 
 
 /* Thumb slide */
@@ -31,28 +31,26 @@
 .product-thumbs.thumbs-left,
 .product-thumbs.thumbs-right {
   width: 80px;
-  height: 100%;
-  max-height: 100%;
-  overflow-y: auto;
   flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.product-thumbs.thumbs-left .swiper-wrapper,
+.product-thumbs.thumbs-right .swiper-wrapper {
+  flex-direction: column;
 }
 
 /*Left thumbs */
 .product-media-wrapper.product-media-left {
   flex-direction: row;
-}
-
-.product-thumbs.thumbs-left .swiper-wrapper {
-  flex-direction: column;
+  aspect-ratio: 1/1;
 } 
 
 /*Right thumbs */
 .product-media-wrapper.product-media-right {
   flex-direction: row;
-}
-
-.product-thumbs.thumbs-right .swiper-wrapper {
-  flex-direction: column;
+  aspect-ratio: 1/1;
 } 
 
 /* Bottom */
