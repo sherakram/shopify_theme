@@ -5,7 +5,32 @@
   {% case media_type %}
     {% when 'image' %}
       <div class="swiper-zoom-container">
-        {{ media | image_url: width: 2048, height: 2048 | image_tag: class: 'product-media__image', alt: media.alt }}
+        {% if forloop.first %}
+          {{
+            media
+            | image_url: width: 2048
+            | image_tag:
+            class: 'product-media__image',
+            alt: media.alt | default: product.title,
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '360,540,720,900,1080,1440,1800,2048',
+            sizes: '(max-width: 768px) 100vw, 50vw'
+          }}
+        {% else %}
+          {{
+            media
+            | image_url: width: 2048
+            | image_tag:
+            class: 'product-media__image',
+            alt: media.alt | default: product.title,
+            loading: 'lazy',
+            fetchpriority: 'auto',
+            widths: '360,540,720,900,1080,1440,1800,2048',
+            sizes: '(max-width: 768px) 100vw, 50vw'
+          }}
+        {% endif %}
+
       </div>
 
     {% when 'video' %}
@@ -24,6 +49,6 @@
       </div>
 
     {% else %}
-      {{ media | image_url: width: 208 | image_tag: class: 'product-media__image', alt: media.alt }}
+      {{ media | image_url: width: 208 | image_tag: class: 'product-media__image', alt: media.alt | default: product.title, loading: 'lazy', fetchpriority: 'auto', widths: '360,540,720,900,1080,1440,1800,2048', sizes: '(max-width: 768px) 100vw, 50vw' }}
   {% endcase %}
 </div>
