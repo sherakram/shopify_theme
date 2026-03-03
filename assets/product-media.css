@@ -9,7 +9,7 @@
   grid-area: media;
 }
 
-/* Media Layout RULES */
+/* Media Layout RULES 
 .media-desktop {
   display: block;
 }
@@ -25,7 +25,7 @@
   .media-mobile {
     display: block;
   }
-}
+} */
 
 .product-media-layout--slideshow {
   height: fit-content;

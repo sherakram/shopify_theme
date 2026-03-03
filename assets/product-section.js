@@ -166,11 +166,22 @@ function initProductMedia(section) {
 
   const isMobile = window.matchMedia('(max-width: 749px)').matches;
 
-  const wrapper = isMobile
-    ? section.querySelector('.media-mobile')
-    : section.querySelector('.media-desktop');
+  // const wrapper = isMobile
+  //   ? section.querySelector('.media-mobile')
+  //   : section.querySelector('.media-desktop');
 
+  const mediaContainer = section.querySelector('.product-media');
+  if (!mediaContainer) return;
+
+  const desktopLayout = mediaContainer.dataset.desktopLayout;
+  const mobileLayout = mediaContainer.dataset.mobileLayout;
+
+  const layoutType = isMobile ? mobileLayout : desktopLayout;
+
+  const wrapper = section.querySelector('.product-media-layout');
   if (!wrapper) return;
+  
+  if (layoutType === 'grid') return;
 
   const mainSwiperEl = wrapper.querySelector('.product-swiper');
   if (!mainSwiperEl) return;
@@ -278,19 +289,19 @@ window.addEventListener('resize', () => {
 /* ---------- VARIANT CHANGES ---------- */
 (function () {
 
-  function getActiveSwiper(sectionEl) {
-    let swiperEl = sectionEl.querySelector('.media-desktop .product-swiper');
+  // function getActiveSwiper(sectionEl) {
+  //   let swiperEl = sectionEl.querySelector('.media-desktop .product-swiper');
 
-    if (
-      swiperEl &&
-      getComputedStyle(swiperEl.closest('.media-desktop')).display === 'none'
-    ) {
-      swiperEl = sectionEl.querySelector('.media-mobile .product-swiper');
-    }
+  //   if (
+  //     swiperEl &&
+  //     getComputedStyle(swiperEl.closest('.media-desktop')).display === 'none'
+  //   ) {
+  //     swiperEl = sectionEl.querySelector('.media-mobile .product-swiper');
+  //   }
 
-    if (!swiperEl || !swiperEl.swiper) return null;
-    return swiperEl.swiper;
-  }
+  //   if (!swiperEl || !swiperEl.swiper) return null;
+  //   return swiperEl.swiper;
+  // }
 
   function onVariantChange(sectionEl, variant) {
     if (!variant || !variant.featured_media) return;
@@ -310,9 +321,11 @@ window.addEventListener('resize', () => {
     }
 
     /* ---------- SWIPER ---------- */
-    const swiperEl =
-    sectionEl.querySelector('.media-desktop .product-swiper') ||
-    sectionEl.querySelector('.media-mobile .product-swiper');
+    // const swiperEl =
+    // sectionEl.querySelector('.media-desktop .product-swiper') ||
+    // sectionEl.querySelector('.media-mobile .product-swiper');
+
+    const swiperEl = sectionEl.querySelector('.product-swiper');
 
     if (!swiperEl || !swiperEl.swiper) return;
 
