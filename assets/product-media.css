@@ -9,24 +9,6 @@
   grid-area: media;
 }
 
-/* Media Layout RULES 
-.media-desktop {
-  display: block;
-}
-
-.media-mobile {
-  display: none;
-}
-
-@media (max-width: 749px) {
-  .media-desktop {
-    display: none;
-  }
-  .media-mobile {
-    display: block;
-  }
-} */
-
 .product-media-layout--slideshow {
   height: fit-content;
 }

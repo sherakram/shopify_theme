@@ -15,52 +15,30 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-
-      {% comment %} <div class="product-media"
-        data-desktop-layout="{{ section.settings.media_desktop_layout }}"
-        data-mobile-layout="{{ section.settings.media_mobile_layout }}">
-
-          {% assign desktop_layout = section.settings.media_desktop_layout %}
-          {% assign mobile_layout = section.settings.media_mobile_layout %}
-
-          <!-- Desktop -->
-          <div class="media-desktop">
-            {% if desktop_layout == 'grid' %}
-              {% render 'product-media-grid', product: product %}
-            {% elsif desktop_layout == 'slideshow' %}
-              {% render 'product-media-slideshow', product: product, section: section %}
-            {% elsif desktop_layout == 'carousel' %}
-              {% render 'product-media-carousel', product: product, section: section %}
-            {% endif %}
-          </div>
-
-          <!-- Mobile -->
-          <div class="media-mobile">
-            {% if mobile_layout == 'slideshow' %}
-              {% render 'product-media-slideshow', product: product, section: section %}
-            {% elsif mobile_layout == 'carousel' %}
-              {% render 'product-media-carousel', product: product, section: section %}
-            {% endif %}
-          </div>
-      </div> {% endcomment %}
       
       <div class="product-media"
         data-desktop-layout="{{ section.settings.media_desktop_layout }}"
         data-mobile-layout="{{ section.settings.media_mobile_layout }}">
-
+        
         <div class="product-media-layout">
-    
-          {% assign active_layout = section.settings.media_desktop_layout %}
 
-          {% if active_layout == 'grid' %}
+          {% assign desktop_layout = section.settings.media_desktop_layout %}
+
+          {% case desktop_layout %}
+
+          {% when 'grid' %}
             {% render 'product-media-grid', product: product, section: section %}
-          {% elsif active_layout == 'slideshow' %}
-            {% render 'product-media-slideshow', product: product, section: section %}
-          {% elsif active_layout == 'carousel' %}
+
+          {% when 'carousel' %}
             {% render 'product-media-carousel', product: product, section: section %}
-          {% endif %}
+
+          {% else %}
+            {% render 'product-media-slideshow', product: product, section: section %}
+
+          {% endcase %}
 
         </div>
+
       </div>
 
       <div class="product-info-column">

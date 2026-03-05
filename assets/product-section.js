@@ -166,10 +166,6 @@ function initProductMedia(section) {
 
   const isMobile = window.matchMedia('(max-width: 749px)').matches;
 
-  // const wrapper = isMobile
-  //   ? section.querySelector('.media-mobile')
-  //   : section.querySelector('.media-desktop');
-
   const mediaContainer = section.querySelector('.product-media');
   if (!mediaContainer) return;
 
@@ -180,8 +176,19 @@ function initProductMedia(section) {
 
   const wrapper = section.querySelector('.product-media-layout');
   if (!wrapper) return;
+
+  wrapper.classList.remove(
+    'product-media-layout--grid',
+    'product-media-layout--slideshow',
+    'product-media-layout--carousel'
+  );
+
+  wrapper.classList.add(`product-media-layout--${layoutType}`);
   
-  if (layoutType === 'grid') return;
+  if (layoutType === 'grid') {
+    destroyProductMediaSwipers();
+    return;
+  }
 
   const mainSwiperEl = wrapper.querySelector('.product-swiper');
   if (!mainSwiperEl) return;
@@ -219,7 +226,7 @@ function initProductMedia(section) {
   }
 
   /* ---------- MAIN SWIPER ---------- */
-  const isCarousel = mainSwiperEl.classList.contains('product-swiper--carousel');
+  const isCarousel = layoutType === 'carousel';
 
   const mainSwiper = new Swiper(mainSwiperEl, {
     loop: false,
@@ -289,20 +296,6 @@ window.addEventListener('resize', () => {
 /* ---------- VARIANT CHANGES ---------- */
 (function () {
 
-  // function getActiveSwiper(sectionEl) {
-  //   let swiperEl = sectionEl.querySelector('.media-desktop .product-swiper');
-
-  //   if (
-  //     swiperEl &&
-  //     getComputedStyle(swiperEl.closest('.media-desktop')).display === 'none'
-  //   ) {
-  //     swiperEl = sectionEl.querySelector('.media-mobile .product-swiper');
-  //   }
-
-  //   if (!swiperEl || !swiperEl.swiper) return null;
-  //   return swiperEl.swiper;
-  // }
-
   function onVariantChange(sectionEl, variant) {
     if (!variant || !variant.featured_media) return;
     
@@ -319,11 +312,6 @@ window.addEventListener('resize', () => {
         block: 'nearest'
       });
     }
-
-    /* ---------- SWIPER ---------- */
-    // const swiperEl =
-    // sectionEl.querySelector('.media-desktop .product-swiper') ||
-    // sectionEl.querySelector('.media-mobile .product-swiper');
 
     const swiperEl = sectionEl.querySelector('.product-swiper');
 
