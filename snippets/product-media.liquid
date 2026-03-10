@@ -35,17 +35,35 @@
 
     {% when 'video' %}
       <div class="product-video">
-        {{ media | video_tag }}
+        {{ media | video_tag: 
+            autoplay: true, 
+            loop: true, 
+            muted: true, 
+            playsinline: true, 
+            controls: true, 
+            class: 'media-video' 
+        }}
       </div>
 
     {% when 'external_video' %}
       <div class="product-external-video">
-        {{ media | external_video_tag }}
+        {%- if media.host == 'youtube' -%}
+          {{ media | external_video_tag: autoplay: true, loop: true, playlist: media.external_id, class: 'media-video' }}
+        {%- else -%}
+          {{ media | external_video_tag: autoplay: true, loop: true, class: 'media-video' }}
+        {%- endif -%}
       </div>
 
     {% when 'model' %}
-      <div class="product-model">
-        {{ media | model_viewer_tag }}
+      <div class="product-model" data-media-id="{{ media.id }}">
+        {{ media | model_viewer_tag: 
+            reveal: 'interaction', 
+            toggleable: true, 
+            data-model-id: media.id, 
+            class: 'media-model-viewer',
+            camera-controls: true,
+            auto-rotate: true
+        }}
       </div>
 
     {% else %}

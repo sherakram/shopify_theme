@@ -15,30 +15,45 @@
 
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
-      
+
       <div class="product-media"
         data-desktop-layout="{{ section.settings.media_desktop_layout }}"
         data-mobile-layout="{{ section.settings.media_mobile_layout }}">
-        
-        <div class="product-media-layout">
 
-          {% assign desktop_layout = section.settings.media_desktop_layout %}
+        {%- liquid
+          assign desktop_layout = section.settings.media_desktop_layout
+          assign mobile_layout = section.settings.media_mobile_layout
 
-          {% case desktop_layout %}
+          # Desktop Patterns mapping
+          if desktop_layout == 'slideshow'
+            assign d_class = 'product__media-layout--full'
+          elsif desktop_layout == 'carousel'
+            assign d_class = 'product__media-layout--partial'
+          else
+            assign d_class = 'product__media-layout--grid'
+          endif
 
-          {% when 'grid' %}
-            {% render 'product-media-grid', product: product, section: section %}
+          # Mobile Patterns mapping
+          if mobile_layout == 'slideshow'
+            assign m_class = 'product__media-layout--full--sm'
+          else
+            assign m_class = 'product__media-layout--partial--sm'
+          endif
+        -%}
 
-          {% when 'carousel' %}
-            {% render 'product-media-carousel', product: product, section: section %}
-
+        <!-- DESKTOP Gallery -->
+        <div class="media-desktop small-hide" data-layout-desktop="{{ d_class }}">
+          {% if desktop_layout == 'grid' %}
+            {% render 'product-media-grid', product: product %}
           {% else %}
-            {% render 'product-media-slideshow', product: product, section: section %}
-
-          {% endcase %}
-
+            {% render 'product-media-slideshow', product: product, layout_type: desktop_layout %}
+          {% endif %}
         </div>
 
+        <!-- MOBILE Gallery -->
+        <div class="media-mobile large-up-hide" data-layout-mobile="{{ m_class }}">
+          {% render 'product-media-slideshow', product: product, layout_type: mobile_layout %}
+        </div>
       </div>
 
       <div class="product-info-column">

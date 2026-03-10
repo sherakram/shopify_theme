@@ -147,9 +147,9 @@
 
 
 
-window.ProductMediaSwipers = window.ProductMediaSwipers || [];
+/* window.ProductMediaSwipers = window.ProductMediaSwipers || [];
 
-/* ---------- DESTROY ALL SWIPERS ---------- */
+ ---------- DESTROY ALL SWIPERS ---------- 
 function destroyProductMediaSwipers() {
   window.ProductMediaSwipers.forEach(swiper => {
     if (swiper && swiper.destroy) {
@@ -157,9 +157,9 @@ function destroyProductMediaSwipers() {
     }
   });
   window.ProductMediaSwipers = [];
-}
+} */
 
-/* ---------- INIT PRODUCT MEDIA ---------- */
+/* ---------- INIT PRODUCT MEDIA ---------- 
 function initProductMedia(section) {
 
   if (!section) return;
@@ -191,9 +191,9 @@ function initProductMedia(section) {
   }
 
   const mainSwiperEl = wrapper.querySelector('.product-swiper');
-  if (!mainSwiperEl) return;
+  if (!mainSwiperEl) return; */
 
-  /* ---------- THUMBNAILS (AUTO SWIPER) ---------- */
+  /* ---------- THUMBNAILS (AUTO SWIPER) ---------- 
   let thumbsSwiper = null;
   const thumbsEl = wrapper.querySelector('.product-thumbs');
 
@@ -223,9 +223,9 @@ function initProductMedia(section) {
       } else {
         thumbsEl.classList.add('is-static');
     }
-  }
+  } */
 
-  /* ---------- MAIN SWIPER ---------- */
+  /* ---------- MAIN SWIPER ---------- 
   const isCarousel = layoutType === 'carousel';
 
   const mainSwiper = new Swiper(mainSwiperEl, {
@@ -252,7 +252,107 @@ function initProductMedia(section) {
   mainSwiperEl.swiper = mainSwiper;
 
   window.ProductMediaSwipers.push(mainSwiper);
+} */
+
+
+
+
+
+window.ProductMediaSwipers = window.ProductMediaSwipers || [];
+
+function destroyProductMediaSwipers() {
+  window.ProductMediaSwipers.forEach(swiper => {
+    if (swiper && swiper.destroy) {
+      swiper.destroy(true, true);
+    }
+  });
+  window.ProductMediaSwipers = [];
 }
+
+function initProductMedia(section) {
+  if (!section) return;
+
+  const isMobile = window.matchMedia('(max-width: 749px)').matches;
+  const mediaContainer = section.querySelector('.product-media');
+  if (!mediaContainer) return;
+
+  // FIX: Sirf active container (Desktop ya Mobile) ko target karein
+  const activeContainer = isMobile 
+    ? section.querySelector('.media-mobile') 
+    : section.querySelector('.media-desktop');
+
+  if (!activeContainer) return;
+
+  const wrapper = activeContainer.querySelector('.product-media-layout');
+  if (!wrapper) return;
+
+  const desktopLayout = mediaContainer.dataset.desktopLayout;
+  const mobileLayout = mediaContainer.dataset.mobileLayout;
+  const layoutType = isMobile ? mobileLayout : desktopLayout;
+
+  // Layout classes update
+  wrapper.classList.remove('product-media-layout--grid', 'product-media-layout--slideshow', 'product-media-layout--carousel');
+  wrapper.classList.add(`product-media-layout--${layoutType}`);
+  
+  if (layoutType === 'grid') {
+    return; // Grid ke liye swiper nahi chahiye
+  }
+
+  const mainSwiperEl = wrapper.querySelector('.product-swiper');
+  if (!mainSwiperEl) return;
+
+  /* ---------- THUMBNAILS ---------- */
+  let thumbsSwiper = null;
+  const thumbsEl = wrapper.querySelector('.product-thumbs');
+
+  if (thumbsEl) {
+    const isVertical = !isMobile && (thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right'));
+    
+    // Pehle purana instance khatam karein agar exist karta hai
+    if (thumbsEl.swiper) thumbsEl.swiper.destroy(true, true);
+
+    thumbsSwiper = new Swiper(thumbsEl, {
+      direction: isVertical ? 'vertical' : 'horizontal',
+      spaceBetween: 8,
+      slidesPerView: 'auto',
+      freeMode: true,
+      watchSlidesProgress: true,
+      mousewheel: isVertical,
+    });
+    window.ProductMediaSwipers.push(thumbsSwiper);
+  }
+
+  /* ---------- MAIN SWIPER ---------- */
+  const isCarousel = layoutType === 'carousel';
+
+  const mainSwiper = new Swiper(mainSwiperEl, {
+    loop: false,
+    slidesPerView: isCarousel ? 1.2 : 1,
+    centeredSlides: false,
+    spaceBetween: 12,
+    grabCursor: true,
+    navigation: {
+      nextEl: wrapper.querySelector('.swiper-button-next'),
+      prevEl: wrapper.querySelector('.swiper-button-prev'),
+    },
+    thumbs: {
+      swiper: thumbsSwiper,
+    },
+    zoom: { maxRatio: 2 },
+    observer: true,
+    observeParents: true,
+    breakpoints: {
+      750: {
+        slidesPerView: isCarousel ? 1.3 : 1,
+        spaceBetween: 20,
+      },
+    },
+  });
+
+  window.ProductMediaSwipers.push(mainSwiper);
+}
+
+// ... baaki functions (initAllProductMedia, Resize, Variant Change) wese hi rahenge
 
 /* ---------- INIT ALL PRODUCT SECTIONS ---------- */
 function initAllProductMedia() {
@@ -379,6 +479,3 @@ function filterMediaByVariant(sectionEl, variant) {
     el.style.display = ids.includes(variantId) ? '' : 'none';
   });
 }
-
-
-
