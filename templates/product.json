@@ -37,7 +37,7 @@
             "show_quantity": true,
             "low_inventory_threshold": 10,
             "show_progress_bar": true,
-            "progress_bar_max_value": 50
+            "progress_bar_max_value": 100
           }
         },
         "product_size": {
