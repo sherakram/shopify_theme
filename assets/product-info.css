@@ -1,6 +1,13 @@
+/*Title Block*/
+h1.product-title {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 /*Price Block*/
 .product-price {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -90,7 +97,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 12px;
+  padding: .5rem;
   border: 1px solid #ddd;
   border-radius: 0px;
   cursor: pointer;
@@ -105,8 +112,6 @@
 
 .variant-pill.is-selected {
   border-color: #000;
-  background: #000;
-  color: #fff;
 }
 
 /* Visible text for text-mode pills */
@@ -118,17 +123,20 @@
 /* Swatches */
 .variant-pill .swatch {
   display: inline-block;
-  width: 28px;
-  height: 28px;
+  width: 45px;
+  height: 45px;
   border: 1px solid #ccc;
 }
 
 /* shape modifiers */
-.variant-swatch-circle .swatch { border-radius: 50%; }
-.variant-swatch-square .swatch { border-radius: 4px; }
+.variant-swatch-circle .swatch { 
+  border-radius: 50%; 
+}
 
-/* hide visible label when swatch-mode is active (optional)
-   — not strictly necessary because we only render .pill-label when not swatch-mode */
+.variant-swatch-square .swatch { 
+  border-radius: 0px; 
+}
+
 .variant-swatch-circle .pill-label,
 .variant-swatch-square .pill-label {
   display: none;

@@ -1,263 +1,3 @@
-// (function(){
-  
-//   function getVisibleLayout(sectionEl) {
-//     return Array.from(
-//       sectionEl.querySelectorAll('.product-media-layout')
-//     ).find(el => getComputedStyle(el).display !== 'none');
-//   }
-
-//   function initSection(sectionEl){
-    
-//     const visibleLayout = getVisibleLayout(sectionEl);
-//     if (!visibleLayout) return;
-
-//     const mainEl = visibleLayout.querySelector('.product-swiper');
-//     if (!mainEl || mainEl.swiper) return;
-
-//     const isCarousel = mainEl.classList.contains('product-swiper--carousel');
-
-//     // optional thumbs
-//     const thumbsEl = visibleLayout.querySelector('.product-thumbs');
-//     let thumbsSwiper = null;
-
-//     if (thumbsEl) {
-//       // detect direction based on wrapper class
-//       const isVertical = thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right');
-
-//       thumbsSwiper = new Swiper(thumbsEl, {
-//         direction: isVertical ? 'vertical' : 'horizontal',
-//         spaceBetween: 8,
-//         slidesPerView: 'auto',
-//         watchSlidesProgress: true,
-//       });
-//     }
-
-//     const mainSwiper = new Swiper(mainEl, {
-//       loop: false,
-//       spaceBetween: 10,
-//       slidesPerView: isCarousel ? 1.2 : 1,
-//       centeredSlides: false,
-//       navigation: {
-//         nextEl: visibleLayout.querySelector('.swiper-button-next'),
-//         prevEl: visibleLayout.querySelector('.swiper-button-prev')
-//       },
-//       thumbs: thumbsSwiper ? { swiper: thumbsSwiper } : undefined,
-//       zoom: { maxRatio: 3 },
-//       a11y: true,
-//       observer: true,
-//       observeParents: true,
-//       breakpoints: {
-//             750: {
-//                 slidesPerView: isCarousel ? 1.4 : 1, // Shows more of the next slide on desktop
-//                 spaceBetween: 20
-//             }
-//         }
-
-//     });
-
-//     // Zoom button behaviour
-//     const zoomBtn = visibleLayout.querySelector('.product-zoom-btn');
-//     if (zoomBtn && mainSwiper.zoom) {
-//       zoomBtn.addEventListener('click', function(){
-//         if (mainSwiper.zoom.scale && mainSwiper.zoom.scale > 1) {
-//           mainSwiper.zoom.out();
-//         } else {
-//           mainSwiper.zoom.in();
-//         }
-//       });
-//     }
-
-//     // Size modal behaviour
-//     const trigger = sectionEl.querySelector('[data-size-trigger]');
-//     const modal = sectionEl.querySelector('.product-size-modal');
-//     const close = modal && modal.querySelector('[data-size-close]');
-//     if (trigger && modal) trigger.addEventListener('click', ()=> modal.setAttribute('aria-hidden','false'));
-//     if (close) close.addEventListener('click', ()=> modal.setAttribute('aria-hidden','true'));
-//     if (modal) modal.addEventListener('click', function(e){ if (e.target === modal) modal.setAttribute('aria-hidden','true'); });
-
-
-//     // 📌 Read More with truncation toggle
-//     const toggleBtn = sectionEl.querySelector('[data-desc-toggle]');
-//     const descContent = sectionEl.querySelector('[data-desc-content]');
-//     if (toggleBtn && descContent) {
-//       const fullText = descContent.innerHTML.trim();
-//       if (!fullText) {
-//         // no description at all → hide toggle
-//         toggleBtn.style.display = "none";
-//         return;
-//       }
-
-//       const words = fullText.split(/\s+/);
-//       const limit = 40; // number of words to show when collapsed
-
-//       if (words.length <= limit) {
-//         // description already short → show full text & hide toggle
-//         descContent.innerHTML = fullText;
-//         toggleBtn.style.display = "none";
-//         return;
-//       }
-
-//       const truncatedText = words.slice(0, limit).join(" ") + "...";
-//       let expanded = false;
-//       descContent.innerHTML = truncatedText;
-
-//       toggleBtn.addEventListener("click", () => {
-//         descContent.classList.add("collapsing");
-
-//         setTimeout(() => {
-//           if (expanded) {
-//             descContent.innerHTML = truncatedText;
-//             toggleBtn.textContent = "Read more";
-//             expanded = false;
-//           } else {
-//             descContent.innerHTML = fullText;
-//             toggleBtn.textContent = "Read less";
-//             expanded = true;
-//           }
-//           descContent.classList.remove("collapsing");
-//         }, 200); // match transition timing
-//       });
-//     }
-    
-//   }
-
-//   function initAll(){
-//     if (typeof Swiper === 'undefined') {
-//       console.warn('Swiper is not loaded yet');
-//       return;
-//     }
-//     document.querySelectorAll('section[id^="product-section-"]').forEach(initSection);
-//   }
-
-//   // Wait for DOM + Swiper
-//   function ready() {
-//     if (window.Swiper) {
-//       initAll();
-//     } else {
-//       var t = setInterval(function(){ if (window.Swiper){ clearInterval(t); initAll(); } }, 50);
-//     }
-//   }
-
-//   if (document.readyState === 'loading') {
-//     document.addEventListener('DOMContentLoaded', ready);
-//   } else {
-//     ready();
-//   }
-// })();
-
-
-
-/* window.ProductMediaSwipers = window.ProductMediaSwipers || [];
-
- ---------- DESTROY ALL SWIPERS ---------- 
-function destroyProductMediaSwipers() {
-  window.ProductMediaSwipers.forEach(swiper => {
-    if (swiper && swiper.destroy) {
-      swiper.destroy(true, true);
-    }
-  });
-  window.ProductMediaSwipers = [];
-} */
-
-/* ---------- INIT PRODUCT MEDIA ---------- 
-function initProductMedia(section) {
-
-  if (!section) return;
-
-  const isMobile = window.matchMedia('(max-width: 749px)').matches;
-
-  const mediaContainer = section.querySelector('.product-media');
-  if (!mediaContainer) return;
-
-  const desktopLayout = mediaContainer.dataset.desktopLayout;
-  const mobileLayout = mediaContainer.dataset.mobileLayout;
-
-  const layoutType = isMobile ? mobileLayout : desktopLayout;
-
-  const wrapper = section.querySelector('.product-media-layout');
-  if (!wrapper) return;
-
-  wrapper.classList.remove(
-    'product-media-layout--grid',
-    'product-media-layout--slideshow',
-    'product-media-layout--carousel'
-  );
-
-  wrapper.classList.add(`product-media-layout--${layoutType}`);
-  
-  if (layoutType === 'grid') {
-    destroyProductMediaSwipers();
-    return;
-  }
-
-  const mainSwiperEl = wrapper.querySelector('.product-swiper');
-  if (!mainSwiperEl) return; */
-
-  /* ---------- THUMBNAILS (AUTO SWIPER) ---------- 
-  let thumbsSwiper = null;
-  const thumbsEl = wrapper.querySelector('.product-thumbs');
-
-  if (thumbsEl) {
-    thumbsEl.classList.remove('is-swiper', 'is-static');
-
-    const slides = thumbsEl.querySelectorAll('.swiper-slide');
-    const isVertical =
-      thumbsEl.classList.contains('thumbs-left') ||
-      thumbsEl.classList.contains('thumbs-right');
-
-    const MAX_VISIBLE = isVertical ? 5 : 6;
-
-    if (slides.length > MAX_VISIBLE) {
-      thumbsEl.classList.add('is-swiper');
-
-      thumbsSwiper = new Swiper(thumbsEl, {
-        direction: isVertical ? 'vertical' : 'horizontal',
-        spaceBetween: 8,
-        slidesPerView: 'auto',
-        freeMode: true,
-        watchSlidesProgress: true,
-        mousewheel: isVertical,
-      });
-
-        window.ProductMediaSwipers.push(thumbsSwiper);
-      } else {
-        thumbsEl.classList.add('is-static');
-    }
-  } */
-
-  /* ---------- MAIN SWIPER ---------- 
-  const isCarousel = layoutType === 'carousel';
-
-  const mainSwiper = new Swiper(mainSwiperEl, {
-    loop: false,
-    slidesPerView: isCarousel ? 1.2 : 1,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: wrapper.querySelector('.swiper-button-next'),
-      prevEl: wrapper.querySelector('.swiper-button-prev'),
-    },
-    thumbs: thumbsSwiper ? { swiper: thumbsSwiper } : undefined,
-    zoom: { maxRatio: 3 },
-    a11y: true,
-    observer: true,
-    observeParents: true,
-    breakpoints: {
-      750: {
-        slidesPerView: isCarousel ? 1.4 : 1,
-        spaceBetween: 20,
-      },
-    },
-  });
-
-  mainSwiperEl.swiper = mainSwiper;
-
-  window.ProductMediaSwipers.push(mainSwiper);
-} */
-
-
-
-
-
 window.ProductMediaSwipers = window.ProductMediaSwipers || [];
 
 function destroyProductMediaSwipers() {
@@ -352,7 +92,6 @@ function initProductMedia(section) {
   window.ProductMediaSwipers.push(mainSwiper);
 }
 
-// ... baaki functions (initAllProductMedia, Resize, Variant Change) wese hi rahenge
 
 /* ---------- INIT ALL PRODUCT SECTIONS ---------- */
 function initAllProductMedia() {
@@ -369,6 +108,124 @@ function initAllProductMedia() {
 
 /* ---------- DOM READY ---------- */
 document.addEventListener('DOMContentLoaded', initAllProductMedia);
+
+/* ---------- SIZE GUIDE MODAL (Dynamic & Accessible) ---------- */
+document.addEventListener('DOMContentLoaded', function(){
+
+  // Handle all size guide triggers
+  document.querySelectorAll('[data-size-trigger]').forEach(trigger => {
+
+    const sectionEl = trigger.closest('.shopify-section');
+    if(!sectionEl) return;
+
+    const modal = sectionEl.querySelector('.product-size-modal');
+    if(!modal) return;
+
+    const closeBtn = modal.querySelector('[data-size-close]');
+
+    // Store the trigger element inside modal
+    modal._trigger = trigger;
+
+    // OPEN MODAL
+    trigger.addEventListener('click', () => {
+      modal.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+
+      // Focus first focusable element inside modal
+      const focusableEls = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if(focusableEls.length) focusableEls[0].focus();
+
+      // Add focus trap
+      modal.addEventListener('keydown', trapFocus);
+    });
+
+    // CLOSE MODAL FUNCTION
+    const closeModal = () => {
+      modal.setAttribute('aria-hidden', 'true');
+      if(modal._trigger) modal._trigger.setAttribute('aria-expanded', 'false');
+      if(modal._trigger) modal._trigger.focus();
+      modal.removeEventListener('keydown', trapFocus);
+    };
+
+    // Close button
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    // Click outside modal
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
+    });
+
+    // ESC key close (global listener)
+    document.addEventListener('keydown', (e) => {
+      if(e.key === "Escape" && modal.getAttribute('aria-hidden') === "false") closeModal();
+    });
+
+    // ---------- Focus Trap Function ----------
+    function trapFocus(e){
+      if(e.key !== "Tab") return;
+      const focusableEls = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if(!focusableEls.length) return;
+
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length -1];
+
+      if(e.shiftKey){ // Shift + Tab
+        if(document.activeElement === firstEl){
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else { // Tab
+        if(document.activeElement === lastEl){
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    }
+
+  });
+
+});
+
+/* ---------- PRODUCT DESCRIPTION TOGGLE (Section Scoped) ---------- */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.shopify-section').forEach(sectionEl => {
+    const toggleBtn = sectionEl.querySelector('[data-desc-toggle]');
+    const descContent = sectionEl.querySelector('[data-desc-content]');
+    if(!toggleBtn || !descContent) return;
+
+    const fullText = descContent.innerHTML.trim();
+    if(!fullText){
+      toggleBtn.style.display = "none";
+      return;
+    }
+
+    const words = fullText.split(/\s+/);
+    const limit = 40;
+    if(words.length <= limit){
+      toggleBtn.style.display = "none";
+      return;
+    }
+
+    const truncatedText = words.slice(0, limit).join(" ") + "...";
+    let expanded = false;
+    descContent.innerHTML = truncatedText;
+    toggleBtn.setAttribute("aria-expanded","false");
+
+    toggleBtn.addEventListener("click", function(){
+      if(expanded){
+        descContent.innerHTML = truncatedText;
+        toggleBtn.textContent = "Read more";
+        toggleBtn.setAttribute("aria-expanded","false");
+        expanded = false;
+      } else {
+        descContent.innerHTML = fullText;
+        toggleBtn.textContent = "Read less";
+        toggleBtn.setAttribute("aria-expanded","true");
+        expanded = true;
+      }
+    });
+  });
+});
 
 /* ---------- SHOPIFY CUSTOMIZER SUPPORT ---------- */
 document.addEventListener('shopify:section:load', e => {
@@ -449,15 +306,87 @@ window.addEventListener('resize', () => {
 
   }
 
-
   document.addEventListener('variant:change', function (evt) {
     const sectionEl = evt.target.closest('.shopify-section');
     if (!sectionEl || !evt.detail || !evt.detail.variant) return;
 
     onVariantChange(sectionEl, evt.detail.variant);
     filterMediaByVariant(sectionEl, evt.detail.variant);
+
+    /* -------- UPDATE SELECTED OPTION LABEL -------- */
+    const picker = sectionEl.querySelector('variant-picker');
+    if (!picker) return;
+
+    const selectedOptions = evt.detail.variant.options;
+
+    picker.querySelectorAll('[data-selected-value]').forEach((span, index) => {
+      if (selectedOptions[index]) {
+        span.textContent = selectedOptions[index];
+      }
+    });
+
   });
 
+  /* ---------- ACCESSIBLE VARIANT PILLS (per option group) ---------- 
+document.querySelectorAll('.shopify-section').forEach(sectionEl => {
+  sectionEl.querySelectorAll('.variant-option--pills').forEach(optionGroup => {
+    const pills = optionGroup.querySelectorAll('.variant-pill');
+    if(!pills.length) return;
+
+    // Live region for screen readers
+    let liveRegion = sectionEl.querySelector('[aria-live="polite"]');
+    if(!liveRegion){
+      liveRegion = document.createElement('div');
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('class','sr-only');
+      sectionEl.appendChild(liveRegion);
+    }
+
+    pills.forEach((pill, index) => {
+      // Set role and initial ARIA
+      pill.setAttribute('role','radio');
+      pill.setAttribute('aria-checked', pill.classList.contains('is-selected') ? 'true':'false');
+      pill.setAttribute('tabindex', pill.classList.contains('is-selected') ? '0':'-1');
+
+      // Click updates selection for this group only
+      pill.addEventListener('click', () => {
+        updatePills(pills, pill);
+        pill.querySelector('input').checked = true; // sync input
+      });
+
+      // Keyboard navigation for this group
+      pill.addEventListener('keydown', (e) => {
+        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return;
+        e.preventDefault();
+
+        let newIndex;
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
+          newIndex = (index + 1) % pills.length;
+        } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
+          newIndex = (index - 1 + pills.length) % pills.length;
+        }
+        pills[newIndex].focus();
+        updatePills(pills, pills[newIndex]);
+        pills[newIndex].querySelector('input').checked = true;
+      });
+    });
+
+    function updatePills(pills, selectedPill){
+      pills.forEach(p => {
+        p.classList.remove('is-selected');
+        p.setAttribute('aria-checked','false');
+        p.setAttribute('tabindex','-1');
+      });
+      selectedPill.classList.add('is-selected');
+      selectedPill.setAttribute('aria-checked','true');
+      selectedPill.setAttribute('tabindex','0');
+
+      // Update live region
+      const valueText = selectedPill.querySelector('.pill-label')?.textContent.trim() || '';
+      liveRegion.textContent = `Selected option: ${valueText}`;
+    }
+  });
+});*/
 
 })();
 
