@@ -27,8 +27,8 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "style": "dropdown",
-            "swatch": "none"
+            "style": "pills",
+            "swatch": "square"
           }
         },
         "product_inventory": {
