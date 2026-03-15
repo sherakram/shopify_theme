@@ -82,8 +82,7 @@
                     data-block-id="{{ section.id }}__variant_picker"
                     data-product-url="{{ product.url }}"
                     ref="mainVariantPicker"
-                    data-template-product-match="true"
-                    data-variants="{{ product.variants | json | escape }}">
+                    data-template-product-match="true">
 
                     <form class="variant-picker__form">
                       {% for option in product.options_with_values %}
@@ -182,6 +181,10 @@
                         </div>
                       {% endfor %}
                     </form>
+
+                    <script type="application/json" data-product-variants>
+                      {{ product.variants | json }}
+                    </script>
               </variant-picker>
 
             {% when 'buy_buttons' %}

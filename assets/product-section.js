@@ -313,6 +313,15 @@ window.addEventListener('resize', () => {
     onVariantChange(sectionEl, evt.detail.variant);
     filterMediaByVariant(sectionEl, evt.detail.variant);
 
+    /* -------- UPDATE BUY FORM VARIANT ID -------- */
+    const buyForm = sectionEl.querySelector('form[action="/cart/add"]');
+    if (buyForm) {
+      const variantInput = buyForm.querySelector('input[name="id"]');
+      if (variantInput) {
+        variantInput.value = evt.detail.variant.id;
+      }
+    }
+
     /* -------- UPDATE SELECTED OPTION LABEL -------- */
     const picker = sectionEl.querySelector('variant-picker');
     if (!picker) return;
@@ -326,67 +335,6 @@ window.addEventListener('resize', () => {
     });
 
   });
-
-  /* ---------- ACCESSIBLE VARIANT PILLS (per option group) ---------- 
-document.querySelectorAll('.shopify-section').forEach(sectionEl => {
-  sectionEl.querySelectorAll('.variant-option--pills').forEach(optionGroup => {
-    const pills = optionGroup.querySelectorAll('.variant-pill');
-    if(!pills.length) return;
-
-    // Live region for screen readers
-    let liveRegion = sectionEl.querySelector('[aria-live="polite"]');
-    if(!liveRegion){
-      liveRegion = document.createElement('div');
-      liveRegion.setAttribute('aria-live', 'polite');
-      liveRegion.setAttribute('class','sr-only');
-      sectionEl.appendChild(liveRegion);
-    }
-
-    pills.forEach((pill, index) => {
-      // Set role and initial ARIA
-      pill.setAttribute('role','radio');
-      pill.setAttribute('aria-checked', pill.classList.contains('is-selected') ? 'true':'false');
-      pill.setAttribute('tabindex', pill.classList.contains('is-selected') ? '0':'-1');
-
-      // Click updates selection for this group only
-      pill.addEventListener('click', () => {
-        updatePills(pills, pill);
-        pill.querySelector('input').checked = true; // sync input
-      });
-
-      // Keyboard navigation for this group
-      pill.addEventListener('keydown', (e) => {
-        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return;
-        e.preventDefault();
-
-        let newIndex;
-        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
-          newIndex = (index + 1) % pills.length;
-        } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
-          newIndex = (index - 1 + pills.length) % pills.length;
-        }
-        pills[newIndex].focus();
-        updatePills(pills, pills[newIndex]);
-        pills[newIndex].querySelector('input').checked = true;
-      });
-    });
-
-    function updatePills(pills, selectedPill){
-      pills.forEach(p => {
-        p.classList.remove('is-selected');
-        p.setAttribute('aria-checked','false');
-        p.setAttribute('tabindex','-1');
-      });
-      selectedPill.classList.add('is-selected');
-      selectedPill.setAttribute('aria-checked','true');
-      selectedPill.setAttribute('tabindex','0');
-
-      // Update live region
-      const valueText = selectedPill.querySelector('.pill-label')?.textContent.trim() || '';
-      liveRegion.textContent = `Selected option: ${valueText}`;
-    }
-  });
-});*/
 
 })();
 
@@ -408,3 +356,127 @@ function filterMediaByVariant(sectionEl, variant) {
     el.style.display = ids.includes(variantId) ? '' : 'none';
   });
 }
+
+
+/* ---------- VARIANT PICKER INIT (Script Tag Approach) ---------- */
+(function () {
+
+  /* -- Variants script tag se read karo -- */
+  function getVariants(pickerEl) {
+    const scriptEl = pickerEl.querySelector('script[data-product-variants]');
+    if (!scriptEl) return [];
+    try {
+      return JSON.parse(scriptEl.textContent);
+    } catch (e) {
+      console.error('[VariantPicker] JSON parse failed:', e);
+      return [];
+    }
+  }
+
+  /* -- Selected options form se collect karo -- */
+  function getSelectedOptions(form) {
+    const options = [];
+    // Order maintain karne ke liye option positions use karo
+    const optionNames = [];
+    form.querySelectorAll('[name^="options["]').forEach(input => {
+      const name = input.name;
+      if (!optionNames.includes(name)) optionNames.push(name);
+    });
+
+    optionNames.forEach(name => {
+      const select = form.querySelector(`select[name="${name}"]`);
+      if (select) {
+        options.push(select.value);
+        return;
+      }
+      const checked = form.querySelector(`input[type="radio"][name="${name}"]:checked`);
+      if (checked) options.push(checked.value);
+    });
+
+    return options;
+  }
+
+  /* -- Options match karke variant dhundo -- */
+  function findVariant(variants, selectedOptions) {
+    return variants.find(v =>
+      v.options.every((opt, i) => opt === selectedOptions[i])
+    ) || null;
+  }
+
+  /* -- Pill states update karo (is-selected, aria-checked) -- */
+  function updatePillStates(pickerEl, selectedOptions) {
+    pickerEl.querySelectorAll('.variant-option').forEach((optionEl, index) => {
+      const selectedValue = selectedOptions[index];
+      optionEl.querySelectorAll('.variant-pill').forEach(pill => {
+        const input = pill.querySelector('input[type="radio"]');
+        if (!input) return;
+        const isSelected = input.value === selectedValue;
+        pill.classList.toggle('is-selected', isSelected);
+        pill.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        pill.setAttribute('tabindex', isSelected ? '0' : '-1');
+      });
+    });
+  }
+
+  /* -- variant:change event dispatch karo -- */
+  function dispatchVariantChange(pickerEl, variant) {
+    pickerEl.dispatchEvent(new CustomEvent('variant:change', {
+      bubbles: true,
+      detail: { variant }
+    }));
+  }
+
+  /* -- URL update karo (clean history) -- */
+  function updateURL(pickerEl, variant) {
+    const productUrl = pickerEl.dataset.productUrl;
+    if (!productUrl) return;
+    const url = new URL(window.location.href);
+    if (variant) {
+      url.searchParams.set('variant', variant.id);
+    } else {
+      url.searchParams.delete('variant');
+    }
+    window.history.replaceState({ variantId: variant?.id }, '', url.toString());
+  }
+
+  /* -- Single picker initialize karo -- */
+  function initPicker(pickerEl) {
+    const variants = getVariants(pickerEl);
+    if (!variants.length) return;
+
+    const form = pickerEl.querySelector('.variant-picker__form');
+    if (!form) return;
+
+    // Pehli baar current state se variant find karo
+    const initialOptions = getSelectedOptions(form);
+    const initialVariant = findVariant(variants, initialOptions);
+    if (initialVariant) {
+      updatePillStates(pickerEl, initialOptions);
+      dispatchVariantChange(pickerEl, initialVariant);
+      updateURL(pickerEl, initialVariant);
+    }
+
+    // User selection par
+    form.addEventListener('change', function (e) {
+      const selectedOptions = getSelectedOptions(form);
+      const matchedVariant = findVariant(variants, selectedOptions);
+
+      updatePillStates(pickerEl, selectedOptions);
+      dispatchVariantChange(pickerEl, matchedVariant);
+      updateURL(pickerEl, matchedVariant);
+    });
+  }
+
+  /* -- Saray pickers initialize karo -- */
+  function initAllPickers(root) {
+    (root || document).querySelectorAll('variant-picker').forEach(initPicker);
+  }
+
+  /* -- DOM Ready -- */
+  document.addEventListener('DOMContentLoaded', () => initAllPickers());
+
+  /* -- Shopify Customizer support -- */
+  document.addEventListener('shopify:section:load', e => initAllPickers(e.target));
+  document.addEventListener('shopify:section:select', e => initAllPickers(e.target));
+
+})();
