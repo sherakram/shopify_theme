@@ -158,8 +158,6 @@
 
                                       {% elsif variant_image %}
                                         <!-- image swatch -->
-                                        {% comment %} <span class="swatch" title="{{ value }}"
-                                          style="background-image: url({{ variant_image }}); background-size: cover; background-position: center;"></span> {% endcomment %}
                                         <img class="swatch" data-variant-value="{{ value }}" src="{{ variant_image | image_url: width: 128 }}" alt="{{ value | escape }}" width="128" height="128" loading="eager" fetchpriority="high" srcset="{{ variant_image | image_url: width: 128 }} 128w" sizes="100vw" style="object-fit: cover; object-position: center;">
                                         <span class="visually-hidden">{{ value }}</span>
 

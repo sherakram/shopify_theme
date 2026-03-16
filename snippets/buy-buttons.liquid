@@ -15,8 +15,8 @@
           <button type="button" class="quantity-btn plus" aria-label="Increase quantity">+</button>
         </div>
 
-        <!-- Add to cart — type="button" rakho, type="submit" NAHI -->
-        <button type="button" class="button add-to-cart-button" data-add-to-cart>
+        <!-- Add to cart -->
+        <button type="submit" class="button add-to-cart-button" data-add-to-cart>
           <span class="add-to-cart-text">Add to cart</span>
           <span class="add-to-cart-added">✓ Added</span>
           <span
@@ -34,8 +34,35 @@
       </div>
 
     </div>
+
+    <!-- ✅ Error / Notice message area -->
+    <div class="cart-error-message" data-cart-error style="display:none; color: #d02e2e; background: #fff5f5; border: 1px solid #d02e2e; padding: 10px; margin-top: 10px; font-size: 13px; border-radius: 4px;">
+    </div>
+
   {% endform %}
 </div>
+
+<style>
+  .cart-error-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background-color: #fff8f0;
+    border: 1px solid #f5a623;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .cart-error-message::before {
+    content: "⚠";
+    font-size: 16px;
+    flex-shrink: 0;
+    color: #f5a623;
+  }
+</style>
 
 <script>
 (function () {
@@ -54,6 +81,21 @@
   const minus        = form.querySelector('.quantity-btn.minus');
   const plus         = form.querySelector('.quantity-btn.plus');
   const addBtn       = form.querySelector('[data-add-to-cart]');
+  const errorBox     = form.querySelector('[data-cart-error]');
+  const errorText    = form.querySelector('[data-cart-error-text]');
+
+  /* -- Error message helper -- */
+  function showError(msg) {
+    if (!errorBox || !errorText) return;
+    errorText.textContent = msg;
+    errorBox.style.display = 'flex';
+  }
+
+  function hideError() {
+    if (!errorBox) return;
+    errorBox.style.display = 'none';
+    if (errorText) errorText.textContent = '';
+  }
 
   // ✅ Quantity minus
   if (minus && qtyInput) {
@@ -90,7 +132,7 @@
     }
   });
 
-  // ✅ Add to cart — form submit nahi, sirf button click
+  // ✅ Add to cart
   if (!addBtn) return;
 
   let isSubmitting = false;
@@ -101,7 +143,6 @@
     isSubmitting = true;
     addBtn.disabled = true;
 
-    // Form se fresh data lo
     const formData = new FormData();
     formData.append('id', variantInput ? variantInput.value : '');
     formData.append('quantity', qtyInput ? (parseInt(qtyInput.value, 10) || 1) : 1);
