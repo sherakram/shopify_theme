@@ -1,9 +1,8 @@
 (function () {
 
-  // ✅ Unique naam — kisi bhi theme se conflict nahi
-  if (customElements.get('zor-atc-form')) return;
+  if (customElements.get('product-form')) return;
 
-  customElements.define('zor-atc-form', class ZorAtcForm extends HTMLElement {
+  customElements.define('product-form', class ProductForm extends HTMLElement {
 
     connectedCallback() {
       this.form         = this.querySelector('form');
@@ -37,8 +36,6 @@
       // Variant change listener
       document.addEventListener('variant:change', this.onVariantChange.bind(this));
 
-      // ✅ Form submit — stopPropagation + preventDefault
-      // Koi bhi bahar ka handler fire nahi hoga
       this.form.addEventListener('submit', this.onSubmit.bind(this), true);
     }
 
@@ -63,7 +60,7 @@
     }
 
     onSubmit(e) {
-      // ✅ Stop — koi aur handler mat chalao
+      
       e.preventDefault();
       e.stopImmediatePropagation();
 
