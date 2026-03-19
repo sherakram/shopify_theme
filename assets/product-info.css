@@ -85,6 +85,11 @@ h1.product-title {
   color: #555;
 }
 
+/* DropDown container */
+.variant-option__select option:disabled {
+  color: #aaa;
+}
+
 /* Pills container */
 .variant-option__pills {
   display: flex;
@@ -147,6 +152,7 @@ h1.product-title {
   opacity: 0.4;
   cursor: not-allowed;
   position: relative;
+  pointer-events: none;
 }
 
 /* Strikethrough line */

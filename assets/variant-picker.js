@@ -157,7 +157,6 @@ function filterMediaByVariant(sectionEl, variant) {
     });
   }
 
-  // ✅ Availability states update karo
   function updateAvailabilityStates(pickerEl, variants, selectedOptions) {
     pickerEl.querySelectorAll('.variant-option').forEach(function (optionEl, optionIndex) {
       optionEl.querySelectorAll('.variant-pill').forEach(function (pill) {
@@ -166,17 +165,20 @@ function filterMediaByVariant(sectionEl, variant) {
 
         const value = input.value;
 
-        // Check: is any variant available with this value + other selected options?
         const isAvailable = variants.some(function (v) {
-          return v.options.every(function (opt, i) {
-            if (i === optionIndex) return opt === value;
-            return !selectedOptions[i] || opt === selectedOptions[i];
-          }) && v.available;
+          if (!v.available) return false;
+
+          if (v.options[optionIndex] !== value) return false;
+
+          for (var i = 0; i < optionIndex; i++) {
+            if (selectedOptions[i] && v.options[i] !== selectedOptions[i]) return false;
+          }
+
+          return true;
         });
 
         pill.classList.toggle('is-unavailable', !isAvailable);
 
-        // Unavailable pill click block karo
         if (!isAvailable) {
           pill.setAttribute('aria-disabled', 'true');
         } else {
@@ -211,6 +213,15 @@ function filterMediaByVariant(sectionEl, variant) {
 
     const form = pickerEl.querySelector('.variant-picker__form');
     if (!form) return;
+
+    // ✅ Unavailable pill click bilkul block karo — capture phase
+    pickerEl.addEventListener('click', function (e) {
+      const pill = e.target.closest('.variant-pill');
+      if (pill && pill.classList.contains('is-unavailable')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
 
     const initialOptions = getSelectedOptions(form);
     const initialVariant = findVariant(variants, initialOptions);
