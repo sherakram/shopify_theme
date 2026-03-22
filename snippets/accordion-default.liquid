@@ -1,0 +1,65 @@
+{% comment %}
+  Accordion Default Snippet
+  -------------------------
+  Usage:
+    {% render 'accordion-default',
+      title: block.settings.title,
+      content: block.settings.content,
+      block: block,
+      section: section,
+      open: false
+    %}
+{% endcomment %}
+
+{%- liquid
+  assign is_open    = open | default: false
+  assign block_id   = block.id | default: title | handle
+  assign summary_id = 'Details-Summary-' | append: block_id
+  assign content_id = 'Details-Content-' | append: block_id
+-%}
+
+<accordion-default
+  class="accordion product__accordion product__block product__block--gap-1"
+  data-hide-multiple=""
+  {{ block.shopify_attributes }}
+>
+  <details
+    class="accordion__section{% if is_open %} is-active{% endif %}"
+    id="Details-{{ block_id }}"
+    {% if is_open %}open{% endif %}
+  >
+    <summary
+      class="accordion__button h5 js-btn"
+      id="{{ summary_id }}"
+      role="button"
+      aria-expanded="{{ is_open }}"
+      aria-controls="{{ content_id }}"
+    >
+      <span>{{ title | escape }}</span>
+
+      <div class="accordion__icon" aria-hidden="true">
+        <svg class="accordion__icon--minus" width="1em" height="1em"
+             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M4 12H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="accordion__icon--plus" width="1em" height="1em"
+             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M4 12H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 4V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </summary>
+
+    <div
+      class="accordion__body"
+      id="{{ content_id }}"
+      role="region"
+      aria-labelledby="{{ summary_id }}"
+      style="height: {% if is_open %}auto{% else %}0px{% endif %};"
+    >
+      <div class="accordion__body-inner">
+        {{ content }}
+      </div>
+    </div>
+  </details>
+</accordion-default>

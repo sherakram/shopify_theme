@@ -3,6 +3,7 @@
 {{ 'product-thumbnails.css' | asset_url | stylesheet_tag }}
 {{ 'product-info.css' | asset_url | stylesheet_tag }}
 {{ 'product-modals.css' | asset_url | stylesheet_tag }}
+{{ 'accordion-default.css' | asset_url | stylesheet_tag }}
 
 <section
   id="product-section-{{ section.id }}"
@@ -420,6 +421,22 @@
                   </div>
                 </div>
               </div>
+
+            {%- when 'accordion' -%}
+              <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <meta itemprop="name" content="{{ block.settings.title | escape }}">
+                <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                  <meta itemprop="text" content="{{ block.settings.content | strip_html | escape }}">
+                </div>
+
+                {% render 'accordion-default',
+                  title: block.settings.title,
+                  content: block.settings.content,
+                  block: block,
+                  section: section,
+                  open: block.settings.open_by_default
+                %}
+              </div>
           {% endcase %}
         {% endfor %}
       </div>
@@ -430,6 +447,7 @@
 <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'countdown-timer.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'accordion-default.js' | asset_url }}" defer></script>
 
 {% if product %}
   <script type="application/ld+json">
@@ -886,6 +904,30 @@
           "id": "size_popup_image",
           "type": "image_picker",
           "label": "Size popup image"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Delivery & Returns"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your content here.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
         }
       ]
     }

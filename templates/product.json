@@ -79,6 +79,14 @@
         "product_description": {
           "type": "product_description",
           "settings": {}
+        },
+        "accordion": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery & Returns",
+            "content": "<p>Add your content here.</p>",
+            "open_by_default": false
+          }
         }
       },
       "block_order": [
@@ -91,7 +99,8 @@
         "payment_icons",
         "buy_buttons",
         "countdown_urgency",
-        "product_description"
+        "product_description",
+        "accordion"
       ],
       "settings": {
         "media_desktop_layout": "slideshow",
