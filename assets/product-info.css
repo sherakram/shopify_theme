@@ -41,17 +41,39 @@ h1.product-title {
   gap: 20px;
 }
 
+/* Reset fieldset browser defaults */
 .variant-option {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.variant-option label {
+/* Legend replaces the old div label */
+.variant-option__legend {
   font-size: 0.95rem;
   font-weight: 500;
   color: #333;
+  padding: 0;
+  margin-bottom: 2px;
+  float: left; /* Prevents legend from breaking flex flow */
+  width: 100%;
 }
+
+/* .variant-option {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+} */
+
+/* .variant-option label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+} */
 
 .variant-option__select-wrapper {
   position: relative;

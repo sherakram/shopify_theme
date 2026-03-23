@@ -17,9 +17,6 @@ accordion-default {
 }
 
 /* ── Section wrapper ─────────────────────────────────────── */
-.accordion__section {
-  border-top: 1px solid var(--accordion-border-color);
-}
 .accordion__section:last-child {
   border-bottom: 1px solid var(--accordion-border-color);
 }

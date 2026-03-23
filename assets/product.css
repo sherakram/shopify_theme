@@ -74,6 +74,25 @@
   left:-9999px !important
 } 
 
+
+/* ============================================
+   Sticky Media Gallery (Desktop only)
+   Sticks while inside .product-columns,
+   unsticks naturally when section ends.
+   ============================================ */
+
+.product-media {
+  position: sticky;
+  top: var(--sticky-top-offset, 20px);
+  align-self: start;
+}
+
+@media (max-width: 600px) {
+  .product-media {
+    position: static;
+  }
+}
+
  
 
 /*Responsive*/
