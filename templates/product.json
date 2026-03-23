@@ -87,6 +87,14 @@
             "content": "<p>Add your content here.</p>",
             "open_by_default": false
           }
+        },
+        "accordion_N9Lr4R": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery & Returns",
+            "content": "<p>Add your content here.</p>",
+            "open_by_default": false
+          }
         }
       },
       "block_order": [
@@ -100,7 +108,8 @@
         "buy_buttons",
         "countdown_urgency",
         "product_description",
-        "accordion"
+        "accordion",
+        "accordion_N9Lr4R"
       ],
       "settings": {
         "media_desktop_layout": "slideshow",
