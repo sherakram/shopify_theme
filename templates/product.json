@@ -31,49 +31,10 @@
             "swatch": "square"
           }
         },
-        "product_inventory": {
-          "type": "product_inventory",
-          "settings": {
-            "show_quantity": true,
-            "low_inventory_threshold": 10,
-            "show_progress_bar": true,
-            "progress_bar_max_value": 100
-          }
-        },
-        "product_size": {
-          "type": "product_size",
-          "settings": {
-            "size_label": "Size guide",
-            "size_popup_image": "shopify://shop_images/suedesmulesslipper.avif"
-          }
-        },
-        "payment_icons": {
-          "type": "payment_icons",
-          "settings": {
-            "payment_icons_image": false,
-            "custom_payment_icons": "visa,master,american-express,paypal"
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "qty_cart_layout": "inline"
-          }
-        },
-        "countdown_urgency": {
-          "type": "countdown_urgency",
-          "settings": {
-            "heading_text": "Hurry up!",
-            "subheading_text": "Sale ends in:",
-            "bg_color": "#ffffff",
-            "text_color": "#000000",
-            "unit_color": "#000000",
-            "flip_color": "#ffcc00",
-            "end_date": "2025-12-31 23:59",
-            "border_radius": 0,
-            "auto_restart": true,
-            "restart_hours": 24,
-            "hide_expired": false
           }
         },
         "product_description": {
@@ -94,11 +55,7 @@
         "price",
         "divider",
         "variant_picker",
-        "product_inventory",
-        "product_size",
-        "payment_icons",
         "buy_buttons",
-        "countdown_urgency",
         "product_description",
         "accordion"
       ],

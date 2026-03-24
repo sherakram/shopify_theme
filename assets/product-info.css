@@ -41,7 +41,6 @@ h1.product-title {
   gap: 20px;
 }
 
-/* Reset fieldset browser defaults */
 .variant-option {
   border: none;
   padding: 0;
@@ -52,28 +51,15 @@ h1.product-title {
   gap: 6px;
 }
 
-/* Legend replaces the old div label */
 .variant-option__legend {
   font-size: 0.95rem;
   font-weight: 500;
   color: #333;
   padding: 0;
   margin-bottom: 2px;
-  float: left; /* Prevents legend from breaking flex flow */
+  float: left;
   width: 100%;
 }
-
-/* .variant-option {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-} */
-
-/* .variant-option label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #333;
-} */
 
 .variant-option__select-wrapper {
   position: relative;
@@ -402,7 +388,7 @@ h1.product-title {
   flex-wrap: wrap;        
   gap: 1rem;                
   align-items: center;    
-  justify-content: flex-start; /* align left, or use center if you prefer */
+  justify-content: flex-start;
   max-width: 100%;        
 }
 
@@ -410,6 +396,20 @@ h1.product-title {
   height: 28px;           
   width: auto;
   flex-shrink: 0;        
+}
+
+/*Product SKU*/
+.product__sku {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 8px 0;
+}
+
+.product__sku-label {
+  font-weight: 600;
 }
 
 /*Product description Block*/

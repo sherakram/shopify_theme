@@ -1,4 +1,4 @@
-{{ 'product.css' | asset_url | stylesheet_tag }}
+{{ 'section-product.css' | asset_url | stylesheet_tag }}
 {{ 'product-media.css' | asset_url | stylesheet_tag }}
 {{ 'product-thumbnails.css' | asset_url | stylesheet_tag }}
 {{ 'product-info.css' | asset_url | stylesheet_tag }}
@@ -65,6 +65,9 @@
       <div class="product-info-column">
         {% for block in section.blocks %}
           {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+
             {% when 'title' %}
               <h1 class="product-title">{{ product.title }}</h1>
 
@@ -439,6 +442,21 @@
                 >
                   Read more
                 </button>
+              </div>
+
+            {% when 'sku' %}
+              <div class="product__sku" id="Sku-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                {% if block.settings.show_label %}
+                  <span class="product__sku-label">{{ block.settings.label_text }}</span>
+                {% endif %}
+                <span class="product__sku-value">
+                  {{ product.selected_or_first_available_variant.sku }}
+                </span>
+              </div>
+
+            {% when 'custom_liquid' %}
+              <div class="product__custom-liquid" {{ block.shopify_attributes }}>
+                {{ block.settings.custom_liquid }}
               </div>
 
             {% when 'countdown_urgency' %}
@@ -836,6 +854,9 @@
   ],
   "blocks": [
     {
+      "type": "@app"
+    },
+    {
       "type": "title",
       "name": "Title",
       "limit": 1
@@ -919,6 +940,37 @@
       "type": "product_description",
       "name": "Product Description",
       "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_label",
+          "label": "Show label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_text",
+          "label": "Label text",
+          "default": "SKU:"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid",
+          "info": "Add Liquid code to create advanced customizations."
+        }
+      ]
     },
     {
       "type": "countdown_urgency",

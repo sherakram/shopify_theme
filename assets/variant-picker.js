@@ -143,20 +143,6 @@ function filterMediaByVariant(sectionEl, variant) {
     ) || null;
   }
 
-  // function updatePillStates(pickerEl, selectedOptions) {
-  //   pickerEl.querySelectorAll('.variant-option').forEach((optionEl, index) => {
-  //     const selectedValue = selectedOptions[index];
-  //     optionEl.querySelectorAll('.variant-pill').forEach(pill => {
-  //       const input = pill.querySelector('input[type="radio"]');
-  //       if (!input) return;
-  //       const isSelected = input.value === selectedValue;
-  //       pill.classList.toggle('is-selected', isSelected);
-  //       pill.setAttribute('aria-checked', isSelected ? 'true' : 'false');
-  //       pill.setAttribute('tabindex', isSelected ? '0' : '-1');
-  //     });
-  //   });
-  // }
-
   function updatePillStates(pickerEl, selectedOptions) {
     pickerEl.querySelectorAll('.variant-option').forEach((optionEl, index) => {
       const selectedValue = selectedOptions[index];
@@ -174,37 +160,6 @@ function filterMediaByVariant(sectionEl, variant) {
       });
     });
   }
-
-  // function updateAvailabilityStates(pickerEl, variants, selectedOptions) {
-  //   pickerEl.querySelectorAll('.variant-option').forEach(function (optionEl, optionIndex) {
-  //     optionEl.querySelectorAll('.variant-pill').forEach(function (pill) {
-  //       const input = pill.querySelector('input[type="radio"]');
-  //       if (!input) return;
-
-  //       const value = input.value;
-
-  //       const isAvailable = variants.some(function (v) {
-  //         if (!v.available) return false;
-
-  //         if (v.options[optionIndex] !== value) return false;
-
-  //         for (var i = 0; i < optionIndex; i++) {
-  //           if (selectedOptions[i] && v.options[i] !== selectedOptions[i]) return false;
-  //         }
-
-  //         return true;
-  //       });
-
-  //       pill.classList.toggle('is-unavailable', !isAvailable);
-
-  //       if (!isAvailable) {
-  //         pill.setAttribute('aria-disabled', 'true');
-  //       } else {
-  //         pill.removeAttribute('aria-disabled');
-  //       }
-  //     });
-  //   });
-  // }
 
   function updateAvailabilityStates(pickerEl, variants, selectedOptions) {
     pickerEl.querySelectorAll('.variant-option').forEach(function (optionEl, optionIndex) {
@@ -230,7 +185,6 @@ function filterMediaByVariant(sectionEl, variant) {
       });
     });
   }
-
 
   function dispatchVariantChange(pickerEl, variant) {
     pickerEl.dispatchEvent(new CustomEvent('variant:change', {
