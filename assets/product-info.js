@@ -9,6 +9,89 @@ function destroyProductMediaSwipers() {
   window.ProductMediaSwipers = [];
 }
 
+// function initProductMedia(section) {
+//   if (!section) return;
+
+//   const isMobile = window.matchMedia('(max-width: 749px)').matches;
+//   const mediaContainer = section.querySelector('.product-media');
+//   if (!mediaContainer) return;
+
+//   // FIX: Sirf active container (Desktop ya Mobile) ko target karein
+//   const activeContainer = isMobile 
+//     ? section.querySelector('.media-mobile') 
+//     : section.querySelector('.media-desktop');
+
+//   if (!activeContainer) return;
+
+//   const wrapper = activeContainer.querySelector('.product-media-layout');
+//   if (!wrapper) return;
+
+//   const desktopLayout = mediaContainer.dataset.desktopLayout;
+//   const mobileLayout = mediaContainer.dataset.mobileLayout;
+//   const layoutType = isMobile ? mobileLayout : desktopLayout;
+
+//   // Layout classes update
+//   wrapper.classList.remove('product-media-layout--grid', 'product-media-layout--slideshow', 'product-media-layout--carousel');
+//   wrapper.classList.add(`product-media-layout--${layoutType}`);
+  
+//   if (layoutType === 'grid') {
+//     return; // Grid ke liye swiper nahi chahiye
+//   }
+
+//   const mainSwiperEl = wrapper.querySelector('.product-swiper');
+//   if (!mainSwiperEl) return;
+
+//   /* ---------- THUMBNAILS ---------- */
+//   let thumbsSwiper = null;
+//   const thumbsEl = wrapper.querySelector('.product-thumbs');
+
+//   if (thumbsEl) {
+//     const isVertical = !isMobile && (thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right'));
+    
+//     // Pehle purana instance khatam karein agar exist karta hai
+//     if (thumbsEl.swiper) thumbsEl.swiper.destroy(true, true);
+
+//     thumbsSwiper = new Swiper(thumbsEl, {
+//       direction: isVertical ? 'vertical' : 'horizontal',
+//       spaceBetween: 8,
+//       slidesPerView: 'auto',
+//       freeMode: true,
+//       watchSlidesProgress: true,
+//       mousewheel: isVertical,
+//     });
+//     window.ProductMediaSwipers.push(thumbsSwiper);
+//   }
+
+//   /* ---------- MAIN SWIPER ---------- */
+//   const isCarousel = layoutType === 'carousel';
+
+//   const mainSwiper = new Swiper(mainSwiperEl, {
+//     loop: false,
+//     slidesPerView: isCarousel ? 1.2 : 1,
+//     centeredSlides: false,
+//     spaceBetween: 12,
+//     grabCursor: true,
+//     navigation: {
+//       nextEl: wrapper.querySelector('.swiper-button-next'),
+//       prevEl: wrapper.querySelector('.swiper-button-prev'),
+//     },
+//     thumbs: {
+//       swiper: thumbsSwiper,
+//     },
+//     zoom: { maxRatio: 2 },
+//     observer: true,
+//     observeParents: true,
+//     breakpoints: {
+//       750: {
+//         slidesPerView: isCarousel ? 1.3 : 1,
+//         spaceBetween: 20,
+//       },
+//     },
+//   });
+
+//   window.ProductMediaSwipers.push(mainSwiper);
+// }
+
 function initProductMedia(section) {
   if (!section) return;
 
@@ -16,27 +99,26 @@ function initProductMedia(section) {
   const mediaContainer = section.querySelector('.product-media');
   if (!mediaContainer) return;
 
-  // FIX: Sirf active container (Desktop ya Mobile) ko target karein
-  const activeContainer = isMobile 
-    ? section.querySelector('.media-mobile') 
+  const activeContainer = isMobile
+    ? section.querySelector('.media-mobile')
     : section.querySelector('.media-desktop');
-
   if (!activeContainer) return;
 
   const wrapper = activeContainer.querySelector('.product-media-layout');
   if (!wrapper) return;
 
   const desktopLayout = mediaContainer.dataset.desktopLayout;
-  const mobileLayout = mediaContainer.dataset.mobileLayout;
-  const layoutType = isMobile ? mobileLayout : desktopLayout;
+  const mobileLayout  = mediaContainer.dataset.mobileLayout;
+  const layoutType    = isMobile ? mobileLayout : desktopLayout;
 
-  // Layout classes update
-  wrapper.classList.remove('product-media-layout--grid', 'product-media-layout--slideshow', 'product-media-layout--carousel');
+  wrapper.classList.remove(
+    'product-media-layout--grid',
+    'product-media-layout--slideshow',
+    'product-media-layout--carousel'
+  );
   wrapper.classList.add(`product-media-layout--${layoutType}`);
-  
-  if (layoutType === 'grid') {
-    return; // Grid ke liye swiper nahi chahiye
-  }
+
+  if (layoutType === 'grid') return;
 
   const mainSwiperEl = wrapper.querySelector('.product-swiper');
   if (!mainSwiperEl) return;
@@ -45,10 +127,14 @@ function initProductMedia(section) {
   let thumbsSwiper = null;
   const thumbsEl = wrapper.querySelector('.product-thumbs');
 
+  // Mobile pe left/right thumbs ko horizontal banana hai
+  const isVertical =
+    !isMobile &&
+    thumbsEl &&
+    (thumbsEl.classList.contains('thumbs-left') ||
+      thumbsEl.classList.contains('thumbs-right'));
+
   if (thumbsEl) {
-    const isVertical = !isMobile && (thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right'));
-    
-    // Pehle purana instance khatam karein agar exist karta hai
     if (thumbsEl.swiper) thumbsEl.swiper.destroy(true, true);
 
     thumbsSwiper = new Swiper(thumbsEl, {
@@ -59,6 +145,7 @@ function initProductMedia(section) {
       watchSlidesProgress: true,
       mousewheel: isVertical,
     });
+
     window.ProductMediaSwipers.push(thumbsSwiper);
   }
 
@@ -75,9 +162,7 @@ function initProductMedia(section) {
       nextEl: wrapper.querySelector('.swiper-button-next'),
       prevEl: wrapper.querySelector('.swiper-button-prev'),
     },
-    thumbs: {
-      swiper: thumbsSwiper,
-    },
+    thumbs: { swiper: thumbsSwiper },
     zoom: { maxRatio: 2 },
     observer: true,
     observeParents: true,
@@ -90,6 +175,44 @@ function initProductMedia(section) {
   });
 
   window.ProductMediaSwipers.push(mainSwiper);
+
+  /* ---------- THUMB HEIGHT SYNC (Left / Right only) ---------- */
+  // Jab left/right thumbs hote hain to unki height
+  // main image ki actual height ke barabar honi chahiye
+  if (isVertical && thumbsEl && thumbsSwiper) {
+    
+    function syncThumbHeight() {
+      const mainH = mainSwiperEl.offsetHeight;
+      if (!mainH) return;
+
+      // Height seedha set karo
+      thumbsEl.style.height = mainH + 'px';
+
+      // Swiper ko batao ke height change hui hai
+      thumbsSwiper.update();
+    }
+
+    // 1. Pehli image load hone par sync karo
+    const firstImg = mainSwiperEl.querySelector('.swiper-slide img');
+    if (firstImg && firstImg.complete) {
+      // Image cached hai — seedha sync
+      syncThumbHeight();
+    } else if (firstImg) {
+      firstImg.addEventListener('load', syncThumbHeight, { once: true });
+    }
+
+    // 2. Window resize par bhi sync karo
+    window.addEventListener('resize', () => {
+      clearTimeout(syncThumbHeight._timer);
+      syncThumbHeight._timer = setTimeout(syncThumbHeight, 200);
+    });
+
+    // 3. Swiper images lazy load hone par bhi
+    mainSwiper.on('lazyImageReady', syncThumbHeight);
+
+    // 4. Safety fallback — 500ms baad bhi ek baar
+    setTimeout(syncThumbHeight, 500);
+  }
 }
 
 

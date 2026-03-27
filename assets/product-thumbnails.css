@@ -3,7 +3,7 @@
   display: flex;
   gap: 16px;
   width: 100%;
-  align-items: stretch;
+  align-items: flex-start;
 } 
 
 /* Thumb slide */
@@ -33,8 +33,6 @@
 .product-media-wrapper.product-media-bottom {
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  width: 100%;
 }
 
 .product-thumbs.thumbs-bottom {
@@ -46,7 +44,6 @@
 }
 
 .product-thumbs.thumbs-bottom .swiper-wrapper {
-  display: flex;
   flex-direction: row;
 }
 
@@ -60,38 +57,28 @@
 .product-thumbs.thumbs-bottom.is-swiper {
   justify-content: flex-start;
   overflow: hidden;
-} 
+}  
 
-/* Swiper states */
-.product-thumbs.is-swiper {
-  cursor: grab;
+
+.product-media-wrapper.product-media-left,
+.product-media-wrapper.product-media-right {
+  align-items: flex-start; /* ← KEY FIX: stretch hata do, warna thumbs image se lamba ho jaate hain */
 }
-.product-thumbs.is-swiper:active {
-  cursor: grabbing;
-}
-
-.product-thumbs.is-static .swiper-wrapper {
-  flex-wrap: wrap;
-} 
-
 
 /* left */
 .product-media-wrapper.product-media-left {
   flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-  align-items: self-start;
+  align-items: flex-start;
 }
 
 .product-thumbs.thumbs-left {
-  height: auto;
-  overflow: hidden;
+  width: 80px;
   flex-shrink: 0;
+  overflow: hidden;
+  /* height: var(--thumb-track-height, 500px); */
 }
 
 .product-thumbs.thumbs-left .swiper-wrapper {
-  display: flex;
   flex-direction: column;
 }
 
@@ -102,8 +89,69 @@
   border-radius: 0;
 } 
 
-/* Bottom swiper */
-.product-thumbs.thumbs-left.is-swiper {
-  justify-content: flex-start;
+/* Right */
+.product-media-wrapper.product-media-right {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.product-thumbs.thumbs-right {
+  width: 80px;
+  flex-shrink: 0;
   overflow: hidden;
+  /* height: var(--thumb-track-height, 500px); */
+}
+
+.product-thumbs.thumbs-right .swiper-wrapper {
+  flex-direction: column;
+}
+
+.product-thumbs.thumbs-right .swiper-slide {
+  width: 80px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+
+
+/* Swiper Utility states */
+.product-thumbs.is-swiper {
+  cursor: grab;
+}
+.product-thumbs.is-swiper:active {
+  cursor: grabbing;
+}
+
+.product-thumbs.is-static .swiper-wrapper {
+  flex-wrap: wrap;
+}
+
+
+@media (max-width: 749px) {
+
+  .product-media-wrapper.product-media-left,
+  .product-media-wrapper.product-media-right {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Left/Right thumbs ko mobile pe bottom jaisi styling do */
+  .product-thumbs.thumbs-left,
+  .product-thumbs.thumbs-right {
+    width: 100% !important;
+    height: 80px !important; /* JS wali height override */
+    overflow: hidden !important;
+  }
+
+  .product-thumbs.thumbs-left .swiper-wrapper,
+  .product-thumbs.thumbs-right .swiper-wrapper {
+    flex-direction: row !important;
+  }
+
+  .product-thumbs.thumbs-left .swiper-slide,
+  .product-thumbs.thumbs-right .swiper-slide {
+    width: 80px !important;
+    height: 80px !important;
+    aspect-ratio: unset !important;
+  }
 }

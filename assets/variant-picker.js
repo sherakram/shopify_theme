@@ -78,6 +78,13 @@
       }
     });
 
+    /* -------- UPDATE SKU -------- */
+    const skuEl = sectionEl.querySelector('.product__sku-value');
+    if (skuEl) {
+      const sku = evt.detail.variant.sku;
+      skuEl.textContent = sku && sku.trim() !== '' ? sku : 'N/A';
+    }
+
   });
 
 })();
