@@ -62,7 +62,7 @@
       "settings": {
         "media_desktop_layout": "slideshow",
         "media_mobile_layout": "carousel",
-        "media_position": "left",
+        "media_position": "right",
         "media_info_gap": 60,
         "column_width": "equal",
         "show_thumbnails": true,
