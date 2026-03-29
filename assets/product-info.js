@@ -9,89 +9,6 @@ function destroyProductMediaSwipers() {
   window.ProductMediaSwipers = [];
 }
 
-// function initProductMedia(section) {
-//   if (!section) return;
-
-//   const isMobile = window.matchMedia('(max-width: 749px)').matches;
-//   const mediaContainer = section.querySelector('.product-media');
-//   if (!mediaContainer) return;
-
-//   // FIX: Sirf active container (Desktop ya Mobile) ko target karein
-//   const activeContainer = isMobile 
-//     ? section.querySelector('.media-mobile') 
-//     : section.querySelector('.media-desktop');
-
-//   if (!activeContainer) return;
-
-//   const wrapper = activeContainer.querySelector('.product-media-layout');
-//   if (!wrapper) return;
-
-//   const desktopLayout = mediaContainer.dataset.desktopLayout;
-//   const mobileLayout = mediaContainer.dataset.mobileLayout;
-//   const layoutType = isMobile ? mobileLayout : desktopLayout;
-
-//   // Layout classes update
-//   wrapper.classList.remove('product-media-layout--grid', 'product-media-layout--slideshow', 'product-media-layout--carousel');
-//   wrapper.classList.add(`product-media-layout--${layoutType}`);
-  
-//   if (layoutType === 'grid') {
-//     return; // Grid ke liye swiper nahi chahiye
-//   }
-
-//   const mainSwiperEl = wrapper.querySelector('.product-swiper');
-//   if (!mainSwiperEl) return;
-
-//   /* ---------- THUMBNAILS ---------- */
-//   let thumbsSwiper = null;
-//   const thumbsEl = wrapper.querySelector('.product-thumbs');
-
-//   if (thumbsEl) {
-//     const isVertical = !isMobile && (thumbsEl.classList.contains('thumbs-left') || thumbsEl.classList.contains('thumbs-right'));
-    
-//     // Pehle purana instance khatam karein agar exist karta hai
-//     if (thumbsEl.swiper) thumbsEl.swiper.destroy(true, true);
-
-//     thumbsSwiper = new Swiper(thumbsEl, {
-//       direction: isVertical ? 'vertical' : 'horizontal',
-//       spaceBetween: 8,
-//       slidesPerView: 'auto',
-//       freeMode: true,
-//       watchSlidesProgress: true,
-//       mousewheel: isVertical,
-//     });
-//     window.ProductMediaSwipers.push(thumbsSwiper);
-//   }
-
-//   /* ---------- MAIN SWIPER ---------- */
-//   const isCarousel = layoutType === 'carousel';
-
-//   const mainSwiper = new Swiper(mainSwiperEl, {
-//     loop: false,
-//     slidesPerView: isCarousel ? 1.2 : 1,
-//     centeredSlides: false,
-//     spaceBetween: 12,
-//     grabCursor: true,
-//     navigation: {
-//       nextEl: wrapper.querySelector('.swiper-button-next'),
-//       prevEl: wrapper.querySelector('.swiper-button-prev'),
-//     },
-//     thumbs: {
-//       swiper: thumbsSwiper,
-//     },
-//     zoom: { maxRatio: 2 },
-//     observer: true,
-//     observeParents: true,
-//     breakpoints: {
-//       750: {
-//         slidesPerView: isCarousel ? 1.3 : 1,
-//         spaceBetween: 20,
-//       },
-//     },
-//   });
-
-//   window.ProductMediaSwipers.push(mainSwiper);
-// }
-
 function initProductMedia(section) {
   if (!section) return;
 
@@ -163,7 +80,7 @@ function initProductMedia(section) {
       prevEl: wrapper.querySelector('.swiper-button-prev'),
     },
     thumbs: { swiper: thumbsSwiper },
-    zoom: { maxRatio: 2 },
+    // zoom: { maxRatio: 2 },
     observer: true,
     observeParents: true,
     breakpoints: {
@@ -215,6 +132,170 @@ function initProductMedia(section) {
   }
 }
 
+/* ---------- ZOOM LIGHTBOX ---------- */
+document.addEventListener('DOMContentLoaded', function () {
+  const overlay  = document.getElementById('product-zoom-overlay');
+  const zoomImg  = document.getElementById('product-zoom-img');
+  const closeBtn = document.getElementById('product-zoom-close');
+  const prevBtn  = document.getElementById('product-zoom-prev');
+  const nextBtn  = document.getElementById('product-zoom-next');
+
+  if (!overlay || !zoomImg) return;
+
+  // Current lightbox state
+  let allImages  = [];
+  let currentIdx = 0;
+
+  // Slide se image URL nikalo (image / video poster / model)
+  function getImageFromSlide(slide) {
+    if (!slide) return null;
+
+    const img    = slide.querySelector('img');
+    const video  = slide.querySelector('video');
+    const model  = slide.querySelector('model-viewer');
+
+    if (img) {
+      // Shopify CDN URL mein high-res version
+      return img.src.replace(/width=\d+/, 'width=1800');
+    }
+
+    if (video) {
+      // Video ka poster image
+      if (video.poster) return video.poster;
+      // Ya pehla frame capture (poster nahi hai to null)
+      return null;
+    }
+
+    if (model) {
+      // Model viewer ke paas poster ya src hoti hai
+      return model.getAttribute('poster') || null;
+    }
+
+    return null;
+  }
+
+  // Zoom button click
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.product-zoom-btn');
+    if (!btn) return;
+
+    // Is button ke parent slide ki image lo (yahi asli fix hai)
+    const clickedSlide = btn.closest('.swiper-slide');
+    const wrapper      = btn.closest('.product-media-layout');
+
+    if (!wrapper) return;
+
+    // Saari slides collect karo
+    const allSlides = Array.from(wrapper.querySelectorAll('.product-swiper .swiper-slide:not(.swiper-slide-duplicate)'));
+
+    allImages  = [];
+    currentIdx = 0;
+
+    allSlides.forEach((slide, i) => {
+      const src = getImageFromSlide(slide);
+      if (src) {
+        allImages.push(src);
+        if (slide === clickedSlide) currentIdx = allImages.length - 1;
+      }
+    });
+
+    // Agar images nahi mili (video/model without poster)
+    if (allImages.length === 0) {
+      // Fallback: active slide se koi bhi image
+      const fallbackImg = wrapper.querySelector('.swiper-slide-active img');
+      if (!fallbackImg) return;
+      allImages  = [fallbackImg.src.replace(/width=\d+/, 'width=1800')];
+      currentIdx = 0;
+    }
+
+    showZoom(currentIdx);
+  });
+
+  // Zoom button click — REPLACE karo ye poora block
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.product-zoom-btn');
+    if (!btn) return;
+
+    const clickedSlide = btn.closest('.swiper-slide');
+    const wrapper      = btn.closest('.product-media-layout');
+    if (!wrapper || !clickedSlide) return;
+
+    // ✅ Clicked slide se seedha URL nikalo
+    const clickedSrc = getImageFromSlide(clickedSlide);
+
+    // Saari slides collect karo (duplicates exclude)
+    const allSlides = Array.from(
+      wrapper.querySelectorAll('.product-swiper > .swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)')
+    );
+
+    allImages  = [];
+    currentIdx = 0;
+
+    allSlides.forEach((slide) => {
+      const src = getImageFromSlide(slide);
+      if (!src) return;
+    
+      // ✅ URL match karo — reference match nahi, URL match karo
+      if (clickedSrc && src === clickedSrc) {
+        currentIdx = allImages.length;
+      }
+      allImages.push(src);
+    });
+
+    // Fallback agar kuch nahi mila
+    if (allImages.length === 0 && clickedSrc) {
+      allImages  = [clickedSrc];
+      currentIdx = 0;
+    }
+
+    showZoom(currentIdx);
+  });
+
+  function showZoom(idx) {
+    if (!allImages.length) return;
+    currentIdx = (idx + allImages.length) % allImages.length;
+
+    zoomImg.src = allImages[currentIdx];
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Navigation buttons — ek se zyada image hai to dikhao
+    if (prevBtn) prevBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
+  }
+
+  // Close
+  const closeOverlay = () => {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    zoomImg.src = '';
+    allImages = [];
+  };
+
+  closeBtn.addEventListener('click', closeOverlay);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeOverlay();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape')      closeOverlay();
+    if (e.key === 'ArrowLeft')   showZoom(currentIdx - 1);
+    if (e.key === 'ArrowRight')  showZoom(currentIdx + 1);
+  });
+
+  // Prev / Next buttons
+  if (prevBtn) prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showZoom(currentIdx - 1);
+  });
+
+  if (nextBtn) nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showZoom(currentIdx + 1);
+  });
+});
 
 /* ---------- INIT ALL PRODUCT SECTIONS ---------- */
 function initAllProductMedia() {

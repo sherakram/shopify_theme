@@ -62,7 +62,7 @@
 
 .product-media-wrapper.product-media-left,
 .product-media-wrapper.product-media-right {
-  align-items: flex-start; /* ← KEY FIX: stretch hata do, warna thumbs image se lamba ho jaate hain */
+  align-items: flex-start;
 }
 
 /* left */
@@ -75,7 +75,6 @@
   width: 80px;
   flex-shrink: 0;
   overflow: hidden;
-  /* height: var(--thumb-track-height, 500px); */
 }
 
 .product-thumbs.thumbs-left .swiper-wrapper {
@@ -99,7 +98,6 @@
   width: 80px;
   flex-shrink: 0;
   overflow: hidden;
-  /* height: var(--thumb-track-height, 500px); */
 }
 
 .product-thumbs.thumbs-right .swiper-wrapper {
@@ -131,15 +129,14 @@
 
   .product-media-wrapper.product-media-left,
   .product-media-wrapper.product-media-right {
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     align-items: center !important;
   }
 
-  /* Left/Right thumbs ko mobile pe bottom jaisi styling do */
   .product-thumbs.thumbs-left,
   .product-thumbs.thumbs-right {
     width: 100% !important;
-    height: 80px !important; /* JS wali height override */
+    height: 80px !important;
     overflow: hidden !important;
   }
 

@@ -9,54 +9,12 @@
   grid-area: media;
 }
 
-.product-media-layout--slideshow {
-  height: fit-content;
-}
 
 /* Media Grid Layout */
 .main-product__media--grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-}
-
-/*Media SlideShow Layout */
-.product-swiper{
-  position:relative;
-  width:100%;
-  height: 100%;
-  border:1px solid #eee;
-  border-radius:0px;
-  overflow:hidden;
-}
-
-.product-swiper .swiper-slide{
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-
-/*Media Carousel Layout */ 
-.product-media-layout--carousel .swiper-slide {
-  width: auto;
-}
-
-.product-media-layout--carousel .product-swiper {
-  aspect-ratio: 4 / 5;
-} 
-
-.product-media-layout--carousel .swiper-slide-active {
-  opacity: 1;
-}
-
-.product-zoom-btn{
-  display: none;
-}
-
-/* Carousel (Partial) Layout logic */
-[data-layout-desktop="product__media-layout--partial"] .product-swiper .swiper-slide,
-[data-layout-mobile="product__media-layout--partial--sm"] .product-swiper .swiper-slide {
-  width: 85%; /* Is se side wali image thodi nazar aayegi */
 }
 
 /* Grid Layout Desktop */
@@ -86,6 +44,13 @@
   object-fit: cover;
 }
 
+
+.main-product__media--grid .product-video,
+.main-product__media--grid .product-external-video,
+.main-product__media--grid .product-model {
+  padding-top: 100%;
+}
+
 /* Hide Swiper when Grid is active on desktop */
 @media screen and (min-width: 750px) {
   .large-up-hide { display: none !important; }
@@ -94,6 +59,89 @@
 /* Hide Grid on mobile */
 @media screen and (max-width: 749px) {
   .small-hide { display: none !important; }
+}
+
+
+/*Media SlideShow Layout */
+.product-media-layout--slideshow {
+  height: fit-content;
+}
+
+.product-swiper{
+  position:relative;
+  width:100%;
+  height: auto;
+  border:1px solid #eee;
+  border-radius:0px;
+  overflow:hidden;
+}
+
+.product-swiper .swiper-slide{
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.product-media-layout--slideshow .product-swiper {
+  height: auto;
+}
+
+.product-media-layout--slideshow .product-swiper .swiper-slide {
+  height: auto;
+  align-items: stretch;
+}
+
+.product-media-layout--slideshow .product-swiper .swiper-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+
+/*Media Carousel Layout */ 
+.product-media-layout--carousel .swiper-slide {
+  width: auto;
+}
+
+.product-media-layout--carousel .product-swiper {
+  height: auto;
+} 
+
+.product-media-layout--carousel .product-swiper .swiper-slide {
+  height: auto;
+  align-items: stretch;
+}
+
+.product-media-layout--carousel .product-swiper .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.product-media-layout--carousel .swiper-slide-active {
+  opacity: 1;
+}
+
+.product-media-layout--carousel .product-swiper .swiper-slide .product-video,
+.product-media-layout--carousel .product-swiper .swiper-slide .product-external-video,
+.product-media-layout--carousel .product-swiper .swiper-slide .product-model {
+  aspect-ratio: 1 / 1;
+  height: auto;
+}
+
+/* Carousel (Partial) Layout logic */
+[data-layout-desktop="product__media-layout--partial"] .product-swiper .swiper-slide,
+[data-layout-mobile="product__media-layout--partial--sm"] .product-swiper .swiper-slide {
+  width: 85%; /* Is se side wali image thodi nazar aayegi */
+}
+
+/* 2. SWIPER (Slideshow/Carousel) LAYOUT */
+.product-swiper .swiper-slide .product-media-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 
@@ -125,34 +173,115 @@
   border: none;
 }
 
-/* 1. GRID LAYOUT: Yahan padding-top ki zaroorat hai height maintain karne ke liye */
-.main-product__media--grid .product-video,
-.main-product__media--grid .product-external-video,
-.main-product__media--grid .product-model {
-  padding-top: 100%; /* Square Ratio */
-}
-
-/* 2. SWIPER (Slideshow/Carousel) LAYOUT: 
-   Swiper slides ki height container se aati hai, isliye yahan padding-top ko 0 karna hoga */
-.product-swiper .swiper-slide .product-media-item {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
 .product-swiper .swiper-slide .product-video,
 .product-swiper .swiper-slide .product-external-video,
 .product-swiper .swiper-slide .product-model {
   height: 100%;
   width: 100%;
-  padding-top: 0 !important; /* Padding reset for swiper */
+  padding-top: 0 !important;
   display: flex;
 }
 
-/* Carousel specific height adjustment */
-.product-media-layout--carousel .product-swiper .swiper-slide .product-video,
-.product-media-layout--carousel .product-swiper .swiper-slide .product-external-video,
-.product-media-layout--carousel .product-swiper .swiper-slide .product-model {
-  aspect-ratio: 4 / 5; /* Jo aapne carousel ke liye set kiya hai */
+
+/* Zoom overlay */
+.product-zoom-btn {
+  display: flex !important;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.product-zoom-btn:hover {
+  background: #fff;
+}
+
+.product-zoom-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.product-zoom-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.product-zoom-overlay.active {
+  display: flex;
+}
+
+.product-zoom-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
   height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  cursor: default;
+}
+
+.product-zoom-overlay__close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.product-zoom-overlay__close:hover {
+  opacity: 1;
+}
+
+/* Lightbox navigation arrows */
+.product-zoom-overlay__prev,
+.product-zoom-overlay__next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background 0.2s;
+}
+
+.product-zoom-overlay__prev { left: 16px; }
+.product-zoom-overlay__next { right: 16px; }
+
+.product-zoom-overlay__prev:hover,
+.product-zoom-overlay__next:hover {
+  background: rgba(255,255,255,0.25);
 }

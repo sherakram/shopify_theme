@@ -1,0 +1,160 @@
+<variant-picker
+  class="variant-picker spacing-style variant-picker--left"
+  style="--color-strikethrough-mix: #000; --padding-block-start: 0px;--padding-block-end: 0px;--padding-inline-start: 0px;--padding-inline-end: 0px;"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-block-id="{{ section.id }}__variant_picker"
+  data-product-url="{{ product.url }}"
+  ref="mainVariantPicker"
+  data-template-product-match="true"
+>
+  <form class="variant-picker__form">
+    {% for option in product.options_with_values %}
+      <fieldset class="variant-option variant-option--{{ block.settings.style }}">
+        <legend class="variant-option__legend">
+          {{ option.name }}
+          <span data-selected-value>{{ option.selected_value }}</span>
+        </legend>
+
+        {% if block.settings.style == 'dropdown' %}
+          <div class="variant-option__select-wrapper">
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              name="options[{{ option.name }}]"
+              class="variant-option__select"
+            >
+              {% for value in option.values %}
+                {% assign dropdown_available = false %}
+                {% for variant in product.variants %}
+                  {% if variant.available %}
+                    {% if option.position == 1 and variant.option1 == value %}
+                      {% assign dropdown_available = true %}
+                    {% elsif option.position == 2 and variant.option2 == value %}
+                      {% assign dropdown_available = true %}
+                    {% elsif option.position == 3 and variant.option3 == value %}
+                      {% assign dropdown_available = true %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+                <option
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}
+                    selected
+                  {% endif %}
+                  {% unless dropdown_available %}
+                    disabled
+                  {% endunless %}
+                >
+                  {% if dropdown_available %}{{ value }}{% else %}{{ value }} - Unavailable{% endif %}
+                </option>
+              {% endfor %}
+            </select>
+            <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"/>
+            </svg>
+          </div>
+
+        {% elsif block.settings.style == 'pills' %}
+          <div class="variant-option__pills" role="radiogroup" aria-label="{{ option.name }}">
+            {% assign option_handle = option.name | downcase %}
+            {% assign show_swatch = false %}
+            {% if block.settings.swatch != 'none' and option_handle contains 'color' %}
+              {% assign show_swatch = true %}
+            {% endif %}
+
+            {% for value in option.values %}
+              {% assign matching_variant = null %}
+              {% for variant in product.variants %}
+                {% if variant.option1 == value or variant.option2 == value or variant.option3 == value %}
+                  {% assign matching_variant = variant %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+
+              {% if matching_variant and matching_variant.image %}
+                {% assign variant_image = matching_variant.image %}
+              {% else %}
+                {% assign variant_image = null %}
+              {% endif %}
+
+              {% assign input_id = 'Option-'
+                | append: section.id
+                | append: '-'
+                | append: option.position
+                | append: '-'
+                | append: forloop.index0
+              %}
+
+              {% assign option_available = false %}
+              {% for variant in product.variants %}
+                {% if variant.available %}
+                  {% if option.position == 1 and variant.option1 == value %}
+                    {% assign option_available = true %}
+                  {% elsif option.position == 2 and variant.option2 == value %}
+                    {% assign option_available = true %}
+                  {% elsif option.position == 3 and variant.option3 == value %}
+                    {% assign option_available = true %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              <label
+                for="{{ input_id }}"
+                class="variant-pill{% if show_swatch %} variant-swatch-{{ block.settings.swatch }}{% endif %}{% if option.selected_value == value %} is-selected{% endif %}{% unless option_available %} is-unavailable{% endunless %}"
+              >
+                <input
+                  type="radio"
+                  id="{{ input_id }}"
+                  name="options[{{ option.name }}]"
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}
+                    checked
+                  {% endif %}
+                  {% unless option_available %}
+                    disabled
+                  {% endunless %}
+                >
+
+                {% if show_swatch == false %}
+                  <span class="pill-label">{{ value }}</span>
+
+                {% elsif variant_image %}
+                  <img
+                    class="swatch"
+                    data-variant-value="{{ value }}"
+                    src="{{ variant_image | image_url: width: 128 }}"
+                    alt="{{ value | escape }}"
+                    width="128"
+                    height="128"
+                    loading="eager"
+                    fetchpriority="high"
+                    srcset="{{ variant_image | image_url: width: 128 }} 128w"
+                    sizes="100vw"
+                    style="object-fit: cover; object-position: center;"
+                  >
+                  <span class="visually-hidden">{{ value }}</span>
+
+                {% elsif option_handle contains 'color' %}
+                  <span
+                    class="swatch"
+                    title="{{ value }}"
+                    style="background-color: {{ value | downcase }};"
+                  ></span>
+                  <span class="visually-hidden">{{ value }}</span>
+
+                {% else %}
+                  <span class="pill-label">{{ value }}</span>
+                {% endif %}
+              </label>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </fieldset>
+    {% endfor %}
+  </form>
+
+  <script type="application/json" data-product-variants>
+    {{ product.variants | json }}
+  </script>
+</variant-picker>
