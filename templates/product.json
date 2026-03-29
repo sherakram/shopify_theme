@@ -60,7 +60,7 @@
         "accordion"
       ],
       "settings": {
-        "media_desktop_layout": "carousel",
+        "media_desktop_layout": "grid",
         "media_mobile_layout": "slideshow",
         "media_position": "left",
         "media_info_gap": 60,
