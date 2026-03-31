@@ -8,5 +8,10 @@
         {% render 'product-media', media: media %}
       </div>
     {% endfor %}
+
+    <!-- zoom / nav -->
+    <button type="button" class="product-zoom-btn" aria-label="Zoom image">
+      {{ 'icon-zoom.svg' | inline_asset_content }}
+    </button>
   </div>
 </div>
