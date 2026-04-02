@@ -6,12 +6,14 @@
           data-variant-ids="{{ media.variant_ids | join: ',' }}"
         {% endif %}>
         {% render 'product-media', media: media %}
+
+        {%- comment -%} Zoom button on every media type {%- endcomment -%}
+        <button type="button" class="product-zoom-btn" aria-label="Open {{ media.media_type }}">
+          {{ 'icon-zoom.svg' | inline_asset_content }}
+        </button>
+      
       </div>
     {% endfor %}
 
-    <!-- zoom / nav -->
-    <button type="button" class="product-zoom-btn" aria-label="Zoom image">
-      {{ 'icon-zoom.svg' | inline_asset_content }}
-    </button>
   </div>
 </div>

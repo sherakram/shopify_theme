@@ -11,6 +11,10 @@
 
 
 /* Media Grid Layout */
+.grid-media-item {
+  position: relative;
+}
+
 .main-product__media--grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -284,4 +288,60 @@
 .product-zoom-overlay__prev:hover,
 .product-zoom-overlay__next:hover {
   background: rgba(255,255,255,0.25);
+}
+
+/* ── Lightbox media container ── */
+.product-zoom-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+}
+
+/* Image */
+.product-zoom-media img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+}
+
+/* Native video */
+.product-zoom-media video {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  display: block;
+  background: #000;
+  outline: none;
+}
+
+/* External video (YouTube / Vimeo) wrapper */
+.product-zoom-media .zoom-iframe-wrap {
+  width: 80vw;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+}
+
+.product-zoom-media .zoom-iframe-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* 3D model viewer */
+.product-zoom-media model-viewer {
+  width: 80vw;
+  max-width: 800px;
+  height: 70vh;
+  background: #1a1a1a;
+  display: block;
+  border-radius: 4px;
 }

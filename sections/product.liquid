@@ -291,11 +291,11 @@
 </section>
 
 <!-- Zoom Lightbox -->
-<div class="product-zoom-overlay" id="product-zoom-overlay">
-  <button class="product-zoom-overlay__close" id="product-zoom-close">&times;</button>
-  <button class="product-zoom-overlay__prev" id="product-zoom-prev">&#8249;</button>
-  <img src="" width="auto" height="auto" alt="Zoomed image" id="product-zoom-img">
-  <button class="product-zoom-overlay__next" id="product-zoom-next">&#8250;</button>
+<div class="product-zoom-overlay" id="product-zoom-overlay" role="dialog" aria-modal="true" aria-label="Media lightbox">
+  <button class="product-zoom-overlay__close" id="product-zoom-close" aria-label="Close">&times;</button>
+  <button class="product-zoom-overlay__prev" id="product-zoom-prev" aria-label="Previous">&#8249;</button>
+  <div class="product-zoom-media" id="product-zoom-media"></div>
+  <button class="product-zoom-overlay__next" id="product-zoom-next" aria-label="Next">&#8250;</button>
 </div>
 
 <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>

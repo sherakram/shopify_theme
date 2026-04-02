@@ -134,143 +134,200 @@ function initProductMedia(section) {
 
 /* ---------- ZOOM LIGHTBOX ---------- */
 document.addEventListener('DOMContentLoaded', function () {
-  const overlay  = document.getElementById('product-zoom-overlay');
-  const zoomImg  = document.getElementById('product-zoom-img');
-  const closeBtn = document.getElementById('product-zoom-close');
-  const prevBtn  = document.getElementById('product-zoom-prev');
-  const nextBtn  = document.getElementById('product-zoom-next');
+  const overlay    = document.getElementById('product-zoom-overlay');
+  const mediaBox   = document.getElementById('product-zoom-media');
+  const closeBtn   = document.getElementById('product-zoom-close');
+  const prevBtn    = document.getElementById('product-zoom-prev');
+  const nextBtn    = document.getElementById('product-zoom-next');
 
-  if (!overlay || !zoomImg) return;
+  if (!overlay || !mediaBox) return;
 
-  // Current lightbox state
-  let allImages  = [];
+  let allMedia   = []; // array of { type, ...data }
   let currentIdx = 0;
 
-  // Slide se image URL nikalo (image / video poster / model)
-  function getImageFromSlide(slide) {
-    if (!slide) return null;
+  // ── Extract media data from a slide or grid item ─────────────────────────
+  function getMediaFromItem(item) {
+    if (!item) return null;
 
-    const img    = slide.querySelector('img');
-    const video  = slide.querySelector('video');
-    const model  = slide.querySelector('model-viewer');
-
-    if (img) {
-      // Shopify CDN URL mein high-res version
-      return img.src.replace(/width=\d+/, 'width=1800');
-    }
-
+    // 1. Native video
+    const video = item.querySelector('video');
     if (video) {
-      // Video ka poster image
-      if (video.poster) return video.poster;
-      // Ya pehla frame capture (poster nahi hai to null)
-      return null;
+      const sources = Array.from(video.querySelectorAll('source')).map(s => ({
+        src: s.src,
+        type: s.type || 'video/mp4'
+      }));
+      // Fallback: video.src set directly
+      if (!sources.length && video.src) {
+        sources.push({ src: video.src, type: 'video/mp4' });
+      }
+      return { type: 'video', sources, poster: video.poster || null };
     }
 
+    // 2. External video (YouTube / Vimeo iframe)
+    const iframe = item.querySelector('iframe');
+    if (iframe && iframe.src) {
+      // Ensure autoplay is appended for a smooth lightbox experience
+      let src = iframe.src;
+      if (src.includes('youtube.com') || src.includes('youtu.be')) {
+        src = src.includes('?') ? src + '&autoplay=1' : src + '?autoplay=1';
+      } else if (src.includes('vimeo.com')) {
+        src = src.includes('?') ? src + '&autoplay=1' : src + '?autoplay=1';
+      }
+      return { type: 'external_video', src };
+    }
+
+    // 3. 3D model
+    const model = item.querySelector('model-viewer');
     if (model) {
-      // Model viewer ke paas poster ya src hoti hai
-      return model.getAttribute('poster') || null;
+      return {
+        type: 'model',
+        src: model.getAttribute('src'),
+        poster: model.getAttribute('poster') || null,
+        alt:    model.getAttribute('alt')    || '3D model'
+      };
+    }
+
+    // 4. Image (must come last — videos also have a poster img)
+    const img = item.querySelector('img');
+    if (img && img.src) {
+      return {
+        type: 'image',
+        src: img.src.replace(/width=\d+/, 'width=1800')
+      };
     }
 
     return null;
   }
 
-  // Zoom button click
-  document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.product-zoom-btn');
-    if (!btn) return;
+  // ── Build the correct HTML/element for the lightbox ───────────────────────
+  function buildMediaEl(data) {
+    switch (data.type) {
 
-    // Is button ke parent slide ki image lo (yahi asli fix hai)
-    const clickedSlide = btn.closest('.swiper-slide');
-    const wrapper      = btn.closest('.product-media-layout');
-
-    if (!wrapper) return;
-
-    // Saari slides collect karo
-    const allSlides = Array.from(wrapper.querySelectorAll('.product-swiper .swiper-slide:not(.swiper-slide-duplicate)'));
-
-    allImages  = [];
-    currentIdx = 0;
-
-    allSlides.forEach((slide, i) => {
-      const src = getImageFromSlide(slide);
-      if (src) {
-        allImages.push(src);
-        if (slide === clickedSlide) currentIdx = allImages.length - 1;
+      case 'image': {
+        const img = document.createElement('img');
+        img.src   = data.src;
+        img.alt   = 'Zoomed product image';
+        return img;
       }
-    });
 
-    // Agar images nahi mili (video/model without poster)
-    if (allImages.length === 0) {
-      // Fallback: active slide se koi bhi image
-      const fallbackImg = wrapper.querySelector('.swiper-slide-active img');
-      if (!fallbackImg) return;
-      allImages  = [fallbackImg.src.replace(/width=\d+/, 'width=1800')];
-      currentIdx = 0;
-    }
-
-    showZoom(currentIdx);
-  });
-
-  // Zoom button click — REPLACE karo ye poora block
-  document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.product-zoom-btn');
-    if (!btn) return;
-
-    const clickedSlide = btn.closest('.swiper-slide');
-    const wrapper      = btn.closest('.product-media-layout');
-    if (!wrapper || !clickedSlide) return;
-
-    // ✅ Clicked slide se seedha URL nikalo
-    const clickedSrc = getImageFromSlide(clickedSlide);
-
-    // Saari slides collect karo (duplicates exclude)
-    const allSlides = Array.from(
-      wrapper.querySelectorAll('.product-swiper > .swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)')
-    );
-
-    allImages  = [];
-    currentIdx = 0;
-
-    allSlides.forEach((slide) => {
-      const src = getImageFromSlide(slide);
-      if (!src) return;
-    
-      // ✅ URL match karo — reference match nahi, URL match karo
-      if (clickedSrc && src === clickedSrc) {
-        currentIdx = allImages.length;
+      case 'video': {
+        const vid       = document.createElement('video');
+        vid.controls    = true;
+        vid.autoplay    = true;
+        vid.loop        = false;
+        vid.playsInline = true;
+        if (data.poster) vid.poster = data.poster;
+        data.sources.forEach(s => {
+          const src  = document.createElement('source');
+          src.src    = s.src;
+          src.type   = s.type;
+          vid.appendChild(src);
+        });
+        return vid;
       }
-      allImages.push(src);
-    });
 
-    // Fallback agar kuch nahi mila
-    if (allImages.length === 0 && clickedSrc) {
-      allImages  = [clickedSrc];
-      currentIdx = 0;
+      case 'external_video': {
+        const wrap            = document.createElement('div');
+        wrap.className        = 'zoom-iframe-wrap';
+        const iframe          = document.createElement('iframe');
+        iframe.src            = data.src;
+        iframe.frameBorder    = '0';
+        iframe.allowFullscreen = true;
+        iframe.allow          = 'autoplay; encrypted-media; picture-in-picture';
+        wrap.appendChild(iframe);
+        return wrap;
+      }
+
+      case 'model': {
+        // model-viewer is a custom element — create it as a regular element
+        const mv = document.createElement('model-viewer');
+        mv.setAttribute('src', data.src);
+        if (data.poster) mv.setAttribute('poster', data.poster);
+        mv.setAttribute('alt', data.alt);
+        mv.setAttribute('camera-controls', '');
+        mv.setAttribute('auto-rotate', '');
+        mv.setAttribute('ar', '');
+        return mv;
+      }
+
+      default:
+        return null;
     }
+  }
 
-    showZoom(currentIdx);
-  });
-
+  // ── Show a specific index ──────────────────────────────────────────────────
   function showZoom(idx) {
-    if (!allImages.length) return;
-    currentIdx = (idx + allImages.length) % allImages.length;
+    if (!allMedia.length) return;
+    currentIdx = (idx + allMedia.length) % allMedia.length;
 
-    zoomImg.src = allImages[currentIdx];
+    // Clear previous media (pauses video / stops model)
+    mediaBox.innerHTML = '';
+
+    const el = buildMediaEl(allMedia[currentIdx]);
+    if (!el) return;
+    mediaBox.appendChild(el);
+
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Navigation buttons — ek se zyada image hai to dikhao
-    if (prevBtn) prevBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
-    if (nextBtn) nextBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
+    // Hide nav arrows when only one item
+    const multi = allMedia.length > 1;
+    if (prevBtn) prevBtn.style.display = multi ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = multi ? 'flex' : 'none';
   }
 
-  // Close
-  const closeOverlay = () => {
+  // ── Unified click handler for ALL layouts ─────────────────────────────────
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.product-zoom-btn');
+    if (!btn) return;
+
+    const wrapper = btn.closest('.product-media-layout');
+    if (!wrapper) return;
+
+    // Works for both swiper slides and grid items
+    const clickedItem =
+      btn.closest('.swiper-slide') ||
+      btn.closest('.grid-media-item');
+
+    if (!clickedItem) return;
+
+    // Collect all media items from this layout (no swiper loop duplicates)
+    const allItems = Array.from(
+      wrapper.querySelectorAll(
+        '.product-swiper > .swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate),' +
+        '.main-product__media--grid .grid-media-item'
+      )
+    );
+
+    allMedia   = [];
+    currentIdx = 0;
+
+    allItems.forEach((item) => {
+      const data = getMediaFromItem(item);
+      if (!data) return;
+      if (item === clickedItem) currentIdx = allMedia.length;
+      allMedia.push(data);
+    });
+
+    if (!allMedia.length) return;
+    showZoom(currentIdx);
+  });
+
+  // ── Close ─────────────────────────────────────────────────────────────────
+  function closeOverlay() {
+    // Pause video / stop model before clearing
+    const vid = mediaBox.querySelector('video');
+    if (vid) { vid.pause(); vid.src = ''; }
+
+    const iframe = mediaBox.querySelector('iframe');
+    if (iframe) iframe.src = '';   // stops YouTube/Vimeo playback
+
+    mediaBox.innerHTML = '';
+    allMedia = [];
+
     overlay.classList.remove('active');
     document.body.style.overflow = '';
-    zoomImg.src = '';
-    allImages = [];
-  };
+  }
 
   closeBtn.addEventListener('click', closeOverlay);
 
@@ -280,21 +337,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.addEventListener('keydown', (e) => {
     if (!overlay.classList.contains('active')) return;
-    if (e.key === 'Escape')      closeOverlay();
-    if (e.key === 'ArrowLeft')   showZoom(currentIdx - 1);
-    if (e.key === 'ArrowRight')  showZoom(currentIdx + 1);
+    if (e.key === 'Escape')     closeOverlay();
+    if (e.key === 'ArrowLeft')  showZoom(currentIdx - 1);
+    if (e.key === 'ArrowRight') showZoom(currentIdx + 1);
   });
 
-  // Prev / Next buttons
-  if (prevBtn) prevBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showZoom(currentIdx - 1);
-  });
-
-  if (nextBtn) nextBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showZoom(currentIdx + 1);
-  });
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showZoom(currentIdx - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showZoom(currentIdx + 1); });
 });
 
 /* ---------- INIT ALL PRODUCT SECTIONS ---------- */
