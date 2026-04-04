@@ -3,7 +3,7 @@
   flex: 1;
   gap:20px;
   align-items:start;
-  height: 100%;
+  height: auto;
   width: 100%;
   min-width: 0;
   grid-area: media;
@@ -34,20 +34,55 @@
   width: 100%;
 }
 
-.main-product__media--grid .media {
+/* ── Grid: item wrapper gets aspect-ratio ── */
+.main-product__media--grid .grid-media-item {
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid #eee;
 }
 
-.main-product__media--grid .media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Fixed ratio overrides */
+[data-gallery-ratio="portrait"]  .main-product__media--grid .grid-media-item { aspect-ratio: 2 / 3; }
+[data-gallery-ratio="landscape"] .main-product__media--grid .grid-media-item { aspect-ratio: 16 / 9; }
+[data-gallery-ratio="square"]    .main-product__media--grid .grid-media-item { aspect-ratio: 1 / 1; }
+
+/* Auto ratio: let the image define height */
+[data-gallery-ratio="auto"] .main-product__media--grid .grid-media-item {
+  aspect-ratio: unset;
+  height: auto;
 }
 
+/* ── All inner wrappers must fill the grid-media-item fully ── */
+.main-product__media--grid .product-media-item,
+.main-product__media--grid .swiper-zoom-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Auto ratio: inner wrappers flow naturally */
+[data-gallery-ratio="auto"] .main-product__media--grid .product-media-item,
+[data-gallery-ratio="auto"] .main-product__media--grid .swiper-zoom-container {
+  position: relative;
+  inset: unset;
+  height: auto;
+}
+
+/* ── Image fills the container ── */
+.main-product__media--grid .product-media__image {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--gallery-object-fit, cover);
+  display: block;
+}
+
+/* Auto ratio: image is natural height */
+[data-gallery-ratio="auto"] .main-product__media--grid .product-media__image {
+  height: auto;
+}
 
 .main-product__media--grid .product-video,
 .main-product__media--grid .product-external-video,
@@ -88,18 +123,50 @@
 
 .product-media-layout--slideshow .product-swiper {
   height: auto;
+  width: 100%;
 }
 
+/* ── Slideshow slide: base (Auto ratio) ── */
 .product-media-layout--slideshow .product-swiper .swiper-slide {
-  height: auto;
-  align-items: stretch;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
+/* ── Slideshow image: Auto ratio — image defines height naturally ── */
 .product-media-layout--slideshow .product-swiper .swiper-slide img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: var(--gallery-object-fit, cover);
+  position: relative;
+}
+
+/* ── Fixed ratios: slide gets aspect-ratio, image fills it absolutely ── */
+[data-gallery-ratio="square"] .product-media-layout--slideshow .product-swiper .swiper-slide,
+[data-gallery-ratio="portrait"] .product-media-layout--slideshow .product-swiper .swiper-slide,
+[data-gallery-ratio="landscape"] .product-media-layout--slideshow .product-swiper .swiper-slide {
+  aspect-ratio: var(--gallery-aspect-ratio);
+}
+
+[data-gallery-ratio="square"] .product-media-layout--slideshow .product-swiper .swiper-slide img,
+[data-gallery-ratio="portrait"] .product-media-layout--slideshow .product-swiper .swiper-slide img,
+[data-gallery-ratio="landscape"] .product-media-layout--slideshow .product-swiper .swiper-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* swiper-zoom-container must also fill the slide */
+[data-gallery-ratio="square"] .product-media-layout--slideshow .product-swiper .swiper-slide .swiper-zoom-container,
+[data-gallery-ratio="portrait"] .product-media-layout--slideshow .product-swiper .swiper-slide .swiper-zoom-container,
+[data-gallery-ratio="landscape"] .product-media-layout--slideshow .product-swiper .swiper-slide .swiper-zoom-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -112,16 +179,45 @@
   height: auto;
 } 
 
+/* ── Carousel slide: base (Auto ratio) ── */
 .product-media-layout--carousel .product-swiper .swiper-slide {
-  height: auto;
-  align-items: stretch;
+  position: relative;
+  overflow: hidden;
 }
 
+/* ── Carousel image: Auto ratio ── */
 .product-media-layout--carousel .product-swiper .swiper-slide img {
   width: 100%;
   height: auto;
-  object-fit: cover;
   display: block;
+  object-fit: var(--gallery-object-fit, cover);
+  position: relative;
+}
+
+/* ── Fixed ratios: carousel ── */
+[data-gallery-ratio="square"] .product-media-layout--carousel .product-swiper .swiper-slide,
+[data-gallery-ratio="portrait"] .product-media-layout--carousel .product-swiper .swiper-slide,
+[data-gallery-ratio="landscape"] .product-media-layout--carousel .product-swiper .swiper-slide {
+  aspect-ratio: var(--gallery-aspect-ratio);
+}
+
+[data-gallery-ratio="square"] .product-media-layout--carousel .product-swiper .swiper-slide img,
+[data-gallery-ratio="portrait"] .product-media-layout--carousel .product-swiper .swiper-slide img,
+[data-gallery-ratio="landscape"] .product-media-layout--carousel .product-swiper .swiper-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+[data-gallery-ratio="square"] .product-media-layout--carousel .product-swiper .swiper-slide .swiper-zoom-container,
+[data-gallery-ratio="portrait"] .product-media-layout--carousel .product-swiper .swiper-slide .swiper-zoom-container,
+[data-gallery-ratio="landscape"] .product-media-layout--carousel .product-swiper .swiper-slide .swiper-zoom-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .product-media-layout--carousel .swiper-slide-active {
@@ -146,6 +242,69 @@
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+
+/* ============================================
+   Auto Height Mode — overrides fixed ratios
+   When enabled, each slide grows to its own
+   image's natural height regardless of ratio setting
+   ============================================ */
+
+[data-auto-height="true"] .product-swiper .swiper-slide {
+  aspect-ratio: unset !important;
+  height: auto !important;
+}
+
+[data-auto-height="true"] .product-swiper .swiper-slide .swiper-zoom-container {
+  position: relative !important;
+  inset: unset !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+[data-auto-height="true"] .product-swiper .swiper-slide .product-media-item {
+  position: relative !important;
+  inset: unset !important;
+  height: auto !important;
+}
+
+[data-auto-height="true"] .product-swiper .swiper-slide img {
+  position: relative !important;
+  top: unset !important;
+  left: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: var(--gallery-object-fit, cover) !important;
+}
+
+
+/* Fit viewport: full screen height (desktop slideshow/carousel only) */
+@media screen and (min-width: 750px) {
+  [style*="--gallery-fit-viewport: 1"] .product-media-layout--slideshow .product-swiper,
+  [style*="--gallery-fit-viewport: 1"] .product-media-layout--carousel .product-swiper {
+    height: 100vh;
+  }
+
+  [style*="--gallery-fit-viewport: 1"] .product-swiper .swiper-slide {
+    height: 100%;
+    aspect-ratio: unset;
+  }
+
+  [style*="--gallery-fit-viewport: 1"] .product-swiper .swiper-slide img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* Auto height override: let each slide grow naturally */
+[data-auto-height="true"] .product-swiper .swiper-slide {
+  aspect-ratio: unset !important;
+  height: auto !important;
+}
+
+[data-auto-height="true"] .product-swiper .swiper-slide img {
+  height: auto !important;
 }
 
 

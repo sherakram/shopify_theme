@@ -29,6 +29,7 @@
     "media_grid": "Grid",
     "media_slideshow": "SlideShow",
     "media_carousel": "Carousel",
+    "thumbnails_settings": "Thumbnails settings",
     "media_position": "Media Position",
     "row": "Row",
     "gap": "Gap",
@@ -64,6 +65,7 @@
     "show_payment_icons": "Show payment icons",
     "Show_thumbnails": "Show Thumbnails",
     "thumbnail_position": "Thumbnail position",
+    "zoom_behavior": "Zoom behavior",
     "text_style": "Text style",
     "text": "Text",
     "textColor": "Text Color",
@@ -129,6 +131,9 @@
       "subtitle": "Subtitle",
       "normal": "Normal text"
     },
+  },
+  "informative_content":{
+    "info_about_thumbs": "On mobile, thumbnails are horizontal and below the main image."
   },
   "sections": {
     "all": {

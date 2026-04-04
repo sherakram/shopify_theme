@@ -5,7 +5,23 @@
 {{ 'product-modals.css' | asset_url | stylesheet_tag }}
 {{ 'accordion-default.css' | asset_url | stylesheet_tag }}
 
-<section
+{%- liquid
+  assign object_fit   = section.settings.gallery_media_object_fit | default: 'cover'
+  assign auto_height  = section.settings.enable_slider_auto_height
+  assign aspect_ratio = section.settings.gallery_aspect_ratio | default: 'auto'
+
+  if aspect_ratio == 'square'
+    assign ar_value = '1 / 1'
+  elsif aspect_ratio == 'portrait'
+    assign ar_value = '2 / 3'
+  elsif aspect_ratio == 'landscape'
+    assign ar_value = '16 / 9'
+  else
+    assign ar_value = 'auto'
+  endif
+-%}
+
+<div
   id="product-section-{{ section.id }}"
   class="
     product-section
@@ -16,6 +32,9 @@
     --product-padding-top: {{ section.settings.padding_top }}px;
     --product-padding-bottom: {{ section.settings.padding_bottom }}px;
     --media-info-gap: {{ section.settings.media_info_gap }}px;
+    --gallery-object-fit: {{ object_fit }};
+    --gallery-aspect-ratio: {{ ar_value }};
+    {% if aspect_ratio == 'fit' %}--gallery-fit-viewport: 1;{% endif %}
   "
 >
   <div class="product-inner" role="region" aria-label="{{product.title}} details">
@@ -25,6 +44,8 @@
         class="product-media"
         data-desktop-layout="{{ section.settings.media_desktop_layout }}"
         data-mobile-layout="{{ section.settings.media_mobile_layout }}"
+        data-auto-height="{{ auto_height }}"
+        data-gallery-ratio="{{ aspect_ratio }}"
       >
         {%- liquid
           assign desktop_layout = section.settings.media_desktop_layout
@@ -288,15 +309,17 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- Zoom Lightbox -->
-<div class="product-zoom-overlay" id="product-zoom-overlay" role="dialog" aria-modal="true" aria-label="Media lightbox">
-  <button class="product-zoom-overlay__close" id="product-zoom-close" aria-label="Close">&times;</button>
-  <button class="product-zoom-overlay__prev" id="product-zoom-prev" aria-label="Previous">&#8249;</button>
-  <div class="product-zoom-media" id="product-zoom-media"></div>
-  <button class="product-zoom-overlay__next" id="product-zoom-next" aria-label="Next">&#8250;</button>
 </div>
+
+{% if section.settings.show_zoom_button %}
+  <!-- Zoom Lightbox -->
+  <div class="product-zoom-overlay" id="product-zoom-overlay" role="dialog" aria-modal="true" aria-label="Media lightbox">
+    <button class="product-zoom-overlay__close" id="product-zoom-close" aria-label="Close">&times;</button>
+    <button class="product-zoom-overlay__prev" id="product-zoom-prev" aria-label="Previous">&#8249;</button>
+    <div class="product-zoom-media" id="product-zoom-media"></div>
+    <button class="product-zoom-overlay__next" id="product-zoom-next" aria-label="Next">&#8250;</button>
+  </div>
+{% endif %}
 
 <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'countdown-timer.js' | asset_url }}" defer="defer"></script>
@@ -386,6 +409,7 @@
 {% schema %}
 {
   "name": "t:general.product",
+  "tag": "section",
   "settings": [
     {
       "type": "header",
@@ -426,6 +450,75 @@
         }
       ],
       "default": "slideshow"
+    },
+    {
+      "type": "select",
+      "id": "gallery_aspect_ratio",
+      "label": "Gallery aspect ratio",
+      "info": "Fit viewport works only with desktop slideshow and carousel layouts.",
+      "options": [
+        { "value": "auto",      "label": "Auto" },
+        { "value": "square",    "label": "Square (1:1)" },
+        { "value": "portrait",  "label": "Portrait (2:3)" },
+        { "value": "landscape", "label": "Landscape (16:9)" },
+        { "value": "fit",       "label": "Fit viewport" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "gallery_media_object_fit",
+      "label": "Gallery media object fit",
+      "info": "This is not effective with auto aspect ratio.",
+      "options": [
+        { "value": "cover",   "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slider_auto_height",
+      "label": "Enable slider auto height",
+      "info": "Do not enable unless product medias have different ratios — it will overwrite your aspect ratio setting.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_zoom_button",
+      "label": "t:labels.zoom_behavior",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.thumbnails_settings"
+    },
+    {
+      "id": "show_thumbnails",
+      "type": "checkbox",
+      "label": "t:labels.Show_thumbnails",
+      "default": true,
+      "info": "t:informative_content.info_about_thumbs"
+    },
+    {
+      "type": "select",
+      "id": "thumb_position",
+      "label": "t:labels.thumbnail_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.alignment.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.alignment.right"
+        },
+        {
+          "value": "bottom",
+          "label": "t:options.alignment.bottom"
+        }
+      ],
+      "default": "bottom"
     },
     {
       "type": "header",
@@ -475,32 +568,6 @@
         }
       ],
       "default": "equal"
-    },
-    {
-      "id": "show_thumbnails",
-      "type": "checkbox",
-      "label": "t:labels.Show_thumbnails",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "thumb_position",
-      "label": "t:labels.thumbnail_position",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:options.alignment.left"
-        },
-        {
-          "value": "right",
-          "label": "t:options.alignment.right"
-        },
-        {
-          "value": "bottom",
-          "label": "t:options.alignment.bottom"
-        }
-      ],
-      "default": "bottom"
     },
     {
       "type": "header",

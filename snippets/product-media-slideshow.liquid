@@ -26,9 +26,11 @@
 
 
                             {%- comment -%} Zoom button on every media type {%- endcomment -%}
-                            <button type="button" class="product-zoom-btn" aria-label="Open {{ media.media_type }}">
-                                {{ 'icon-zoom.svg' | inline_asset_content }}
-                            </button>
+                             {% if section.settings.show_zoom_button %}
+                                <button type="button" class="product-zoom-btn" aria-label="Open {{ media.media_type }}">
+                                    {{ 'icon-zoom.svg' | inline_asset_content }}
+                                </button>
+                            {% endif %}
 
                         </div>
                     {% endfor %}

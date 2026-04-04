@@ -97,6 +97,10 @@
 
 /*Responsive*/
 @media (max-width: 600px) {
+  .product-columns{
+    gap: 28px;
+  }
+
   .product-columns,
   .product-section--media-left .product-columns,
   .product-section--media-right .product-columns {
