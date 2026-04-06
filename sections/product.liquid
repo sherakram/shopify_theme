@@ -26,7 +26,7 @@
   class="
     product-section
     product-section--media-{{ section.settings.media_position }}
-    product-section--{{ section.settings.column_width }}
+    product-section--{{ section.settings.product_media_width }}
   "
   style="
     --product-padding-top: {{ section.settings.padding_top }}px;
@@ -41,7 +41,7 @@
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
       <div
-        class="product-media"
+        class="product-media {% if section.settings.enable_sticky_content %}product-media--sticky{% endif %}"
         data-desktop-layout="{{ section.settings.media_desktop_layout }}"
         data-mobile-layout="{{ section.settings.media_mobile_layout }}"
         data-auto-height="{{ auto_height }}"
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <div class="product-info-column">
+      <div class="product-info-column" style="--spacing-between-info-blocks: {{ section.settings.product_info_blocks_space }}rem">
         {% for block in section.blocks %}
           {% case block.type %}
             {% when '@app' %}
@@ -525,6 +525,12 @@
       "content": "t:general.layout"
     },
     {
+      "type": "checkbox",
+      "id": "enable_sticky_content",
+      "label": "Enable sticky content on desktop",
+      "default": true
+    },
+    {
       "id": "media_position",
       "type": "select",
       "label": "t:general.media_position",
@@ -544,15 +550,25 @@
       "id": "media_info_gap",
       "type": "range",
       "label": "t:general.gap",
-      "min": 30,
-      "max": 120,
+      "min": 0,
+      "max": 80,
       "step": 2,
-      "default": 60
+      "default": 30
+    },
+    {
+      "id": "product_info_blocks_space",
+      "type": "range",
+      "label": "t:general.space",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "rem",
+      "default": 1
     },
     {
       "type": "select",
-      "id": "column_width",
-      "label": "Column Width",
+      "id": "product_media_width",
+      "label": "t:general.product_media_width",
       "options": [
         {
           "value": "small-media",

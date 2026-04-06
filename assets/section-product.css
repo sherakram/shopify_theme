@@ -50,7 +50,7 @@
 .product-info-column{
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:var(--spacing-between-info-blocks, 1.6rem);
 }
 
 .product-info-column {
@@ -81,14 +81,14 @@
    unsticks naturally when section ends.
    ============================================ */
 
-.product-media {
+.product-media--sticky {
   position: sticky;
   top: var(--sticky-top-offset, 20px);
   align-self: start;
 }
 
 @media (max-width: 600px) {
-  .product-media {
+  .product-media--sticky {
     position: static;
   }
 }
@@ -97,10 +97,6 @@
 
 /*Responsive*/
 @media (max-width: 600px) {
-  .product-columns{
-    gap: 28px;
-  }
-
   .product-columns,
   .product-section--media-left .product-columns,
   .product-section--media-right .product-columns {
@@ -108,6 +104,7 @@
     grid-template-areas:
       "media"
       "info";
+    gap: 20px;  
   }
 
   .product-media-column {
@@ -122,8 +119,8 @@
 
 @media (min-width: 601px) and (max-width: 1024px) {
   .product-columns {
-    grid-template-columns: 1fr 1fr; /* equal split */
-    gap: 24px; /* a bit more breathing room on tablets */
+    grid-template-columns: 1fr 1fr;
+    gap:var(--media-info-gap);
   }
 
   .product-media-column {

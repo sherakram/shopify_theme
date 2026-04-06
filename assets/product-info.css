@@ -24,8 +24,7 @@ h1.product-title {
 .product-divider {
   border: 0;                   
   height: 1px;                  
-  background-color: #ddd;       
-  margin: 1rem 0;
+  background-color: #ddd;
 }
 
 /*Variants Block*/
