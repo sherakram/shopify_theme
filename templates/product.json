@@ -34,18 +34,30 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "qty_cart_layout": "inline"
+            "qty_cart_layout": "stacked"
           }
         },
-        "product_description": {
-          "type": "product_description",
-          "settings": {}
+        "accordion-1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Description",
+            "content": "<p>{{ product.description }}</p>",
+            "open_by_default": false
+          }
         },
-        "accordion": {
+        "accordion-2": {
           "type": "accordion",
           "settings": {
             "title": "Delivery & Returns",
-            "content": "<p>Add your content here.</p>",
+            "content": "<p>We deliver all over Pakistan in 3-5 working days.</p>",
+            "open_by_default": false
+          }
+        },
+        "accordion-3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients",
+            "content": "<p>Natural extracts and essential oils.</p>",
             "open_by_default": false
           }
         }
@@ -56,8 +68,9 @@
         "divider",
         "variant_picker",
         "buy_buttons",
-        "product_description",
-        "accordion"
+        "accordion-1",
+        "accordion-2",
+        "accordion-3"
       ],
       "settings": {
         "media_desktop_layout": "slideshow",
