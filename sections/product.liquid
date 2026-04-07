@@ -311,6 +311,10 @@
   </div>
 </div>
 
+{% if section.settings.show_sticky_cart %}
+   {% render 'sticky-add-to-cart', product: product, section_id: section.id %}
+{% endif %}
+
 {% if section.settings.show_zoom_button %}
   <!-- Zoom Lightbox -->
   <div class="product-zoom-overlay" id="product-zoom-overlay" role="dialog" aria-modal="true" aria-label="Media lightbox">
@@ -529,6 +533,13 @@
       "id": "enable_sticky_content",
       "label": "Enable sticky content on desktop",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_cart",
+      "label": "Enable sticky add to cart bar",
+      "default": true,
+      "info": "Shows a sticky bar with an add to cart button when the main buy button scrolls out of view."
     },
     {
       "id": "media_position",
