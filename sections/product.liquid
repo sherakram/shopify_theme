@@ -311,10 +311,6 @@
   </div>
 </div>
 
-{% if section.settings.show_sticky_cart %}
-   {% render 'sticky-add-to-cart', product: product, section_id: section.id %}
-{% endif %}
-
 {% if section.settings.show_zoom_button %}
   <!-- Zoom Lightbox -->
   <div class="product-zoom-overlay" id="product-zoom-overlay" role="dialog" aria-modal="true" aria-label="Media lightbox">
