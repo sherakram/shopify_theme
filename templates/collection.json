@@ -1,11 +1,16 @@
 {
   "sections": {
+    "page-banner": {
+      "type": "page-banner",
+      "settings": {}
+    },
     "main": {
       "type": "collection",
       "settings": {}
     }
   },
   "order": [
+    "page-banner",
     "main"
   ]
 }

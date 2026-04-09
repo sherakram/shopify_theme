@@ -1,0 +1,183 @@
+.page-banner {
+  --banner-bg:                  #ffffff;
+  --banner-pt:                  20px;
+  --banner-pb:                  20px;
+  --banner-title-color:         #000000;
+  --banner-desc-color:          #4b5563;
+  --banner-title-color-on-image:#ffffff;
+
+  /* Internal tokens */
+  --banner-content-max-width:   760px;
+  --banner-gutter:              clamp(1rem, 4vw, 2rem);
+
+  /* Title size scale — overridden per modifier */
+  --banner-title-size:          clamp(1.75rem, 4vw, 2.75rem);
+  --banner-title-lh:            1.15;
+  --banner-title-weight:        700;
+  --banner-desc-size:           clamp(0.9375rem, 1.5vw, 1.0625rem);
+  --banner-desc-lh:             1.7;
+}
+
+/* ---------- Base layout ---------- */
+.section-page-banner {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.page-banner {
+  position: relative;
+  width: 100%;
+  background-color: var(--banner-bg);
+  padding-block: var(--banner-pt) var(--banner-pb);
+  overflow: hidden;
+}
+
+/* ---------- Alignment modifiers ---------- */
+.page-banner--align-left   { 
+    --banner-text-align: left;
+}
+
+.page-banner--align-center { 
+    --banner-text-align: center; 
+}
+
+.page-banner--align-right  { 
+    --banner-text-align: right;  
+}
+
+/* ---------- Title size modifiers ---------- */
+.page-banner--title-sm { 
+    --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem); 
+}
+
+.page-banner--title-md { 
+    --banner-title-size: clamp(1.5rem,  3vw,  2.25rem); 
+}
+
+.page-banner--title-lg { 
+    --banner-title-size: clamp(1.75rem, 4vw,  2.75rem); 
+}
+
+.page-banner--title-xl { 
+    --banner-title-size: clamp(2rem,    5vw,  3.75rem); 
+}
+
+/* ---------- Content wrapper ---------- */
+.page-banner__content {
+  position: relative;
+  z-index: 2;
+  text-align: var(--banner-text-align, left);
+}
+
+/* ---------- Title ---------- */
+.page-banner__title {
+  margin: 0;
+  font-size: var(--banner-title-size);
+  font-weight: var(--banner-title-weight);
+  line-height: var(--banner-title-lh);
+  color: var(--banner-title-color);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ---------- Description ---------- */
+.page-banner__description {
+  margin-block: 0.75em 0;
+  font-size: var(--banner-desc-size);
+  line-height: var(--banner-desc-lh);
+  color: var(--banner-desc-color);
+  text-wrap: pretty;
+}
+
+.page-banner__description p {
+  margin: 0;
+}
+
+.page-banner__description p + p {
+  margin-top: 0.75em;
+}
+
+/* Image height modifiers */
+.page-banner--image-sm   { --banner-media-height: 200px; }
+.page-banner--image-md   { --banner-media-height: 320px; }
+.page-banner--image-lg   { --banner-media-height: 460px; }
+.page-banner--image-full { --banner-media-height: 100svh; }
+
+.page-banner__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.page-banner--has-image {
+  min-height: var(--banner-media-height, 320px);
+  display: flex;
+  align-items: center;
+}
+
+.page-banner__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---------- Overlay modifiers ---------- */
+.page-banner--overlay-0::after  { display: none; }
+
+.page-banner--overlay-30::after,
+.page-banner--overlay-50::after,
+.page-banner--overlay-70::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: #000;
+  pointer-events: none;
+}
+
+.page-banner--overlay-30::after { opacity: 0.30; }
+.page-banner--overlay-50::after { opacity: 0.50; }
+.page-banner--overlay-70::after { opacity: 0.70; }
+
+/* On-image title/desc colour override */
+.page-banner--has-image .page-banner__title {
+  color: var(--banner-title-color-on-image, #fff);
+}
+
+.page-banner--has-image .page-banner__description {
+  color: color-mix(in srgb, var(--banner-title-color-on-image, #fff) 85%, transparent);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 749px) {
+  .page-banner--image-lg   { --banner-media-height: 300px; }
+  .page-banner--image-full { --banner-media-height: 60svh;  }
+}
+
+@media (max-width: 479px) {
+  .page-banner--image-md   { --banner-media-height: 220px; }
+  .page-banner--image-lg   { --banner-media-height: 260px; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .page-banner__image {
+    transition: none;
+  }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .page-banner__media,
+  .page-banner--overlay-30::after,
+  .page-banner--overlay-50::after,
+  .page-banner--overlay-70::after {
+    display: none;
+  }
+
+  .page-banner__title {
+    color: #000 !important;
+  }
+}

@@ -1,0 +1,232 @@
+{{ 'page-banner.css' | asset_url | stylesheet_tag }}
+
+{% comment %} {%- liquid
+  assign banner_title = collection.title
+  assign banner_desc  = collection.description
+  
+  assign custom_title_stripped = section.settings.custom_title | strip_html | strip
+  assign custom_desc_stripped  = section.settings.custom_description | strip_html | strip
+
+  if section.settings.custom_title != blank
+    assign banner_title = section.settings.custom_title
+  endif
+
+  if section.settings.custom_description != blank
+    assign banner_desc = section.settings.custom_description
+  endif
+
+  assign has_image = false
+  if collection.image and section.settings.show_collection_image
+    assign has_image = true
+  endif
+-%} {% endcomment %}
+
+{%- liquid
+  assign banner_title = collection.title
+  assign banner_desc  = collection.description
+
+  assign custom_title_stripped = section.settings.custom_title | strip_html | strip
+  assign custom_desc_stripped  = section.settings.custom_description | strip_html | strip
+
+  if custom_title_stripped != blank
+    assign banner_title = section.settings.custom_title
+  endif
+
+  if custom_desc_stripped != blank
+    assign banner_desc = section.settings.custom_description
+  endif
+
+  assign has_image = false
+  if collection.image and section.settings.show_collection_image
+    assign has_image = true
+  endif
+-%}
+
+
+<div class="page-banner 
+            page-banner--align-{{ section.settings.title_align }}
+            page-banner--title-{{ section.settings.title_size }}
+            {% if has_image %}
+              page-banner--has-image
+              page-banner--image-{{ section.settings.image_height }}
+              page-banner--overlay-{{ section.settings.overlay_opacity }}
+            {% endif %}"
+    style="--banner-bg: {{ section.settings.bg_color }};
+       --banner-pt: {{ section.settings.padding_top }}px;
+       --banner-pb: {{ section.settings.padding_bottom }}px;
+       --banner-title-color: {{ section.settings.title_color }};
+       --banner-desc-color: {{ section.settings.description_color }};
+       --banner-title-color-on-image: {{ section.settings.title_color_on_image }};
+       {%- if has_image %} --banner-pt: 0px; --banner-pb: 0px;{%- endif -%}
+    ">
+
+
+  {%- if has_image -%}
+    <div class="page-banner__media" aria-hidden="true">
+      {% render 'image',
+        image: collection.image,
+        class: 'page-banner__image',
+        width: 1400,
+        height: 400,
+        crop: 'center',
+        alt: banner_title | escape
+      %}
+    </div>
+  {%- endif -%}
+
+  <div class="page-banner__content">
+    <h1 class="page-banner__title">{{ banner_title | escape }}</h1>
+
+    {%- if banner_desc != blank and section.settings.show_description -%}
+      <div class="page-banner__description">{{ banner_desc }}</div>
+    {%- endif -%}
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+  "name": "Page banner",
+  "tag": "section",
+  "class": "section-page-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:labels.collection_title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "custom_title",
+      "label": "Custom title",
+      "info": "Overrides the default collection title. Useful when you want to use a different title or add emojis."
+    },
+    {
+      "type": "richtext",
+      "id": "custom_description",
+      "label": "Custom description",
+      "info": "Overrides the default collection description. Useful when you want to use a different description or add formatting."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:labels.show_description",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "t:labels.bgColor",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "t:labels.alignment",
+      "options": [
+        { "label": "t:options.alignment.left",   "value": "left"   },
+        { "label": "t:options.alignment.center", "value": "center" },
+        { "label": "t:options.alignment.right",  "value": "right"  }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "Heading size",
+      "options": [
+        { "label": "Small",  "value": "sm"  },
+        { "label": "Medium", "value": "md"  },
+        { "label": "Large",  "value": "lg"  },
+        { "label": "XL",     "value": "xl"  }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "header",
+      "content": "Collection image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "show collection image",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Image height",
+      "options": [
+        { "label": "Small  (200px)",  "value": "sm"  },
+        { "label": "Medium (320px)",  "value": "md"  },
+        { "label": "Large  (460px)",  "value": "lg"  },
+        { "label": "Full viewport",   "value": "full" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "overlay_opacity",
+      "label": "Image overlay opacity",
+      "options": [
+        { "label": "None",  "value": "0"   },
+        { "label": "Light", "value": "30"  },
+        { "label": "Medium","value": "50"  },
+        { "label": "Dark",  "value": "70"  }
+      ],
+      "default": "30"
+    },
+    {
+      "type": "color",
+      "id": "title_color_on_image",
+      "label": "Title color (on image)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page banner"
+    }
+  ]
+}
+{% endschema %}

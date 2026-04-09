@@ -1,4 +1,4 @@
-<div class="collection-product" style="--card-bg:{{ section.settings.card_product_bg }};"> 
+<div class="collection-product"> 
   {% if product.featured_image %}
     <a href="{{ product.url }}" class="collection-product__image-wrapper">
       {% render 'image',
@@ -44,7 +44,6 @@
 {% style %}
 
 .collection-product {
-  background: var(--card-bg);
   border-radius: var(--style-border-radius);
   overflow: hidden;
   box-shadow: var(--card-shadow-horizontal-offset, 0px) var(--card-shadow-vertical-offset, 0px) var(--card-shadow-blur, 10px) rgba(0, 0, 0, var(--card-shadow-opacity, 0.1));

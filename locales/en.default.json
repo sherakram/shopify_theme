@@ -52,6 +52,7 @@
   "collections": {
     "title": "Collections",
     "general": {
+      "no_matches": "No products found",
       "collection_product_count": "Product",
       "filters_and_sorting": "Filters and sorting",
       "filter_products": "Filter products",
