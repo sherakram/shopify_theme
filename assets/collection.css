@@ -1,6 +1,6 @@
-.collection-products {
+/* .collection-products {
     display: grid;
-    grid-template-columns: repeat(var(--grid-cards-columns-desktop), minmax(0, 1fr));
+    grid-template-columns: repeat(var(--products-per-row, 4), minmax(0, 1fr));
     column-gap: var(--grid-cards-column-gap);
     row-gap: var(--grid-cards-row-gap);
     padding-top: var(--padding-top);
@@ -12,18 +12,18 @@
 
   @media (min-width: 768px) and (max-width: 1024px) {
   .collection-products {
-    grid-template-columns: repeat(var(--grid-cards-columns-tablet), minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 767px) {
   .collection-products {
-    grid-template-columns: repeat(var(--grid-cards-columns-mobile), minmax(0, 1fr));
+    grid-template-columns: repeat(var(--products-per-row-mobile, 2), minmax(0, 1fr));
     justify-content: center;
   }
 }
 
-/* Control max-width only when multiple columns */
+/* Control max-width only when multiple columns 
 .blog-card:not([style*="--grid-cards-columns-desktop:1"]) .card {
   max-width: var(--grid-cards-max-width-desktop);
 }
@@ -38,4 +38,64 @@
   .blog-card:not([style*="--grid-cards-columns-mobile:1"]) .card {
     max-width: var(--grid-cards-max-width-mobile);
   }
+} */
+
+
+
+
+/* ── Section wrapper ── */
+.collection-section {
+  width: 100%;
+}
+
+/* ── Product grid ── */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));
+  gap: var(--grid-cards-row-gap, 28px) var(--grid-cards-column-gap, 20px);
+  padding-top: var(--pt, 20px);
+  padding-bottom: var(--pb, 20px);
+}
+
+/* ── Tablet  (768 – 1024 px): cap at 3 cols or merchant value ── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── Mobile (< 768 px): merchant-controlled ── */
+@media (max-width: 767px) {
+  .collection-grid {
+    grid-template-columns: repeat(var(--cols-mobile, 2), minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+}
+
+/* ── Empty state ── */
+.collection-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.collection-empty__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-background-2, #f4f4f4);
+  color: var(--color-foreground-secondary, #888);
+}
+
+.collection-empty__text {
+  font-size: 1.05rem;
+  color: var(--color-foreground-secondary, #888);
+  margin: 0;
 }

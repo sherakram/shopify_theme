@@ -1,4 +1,4 @@
-<div class="collection-product"> 
+{% comment %} <div class="collection-product"> 
   {% if product.featured_image %}
     <a href="{{ product.url }}" class="collection-product__image-wrapper">
       {% render 'image',
@@ -41,87 +41,146 @@
 </div>
 
 
-{% style %}
+{%- comment -%}
+  Snippet : product-card.liquid
+  Accepts :
+    product      {object}  – required
+    show_vendor  {bool}    – optional, default false
+    show_reviews {bool}    – optional, default false
+    show_quick_add {bool}  – optional, default false
+    lazy         {number}  – forloop.index; first 4 cards load eagerly
+{%- endcomment -%}
 
-.collection-product {
-  border-radius: var(--style-border-radius);
-  overflow: hidden;
-  box-shadow: var(--card-shadow-horizontal-offset, 0px) var(--card-shadow-vertical-offset, 0px) var(--card-shadow-blur, 10px) rgba(0, 0, 0, var(--card-shadow-opacity, 0.1));
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+{%- liquid
+  assign loading = 'lazy'
+  if lazy <= 4
+    assign loading = 'eager'
+  endif
 
-.collection-product:hover {
-  transform: translateY(-6px);
-}
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    assign savings_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price
+  endif
 
-.collection-product__image-wrapper {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
+  assign sold_out = false
+  unless product.available
+    assign sold_out = true
+  endunless
+-%}
 
-.collection-product__image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
+<article
+  class="pc{% if sold_out %} pc--sold-out{% endif %}"
+  style="--image-ratio: {{ section.settings.image_ratio | default: '100%' }};"
+  aria-label="{{ product.title | escape }}"
+>
 
-.collection-product:hover .collection-product__image {
-  transform: scale(1.05);
-}
+  {{- '<!-- Product Card: ' | append: product.title | append: ' -->' -}}
 
-.collection-product__content {
-  padding: 15px;
-  text-align: left;
-}
+  {%- comment -%} ── Image ── {%- endcomment -%}
+  <a href="{{ product.url }}" class="pc__media" aria-hidden="true" tabindex="-1">
+    <div class="pc__image-wrap">
 
-.collection-product__title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 6px;
-  color: #000;
-}
+      {%- if product.featured_image -%}
+        {{
+          product.featured_image
+          | image_url: width: 600
+          | image_tag:
+            class: 'pc__image',
+            loading: loading,
+            widths: '300, 400, 500, 600',
+            sizes: '(max-width: 767px) 50vw, 25vw',
+            alt: product.featured_image.alt | escape | default: product.title
+        }}
 
-.collection-product__title a {
-  text-decoration: none;
-  color: inherit;
-}
+        {%- if product.images[1] -%}
+          {{
+            product.images[1]
+            | image_url: width: 600
+            | image_tag:
+              class: 'pc__image pc__image--hover',
+              loading: 'lazy',
+              widths: '300, 400, 500, 600',
+              sizes: '(max-width: 767px) 50vw, 25vw',
+              alt: product.images[1].alt | escape | default: product.title
+          }}
+        {%- endif -%}
 
-.collection-product__price {
-  margin-bottom: 8px;
-}
+      {%- else -%}
+        <span class="pc__placeholder">
+          {{ 'product-apparel-3' | placeholder_svg_tag: 'pc__placeholder-svg' }}
+        </span>
+      {%- endif -%}
 
-.price--old {
-  text-decoration: line-through;
-  color: #888;
-  margin-right: 6px;
-  font-size: 0.9rem;
-}
+    </div>
 
-.price--new {
-  color: #f39c12;
-  font-weight: 600;
-  font-size: 1rem;
-}
+    {%- comment -%} ── Badges ── {%- endcomment -%}
+    <div class="pc__badges">
+      {%- if sold_out -%}
+        <span class="pc__badge pc__badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+      {%- elsif on_sale -%}
+        <span class="pc__badge pc__badge--sale">-{{ savings_pct }}%</span>
+      {%- endif -%}
+    </div>
 
-.price--regular {
-  color: #fff;
-  font-weight: 600;
-}
+  </a>
 
-.collection-product__vendor {
-  font-size: 0.85rem;
-  color: #bbb;
-  margin-bottom: 8px;
-}
+  {%- comment -%} ── Quick add ── {%- endcomment -%}
+  {%- if show_quick_add and sold_out == false -%}
+    <div class="pc__quick-add">
+      {%- if product.variants.size == 1 -%}
+        <form action="/cart/add" method="post">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <button type="submit" class="pc__quick-btn" aria-label="{{ 'products.product.add_to_cart' | t }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span>{{ 'products.product.add_to_cart' | t }}</span>
+          </button>
+        </form>
+      {%- else -%}
+        <a href="{{ product.url }}" class="pc__quick-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>{{ 'products.product.choose_options' | t }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 
-.collection-product__reviews {
-  margin-top: 5px;
-}
+  {%- comment -%} ── Info ── {%- endcomment -%}
+  <div class="pc__info">
 
-{% endstyle %}
+    {%- if show_vendor and product.vendor != blank -%}
+      <p class="pc__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h2 class="pc__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h2>
+
+    <div class="pc__price">
+      {%- if on_sale -%}
+        <span class="pc__price-compare">{{ product.compare_at_price | money }}</span>
+        <span class="pc__price-sale">{{ product.price | money }}</span>
+      {%- elsif sold_out -%}
+        <span class="pc__price-soldout">{{ 'products.product.sold_out' | t }}</span>
+      {%- else -%}
+        <span class="pc__price-regular">{{ product.price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if show_reviews -%}
+      <div class="pc__reviews" aria-label="Product reviews">
+        {%- comment -%} {% render 'star-rating', product: product %} {%- endcomment -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+
+</article>
+
 
