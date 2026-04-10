@@ -1,157 +1,3 @@
-{% comment %} {{ 'collection.css' | asset_url | stylesheet_tag }}
-
-{%- comment -%} Determine page size from URL or setting {%- endcomment -%}
-{% assign current_page_size = section.settings.page_size_default %}
-
-<div id="CollectionSection-{{ section.id }}">
-  
-  {%- render 'filters-sorting' -%}
-
-  {% paginate collection.products by current_page_size %}
-      <div id="CollectionProductGrid-{{ section.id }}"
-          class="collection-products" 
-          style="--padding-top:{{ section.settings.padding_top }}px;
-          --padding-bottom:{{ section.settings.padding_bottom }}px;
-          --products-per-row: {{ section.settings.product_per_row }};
-          --products-per-row-mobile: {{ section.settings.product_per_row_mobile }};" 
-          tabindex="-1">
-
-          {% if collection.products.size == 0 %}
-            <p class="collection-empty">{{ 'collections.general.no_matches' | t }}</p>
-          {% else %}
-            {% for product in collection.products %}
-              {% render 'Product-card',
-                product: product,
-                show_vendor: section.settings.show_vendor,
-                show_reviews: section.settings.show_reviews
-              %}
-            {% endfor %}
-          {% endif %}
-
-      </div>
-      <div id="CollectionPagination-{{ section.id }}" class="pagination" aria-label="Pagination">
-        {% render 'pagination', pagination: paginate %}
-     </div>
-  {% endpaginate %}
-</div>  
-
-{% schema %}
-{
-  "name": "t:general.collection",
-  "tag": "section",
-  "class": "section-collection",
-  "settings": [
-    {
-      "type": "header",
-      "content": "t:general.product_grid"
-    },
-    {
-      "type": "select",
-      "id": "product_per_row",
-      "label": "Products per row",
-      "options": [
-        {
-          "label": "3",
-          "value": "3"
-        },
-        {
-          "label": "4",
-          "value": "4"
-        }
-      ],
-      "default": "4"
-    },
-    {
-      "type": "select",
-      "id": "product_per_row_mobile",
-      "label": "Products per row for mobile",
-      "options": [
-        {
-          "label": "1",
-          "value": "1"
-        },
-        {
-          "label": "2",
-          "value": "2"
-        }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "number",
-      "id": "page_size_default",
-      "label": "t:labels.items_per_page",
-      "default": 4
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "label": "Show product vendor",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_reviews",
-      "label": "Show product reviews",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:general.filter_and_sorting"
-    },
-    {
-      "type": "checkbox",
-      "id": "filters_use_drawer",
-      "label": "t:labels.drawer_popup",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_filters",
-      "label": "t:labels.enable_filters",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sort",
-      "label": "t:labels.sort_selector",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "sort_options",
-      "label": "t:labels.sort_options",
-      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
-    },
-    {
-      "type": "header",
-      "content": "t:labels.padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 36,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 36,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 20
-    }
-  ]
-}
-{% endschema %} {% endcomment %}
-
-
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
@@ -165,6 +11,9 @@
   id="CollectionSection-{{ section.id }}"
   class="collection-section"
   data-section-id="{{ section.id }}"
+  style="
+      --pt: {{ section.settings.padding_top }}px;
+      --pb: {{ section.settings.padding_bottom }}px;"
 >
 
   {%- render 'filters-sorting' -%}
@@ -177,8 +26,6 @@
       style="
         --cols-desktop: {{ cols_desktop }};
         --cols-mobile: {{ cols_mobile }};
-        --pt: {{ section.settings.padding_top }}px;
-        --pb: {{ section.settings.padding_bottom }}px;
       "
       tabindex="-1"
       aria-label="{{ collection.title }} products"
@@ -207,7 +54,7 @@
       <div
         id="CollectionPagination-{{ section.id }}"
         class="collection-pagination"
-        aria-label="{{ 'general.pagination.label' | t }}"
+        aria-label="{{ 'accessibility.pagination_label' | t }}"
       >
         {%- render 'pagination', pagination: paginate -%}
       </div>
@@ -226,38 +73,6 @@
   "settings": [
     {
       "type": "header",
-      "content": "t:general.product_grid"
-    },
-    {
-      "type": "select",
-      "id": "product_per_row",
-      "label": "Products per row (desktop)",
-      "options": [
-        { "label": "2", "value": "2" },
-        { "label": "3", "value": "3" },
-        { "label": "4", "value": "4" },
-        { "label": "5", "value": "5" }
-      ],
-      "default": "4"
-    },
-    {
-      "type": "select",
-      "id": "product_per_row_mobile",
-      "label": "Products per row (mobile)",
-      "options": [
-        { "label": "1", "value": "1" },
-        { "label": "2", "value": "2" }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "number",
-      "id": "page_size_default",
-      "label": "t:labels.items_per_page",
-      "default": 12
-    },
-    {
-      "type": "header",
       "content": "Product card"
     },
     {
@@ -265,11 +80,24 @@
       "id": "image_ratio",
       "label": "Image ratio",
       "options": [
-        { "label": "Portrait (2:3)", "value": "150%" },
-        { "label": "Square (1:1)", "value": "100%" },
-        { "label": "Landscape (4:3)", "value": "75%" }
+        { 
+          "label": "Auto", 
+          "value": "auto" 
+        },
+        { 
+          "label": "1:1", 
+          "value": "1/1" 
+        },
+        { 
+          "label": "3:4", 
+          "value": "3/4" 
+        },
+        { 
+          "label": "4:5", 
+          "value": "4/5" 
+        }
       ],
-      "default": "100%"
+      "default": "1/1"
     },
     {
       "type": "checkbox",
@@ -288,6 +116,55 @@
       "id": "show_quick_add",
       "label": "Show quick add button",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.product_grid"
+    },
+    {
+      "type": "select",
+      "id": "product_per_row",
+      "label": "Products per row (desktop)",
+      "options": [
+        { 
+          "label": "2",
+          "value": "2" 
+        },
+        { 
+          "label": "3", 
+          "value": "3" 
+        },
+        { 
+          "label": "4", 
+          "value": "4" 
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "product_per_row_mobile",
+      "label": "Products per row (mobile)",
+      "options": [
+        { 
+          "label": "1", 
+          "value": "1" 
+        },
+        { 
+          "label": "2", 
+          "value": "2" 
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "page_size_default",
+      "label": "t:labels.items_per_page",
+      "min": 12,
+      "max": 50,
+      "step": 1,
+      "default": 12
     },
     {
       "type": "header",

@@ -2,12 +2,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: 12px;
   background: var(--color-card-background, #fff);
-  border-radius: var(--style-border-radius, 8px);
+  border-radius: var(--style-border-radius, 0px);
   overflow: hidden;
   box-shadow:
     var(--card-shadow-horizontal-offset, 0px)
-    var(--card-shadow-vertical-offset, 2px)
+    var(--card-shadow-vertical-offset, 0px)
     var(--card-shadow-blur, 12px)
     rgba(0, 0, 0, var(--card-shadow-opacity, 0.08));
   transition: transform 0.28s ease, box-shadow 0.28s ease;
@@ -15,7 +16,6 @@
 }
 
 .pc:hover {
-  transform: translateY(-5px);
   box-shadow:
     0px 8px 28px rgba(0, 0, 0, calc(var(--card-shadow-opacity, 0.08) * 2));
 }
@@ -30,23 +30,24 @@
   position: relative;
   text-decoration: none;
   overflow: hidden;
-  /* ratio is injected inline per-card from schema setting */
   aspect-ratio: auto;
 }
 
 .pc__image-wrap {
+  display: grid;
   position: relative;
   width: 100%;
-  padding-bottom: var(--image-ratio, 100%);
+  aspect-ratio: var(--image-ratio, 1/1);
   overflow: hidden;
 }
 
 .pc__image {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   width: 100%;
   height: 100%;
+  min-height: 0;
   object-fit: cover;
+  display: block;
   transition: transform 0.45s ease, opacity 0.35s ease;
   will-change: transform;
 }
@@ -71,8 +72,9 @@
 
 /* ── Placeholder (no image) ── */
 .pc__placeholder {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +101,7 @@
 .pc__badge {
   display: inline-block;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 0px;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -161,7 +163,6 @@
 
 /* ── Info block ── */
 .pc__info {
-  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -181,9 +182,12 @@
 /* Title */
 .pc__title {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  font-style: normal;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.25;
+  letter-spacing: .48px;
+  text-transform: uppercase;
 }
 
 .pc__title a {
@@ -193,39 +197,40 @@
 }
 
 .pc__title a:hover {
-  color: var(--color-accent, #0055cc);
+  color: var(--color-accent, #292929);
 }
 
 /* Price */
 .pc__price {
   display: flex;
+  flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
   margin-top: 2px;
 }
 
 .pc__price-regular {
-  font-size: 0.98rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--color-foreground, #111);
 }
 
 .pc__price-compare {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--color-foreground-secondary, #999);
   text-decoration: line-through;
 }
 
 .pc__price-sale {
-  font-size: 0.98rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--color-price-sale, #e8290b);
 }
 
 .pc__price-soldout {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--color-foreground-secondary, #999);
   letter-spacing: 0.03em;
@@ -248,17 +253,24 @@
 /* ── Mobile tweaks ── */
 @media (max-width: 767px) {
   .pc__info {
-    padding: 10px 10px 12px;
     gap: 4px;
   }
 
   .pc__title {
-    font-size: 0.88rem;
+    font-size: 0.75rem;
   }
 
   .pc__price-regular,
   .pc__price-sale {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+  }
+
+  .pc__price-compare {
+    font-size: 0.7rem;
+  }
+
+  .pc__price-soldout {
+    font-size: 0.7rem;
   }
 
   /* Quick add always visible on touch (no hover) */

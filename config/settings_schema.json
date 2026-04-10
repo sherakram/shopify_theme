@@ -201,7 +201,7 @@
         "step": 5,
         "unit": "%",
         "label": "t:labels.card_shadow_opacity",
-        "default": 10
+        "default": 0
       },
       {
         "type": "range",
@@ -231,7 +231,7 @@
         "step": 5,
         "unit": "px",
         "label": "t:labels.card_shadow_blur",
-        "default": 10
+        "default": 0
       },
       {
         "type": "header",
@@ -245,7 +245,7 @@
         "step": 1,
         "unit": "px",
         "label": "t:labels.corner_radius",
-        "default": 4
+        "default": 0
       }
     ]
   },

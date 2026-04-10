@@ -1,4 +1,24 @@
 {
+  "products": {
+    "product_label": "Product",
+    "sale_label": "Sale",
+    "sold_out_label": "Sold out",
+    "unit_price_separator": "per",
+    "vendor": "Vendor",
+    "add_to_cart": "Add to cart",
+    "quick_add": "Quick add",
+    "view_product": "View product",
+    "color": "Color",
+    "size": "Size",
+    "quantity": "Quantity",
+    "select_options": "Select options",
+    "unavailable": "Unavailable",
+    "on_sale": "On sale",
+    "regular_price": "Regualr price",
+    "sale_price": "Sale price",
+    "comapre_at_price": "Compare at price",
+    "unit_price": "Unit price"
+  },
   "404": {
     "title": "404",
     "not_found": "Page not found.",
@@ -23,7 +43,8 @@
     "total_reviews": "total reviews",
     "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
     "collapsible_content_title": "Collapsible content",
-    "complementary_products": "Complementary products"
+    "complementary_products": "Complementary products",
+    "pagination_label": "Pagination"
   },
   "blog": {
     "article_comments": "Comments",

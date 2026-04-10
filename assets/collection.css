@@ -1,60 +1,14 @@
-/* .collection-products {
-    display: grid;
-    grid-template-columns: repeat(var(--products-per-row, 4), minmax(0, 1fr));
-    column-gap: var(--grid-cards-column-gap);
-    row-gap: var(--grid-cards-row-gap);
-    padding-top: var(--padding-top);
-    padding-bottom: var(--padding-bottom);
-    box-sizing: border-box;
-    margin: 30px 0;
-    max-width: 100%;
-  }
-
-  @media (min-width: 768px) and (max-width: 1024px) {
-  .collection-products {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 767px) {
-  .collection-products {
-    grid-template-columns: repeat(var(--products-per-row-mobile, 2), minmax(0, 1fr));
-    justify-content: center;
-  }
-}
-
-/* Control max-width only when multiple columns 
-.blog-card:not([style*="--grid-cards-columns-desktop:1"]) .card {
-  max-width: var(--grid-cards-max-width-desktop);
-}
-
-@media (max-width: 940px) {
-  .blog-card:not([style*="--grid-cards-columns-tablet:1"]) .card {
-    max-width: var(--grid-cards-max-width-tablet);
-  }
-}
-
-@media (max-width: 768px) {
-  .blog-card:not([style*="--grid-cards-columns-mobile:1"]) .card {
-    max-width: var(--grid-cards-max-width-mobile);
-  }
-} */
-
-
-
-
-/* ── Section wrapper ── */
 .collection-section {
   width: 100%;
+  padding-top: var(--pt, 20px);
+  padding-bottom: var(--pb, 20px);
 }
 
 /* ── Product grid ── */
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));
-  gap: var(--grid-cards-row-gap, 28px) var(--grid-cards-column-gap, 20px);
-  padding-top: var(--pt, 20px);
-  padding-bottom: var(--pb, 20px);
+  gap: 40px 12px;
 }
 
 /* ── Tablet  (768 – 1024 px): cap at 3 cols or merchant value ── */
