@@ -33,33 +33,33 @@
 }
 
 /* ---------- Alignment modifiers ---------- */
-.page-banner--align-left   { 
-    --banner-text-align: left;
+.page-banner--align-left   {
+  --banner-text-align: left;
 }
 
-.page-banner--align-center { 
-    --banner-text-align: center; 
+.page-banner--align-center {
+  --banner-text-align: center;
 }
 
-.page-banner--align-right  { 
-    --banner-text-align: right;  
+.page-banner--align-right  {
+  --banner-text-align: right;
 }
 
 /* ---------- Title size modifiers ---------- */
-.page-banner--title-sm { 
-    --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem); 
+.page-banner--title-sm {
+  --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 
-.page-banner--title-md { 
-    --banner-title-size: clamp(1.5rem,  3vw,  2.25rem); 
+.page-banner--title-md {
+  --banner-title-size: clamp(1.5rem,  3vw,  2.25rem);
 }
 
-.page-banner--title-lg { 
-    --banner-title-size: clamp(1.75rem, 4vw,  2.75rem); 
+.page-banner--title-lg {
+  --banner-title-size: clamp(1.75rem, 4vw,  2.75rem);
 }
 
-.page-banner--title-xl { 
-    --banner-title-size: clamp(2rem,    5vw,  3.75rem); 
+.page-banner--title-xl {
+  --banner-title-size: clamp(2rem,    5vw,  3.75rem);
 }
 
 /* ---------- Content wrapper ---------- */
@@ -97,30 +97,36 @@
   margin-top: 0.75em;
 }
 
-/* Image height modifiers */
 .page-banner--image-sm   { --banner-media-height: 200px; }
 .page-banner--image-md   { --banner-media-height: 320px; }
 .page-banner--image-lg   { --banner-media-height: 460px; }
 .page-banner--image-full { --banner-media-height: 100svh; }
 
+/* ---------- Media container ---------- */
 .page-banner__media {
   position: absolute;
   inset: 0;
   z-index: 0;
+  height: var(--banner-media-height, 320px);
 }
 
+/* ---------- Has-image state ---------- */
 .page-banner--has-image {
+  height: var(--banner-media-height, 320px);
   min-height: var(--banner-media-height, 320px);
   display: flex;
   align-items: center;
 }
 
-.page-banner__image {
+.page-banner__image,
+.page-banner__media img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  max-width: none;
+  max-height: none;
 }
 
 /* ---------- Overlay modifiers ---------- */
