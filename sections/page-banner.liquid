@@ -19,56 +19,44 @@
   if collection.image and section.settings.show_collection_image
     assign has_image = true
   endif
-
-  # --- Map image_height setting to a pixel value for the CDN request ---
-  # This ensures the image is fetched at the correct resolution
-  case section.settings.image_height
-    when 'sm'
-      assign fetch_height = 400
-    when 'md'
-      assign fetch_height = 640
-    when 'lg'
-      assign fetch_height = 920
-    when 'full'
-      assign fetch_height = 1200
-    else
-      assign fetch_height = 640
-  endcase
 -%}
 
+<style>
+  #shopify-section-{{ section.id }} .page-banner {
+    --banner-bg:                   {{ section.settings.bg_color }};
+    --banner-pt:                   {{ section.settings.padding_top }}px;
+    --banner-pb:                   {{ section.settings.padding_bottom }}px;
+    --banner-title-color:          {{ section.settings.title_color }};
+    --banner-desc-color:           {{ section.settings.description_color }};
+    --banner-title-color-on-image: {{ section.settings.title_color_on_image }};
+  }
+</style>
 
-<div class="page-banner page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }} {% if has_image %} page-banner--has-image page-banner--image-{{ section.settings.image_height }} page-banner--overlay-{{ section.settings.overlay_opacity }} {% endif %}"
-    style="--banner-bg: {{ section.settings.bg_color }};
-       --banner-pt: {{ section.settings.padding_top }}px;
-       --banner-pb: {{ section.settings.padding_bottom }}px;
-       --banner-title-color: {{ section.settings.title_color }};
-       --banner-desc-color: {{ section.settings.description_color }};
-       --banner-title-color-on-image: {{ section.settings.title_color_on_image }};
-       {%- if has_image %} --banner-pt: 0px; --banner-pb: 0px;{%- endif -%}
-    ">
-
+<div class="page-banner full-width page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }}{% if has_image %} page-banner--has-image page-banner--overlay-{{ section.settings.overlay_opacity }}{% endif %}">
 
   {%- if has_image -%}
     <div class="page-banner__media" aria-hidden="true">
       {{- collection.image
-        | image_url: width: 2000, height: fetch_height, crop: 'center'
+        | image_url: width: 2000, height: 800, crop: 'center'
         | image_tag:
           class: 'page-banner__image',
           loading: 'eager',
           fetchpriority: 'high',
-          alt: banner_title,
+          alt: '',
           sizes: '100vw',
           widths: '600, 900, 1200, 1600, 2000'
       -}}
     </div>
   {%- endif -%}
 
-  <div class="page-banner__content">
-    <h1 class="page-banner__title">{{ banner_title | escape }}</h1>
+  <div class="page-banner__content shopify-section">
+    <div class="page-banner__inner">
+      <h1 class="page-banner__title">{{ banner_title | escape }}</h1>
 
-    {%- if banner_desc != blank and section.settings.show_description -%}
-      <div class="page-banner__description">{{ banner_desc }}</div>
-    {%- endif -%}
+      {%- if banner_desc != blank and section.settings.show_description -%}
+        <div class="page-banner__description">{{ banner_desc }}</div>
+      {%- endif -%}
+    </div>
   </div>
 
 </div>
@@ -88,13 +76,13 @@
       "type": "inline_richtext",
       "id": "custom_title",
       "label": "Custom title",
-      "info": "Overrides the default collection title. Useful when you want to use a different title or add emojis."
+      "info": "Overrides the default collection title."
     },
     {
       "type": "richtext",
       "id": "custom_description",
       "label": "Custom description",
-      "info": "Overrides the default collection description. Useful when you want to use a different description or add formatting."
+      "info": "Overrides the default collection description."
     },
     {
       "type": "checkbox",
@@ -140,10 +128,10 @@
       "id": "title_size",
       "label": "Heading size",
       "options": [
-        { "label": "Small",  "value": "sm"  },
-        { "label": "Medium", "value": "md"  },
-        { "label": "Large",  "value": "lg"  },
-        { "label": "XL",     "value": "xl"  }
+        { "label": "Small",  "value": "sm" },
+        { "label": "Medium", "value": "md" },
+        { "label": "Large",  "value": "lg" },
+        { "label": "XL",     "value": "xl" }
       ],
       "default": "xl"
     },
@@ -154,30 +142,18 @@
     {
       "type": "checkbox",
       "id": "show_collection_image",
-      "label": "show collection image",
+      "label": "Show collection image",
       "default": false
-    },
-    {
-      "type": "select",
-      "id": "image_height",
-      "label": "Image height",
-      "options": [
-        { "label": "Small  (200px)",  "value": "sm"  },
-        { "label": "Medium (320px)",  "value": "md"  },
-        { "label": "Large  (460px)",  "value": "lg"  },
-        { "label": "Full viewport",   "value": "full" }
-      ],
-      "default": "md"
     },
     {
       "type": "select",
       "id": "overlay_opacity",
       "label": "Image overlay opacity",
       "options": [
-        { "label": "None",  "value": "0"   },
-        { "label": "Light", "value": "30"  },
-        { "label": "Medium","value": "50"  },
-        { "label": "Dark",  "value": "70"  }
+        { "label": "None",   "value": "0"  },
+        { "label": "Light",  "value": "30" },
+        { "label": "Medium", "value": "50" },
+        { "label": "Dark",   "value": "70" }
       ],
       "default": "30"
     },
@@ -219,3 +195,4 @@
   ]
 }
 {% endschema %}
+

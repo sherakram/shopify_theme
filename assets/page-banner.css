@@ -1,29 +1,34 @@
+/* ============================================================
+   Page Banner — page-banner.css
+   ============================================================ */
+
+/* ---------- Design tokens (fallbacks) ---------- */
 .page-banner {
-  --banner-bg:                  #ffffff;
-  --banner-pt:                  20px;
-  --banner-pb:                  20px;
-  --banner-title-color:         #000000;
-  --banner-desc-color:          #4b5563;
-  --banner-title-color-on-image:#ffffff;
+  --banner-bg:                   #ffffff;
+  --banner-pt:                   20px;
+  --banner-pb:                   20px;
+  --banner-title-color:          #000000;
+  --banner-desc-color:           #4b5563;
+  --banner-title-color-on-image: #ffffff;
 
-  /* Internal tokens */
-  --banner-content-max-width:   760px;
-  --banner-gutter:              clamp(1rem, 4vw, 2rem);
+  --banner-content-max-width:    760px;
+  --banner-gutter:               clamp(1.25rem, 5vw, 2.5rem);
 
-  /* Title size scale — overridden per modifier */
-  --banner-title-size:          clamp(1.75rem, 4vw, 2.75rem);
-  --banner-title-lh:            1.15;
-  --banner-title-weight:        700;
-  --banner-desc-size:           clamp(0.9375rem, 1.5vw, 1.0625rem);
-  --banner-desc-lh:             1.7;
+  --banner-title-size:           clamp(1.75rem, 4vw, 2.75rem);
+  --banner-title-lh:             1.15;
+  --banner-title-weight:         700;
+
+  --banner-desc-size:            clamp(0.9375rem, 1.5vw, 1.0625rem);
+  --banner-desc-lh:              1.7;
 }
 
-/* ---------- Base layout ---------- */
+/* ---------- Reset section margins ---------- */
 .section-page-banner {
-  margin-bottom: 0 !important;
   margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
+/* ---------- Base ---------- */
 .page-banner {
   position: relative;
   width: 100%;
@@ -32,41 +37,42 @@
   overflow: hidden;
 }
 
-/* ---------- Alignment modifiers ---------- */
-.page-banner--align-left   {
-  --banner-text-align: left;
-}
-
-.page-banner--align-center {
-  --banner-text-align: center;
-}
-
-.page-banner--align-right  {
-  --banner-text-align: right;
-}
-
 /* ---------- Title size modifiers ---------- */
-.page-banner--title-sm {
-  --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem);
-}
-
-.page-banner--title-md {
-  --banner-title-size: clamp(1.5rem,  3vw,  2.25rem);
-}
-
-.page-banner--title-lg {
-  --banner-title-size: clamp(1.75rem, 4vw,  2.75rem);
-}
-
-.page-banner--title-xl {
-  --banner-title-size: clamp(2rem,    5vw,  3.75rem);
-}
+.page-banner--title-sm { --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+.page-banner--title-md { --banner-title-size: clamp(1.5rem,  3vw,  2.25rem);  }
+.page-banner--title-lg { --banner-title-size: clamp(1.75rem, 4vw,  2.75rem);  }
+.page-banner--title-xl { --banner-title-size: clamp(2rem,    5vw,  3.75rem);  }
 
 /* ---------- Content wrapper ---------- */
 .page-banner__content {
   position: relative;
   z-index: 2;
-  text-align: var(--banner-text-align, left);
+  width: 100%;
+}
+
+/* ---------- Inner — constrains max-width & controls text-align ---------- */
+.page-banner__inner {
+  width: 100%;
+  max-width: var(--banner-content-max-width);
+}
+
+/* Alignment: left (default) */
+.page-banner--align-left .page-banner__inner {
+  margin-inline: 0;
+  text-align: left;
+}
+
+/* Alignment: center */
+.page-banner--align-center .page-banner__inner {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Alignment: right */
+.page-banner--align-right .page-banner__inner {
+  margin-inline: 0 0;
+  margin-left: auto;
+  text-align: right;
 }
 
 /* ---------- Title ---------- */
@@ -89,33 +95,33 @@
   text-wrap: pretty;
 }
 
-.page-banner__description p {
-  margin: 0;
+.page-banner__description p      { margin: 0; }
+.page-banner__description p + p  { margin-top: 0.75em; }
+
+/* ============================================================
+   Has-image state
+   Fixed height: 440px desktop / 280px mobile
+   ============================================================ */
+.page-banner--has-image {
+  --banner-media-height: 320px;
+
+  height: var(--banner-media-height);
+  display: flex;
+  align-items: center;
+  padding-block: 0;
 }
 
-.page-banner__description p + p {
-  margin-top: 0.75em;
+/* Override padding tokens when image is active */
+.page-banner--has-image {
+  --banner-pt: 0px;
+  --banner-pb: 0px;
 }
-
-.page-banner--image-sm   { --banner-media-height: 200px; }
-.page-banner--image-md   { --banner-media-height: 320px; }
-.page-banner--image-lg   { --banner-media-height: 460px; }
-.page-banner--image-full { --banner-media-height: 100svh; }
 
 /* ---------- Media container ---------- */
 .page-banner__media {
   position: absolute;
   inset: 0;
   z-index: 0;
-  height: var(--banner-media-height, 320px);
-}
-
-/* ---------- Has-image state ---------- */
-.page-banner--has-image {
-  height: var(--banner-media-height, 320px);
-  min-height: var(--banner-media-height, 320px);
-  display: flex;
-  align-items: center;
 }
 
 .page-banner__image,
@@ -129,7 +135,7 @@
   max-height: none;
 }
 
-/* ---------- Overlay modifiers ---------- */
+/* ---------- Overlay ---------- */
 .page-banner--overlay-0::after  { display: none; }
 
 .page-banner--overlay-30::after,
@@ -147,7 +153,7 @@
 .page-banner--overlay-50::after { opacity: 0.50; }
 .page-banner--overlay-70::after { opacity: 0.70; }
 
-/* On-image title/desc colour override */
+/* ---------- On-image colour overrides ---------- */
 .page-banner--has-image .page-banner__title {
   color: var(--banner-title-color-on-image, #fff);
 }
@@ -156,25 +162,33 @@
   color: color-mix(in srgb, var(--banner-title-color-on-image, #fff) 85%, transparent);
 }
 
-/* ---------- Responsive ---------- */
+/* ============================================================
+   Responsive
+   ============================================================ */
 @media (max-width: 749px) {
-  .page-banner--image-lg   { --banner-media-height: 300px; }
-  .page-banner--image-full { --banner-media-height: 60svh;  }
+  .page-banner--has-image {
+    --banner-media-height: 240px;
+  }
 }
 
 @media (max-width: 479px) {
-  .page-banner--image-md   { --banner-media-height: 220px; }
-  .page-banner--image-lg   { --banner-media-height: 260px; }
+  .page-banner--has-image {
+    --banner-media-height: 200px;
+  }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ============================================================
+   Accessibility
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .page-banner__image {
     transition: none;
   }
 }
 
-/* ---------- Print ---------- */
+/* ============================================================
+   Print
+   ============================================================ */
 @media print {
   .page-banner__media,
   .page-banner--overlay-30::after,
