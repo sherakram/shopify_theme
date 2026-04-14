@@ -9,6 +9,13 @@
 {%- endcomment -%}
 
 {%- liquid
+  assign show_vendor = show_vendor | default: settings.show_vendor
+  assign show_reviews = show_reviews | default: settings.show_reviews
+  assign show_quick_add = show_quick_add | default: settings.show_quick_add
+  assign show_secondary_image = show_secondary_image | default: settings.show_secondary_image
+  assign quick_add_hover_only = quick_add_hover_only | default: settings.enable_quick_button_on_hover
+  assign quick_multiple_options = quick_multiple_options | default: settings.enable_selected_varaint_quick_add
+
   assign loading = 'lazy'
   if lazy <= 4
     assign loading = 'eager'
@@ -24,20 +31,28 @@
   unless product.available
     assign sold_out = true
   endunless
+
+  assign any_quick_button = false
+  if sold_out == false
+    if product.variants.size == 1 and show_quick_add
+      assign any_quick_button = true
+    endif
+    if product.variants.size > 1 and quick_multiple_options
+      assign any_quick_button = true
+    endif
+  endif
 -%}
 
 <article
-  class="pc{% if sold_out %} pc--sold-out{% endif %}"
-  style="--image-ratio: {{ section.settings.image_ratio | default: '1/1' }};"
+  class="pc{% if sold_out %} pc--sold-out{% endif %}{% if quick_add_hover_only and any_quick_button %} pc--quick-hover{% endif %}"
+  style="--image-ratio: var(--product-card-image-ratio, 1/1);"
   aria-label="{{ product.title | escape }}"
 >
-
   {{- '<!-- Product Card: ' | append: product.title | append: ' -->' -}}
 
   {%- comment -%} ── Image ── {%- endcomment -%}
   <a href="{{ product.url }}" class="pc__media" aria-hidden="true" tabindex="-1">
     <div class="pc__image-wrap">
-
       {%- if product.featured_image -%}
         {{
           product.featured_image
@@ -47,10 +62,12 @@
             loading: loading,
             widths: '300, 400, 500, 600',
             sizes: '(max-width: 767px) 50vw, 25vw',
-            alt: product.featured_image.alt | escape | default: product.title
+            alt: product.featured_image.alt
+          | escape
+          | default: product.title
         }}
 
-        {%- if product.images[1] -%}
+        {%- if product.images[1] and show_secondary_image -%}
           {{
             product.images[1]
             | image_url: width: 600
@@ -59,7 +76,9 @@
               loading: 'lazy',
               widths: '300, 400, 500, 600',
               sizes: '(max-width: 767px) 50vw, 25vw',
-              alt: product.images[1].alt | escape | default: product.title
+              alt: product.images[1].alt
+            | escape
+            | default: product.title
           }}
         {%- endif -%}
 
@@ -68,7 +87,6 @@
           {{ 'product-apparel-3' | placeholder_svg_tag: 'pc__placeholder-svg' }}
         </span>
       {%- endif -%}
-
     </div>
 
     {%- comment -%} ── Badges ── {%- endcomment -%}
@@ -80,37 +98,55 @@
       {%- endif -%}
     </div>
 
-  </a>
+    {%- comment -%} ── Quick add ── {%- endcomment -%}
+    {%- if sold_out == false -%}
+      {%- if product.variants.size == 1 and show_quick_add -%}
+        <div class="pc__quick-add">
+          <form action="{{ routes.cart_add_url }}" method="post">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <button type="submit" class="pc__quick-btn" aria-label="{{ 'products.add_to_cart' | t }}">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              <span>{{ 'products.add_to_cart' | t }}</span>
+            </button>
+          </form>
+        </div>
+      {% endif %}
 
-  {%- comment -%} ── Quick add ── {%- endcomment -%}
-  {%- if show_quick_add and sold_out == false -%}
-    <div class="pc__quick-add">
-      {%- if product.variants.size == 1 -%}
-        <form action="{{ routes.cart_add_url }}" method="post">
-          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-          <button type="submit" class="pc__quick-btn" aria-label="{{ 'products.add_to_cart' | t }}">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
+      {% if product.variants.size > 1 and quick_multiple_options %}
+        <div class="pc__quick-add">
+          <a href="{{ product.url }}" class="pc__quick-btn">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-            <span>{{ 'products.add_to_cart' | t }}</span>
-          </button>
-        </form>
-      {%- else -%}
-        <a href="{{ product.url }}" class="pc__quick-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <span>{{ 'products.select_options' | t }}</span>
-        </a>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
+            <span>{{ 'products.select_options' | t }}</span>
+          </a>
+        </div>
+      {% endif %}
+    {%- endif -%}
+  </a>
 
   {%- comment -%} ── Info ── {%- endcomment -%}
   <div class="pc__info">
-
     {%- if show_vendor and product.vendor != blank -%}
       <p class="pc__vendor">{{ product.vendor }}</p>
     {%- endif -%}
@@ -135,9 +171,5 @@
         {%- comment -%} {% render 'star-rating', product: product %} {%- endcomment -%}
       </div>
     {%- endif -%}
-
   </div>
-
 </article>
-
-

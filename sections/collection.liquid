@@ -40,10 +40,10 @@
       {%- else -%}
         {%- for product in collection.products -%}
           {%- render 'product-card',
-            product:      product,
-            show_vendor:  section.settings.show_vendor,
-            show_reviews: section.settings.show_reviews,
-            lazy:         forloop.index
+            product: product,
+            show_quick_add: settings.show_quick_add,
+            quick_add_hover_only: settings.enable_quick_button_on_hover,
+            lazy: forloop.index
           -%}
         {%- endfor -%}
       {%- endif -%}
@@ -73,49 +73,31 @@
   "settings": [
     {
       "type": "header",
-      "content": "Product card"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Image ratio",
-      "options": [
-        { 
-          "label": "Auto", 
-          "value": "auto" 
-        },
-        { 
-          "label": "1:1", 
-          "value": "1/1" 
-        },
-        { 
-          "label": "3:4", 
-          "value": "3/4" 
-        },
-        { 
-          "label": "4:5", 
-          "value": "4/5" 
-        }
-      ],
-      "default": "1/1"
+      "content": "t:general.filter_and_sorting"
     },
     {
       "type": "checkbox",
-      "id": "show_vendor",
-      "label": "Show product vendor",
+      "id": "filters_use_drawer",
+      "label": "t:labels.drawer_popup",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "t:labels.enable_filters",
       "default": true
     },
     {
       "type": "checkbox",
-      "id": "show_reviews",
-      "label": "Show product reviews",
+      "id": "enable_sort",
+      "label": "t:labels.sort_selector",
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "show_quick_add",
-      "label": "Show quick add button",
-      "default": true
+      "type": "text",
+      "id": "sort_options",
+      "label": "t:labels.sort_options",
+      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
     },
     {
       "type": "header",
@@ -165,34 +147,6 @@
       "max": 50,
       "step": 1,
       "default": 12
-    },
-    {
-      "type": "header",
-      "content": "t:general.filter_and_sorting"
-    },
-    {
-      "type": "checkbox",
-      "id": "filters_use_drawer",
-      "label": "t:labels.drawer_popup",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_filters",
-      "label": "t:labels.enable_filters",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sort",
-      "label": "t:labels.sort_selector",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "sort_options",
-      "label": "t:labels.sort_options",
-      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
     },
     {
       "type": "header",

@@ -250,6 +250,79 @@
     ]
   },
   {
+    "name": "Product Cards",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor",
+        "default": false
+      },
+      {
+        "type": "header", 
+        "content": "Media"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_secondary_image",
+        "label": "Show secondary image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_reviews",
+        "label": "Show product reviews",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "Image ratio",
+        "options": [
+          { 
+            "label": "Auto", 
+            "value": "auto" 
+          },
+          { 
+            "label": "1:1", 
+            "value": "1/1" 
+          },
+          {  
+            "label": "3:4", 
+            "value": "3/4" 
+          },
+          { 
+            "label": "4:5", 
+            "value": "4/5" 
+          }
+        ],
+          "default": "1/1"
+      },
+      {
+        "type": "header", 
+        "content": "Quick button"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_selected_varaint_quick_add",
+        "label": "Enable quick add to cart button for multiple options",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quick_add",
+        "label": "Show quick add to cart button for single option products",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quick_button_on_hover",
+        "label": "Show quick add button on hover only",
+        "default": false
+      }
+    ]
+  },
+  {
   "name": "t:general.social_media_icons",
   "settings": [
       { "type": "checkbox", "id": "show_social_icons", "label": "t:labels.show_social_icons", "default": true },
