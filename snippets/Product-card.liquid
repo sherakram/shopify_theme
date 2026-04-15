@@ -90,11 +90,35 @@
     </div>
 
     {%- comment -%} ── Badges ── {%- endcomment -%}
-    <div class="pc__badges">
+    {% comment %}
+      <div class="pc__badges pc__badges--{{ settings.badge_position }}">
+        {%- if sold_out -%}
+          <span class="pc__badge pc__badge--sold-out color-{{ settings.badge_soldout_scheme }}">{{ 'products.sold_out_label' | t }}</span>
+        {%- elsif on_sale -%}
+          <span class="pc__badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">-{{ savings_pct }}%</span>
+        {%- endif -%}
+      </div>
+    {% endcomment %}
+
+    <div class="pc__badges pc__badges--{{ settings.badge_position }}">
       {%- if sold_out -%}
-        <span class="pc__badge pc__badge--sold-out">{{ 'products.sold_out_label' | t }}</span>
+        <span class="pc__badge pc__badge--sold-out color-{{ settings.badge_soldout_scheme }} text-{{ settings.badge_text_case }}">{{ 'products.sold_out_label' | t }}</span>
+      {%- elsif product.metafields.custom.badge_text != blank -%}
+        <span class="pc__badge pc__badge--sale color-{{ settings.badge_sale_scheme }} text-{{ settings.badge_text_case }}">{{ product.metafields.custom.badge_text }}</span>
       {%- elsif on_sale -%}
-        <span class="pc__badge pc__badge--sale">-{{ savings_pct }}%</span>
+        {%- case settings.sale_badge_type -%}
+          {%- when 'percent' -%}
+            <span class="pc__badge pc__badge--sale color-{{ settings.badge_sale_scheme }} text-{{ settings.badge_text_case }}"> -{{ savings_pct }}% </span>
+
+          {%- when 'text' -%}
+            <span class="pc__badge pc__badge--sale color-{{ settings.badge_sale_scheme }} text-{{ settings.badge_text_case }}">
+              {{ settings.sale_badge_text }}
+            </span>
+
+          {%- when 'save_amount' -%}
+            {%- assign save_amount = product.compare_at_price | minus: product.price -%}
+            <span class="pc__badge pc__badge--sale color-{{ settings.badge_sale_scheme }} text-{{ settings.badge_text_case }}"> Save {{ save_amount | money }} </span>
+        {%- endcase -%}
       {%- endif -%}
     </div>
 
@@ -126,7 +150,12 @@
 
       {% if product.variants.size > 1 and quick_multiple_options %}
         <div class="pc__quick-add">
-          <a href="{{ product.url }}" class="pc__quick-btn">
+          <button
+            type="button"
+            class="pc__quick-btn"
+            onclick="window.location.href='{{ product.url }}'"
+            aria-label="{{ 'products.select_options' | t }}"
+          >
             <svg
               width="16"
               height="16"
@@ -139,7 +168,7 @@
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <span>{{ 'products.select_options' | t }}</span>
-          </a>
+          </button>
         </div>
       {% endif %}
     {%- endif -%}

@@ -98,6 +98,16 @@
   z-index: 2;
 }
 
+.pc__badges--left {
+  left: 10px;
+  right: auto;
+}
+
+.pc__badges--right {
+  right: 10px;
+  left: auto;
+}
+
 .pc__badge {
   display: inline-block;
   padding: 3px 8px;
@@ -105,8 +115,16 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   line-height: 1.4;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
 }
 
 .pc__badge--sale {
