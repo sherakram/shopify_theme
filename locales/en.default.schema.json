@@ -9,6 +9,7 @@
     "collections": "Collections",
     "product_grid": "Product grid",
     "collections_grid": "Collections grid",
+    "quick_buy": "Quick button",
     "colors": "Colors",
     "column": "Column",
     "content": "Content",
@@ -50,9 +51,60 @@
     "mobile_grid_settings": "Mobile Grid Settings",
     "card_shadow": "Card Shadow",
     "social_media_icons": "Social Media",
-    "filter_and_sorting": "Filters & Sorting"
+    "filter_and_sorting": "Filters & Sorting",
+    "announcement_bar": "Announcement Bar",
+    "slideshow": "Slideshow",
+    "featured_collection": "Featured Collection",
+    "featured_product": "Featured Product",
+    "image_banner": "Image Banner",
+    "rich_text": "Rich Text",
+    "multicolumn": "Multicolumn",
+    "newsletter": "Newsletter",
+    "testimonials": "Testimonials",
+    "contact_form": "Contact Form"
   },
+
+  "settings": {
+    "background": "Background",
+    "headings": "Headings",
+    "text": "Text",
+    "primary_color": "Primary color",
+    "primary_hover_color": "Primary hover color",
+    "borders": "Borders",
+    "shadow_color": "Shadow color",
+    "hover_background": "Hover background",
+    "hover_text": "Hover text",
+    "hover_borders": "Hover borders",
+    "overlay_color": "Overlay color",
+    "overlay_opacity": "Overlay opacity",
+    "accent_color": "Accent color",
+    "success_color": "Success color",
+    "error_color": "Error color",
+    "warning_color": "Warning color"
+  },
+
+  "names": {
+    "logo": "Logo",
+    "product_card": "Product Cards",
+    "primary_button": "Primary button",
+    "secondary_button": "Secondary button",
+    "inputs": "Inputs",
+    "variants": "Variants",
+    "selected_variants": "Selected variants",
+    "badges": "Badges",
+    "links": "Links",
+    "icons": "Icons",
+    "cards": "Cards",
+    "navigation": "Navigation",
+    "footer": "Footer"
+  },
+
   "labels": {
+    "desktop_logo": "Desktop logo",
+    "mobile_logo": "Mobile logo",
+    "dark_logo": "Dark mode logo",
+    "logo_max_width": "Logo max width (px)",
+    "favicon": "Favicon",
     "alignment": "Alignment",
     "background": "Background",
     "foreground": "Foreground",
@@ -74,6 +126,8 @@
     "collection_title": "Collection Title",
     "show_description": "Show Description",
     "bgColor": "Background Title",
+    "media": "Media",
+    "show_secondary_image": "Show secondary image on hover",
     "desktop_Columns": "Desktop Columns",
     "max_card_width_desktop": "Max Card Width (Desktop)",
     "table_columns": "Tablet Columns",
@@ -107,8 +161,50 @@
     "sort_selector": "Enable sort selector",
     "sort_options": "Sort options (Label:Value, comma-separated)",
     "items_per_page": "Default items per page",
-    "position": "Position"
+    "position": "Position",
+    "image": "Image",
+    "video": "Video",
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "description": "Description",
+    "button_label": "Button label",
+    "button_link": "Button link",
+    "button_style": "Button style",
+    "show_image": "Show image",
+    "image_ratio": "Image ratio",
+    "image_position": "Image position",
+    "autoplay": "Autoplay",
+    "autoplay_speed": "Autoplay speed (seconds)",
+    "show_arrows": "Show navigation arrows",
+    "show_dots": "Show pagination dots",
+    "enable_loop": "Enable loop",
+    "full_width": "Full width",
+    "max_width": "Max width",
+    "enable_sticky": "Enable sticky",
+    "show_border": "Show border",
+    "lazy_load": "Lazy load images",
+    "show_vendor": "Show vendor",
+    "show_reviews": "Show reviews",
+    "show_rating": "Show rating",
+    "show_price": "Show price",
+    "show_compare_price": "Show compare at price",
+    "show_badge": "Show sale badge",
+    "quick_button_multiple_options": "Enable quick add to cart button for multiple options",
+    "quick_button_single_option": "Show quick add to cart button for single option products",
+    "quick_add": "Show quick add button",
+    "quick_add_hover": "Show quick add on hover only",
+    "color_scheme": "Color scheme",
+    "enable_animation": "Enable animation",
+    "animation_type": "Animation type",
+    "custom_css": "Custom CSS",
+    "badge_position": "Badge Position",
+    "sale_badge_type": "Sale badge type",
+    "sale_badge_text": "Sale badge text",
+    "badge_sale_scheme": "Sale badge color scheme",
+    "badge_soldout_scheme": "Sold out badge color scheme",
+    "badge_text_case": "Badge text case"
   },
+
   "options": {
     "alignment": {
       "left": "Left",
@@ -127,6 +223,7 @@
     },
     "size": {
       "large": "Large",
+      "medium": "Medium",
       "small": "Small"
     },
     "text_style": {
@@ -134,16 +231,66 @@
       "subtitle": "Subtitle",
       "normal": "Normal text"
     },
+    "button_style": {
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "link": "Link style"
+    },
+    "image_ratio": {
+      "auto": "Auto",
+      "natural": "Natural",
+      "square": "1:1",
+      "portrait": "3:4",
+      "landscape": "4:5",
+      "wide": "Wide (16:9)"
+    },
+    "animation": {
+      "none": "None",
+      "fade": "Fade",
+      "slide": "Slide",
+      "zoom": "Zoom"
+    },
+    "position": {
+      "left": "Left",
+      "right": "Right",
+      "top": "Top",
+      "bottom": "Bottom",
+      "center": "Center"
+    },
+    "badge_position": {
+      "top_left": "Top left",
+      "top_right": "Top right",
+      "bottom_left": "Bottom left",
+      "bottom_right": "Bottom right"
+    },
+    "sale_badge_type": {
+      "percentage": "Percentage off",
+      "amount": "Save amount",
+      "text": "Custom text"
+    },
+    "text_case": {
+      "uppercase": "Uppercase",
+      "lowercase": "Lowercase",
+      "capitalize": "capitalize"
+    }
   },
-  "informative_content":{
-    "info_about_thumbs": "On mobile, thumbnails are horizontal and below the main image."
+
+  "informative_content": {
+    "favicon_info": "Displayed at 32 x 32px",
+    "info_about_thumbs": "On mobile, thumbnails are horizontal and below the main image.",
+    "color_scheme_info": "Editing this scheme's colors will affect all sections using this scheme.",
+    "custom_css_info": "Add custom CSS to this section. Access section class with .section-{{ id }}."
   },
+
   "sections": {
     "all": {
       "padding": {
         "padding_top": "Top Padding",
         "padding_bottom": "Bottom Padding"
-      }
-    },
+      },
+      "color_scheme": "Color scheme",
+      "section_width": "Section width",
+      "section_id": "Section ID (for anchor links)"
+    }
   }
 }

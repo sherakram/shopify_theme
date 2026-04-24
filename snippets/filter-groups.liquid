@@ -1,0 +1,135 @@
+{% liquid
+  assign section = section
+  assign collection = collection
+%}
+
+{%- for filter in collection.filters -%}
+  {% liquid
+    assign group_id = 'Filter-' | append: section.id | append: '-' | append: forloop.index
+    assign type = filter.type
+  %}
+  <fieldset class="fs-group" aria-labelledby="{{ group_id }}">
+    <legend id="{{ group_id }}" class="fs-group__title">{{ filter.label }}</legend>
+
+    {%- case type -%}
+      {%- when 'list' -%}
+        <ul class="fs-list" role="list">
+          {%- for filter_value in filter.values -%}
+            <li class="fs-list__item">
+              <div class="fs-checkbox">
+                <input
+                  id="{{ group_id }}-{{ forloop.index }}"
+                  type="checkbox"
+                  name="{{ filter_value.param_name }}"
+                  value="{{ filter_value.value }}"
+                  data-filter-url="{{ filter_value.url }}"
+                  {% if filter_value.active %}
+                    checked
+                  {% endif %}
+                  {% if filter_value.count == 0 and filter_value.active == false %}
+                    disabled
+                  {% endif %}
+                  aria-pressed="{% if filter_value.active %}true{% else %}false{% endif %}"
+                  aria-describedby="{{ group_id }}-count-{{ forloop.index }}"
+                >
+                <label for="{{ group_id }}-{{ forloop.index }}">
+                  <span class="fs-text">{{ filter_value.label }}</span>
+                  <span class="fs-count" id="{{ group_id }}-count-{{ forloop.index }}">({{ filter_value.count }})</span>
+                </label>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+      {%- when 'price_range' -%}
+        <div class="fs-price">
+          {%- assign min_value = filter.min_value.value | default: '' -%}
+          {%- assign max_value = filter.max_value.value | default: '' -%}
+          {%- assign range_min = filter.range_min -%}
+          {%- assign range_max = filter.range_max -%}
+
+          <label for="{{ group_id }}-from" class="fs-label">
+            {{- 'collections.general.from' | t | default: 'From' -}}
+          </label>
+          <input
+            id="{{ group_id }}-from"
+            class="fs-input"
+            name="{{ filter.min_value.param_name }}"
+            data-param-name="{{ filter.min_value.param_name }}"
+            type="number"
+            inputmode="numeric"
+            min="{{ range_min }}"
+            max="{{ range_max }}"
+            value="{{ min_value }}"
+            aria-describedby="{{ group_id }}-from-help"
+          >
+          <span class="fs-to" aria-hidden="true">–</span>
+          <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
+          <input
+            id="{{ group_id }}-to"
+            class="fs-input"
+            name="{{ filter.max_value.param_name }}"
+            data-param-name="{{ filter.max_value.param_name }}"
+            type="number"
+            inputmode="numeric"
+            min="{{ range_min }}"
+            max="{{ range_max }}"
+            value="{{ max_value }}"
+            aria-describedby="{{ group_id }}-to-help"
+          >
+          <div class="visually-hidden" id="{{ group_id }}-from-help">
+            {{ 'collections.general.min_price' | t | default: 'Minimum price' }}
+          </div>
+          <div class="visually-hidden" id="{{ group_id }}-to-help">
+            {{ 'collections.general.max_price' | t | default: 'Maximum price' }}
+          </div>
+        </div>
+
+      {%- when 'boolean' -%}
+        {%- for filter_value in filter.values -%}
+          <div class="fs-checkbox">
+            <input
+              id="{{ group_id }}-bool-{{ forloop.index }}"
+              type="checkbox"
+              name="{{ filter_value.param_name }}"
+              value="{{ filter_value.value }}"
+              data-filter-url="{{ filter_value.url }}"
+              {% if filter_value.active %}
+                checked
+              {% endif %}
+              {% if filter_value.count == 0 and filter_value.active == false %}
+                disabled
+              {% endif %}
+            >
+            <label for="{{ group_id }}-bool-{{ forloop.index }}">
+              {{ filter_value.label }}
+              <span class="fs-count">({{ filter_value.count }})</span>
+            </label>
+          </div>
+        {%- endfor -%}
+    {%- endcase -%}
+
+    {%- if filter.active_values.size > 0 -%}
+      <a
+        class="fs-clear"
+        href="{{ filter.url_to_remove }}"
+        aria-label="{{ 'collections.general.clear_filter' | t | default: 'Clear filter' }}: {{ filter.label }}"
+      >
+        {{- 'collections.general.clear' | t | default: 'Clear' -}}
+      </a>
+    {%- endif -%}
+  </fieldset>
+{%- endfor -%}
+
+{%- assign has_active_filters = false -%}
+{%- for f in collection.filters -%}
+  {%- if f.active_values.size > 0 -%}
+    {%- assign has_active_filters = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if has_active_filters -%}
+  <a class="fs-clear-all" href="{{ collection.url | append: '?' | append: 'sort_by=' | append: current_sort | escape }}">
+    {{ 'collections.general.clear_all' | t | default: 'Clear all' }}
+  </a>
+{%- endif -%}

@@ -63,7 +63,6 @@
             widths: '300, 400, 500, 600',
             sizes: '(max-width: 767px) 50vw, 25vw',
             alt: product.featured_image.alt
-          | escape
           | default: product.title
         }}
 
@@ -77,7 +76,6 @@
               widths: '300, 400, 500, 600',
               sizes: '(max-width: 767px) 50vw, 25vw',
               alt: product.images[1].alt
-            | escape
             | default: product.title
           }}
         {%- endif -%}

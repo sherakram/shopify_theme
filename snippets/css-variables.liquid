@@ -14,6 +14,61 @@
     --color-background: {{ settings.background_color }};
     --color-foreground: {{ settings.foreground_color }};
     --style-border-radius: {{ settings.corner_radius }}px;
+    
+    /* Color schemes */
+    {% # Generate CSS class for each color scheme %}
+  {% for scheme in settings.color_schemes %}
+    .color-scheme-{{ scheme.id }} {
+      --color-background:                   {{ scheme.settings.background }};
+      --color-foreground-heading:           {{ scheme.settings.foreground_heading }};
+      --color-foreground:                   {{ scheme.settings.foreground }};
+      --color-primary:                      {{ scheme.settings.primary }};
+      --color-primary-hover:                {{ scheme.settings.primary_hover }};
+      --color-border:                       {{ scheme.settings.border }};
+      --color-shadow:                       {{ scheme.settings.shadow }};
+
+      /* Primary Button */
+      --color-btn-primary-bg:              {{ scheme.settings.primary_button_background }};
+      --color-btn-primary-text:            {{ scheme.settings.primary_button_text }};
+      --color-btn-primary-border:          {{ scheme.settings.primary_button_border }};
+      --color-btn-primary-hover-bg:        {{ scheme.settings.primary_button_hover_background }};
+      --color-btn-primary-hover-text:      {{ scheme.settings.primary_button_hover_text }};
+      --color-btn-primary-hover-border:    {{ scheme.settings.primary_button_hover_border }};
+
+      /* Secondary Button */
+      --color-btn-secondary-bg:            {{ scheme.settings.secondary_button_background }};
+      --color-btn-secondary-text:          {{ scheme.settings.secondary_button_text }};
+      --color-btn-secondary-border:        {{ scheme.settings.secondary_button_border }};
+      --color-btn-secondary-hover-bg:      {{ scheme.settings.secondary_button_hover_background }};
+      --color-btn-secondary-hover-text:    {{ scheme.settings.secondary_button_hover_text }};
+      --color-btn-secondary-hover-border:  {{ scheme.settings.secondary_button_hover_border }};
+
+      /* Inputs */
+      --color-input-bg:                    {{ scheme.settings.input_background }};
+      --color-input-text:                  {{ scheme.settings.input_text_color }};
+      --color-input-border:                {{ scheme.settings.input_border_color }};
+      --color-input-hover-bg:              {{ scheme.settings.input_hover_background }};
+
+      /* Variants */
+      --color-variant-bg:                  {{ scheme.settings.variant_background_color }};
+      --color-variant-text:                {{ scheme.settings.variant_text_color }};
+      --color-variant-border:              {{ scheme.settings.variant_border_color }};
+      --color-variant-hover-bg:            {{ scheme.settings.variant_hover_background_color }};
+      --color-variant-hover-text:          {{ scheme.settings.variant_hover_text_color }};
+      --color-variant-hover-border:        {{ scheme.settings.variant_hover_border_color }};
+
+      /* Selected Variants */
+      --color-selected-variant-bg:         {{ scheme.settings.selected_variant_background_color }};
+      --color-selected-variant-text:       {{ scheme.settings.selected_variant_text_color }};
+      --color-selected-variant-border:     {{ scheme.settings.selected_variant_border_color }};
+      --color-selected-variant-hover-bg:   {{ scheme.settings.selected_variant_hover_background_color }};
+      --color-selected-variant-hover-text: {{ scheme.settings.selected_variant_hover_text_color }};
+      --color-selected-variant-hover-border: {{ scheme.settings.selected_variant_hover_border_color }};
+    }
+  {% endfor %}
+    /* Colors */
+    --color-sale-badge: {{ settings.badge_sale_scheme }};
+    --color-soldout-badge: {{  settings.badge_soldout_scheme }};
     /* Card Grid Layout Settings */
     --grid-cards-columns-desktop: {{ settings.grid_cards_columns_desktop }};
     --grid-cards-columns-tablet: {{ settings.grid_cards_columns_tablet }};

@@ -8,27 +8,27 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
-    "name": "Logo",
+    "name": "t:names.logo",
     "settings": [
       {
         "type": "image_picker",
         "id": "logo_image",
-        "label": "Desktop Logo"
+        "label": "t:labels.desktop_logo"
       },
       {
         "type": "image_picker",
         "id": "mobile_logo_image",
-        "label": "Mobile Logo"
+        "label": "t:labels.mobile_logo"
       },
       {
         "type": "image_picker",
         "id": "dark_logo_image",
-        "label": "Dark Mode Logo"
+        "label": "t:labels.dark_logo"
       },
       {
         "type": "range",
         "id": "logo_max_width",
-        "label": "Max logo width (PX)",
+        "label": "t:labels.logo_max_width",
         "min": 100,
         "max": 200,
         "step": 4,
@@ -37,8 +37,8 @@
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon",
-        "info": "Displayed at 32 x 32px"
+        "label": "t:labels.favicon",
+        "info": "t:informative_content.favicon_info"
       }
     ]
   },
@@ -377,20 +377,20 @@
     ]
   },
   {
-    "name": "Badges",
+    "name": "t:names.badges",
     "settings": [
       {
         "type": "select",
         "id": "badge_position",
-        "label": "Badge Position",
+        "label": "t:labels.badge_position",
         "options": [
           { 
             "value": "left", 
-            "label": "Top Left" 
+            "label": "t:options.badge_position.top_left" 
           },
           { 
             "value": "right", 
-            "label": "Top Right" 
+            "label": "t:options.badge_position.top_right"
           }
         ],
         "default": "left"
@@ -398,19 +398,19 @@
       {
         "type": "select",
         "id": "sale_badge_type",
-        "label": "Sale Badge Type",
+        "label": "t:labels.sale_badge_type",
         "options": [
           { 
             "value": "percent", 
-            "label": "Percentage (-20%)" 
+            "label": "t:options.sale_badge_type.percentage" 
           },
           { 
             "value": "text", 
-            "label": "Sale Text" 
+            "label": "t:options.sale_badge_type.text" 
           },
           { 
             "value": "save_amount", 
-            "label": "Save Amount ($10 OFF)" 
+            "label": "t:options.sale_badge_type.amount" 
           }
         ],
         "default": "percent"
@@ -418,34 +418,40 @@
       {
         "type": "text",
         "id": "sale_badge_text",
-        "label": "Custom Sale Text",
+        "label": "t:labels.sale_badge_text",
         "default": "Sale"
       },
       {
         "type": "header",
-        "content": "Colors"
+        "content": "t:general.colors"
       },
       {
         "type": "color_scheme",
         "id": "badge_sale_scheme",
-        "label": "Sale badge color"
+        "label": "t:labels.badge_sale_scheme"
       },
       {
         "type": "color_scheme",
         "id": "badge_soldout_scheme",
-        "label": "Sold out badge color"
+        "label": "t:labels.badge_soldout_scheme"
       },
       {
         "type": "header",
-        "content": "Typography"
+        "content": "t:general.typography"
       },
       {
       "type": "select",
       "id": "badge_text_case",
-      "label": "Badge Text Case",
+      "label": "t:labels.badge_text_case",
       "options": [
-        { "value": "uppercase", "label": "UPPERCASE" },
-        { "value": "lowercase", "label": "lowercase" }
+        { 
+          "value": "uppercase", 
+          "label": "t:options.text_case.uppercase" 
+        },
+        { 
+          "value": "lowercase", 
+          "label": "t:options.text_case.lowercase" 
+        }
       ],
       "default": "uppercase"
     }
@@ -596,49 +602,49 @@
     ]
   },
   {
-    "name": "Product Cards",
+    "name": "t:names.product_card",
     "settings": [
       {
         "type": "checkbox",
         "id": "show_vendor",
-        "label": "Show product vendor",
+        "label": "t:labels.show_vendor",
         "default": false
       },
       {
         "type": "header", 
-        "content": "Media"
+        "content": "t:labels.media"
       },
       {
         "type": "checkbox",
         "id": "show_secondary_image",
-        "label": "Show secondary image on hover",
+        "label": "t:labels.show_secondary_image",
         "default": true
       },
       {
         "type": "checkbox",
         "id": "show_reviews",
-        "label": "Show product reviews",
+        "label": "t:labels.show_reviews",
         "default": false
       },
       {
         "type": "select",
         "id": "image_ratio",
-        "label": "Image ratio",
+        "label": "t:labels.image_ratio",
         "options": [
           { 
-            "label": "Auto", 
+            "label": "t:options.image_ratio.auto", 
             "value": "auto" 
           },
           { 
-            "label": "1:1", 
+            "label": "t:options.image_ratio.square", 
             "value": "1/1" 
           },
           {  
-            "label": "3:4", 
+            "label": "t:options.image_ratio.portrait", 
             "value": "3/4" 
           },
           { 
-            "label": "4:5", 
+            "label": "t:options.image_ratio.landscape", 
             "value": "4/5" 
           }
         ],
@@ -646,24 +652,24 @@
       },
       {
         "type": "header", 
-        "content": "Quick button"
+        "content": "t:general.quick_buy"
       },
       {
         "type": "checkbox",
         "id": "enable_selected_varaint_quick_add",
-        "label": "Enable quick add to cart button for multiple options",
+        "label": "t:labels.quick_button_multiple_options",
         "default": false
       },
       {
         "type": "checkbox",
         "id": "show_quick_add",
-        "label": "Show quick add to cart button for single option products",
+        "label": "t:labels.quick_button_single_option",
         "default": true
       },
       {
         "type": "checkbox",
         "id": "enable_quick_button_on_hover",
-        "label": "Show quick add button on hover only",
+        "label": "t:labels.quick_add_hover",
         "default": false
       }
     ]
@@ -671,29 +677,112 @@
   {
   "name": "t:general.social_media_icons",
   "settings": [
-      { "type": "checkbox", "id": "show_social_icons", "label": "t:labels.show_social_icons", "default": true },
-
-      { "type": "select", "id": "social_icon_style", "label": "t:labels.icon_style", "default": "mono",
-       "options": [
-         { "value": "mono", "label": "t:labels.monochrome_color" },
-         { "value": "brand", "label": "t:labels.brand_colors" }
+      { 
+        "type": "checkbox", 
+        "id": "show_social_icons", 
+        "label": "t:labels.show_social_icons", 
+        "default": true 
+      },
+      { 
+        "type": "select", 
+        "id": "social_icon_style", 
+        "label": "t:labels.icon_style", 
+        "default": "mono",
+        "options": [
+          { 
+            "value": "mono", 
+            "label": "t:labels.monochrome_color" 
+          },
+          { 
+            "value": "brand", 
+            "label": "t:labels.brand_colors" 
+          }
        ]
       },
-
-      { "type": "range", "id": "social_icon_size", "label": "t:labels.icon_size", "min": 14, "max": 36, "step": 2, "unit": "px", "default": 18 },
-      { "type": "range", "id": "social_icon_gap", "label": "t:labels.icon_gap", "min": 4, "max": 24, "step": 2, "unit": "px", "default": 10 },
-      { "type": "range", "id": "social_icon_radius", "label": "t:labels.icon_corner_radius", "min": 0, "max": 12, "step": 2, "unit": "px", "default": 6 },
-
-      { "type": "color", "id": "social_icon_color", "label": "t:labels.monochrome", "default": "#222222" },
-      { "type": "color", "id": "social_icon_hover_color", "label": "t:labels.hover_color", "default": "#000000" },
-
-      { "type": "text", "id": "social_facebook_url", "label": "t:labels.facebook_url", "placeholder": "https://facebook.com/shopify" },
-      { "type": "text", "id": "social_instagram_url", "label": "t:labels.instagram_url", "placeholder": "https://Instagram.com/shopify" },
-      { "type": "text", "id": "social_twitter_url", "label": "t:labels.twitter_url", "placeholder": "https://Twitter.com/shopify" },
-      { "type": "text", "id": "social_youtube_url", "label": "t:labels.youtube_url", "placeholder": "https://YouTube.com/shopify" },
-      { "type": "text", "id": "social_linkedin_url", "label": "t:labels.linkedin_url", "placeholder": "https://LinkedIn.com/shopify" },
-      { "type": "text", "id": "social_pinterest_url", "label": "t:labels.pinterest_url", "placeholder": "https://Pinterest.com/shopify" },
-      { "type": "text", "id": "social_tiktok_url", "label": "t:labels.tiktok_url", "placeholder": "https://TikTok.com/shopify" }
+      { 
+        "type": "range", 
+        "id": "social_icon_size", 
+        "label": "t:labels.icon_size", 
+        "min": 14, 
+        "max": 36, 
+        "step": 2, 
+        "unit": "px", 
+        "default": 18 
+      },
+      { 
+        "type": "range", 
+        "id": "social_icon_gap", 
+        "label": "t:labels.icon_gap", 
+        "min": 4, 
+        "max": 24, 
+        "step": 2, 
+        "unit": "px", 
+        "default": 10 
+      },
+      { 
+        "type": "range", 
+        "id": "social_icon_radius", 
+        "label": "t:labels.icon_corner_radius", 
+        "min": 0, 
+        "max": 12, 
+        "step": 2, 
+        "unit": "px", 
+        "default": 6 
+      },
+      { 
+        "type": "color", 
+        "id": "social_icon_color", 
+        "label": "t:labels.monochrome", 
+        "default": "#222222" 
+      },
+      { 
+        "type": "color", 
+        "id": "social_icon_hover_color", 
+        "label": "t:labels.hover_color", 
+        "default": "#000000" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_facebook_url", 
+        "label": "t:labels.facebook_url", 
+        "placeholder": "https://facebook.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_instagram_url", 
+        "label": "t:labels.instagram_url", 
+        "placeholder": "https://Instagram.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_twitter_url", 
+        "label": "t:labels.twitter_url", 
+        "placeholder": "https://Twitter.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_youtube_url", 
+        "label": "t:labels.youtube_url", 
+        "placeholder": "https://YouTube.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_linkedin_url", 
+        "label": "t:labels.linkedin_url", 
+        "placeholder": "https://LinkedIn.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_pinterest_url", 
+        "label": "t:labels.pinterest_url", 
+        "placeholder": "https://Pinterest.com/shopify" 
+      },
+      { 
+        "type": "text", 
+        "id": "social_tiktok_url", 
+        "label": "t:labels.tiktok_url", 
+        "placeholder": "https://TikTok.com/shopify" 
+      }
     ]
   }
 ]

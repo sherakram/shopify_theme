@@ -2,321 +2,144 @@
 
 {%- assign allow_filters = section.settings.enable_filters -%}
 {%- assign allow_sort = section.settings.enable_sort -%}
-{%- assign allow_page_size = section.settings.enable_page_size -%}
+{%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
 
-<div class="fs-toolbar" role="region" aria-label="{{ 'collections.general.filters_and_sorting' | t | default: 'Filters and sorting' }}">
-          <form id="FacetFiltersForm-{{ section.id }}" class="fs-form" method="get" role="search" aria-label="{{ 'collections.general.filter_products' | t | default: 'Filter products' }}">
-             <div class="fs-topbar" aria-live="polite">
-                {%- if allow_sort -%}
-                  <label for="SortBy-{{ section.id }}" class="fs-label">{{ 'collections.sorting.title' | t | default: 'Sort by' }}</label>
-                  <select id="SortBy-{{ section.id }}" class="fs-select" name="sort_by" aria-controls="CollectionProductGrid-{{ section.id }}">
-                    {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
-                    {%- for option in collection.sort_options -%}
-                      <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
-                        {{ option.name }}
-                      </option>
-                    {%- endfor -%}
-                  </select>
+<div
+  class="fs-toolbar"
+  role="region"
+  aria-label="{{ 'collections.general.filters_and_sorting' | t | default: 'Filters and sorting' }}"
+>
+  <form
+    id="FacetFiltersForm-{{ section.id }}"
+    class="fs-form"
+    method="get"
+    role="search"
+    aria-label="{{ 'collections.general.filter_products' | t | default: 'Filter products' }}"
+  >
+    <div class="fs-topbar" aria-live="polite">
+      {%- if allow_sort -%}
+        <label for="SortBy-{{ section.id }}" class="fs-label visually-hidden">
+          {{- 'collections.sorting.title' | t | default: 'Sort by' -}}
+        </label>
+        <select
+          id="SortBy-{{ section.id }}"
+          class="fs-select"
+          name="sort_by"
+          aria-controls="CollectionProductGrid-{{ section.id }}"
+        >
+          {%- for option in collection.sort_options -%}
+            <option
+              value="{{ option.value }}"
+              {% if option.value == collection.sort_by %}
+                selected
+              {% endif %}
+            >
+              {{ option.name }}
+            </option>
+          {%- endfor -%}
+        </select>
+      {%- endif -%}
+
+      <noscript>
+        <button class="fs-apply" type="submit">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
+      </noscript>
+    </div>
+
+    {%- if allow_filters -%}
+      <div class="fs-layout">
+        <aside class="fs-sidebar" aria-label="{{ 'collections.general.filters' | t | default: 'Filters' }}">
+          <button type="button" class="fs-toggle" aria-expanded="false" aria-controls="FiltersPanel-{{ section.id }}">
+            {{ 'collections.general.filter' | t | default: 'Filter' }}
+          </button>
+
+          {%- if section.settings.filters_use_drawer -%}
+            <div class="fs-drawer" aria-hidden="true" id="FiltersDrawer-{{ section.id }}">
+
+              <div class="fs-drawer__backdrop" data-drawer-close hidden aria-hidden="true" tabindex="-1"></div>
+
+              <div
+                id="FiltersPanel-{{ section.id }}"
+                class="fs-panels fs-drawer__panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="FiltersPanelTitle-{{ section.id }}"
+                tabindex="-1"
+                hidden
+              >
+                <div class="fs-panel__header">
+                  <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
+                    {{ 'collections.general.filters' | t | default: 'Filters' }}
+                  </h3>
+                  <button
+                    class="fs-close"
+                    aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}"
+                    data-drawer-close
+                  >
+                    &times;
+                  </button>
+                </div>
+
+                {%- if collection.filters.size == 0 -%}
+                  <p class="fs-empty">
+                    {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
+                  </p>
                 {%- endif -%}
 
+                {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
 
-                <noscript>
-                  <button class="fs-apply" type="submit">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
-                </noscript>
-              </div>
-
-            {%- if allow_filters -%}
-                <div class="fs-layout">
-                  <aside class="fs-sidebar" aria-label="{{ 'collections.general.filters' | t | default: 'Filters' }}">
-                      <button type="button" class="fs-toggle" aria-expanded="false" aria-controls="FiltersPanel-{{ section.id }}">
-                        {{ 'collections.general.filter' | t | default: 'Filter' }}
-                      </button>
-
-                     {%- if section.settings.filters_use_drawer -%}
-                        <div class="fs-drawer" aria-hidden="true" id="FiltersDrawer-{{ section.id }}">
-                            <!-- backdrop: clicking this will be handled by your drawer JS because it looks for [data-drawer-close] -->
-                            <div class="fs-drawer__backdrop" data-drawer-close hidden aria-hidden="true" tabindex="-1"></div>
-
-                            <!-- the panel: keep your inner filter markup inside this element -->
-                            <div
-                              id="FiltersPanel-{{ section.id }}"
-                              class="fs-panels fs-drawer__panel"
-                              role="dialog"
-                              aria-modal="true"
-                              aria-labelledby="FiltersPanelTitle-{{ section.id }}"
-                              tabindex="-1"
-                              hidden
-                              >
-                              <div class="fs-panel__header">
-                              <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">{{ 'collections.general.filters' | t | default: 'Filters' }}</h3>
-                              <button class="fs-close" aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}" data-drawer-close>&times;</button>
-                            </div>
-
-                            {%- if collection.filters.size == 0 -%}
-                              <p class="fs-empty">{{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}</p>
-                            {%- endif -%}
-
-                            {%- for filter in collection.filters -%}
-                              {% liquid
-                                assign group_id = 'Filter-' | append: section.id | append: '-' | append: forloop.index
-                                assign type = filter.type
-                              %}
-                              <fieldset class="fs-group" aria-labelledby="{{ group_id }}">
-                                <legend id="{{ group_id }}" class="fs-group__title">{{ filter.label }}</legend>
-
-                                {%- case type -%}
-                                  {%- when 'list' -%}
-                                    <ul class="fs-list" role="list">
-                                      {%- for filter_value in filter.values -%}
-                                        <li class="fs-list__item">
-                                          <div class="fs-checkbox">
-                          
-                                            <input
-                                              id="{{ group_id }}-{{ forloop.index }}"
-                                              type="checkbox"
-                                              name="{{ filter_value.param_name }}"
-                                              value="{{ filter_value.value }}"
-                                              data-filter-url="{{ filter_value.url }}"
-                                              {% if filter_value.active %}checked{% endif %}
-                                              {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
-                                              aria-pressed="{% if filter_value.active %}true{% else %}false{% endif %}"
-                                              aria-describedby="{{ group_id }}-count-{{ forloop.index }}"
-                                            >
-                                            <label for="{{ group_id }}-{{ forloop.index }}">
-                                              <span class="fs-text">{{ filter_value.label }}</span>
-                                              <span class="fs-count" id="{{ group_id }}-count-{{ forloop.index }}">({{ filter_value.count }})</span>
-                                            </label>
-                                          </div>
-                                        </li>
-                                      {%- endfor -%}
-                                    </ul>
-
-                                  {%- when 'price_range' -%}
-                                   <div class="fs-price">
-                                      {%- assign min_value = filter.min_value.value | default: '' -%}
-                                      {%- assign max_value = filter.max_value.value | default: '' -%}
-                                      {%- assign range_min = filter.range_min -%}
-                                      {%- assign range_max = filter.range_max -%}
-
-                                      <label for="{{ group_id }}-from" class="fs-label">{{ 'collections.general.from' | t | default: 'From' }}</label>
-                                      <input
-                                        id="{{ group_id }}-from"
-                                        class="fs-input"
-                                        name="{{ filter.min_value.param_name }}"
-                                        data-param-name="{{ filter.min_value.param_name }}"
-                                        type="number"
-                                        inputmode="numeric"
-                                        min="{{ range_min }}"
-                                        max="{{ range_max }}"
-                                        value="{{ min_value }}"
-                                        aria-describedby="{{ group_id }}-from-help"
-                                      >
-                                        <span class="fs-to" aria-hidden="true">–</span>
-                                        <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
-                                      <input
-                                        id="{{ group_id }}-to"
-                                        class="fs-input"
-                                        name="{{ filter.max_value.param_name }}"
-                                        data-param-name="{{ filter.max_value.param_name }}"
-                                        type="number"
-                                        inputmode="numeric"
-                                        min="{{ range_min }}"
-                                        max="{{ range_max }}"
-                                        value="{{ max_value }}"
-                                        aria-describedby="{{ group_id }}-to-help"
-                                      >
-                                      <div class="visually-hidden" id="{{ group_id }}-from-help">{{ 'collections.general.min_price' | t | default: 'Minimum price' }}</div>
-                                      <div class="visually-hidden" id="{{ group_id }}-to-help">{{ 'collections.general.max_price' | t | default: 'Maximum price' }}</div>
-                                    </div>
-
-                                  {%- when 'boolean' -%}
-                                    {%- for filter_value in filter.values -%}
-                                      <div class="fs-checkbox">
-                                        <input
-                                          id="{{ group_id }}-bool-{{ forloop.index }}"
-                                          type="checkbox"
-                                          name="{{ filter_value.param_name }}"
-                                          value="{{ filter_value.value }}"
-                                          data-filter-url="{{ filter_value.url }}"
-                                          {% if filter_value.active %}checked{% endif %}
-                                          {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
-                                        >
-                                        <label for="{{ group_id }}-bool-{{ forloop.index }}">
-                                          {{ filter_value.label }} <span class="fs-count">({{ filter_value.count }})</span>
-                                        </label>
-                                      </div>
-                                    {%- endfor -%}
-                                {%- endcase -%}
-
-                                {%- if filter.active_values.size > 0 -%}
-                                  <a class="fs-clear" href="{{ filter.url_to_remove }}" aria-label="{{ 'collections.general.clear_filter' | t | default: 'Clear filter' }}: {{ filter.label }}">{{ 'collections.general.clear' | t | default: 'Clear' }}</a>
-                                {%- endif -%}
-                              </fieldset>
-                            {%- endfor -%}
-
-                            {%- assign has_active_filters = false -%}
-                            {%- for f in collection.filters -%}
-                              {%- if f.active_values.size > 0 -%}
-                                {%- assign has_active_filters = true -%}
-                              {%- endif -%}
-                            {%- endfor -%}
-
-                            {%- if has_active_filters -%}
-                              <a class="fs-clear-all" href="{{ collection.url | append: '?' | append: 'sort_by=' | append: current_sort | escape }}">
-                                {{ 'collections.general.clear_all' | t | default: 'Clear all' }}
-                              </a>
-                            {%- endif -%}
-
-                            {% comment %}
-                              <div class="fs-panel__footer fs-drawer__footer">
-                                <button type="button" class="fs-clear">{{ 'collections.general.clear' | t | default: 'Clear' }}</button>
-                                <button type="submit" class="fs-apply">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
-                              </div> 
-                            {% endcomment %}
-                          </div>
-                        </div>
-                        {%- else -%}
-                          <!-- Modal popup (centered) -->
-                          <div
-                            id="FiltersPanel-{{ section.id }}"
-                            class="fs-panels"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-labelledby="FiltersPanelTitle-{{ section.id }}"
-                            tabindex="-1"
-                            hidden
-                            >
-                            <div class="fs-panel-inner">
-                              <div class="fs-panel__header">
-                                <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">{{ 'collections.general.filters' | t | default: 'Filters' }}</h3>
-                                <button class="fs-close" aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}">&times;</button>
-                              </div>
-                              {%- if collection.filters.size == 0 -%}
-                              <p class="fs-empty">{{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}</p>
-                      {%- endif -%}
-
-                        {%- for filter in collection.filters -%}
-                          {% liquid
-                            assign group_id = 'Filter-' | append: section.id | append: '-' | append: forloop.index
-                            assign type = filter.type
-                          %}
-                          <fieldset class="fs-group" aria-labelledby="{{ group_id }}">
-                            <legend id="{{ group_id }}" class="fs-group__title">{{ filter.label }}</legend>
-
-                            {%- case type -%}
-                              {%- when 'list' -%}
-                                <ul class="fs-list" role="list">
-                                  {%- for filter_value in filter.values -%}
-                                    <li class="fs-list__item">
-                                      <div class="fs-checkbox">
-                          
-                                        <input
-                                          id="{{ group_id }}-{{ forloop.index }}"
-                                          type="checkbox"
-                                          name="{{ filter_value.param_name }}"
-                                          value="{{ filter_value.value }}"
-                                          data-filter-url="{{ filter_value.url }}"
-                                          {% if filter_value.active %}checked{% endif %}
-                                          {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
-                                          aria-pressed="{% if filter_value.active %}true{% else %}false{% endif %}"
-                                          aria-describedby="{{ group_id }}-count-{{ forloop.index }}"
-                                        >
-                                        <label for="{{ group_id }}-{{ forloop.index }}">
-                                          <span class="fs-text">{{ filter_value.label }}</span>
-                                          <span class="fs-count" id="{{ group_id }}-count-{{ forloop.index }}">({{ filter_value.count }})</span>
-                                        </label>
-                                      </div>
-                                    </li>
-                                  {%- endfor -%}
-                                </ul>
-
-                              {%- when 'price_range' -%}
-                                <div class="fs-price">
-                                  {%- assign min_value = filter.min_value.value | default: '' -%}
-                                  {%- assign max_value = filter.max_value.value | default: '' -%}
-                                  {%- assign range_min = filter.range_min -%}
-                                  {%- assign range_max = filter.range_max -%}
-
-                                  <label for="{{ group_id }}-from" class="fs-label">{{ 'collections.general.from' | t | default: 'From' }}</label>
-                                  <input
-                                    id="{{ group_id }}-from"
-                                    class="fs-input"
-                                    name="{{ filter.min_value.param_name }}"
-                                    data-param-name="{{ filter.min_value.param_name }}"
-                                    type="number"
-                                    inputmode="numeric"
-                                    min="{{ range_min }}"
-                                    max="{{ range_max }}"
-                                    value="{{ min_value }}"
-                                    aria-describedby="{{ group_id }}-from-help"
-                                  >
-                                  <span class="fs-to" aria-hidden="true">–</span>
-                                  <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
-                                  <input
-                                    id="{{ group_id }}-to"
-                                    class="fs-input"
-                                    name="{{ filter.max_value.param_name }}"
-                                    data-param-name="{{ filter.max_value.param_name }}"
-                                    type="number"
-                                    inputmode="numeric"
-                                    min="{{ range_min }}"
-                                    max="{{ range_max }}"
-                                    value="{{ max_value }}"
-                                    aria-describedby="{{ group_id }}-to-help"
-                                  >
-                                  <div class="visually-hidden" id="{{ group_id }}-from-help">{{ 'collections.general.min_price' | t | default: 'Minimum price' }}</div>
-                                  <div class="visually-hidden" id="{{ group_id }}-to-help">{{ 'collections.general.max_price' | t | default: 'Maximum price' }}</div>
-                                </div>
-
-                              {%- when 'boolean' -%}
-                                {%- for filter_value in filter.values -%}
-                                  <div class="fs-checkbox">
-                                    <input
-                                      id="{{ group_id }}-bool-{{ forloop.index }}"
-                                      type="checkbox"
-                                      name="{{ filter_value.param_name }}"
-                                      value="{{ filter_value.value }}"
-                                      data-filter-url="{{ filter_value.url }}"
-                                      {% if filter_value.active %}checked{% endif %}
-                                      {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
-                                    >
-                                    <label for="{{ group_id }}-bool-{{ forloop.index }}">
-                                      {{ filter_value.label }} <span class="fs-count">({{ filter_value.count }})</span>
-                                    </label>
-                                  </div>
-                                {%- endfor -%}
-                            {%- endcase -%}
-
-                            {%- if filter.active_values.size > 0 -%}
-                              <a class="fs-clear" href="{{ filter.url_to_remove }}" aria-label="{{ 'collections.general.clear_filter' | t | default: 'Clear filter' }}: {{ filter.label }}">{{ 'collections.general.clear' | t | default: 'Clear' }}</a>
-                            {%- endif -%}
-                          </fieldset>
-                        {%- endfor -%}
-
-                        {%- assign has_active_filters = false -%}
-                        {%- for f in collection.filters -%}
-                          {%- if f.active_values.size > 0 -%}
-                            {%- assign has_active_filters = true -%}
-                          {%- endif -%}
-                        {%- endfor -%}
-
-                        {%- if has_active_filters -%}
-                          <a class="fs-clear-all" href="{{ collection.url | append: '?' | append: 'sort_by=' | append: current_sort | escape }}">
-                            {{ 'collections.general.clear_all' | t | default: 'Clear all' }}
-                          </a>
-                        {%- endif -%}
-
-                        {% comment %} <div class="fs-panel__footer fs-actions">
-                          <button type="button" class="fs-clear">{{ 'collections.general.clear' | t | default: 'Clear' }}</button>
-                          <button type="submit" class="fs-apply">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
-                        </div> {% endcomment %}
-                      </div>
-                    </div>
-                     {%- endif -%}
-                  </aside>
+                <div class="fs-panel__footer fs-drawer__footer">
+                  <button type="button" class="fs-clear">
+                    {{ 'collections.general.clear' | t | default: 'Clear' }}
+                  </button>
+                  <button type="submit" class="fs-apply">
+                    {{ 'collections.general.apply' | t | default: 'Apply' }}
+                  </button>
                 </div>
-            {%- endif -%}
-          </form>
+              </div>
+            </div>
+          {%- else -%}
+            <!-- Modal popup (centered) -->
+            <div
+              id="FiltersPanel-{{ section.id }}"
+              class="fs-panels"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="FiltersPanelTitle-{{ section.id }}"
+              tabindex="-1"
+              hidden
+            >
+              <div class="fs-panel-inner">
+                <div class="fs-panel__header">
+                  <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
+                    {{ 'collections.general.filters' | t | default: 'Filters' }}
+                  </h3>
+                  <button class="fs-close" aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}">
+                    &times;
+                  </button>
+                </div>
+                {%- if collection.filters.size == 0 -%}
+                  <p class="fs-empty">
+                    {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
+                  </p>
+                {%- endif -%}
+
+                {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
+
+                <div class="fs-panel__footer fs-actions">
+                  <button type="button" class="fs-clear">
+                    {{ 'collections.general.clear' | t | default: 'Clear' }}
+                  </button>
+                  <button type="submit" class="fs-apply">
+                    {{ 'collections.general.apply' | t | default: 'Apply' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </aside>
+      </div>
+    {%- endif -%}
+  </form>
 </div>
 
 <script src="{{ 'filters-sorting.js' | asset_url }}" defer="defer"></script>

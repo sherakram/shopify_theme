@@ -2,6 +2,8 @@
   width: 100%;
   padding-top: var(--pt, 20px);
   padding-bottom: var(--pb, 20px);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* ── Product grid ── */
@@ -11,14 +13,14 @@
   gap: 40px 12px;
 }
 
-/* ── Tablet  (768 – 1024 px): cap at 3 cols or merchant value ── */
+/* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
   .collection-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* ── Mobile (< 768 px): merchant-controlled ── */
+/* Mobile */
 @media (max-width: 767px) {
   .collection-grid {
     grid-template-columns: repeat(var(--cols-mobile, 2), minmax(0, 1fr));
@@ -26,7 +28,7 @@
   }
 }
 
-/* ── Empty state ── */
+/* Empty state */
 .collection-empty {
   grid-column: 1 / -1;
   display: flex;
@@ -44,12 +46,12 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--color-background-2, #f4f4f4);
-  color: var(--color-foreground-secondary, #888);
+  background: var(--color-border);
+  color: var(--color-foreground);
 }
 
 .collection-empty__text {
   font-size: 1.05rem;
-  color: var(--color-foreground-secondary, #888);
+  color: var(--color-foreground);
   margin: 0;
 }
