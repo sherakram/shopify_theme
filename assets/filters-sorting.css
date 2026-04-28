@@ -43,6 +43,7 @@
   padding: 10px 16px;
   background: #fff;
   color: #000;
+  border: 1px solid #cccccc;
   font-weight: 500;
   font-size: 14px;
   cursor: pointer;
@@ -56,7 +57,7 @@
 
 .fs-select:focus {
   outline: none;
-  border-color: #000;
+  border-color: #cccccc;
 }
 .fs-select option {
   background-color: #fff; /* Style options in dropdown */
@@ -127,7 +128,7 @@
   justify-content: space-between;
   margin-bottom: 20px; /* Increased margin */
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+  border-bottom: 1px solid #e8e8e8 !important;
 }
 .fs-panel__title {
   margin: 0;
@@ -226,10 +227,11 @@
 .fs-group {
   margin-top: 20px;
   padding-top: 15px;
+  border-top: 1px solid #e8e8e8;
 }
 .fs-group__title {
   font-weight: 700;
-  margin-bottom: 15px; /* Increased margin */
+  margin-bottom: 15px;
   display: block;
   font-size: 16px;
   color: #000;
@@ -275,8 +277,8 @@ ul.fs-list {
 }
 .fs-count {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  background-color: rgba(255, 255, 255, 0.05);
+  color: #666666;
+  background-color: #f0f0f0;
   padding: 2px 8px;
   border-radius: 12px;
   margin-left: auto; /* Pushes count to the right */
@@ -299,9 +301,9 @@ ul.fs-list {
   width: 100px;
   padding: 8px 10px;
   border-radius: 0;
-  border: 1px solid #000;
-  background: var(--dark-panel-color);
-  color: var(--text-color);
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  color: #111111;
   font-size: 14px;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
@@ -310,8 +312,18 @@ ul.fs-list {
   border-color: #000;
 }
 .fs-to {
-  color: rgba(255, 255, 255, 0.5);
+  color: #999999;
   font-size: 18px;
+}
+
+.fs-price .fs-input::-webkit-outer-spin-button,
+.fs-price .fs-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.fs-price .fs-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Clear single filter */
@@ -319,7 +331,7 @@ ul.fs-list {
   display: inline-block;
   margin-top: 10px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color:  #666666;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -333,10 +345,10 @@ ul.fs-list {
   display: block;
   text-align: center;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #f5f5f5;
   border-radius: 8px;
   margin-top: 25px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #444444;
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s ease, color 0.2s ease;
@@ -372,22 +384,22 @@ ul.fs-list {
   justify-content: flex-end;
   margin-top: 25px; /* Increased margin top */
   padding-top: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Separator for footer actions */
+  border-top: 1px solid #e8e8e8 !important;
 }
 .fs-apply,
-.fs-panel__footer .fs-clear { /* Target the clear button in the footer specifically */
+.fs-panel__footer .fs-clear { 
   padding: 12px 20px;
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
   transition: all 0.3s ease;
-  min-width: 100px; /* Ensure consistent button size */
+  min-width: 100px; 
   text-align: center;
 }
 .fs-apply {
   background: var(--primary-color);
-  border: 1px solid #000;
-  color: #111;
+  border: 1px solid #cccccc;
+  color: #333333;
 }
 .fs-apply:hover {
   transform: translateY(-2px);

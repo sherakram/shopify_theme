@@ -29,7 +29,6 @@
                   {% if filter_value.count == 0 and filter_value.active == false %}
                     disabled
                   {% endif %}
-                  aria-pressed="{% if filter_value.active %}true{% else %}false{% endif %}"
                   aria-describedby="{{ group_id }}-count-{{ forloop.index }}"
                 >
                 <label for="{{ group_id }}-{{ forloop.index }}">
@@ -44,7 +43,7 @@
       {%- when 'price_range' -%}
         <div class="fs-price">
           {%- assign min_value = filter.min_value.value | default: '' -%}
-          {%- assign max_value = filter.max_value.value | default: '' -%}
+          {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
           {%- assign range_min = filter.range_min -%}
           {%- assign range_max = filter.range_max -%}
 
@@ -56,11 +55,13 @@
             class="fs-input"
             name="{{ filter.min_value.param_name }}"
             data-param-name="{{ filter.min_value.param_name }}"
+            data-range-min="{{ range_min }}"
             type="number"
             inputmode="numeric"
             min="{{ range_min }}"
             max="{{ range_max }}"
             value="{{ min_value }}"
+            placeholder="{{ range_min }}"
             aria-describedby="{{ group_id }}-from-help"
           >
           <span class="fs-to" aria-hidden="true">–</span>
@@ -70,11 +71,13 @@
             class="fs-input"
             name="{{ filter.max_value.param_name }}"
             data-param-name="{{ filter.max_value.param_name }}"
+            data-range-max="{{ range_max }}"
             type="number"
             inputmode="numeric"
             min="{{ range_min }}"
             max="{{ range_max }}"
             value="{{ max_value }}"
+            placeholder="{{ range_max }}"
             aria-describedby="{{ group_id }}-to-help"
           >
           <div class="visually-hidden" id="{{ group_id }}-from-help">

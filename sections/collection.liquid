@@ -27,6 +27,12 @@
     {%- if f.active_values.size > 0 -%}
       {%- assign has_active = true -%}
     {%- endif -%}
+
+    {%- if f.type == 'price_range' -%}
+      {%- if f.min_value.value or f.max_value.value -%}
+        {%- assign has_active = true -%}
+      {%- endif -%}
+    {%- endif -%}
   {%- endfor -%}
 
   {%- if has_active -%}
@@ -35,8 +41,18 @@
 
       {%- for f in collection.filters -%}
         {%- for v in f.active_values -%}
-          <a href="{{ v.url_to_remove }}" class="filter-pill"> {{ f.label }}: {{ v.label }} × </a>
+          <a href="{{ v.url_to_remove }}" class="filter-pill fs-filter-remove"> {{ f.label }}: {{ v.label }} × </a>
         {%- endfor -%}
+
+        {%- if f.type == 'price_range' -%}
+          {%- if f.min_value.value or f.max_value.value -%}
+            {%- assign pill_min = f.min_value.value | default: f.range_min | money_without_trailing_zeros -%}
+            {%- assign pill_max = f.max_value.value | default: f.range_max | money_without_trailing_zeros -%}
+            <a href="{{ f.url_to_remove }}" class="filter-pill fs-filter-remove">
+              {{ f.label }}: {{ pill_min }} – {{ pill_max }} ×
+            </a>
+          {%- endif -%}
+        {%- endif -%}
       {%- endfor -%}
     </div>
   {%- endif -%}
