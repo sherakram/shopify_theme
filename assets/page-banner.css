@@ -1,15 +1,6 @@
-/* ============================================================
-   Page Banner — page-banner.css
-   ============================================================ */
-
-/* ---------- Design tokens (fallbacks) ---------- */
 .page-banner {
-  --banner-bg:                   #ffffff;
   --banner-pt:                   20px;
   --banner-pb:                   20px;
-  --banner-title-color:          #000000;
-  --banner-desc-color:           #4b5563;
-  --banner-title-color-on-image: #ffffff;
 
   --banner-content-max-width:    760px;
   --banner-gutter:               clamp(1.25rem, 5vw, 2.5rem);
@@ -22,41 +13,48 @@
   --banner-desc-lh:              1.7;
 }
 
-/* ---------- Reset section margins ---------- */
 .section-page-banner {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
 
-/* ---------- Base ---------- */
 .page-banner {
   position: relative;
   width: 100%;
-  background-color: var(--banner-bg);
+  background-color: var(--color-background);
   padding-block: var(--banner-pt) var(--banner-pb);
   overflow: hidden;
 }
 
-/* ---------- Title size modifiers ---------- */
-.page-banner--title-sm { --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem); }
-.page-banner--title-md { --banner-title-size: clamp(1.5rem,  3vw,  2.25rem);  }
-.page-banner--title-lg { --banner-title-size: clamp(1.75rem, 4vw,  2.75rem);  }
-.page-banner--title-xl { --banner-title-size: clamp(2rem,    5vw,  3.75rem);  }
+.page-banner--title-sm { 
+  --banner-title-size: clamp(1.25rem, 2.5vw, 1.75rem); 
+}
 
-/* ---------- Content wrapper ---------- */
+.page-banner--title-md { 
+  --banner-title-size: clamp(1.5rem,  3vw,  2.25rem);  
+}
+
+.page-banner--title-lg { 
+  --banner-title-size: clamp(1.75rem, 4vw,  2.75rem);  
+}
+
+.page-banner--title-xl { 
+  --banner-title-size: clamp(2rem,    5vw,  3.75rem);  
+}
+
+/* Content wrapper */
 .page-banner__content {
   position: relative;
   z-index: 2;
   width: 100%;
 }
 
-/* ---------- Inner — constrains max-width & controls text-align ---------- */
 .page-banner__inner {
   width: 100%;
   max-width: var(--banner-content-max-width);
 }
 
-/* Alignment: left (default) */
+/* Alignment: left */
 .page-banner--align-left .page-banner__inner {
   margin-inline: 0;
   text-align: left;
@@ -75,49 +73,48 @@
   text-align: right;
 }
 
-/* ---------- Title ---------- */
+/* Title */
 .page-banner__title {
   margin: 0;
   font-size: var(--banner-title-size);
   font-weight: var(--banner-title-weight);
   line-height: var(--banner-title-lh);
-  color: var(--banner-title-color);
+  color: var(--color-foreground-heading);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
-/* ---------- Description ---------- */
+/* Description */
 .page-banner__description {
   margin-block: 0.75em 0;
   font-size: var(--banner-desc-size);
   line-height: var(--banner-desc-lh);
-  color: var(--banner-desc-color);
+  color: var(--color-foreground);
   text-wrap: pretty;
 }
 
-.page-banner__description p      { margin: 0; }
-.page-banner__description p + p  { margin-top: 0.75em; }
+.page-banner__description p { 
+  margin: 0; 
+}
 
-/* ============================================================
-   Has-image state
-   Fixed height: 440px desktop / 280px mobile
-   ============================================================ */
+.page-banner__description p + p { 
+  margin-top: 0.75em; 
+}
+
 .page-banner--has-image {
   --banner-media-height: 320px;
-
   height: var(--banner-media-height);
   display: flex;
   align-items: center;
   padding-block: 0;
 }
 
-/* Override padding tokens when image is active */
 .page-banner--has-image {
   --banner-pt: 0px;
   --banner-pb: 0px;
 }
 
-/* ---------- Media container ---------- */
+/* Media container */
 .page-banner__media {
   position: absolute;
   inset: 0;
@@ -135,8 +132,10 @@
   max-height: none;
 }
 
-/* ---------- Overlay ---------- */
-.page-banner--overlay-0::after  { display: none; }
+/* Overlay */
+.page-banner--overlay-0::after  { 
+  display: none; 
+}
 
 .page-banner--overlay-30::after,
 .page-banner--overlay-50::after,
@@ -145,26 +144,32 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-color: #000;
+  background-color: var(--color-shadow);
   pointer-events: none;
 }
 
-.page-banner--overlay-30::after { opacity: 0.30; }
-.page-banner--overlay-50::after { opacity: 0.50; }
-.page-banner--overlay-70::after { opacity: 0.70; }
+.page-banner--overlay-30::after { 
+  opacity: 0.30; 
+}
 
-/* ---------- On-image colour overrides ---------- */
+.page-banner--overlay-50::after { 
+  opacity: 0.50; 
+}
+
+.page-banner--overlay-70::after { 
+  opacity: 0.70; 
+}
+
+/* On-image colour overrides */
 .page-banner--has-image .page-banner__title {
-  color: var(--banner-title-color-on-image, #fff);
+  color: var(--color-foreground-heading);
 }
 
 .page-banner--has-image .page-banner__description {
-  color: color-mix(in srgb, var(--banner-title-color-on-image, #fff) 85%, transparent);
+  color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
 }
 
-/* ============================================================
-   Responsive
-   ============================================================ */
+/* Responsive */
 @media (max-width: 749px) {
   .page-banner--has-image {
     --banner-media-height: 240px;
@@ -177,18 +182,14 @@
   }
 }
 
-/* ============================================================
-   Accessibility
-   ============================================================ */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .page-banner__image {
     transition: none;
   }
 }
 
-/* ============================================================
-   Print
-   ============================================================ */
+/* Print */
 @media print {
   .page-banner__media,
   .page-banner--overlay-30::after,
@@ -198,6 +199,6 @@
   }
 
   .page-banner__title {
-    color: #000 !important;
+    color: var(--color-foreground-heading) !important;
   }
 }

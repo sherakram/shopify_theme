@@ -35,7 +35,6 @@
   function getModal() {
     var form = getForm();
     if (!form) return null;
-    // Drawer mode mein .fs-panels drawer ke andar hota hai — usse skip karo
     if (form.querySelector(".fs-drawer")) return null;
     return form.querySelector(".fs-panels");
   }

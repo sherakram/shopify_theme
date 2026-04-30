@@ -41,7 +41,11 @@
 
       {%- for f in collection.filters -%}
         {%- for v in f.active_values -%}
-          <a href="{{ v.url_to_remove }}" class="filter-pill fs-filter-remove"> {{ f.label }}: {{ v.label }} × </a>
+          <a href="{{ v.url_to_remove }}" class="filter-pill fs-filter-remove"> {{ f.label }}: {{ v.label }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
         {%- endfor -%}
 
         {%- if f.type == 'price_range' -%}
@@ -49,7 +53,10 @@
             {%- assign pill_min = f.min_value.value | default: f.range_min | money_without_trailing_zeros -%}
             {%- assign pill_max = f.max_value.value | default: f.range_max | money_without_trailing_zeros -%}
             <a href="{{ f.url_to_remove }}" class="filter-pill fs-filter-remove">
-              {{ f.label }}: {{ pill_min }} – {{ pill_max }} ×
+              {{ f.label }}: {{ pill_min }} – {{ pill_max }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
             </a>
           {%- endif -%}
         {%- endif -%}

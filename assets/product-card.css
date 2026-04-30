@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: var(--color-card-background, #fff);
+  background: var(--color-card-background, var(--color-background));
   border-radius: var(--style-border-radius, 0px);
   overflow: hidden;
   box-shadow:
@@ -115,7 +115,6 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  /* text-transform: uppercase; */
   line-height: 1.4;
 }
 
@@ -128,13 +127,13 @@
 }
 
 .pc__badge--sale {
-  background: var(--color-badge-sale-background, #e8290b);
-  color: var(--color-badge-sale-text, #fff);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .pc__badge--sold-out {
-  background: var(--color-badge-soldout-background, #444);
-  color: var(--color-badge-soldout-text, #fff);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* ── Quick add button ── */
@@ -164,21 +163,21 @@
   gap: 7px;
   width: 100%;
   padding: 9px 14px;
-  border-radius: var(--style-border-radius, 6px);
+  border-radius: var(--color-btn-primary-border);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
   text-decoration: none;
   border: none;
-  background: var(--color-button-background, #fff);
-  color: var(--color-button-text, #111);
+  background: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .pc__quick-btn:hover {
-  background: var(--color-button-background-hover, #111);
-  color: var(--color-button-text-hover, #fff);
+  background: var(--color-btn-primary-hover-bg);
+  color: var(--color-btn-primary-hover-text);
 }
 
 /* ── Info block ── */
@@ -196,7 +195,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-foreground-secondary, #999);
+  color: var(--color-foreground);
 }
 
 /* Title */
@@ -212,12 +211,12 @@
 
 .pc__title a {
   text-decoration: none;
-  color: var(--color-foreground, #111);
+  color: var(--color-foreground-heading);
   transition: color 0.18s ease;
 }
 
 .pc__title a:hover {
-  color: var(--color-accent, #292929);
+  color: var(--color-primary);
 }
 
 /* Price */
@@ -233,26 +232,26 @@
 .pc__price-regular {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--color-foreground, #111);
+  color: var(--color-foreground);
 }
 
 .pc__price-compare {
   font-size: 0.8rem;
   font-weight: 400;
-  color: var(--color-foreground-secondary, #999);
+  color: var(--color-foreground);
   text-decoration: line-through;
 }
 
 .pc__price-sale {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--color-price-sale, #e8290b);
+  color: var(--color-primary);
 }
 
 .pc__price-soldout {
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--color-foreground-secondary, #999);
+  color: var(--color-foreground);
   letter-spacing: 0.03em;
 }
 
@@ -266,7 +265,7 @@
 .pc__title a:focus-visible,
 .pc__media:focus-visible,
 .pc__quick-btn:focus-visible {
-  outline: 2px solid var(--color-accent, #0055cc);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 

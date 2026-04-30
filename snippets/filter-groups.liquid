@@ -41,50 +41,110 @@
         </ul>
 
       {%- when 'price_range' -%}
-        <div class="fs-price">
-          {%- assign min_value = filter.min_value.value | default: '' -%}
-          {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-          {%- assign range_min = filter.range_min -%}
-          {%- assign range_max = filter.range_max -%}
+        {% comment %}
+          <div class="fs-price">
+            {%- assign min_value = filter.min_value.value | default: '' -%}
+            {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+            {%- assign range_min = filter.range_min -%}
+            {%- assign range_max = filter.range_max -%}
 
-          <label for="{{ group_id }}-from" class="fs-label">
-            {{- 'collections.general.from' | t | default: 'From' -}}
-          </label>
-          <input
-            id="{{ group_id }}-from"
-            class="fs-input"
-            name="{{ filter.min_value.param_name }}"
-            data-param-name="{{ filter.min_value.param_name }}"
-            data-range-min="{{ range_min }}"
-            type="number"
-            inputmode="numeric"
-            min="{{ range_min }}"
-            max="{{ range_max }}"
-            value="{{ min_value }}"
-            placeholder="{{ range_min }}"
-            aria-describedby="{{ group_id }}-from-help"
-          >
-          <span class="fs-to" aria-hidden="true">–</span>
-          <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
-          <input
-            id="{{ group_id }}-to"
-            class="fs-input"
-            name="{{ filter.max_value.param_name }}"
-            data-param-name="{{ filter.max_value.param_name }}"
-            data-range-max="{{ range_max }}"
-            type="number"
-            inputmode="numeric"
-            min="{{ range_min }}"
-            max="{{ range_max }}"
-            value="{{ max_value }}"
-            placeholder="{{ range_max }}"
-            aria-describedby="{{ group_id }}-to-help"
-          >
-          <div class="visually-hidden" id="{{ group_id }}-from-help">
-            {{ 'collections.general.min_price' | t | default: 'Minimum price' }}
+            <label for="{{ group_id }}-from" class="fs-label">
+              {{- 'collections.general.from' | t | default: 'From' -}}
+            </label>
+            <input
+              id="{{ group_id }}-from"
+              class="fs-input"
+              name="{{ filter.min_value.param_name }}"
+              data-param-name="{{ filter.min_value.param_name }}"
+              data-range-min="{{ range_min }}"
+              type="number"
+              inputmode="numeric"
+              min="{{ range_min }}"
+              max="{{ range_max }}"
+              value="{{ min_value }}"
+              placeholder="{{ range_min }}"
+              aria-describedby="{{ group_id }}-from-help"
+            >
+            <span class="fs-to" aria-hidden="true">–</span>
+            <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
+            <input
+              id="{{ group_id }}-to"
+              class="fs-input"
+              name="{{ filter.max_value.param_name }}"
+              data-param-name="{{ filter.max_value.param_name }}"
+              data-range-max="{{ range_max }}"
+              type="number"
+              inputmode="numeric"
+              min="{{ range_min }}"
+              max="{{ range_max }}"
+              value="{{ max_value }}"
+              placeholder="{{ range_max }}"
+              aria-describedby="{{ group_id }}-to-help"
+            >
+            <div class="visually-hidden" id="{{ group_id }}-from-help">
+              {{ 'collections.general.min_price' | t | default: 'Minimum price' }}
+            </div>
+            <div class="visually-hidden" id="{{ group_id }}-to-help">
+              {{ 'collections.general.max_price' | t | default: 'Maximum price' }}
+            </div>
           </div>
-          <div class="visually-hidden" id="{{ group_id }}-to-help">
-            {{ 'collections.general.max_price' | t | default: 'Maximum price' }}
+        {% endcomment %}
+
+        {%- assign min_value = filter.min_value.value | default: '' -%}
+        {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+        {%- assign range_min = filter.range_min -%}
+        {%- assign range_max = filter.range_max -%}
+
+        {%- assign min_display = min_value | divided_by: 100 -%}
+        {%- assign max_display = max_value | divided_by: 100 -%}
+        {%- assign range_min_display = range_min | divided_by: 100 -%}
+        {%- assign range_max_display = range_max | divided_by: 100 -%}
+
+        <div class="fs-price">
+          <div class="fs-price__field">
+            <label for="{{ group_id }}-from" class="fs-label">
+              {{- 'collections.general.from' | t | default: 'From' -}}
+            </label>
+            <div class="fs-price__input-wrap">
+              <span class="fs-currency">{{ cart.currency.symbol }}</span>
+              <input
+                id="{{ group_id }}-from"
+                class="fs-input"
+                name="{{ filter.min_value.param_name }}"
+                data-param-name="{{ filter.min_value.param_name }}"
+                data-range-min="{{ range_min_display }}"
+                data-display-divisor="100"
+                type="number"
+                inputmode="numeric"
+                min="{{ range_min_display }}"
+                max="{{ range_max_display }}"
+                value="{{ min_display }}"
+                placeholder="0"
+              >
+            </div>
+          </div>
+
+          <div class="fs-price__field">
+            <label for="{{ group_id }}-to" class="fs-label">
+              {{- 'collections.general.to' | t | default: 'To' -}}
+            </label>
+            <div class="fs-price__input-wrap">
+              <span class="fs-currency">{{ cart.currency.symbol }}</span>
+              <input
+                id="{{ group_id }}-to"
+                class="fs-input"
+                name="{{ filter.max_value.param_name }}"
+                data-param-name="{{ filter.max_value.param_name }}"
+                data-range-max="{{ range_max_display }}"
+                data-display-divisor="100"
+                type="number"
+                inputmode="numeric"
+                min="{{ range_min_display }}"
+                max="{{ range_max_display }}"
+                value="{{ max_display }}"
+                placeholder="{{ range_max_display }}"
+              >
+            </div>
           </div>
         </div>
 
@@ -132,7 +192,10 @@
 {%- endfor -%}
 
 {%- if has_active_filters -%}
-  <a class="fs-clear-all" href="{{ collection.url | append: '?' | append: 'sort_by=' | append: current_sort | escape }}">
+  <a
+    class="fs-clear-all"
+    href="{{ collection.url | append: '?' | append: 'sort_by=' | append: current_sort | escape }}"
+  >
     {{ 'collections.general.clear_all' | t | default: 'Clear all' }}
   </a>
 {%- endif -%}

@@ -1,6 +1,8 @@
 {{ 'page-banner.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign scheme = section.settings.page_banner_color_scheme
+  
   assign banner_title = collection.title
   assign banner_desc  = collection.description
 
@@ -23,16 +25,12 @@
 
 <style>
   #shopify-section-{{ section.id }} .page-banner {
-    --banner-bg:                   {{ section.settings.bg_color }};
     --banner-pt:                   {{ section.settings.padding_top }}px;
     --banner-pb:                   {{ section.settings.padding_bottom }}px;
-    --banner-title-color:          {{ section.settings.title_color }};
-    --banner-desc-color:           {{ section.settings.description_color }};
-    --banner-title-color-on-image: {{ section.settings.title_color_on_image }};
   }
 </style>
 
-<div class="page-banner full-width page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }}{% if has_image %} page-banner--has-image page-banner--overlay-{{ section.settings.overlay_opacity }}{% endif %}">
+<div class="page-banner color-scheme-{{ scheme }} full-width page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }}{% if has_image %} page-banner--has-image page-banner--overlay-{{ section.settings.overlay_opacity }}{% endif %}">
 
   {%- if has_image -%}
     <div class="page-banner__media" aria-hidden="true">
@@ -95,24 +93,6 @@
       "content": "Appearance"
     },
     {
-      "type": "color",
-      "id": "bg_color",
-      "label": "t:labels.bgColor",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "description_color",
-      "label": "Description color",
-      "default": "#4b5563"
-    },
-    {
       "type": "select",
       "id": "title_align",
       "label": "t:labels.alignment",
@@ -158,14 +138,13 @@
       "default": "30"
     },
     {
-      "type": "color",
-      "id": "title_color_on_image",
-      "label": "Title color (on image)",
-      "default": "#ffffff"
+      "type": "header",
+      "content": "Section settings"
     },
     {
-      "type": "header",
-      "content": "t:labels.padding"
+      "type": "color_scheme",
+      "id": "page_banner_color_scheme",
+      "label": "Color scheme"
     },
     {
       "type": "range",
