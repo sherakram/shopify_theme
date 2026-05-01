@@ -20,89 +20,108 @@
   class="collection-section color-scheme-{{ scheme }}"
   data-section-id="{{ section.id }}"
 >
+  
   {%- render 'filters-sorting' -%}
+  
+  <div class="page-width">
 
-  {%- assign has_active = false -%}
-  {%- for f in collection.filters -%}
-    {%- if f.active_values.size > 0 -%}
-      {%- assign has_active = true -%}
-    {%- endif -%}
-
-    {%- if f.type == 'price_range' -%}
-      {%- if f.min_value.value or f.max_value.value -%}
+    {%- assign has_active = false -%}
+    {%- for f in collection.filters -%}
+      {%- if f.active_values.size > 0 -%}
         {%- assign has_active = true -%}
       {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
 
-  {%- if has_active -%}
-    <div class="collection-active-filters">
-      <span>{{ collection.products_count }} results</span>
+      {%- if f.type == 'price_range' -%}
+        {%- if f.min_value.value or f.max_value.value -%}
+          {%- assign has_active = true -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
 
-      {%- for f in collection.filters -%}
-        {%- for v in f.active_values -%}
-          <a href="{{ v.url_to_remove }}" class="filter-pill fs-filter-remove"> {{ f.label }}: {{ v.label }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </a>
-        {%- endfor -%}
+    {%- if has_active -%}
+      <div class="collection-active-filters">
+        <span>{{ collection.products_count }} results</span>
 
-        {%- if f.type == 'price_range' -%}
-          {%- if f.min_value.value or f.max_value.value -%}
-            {%- assign pill_min = f.min_value.value | default: f.range_min | money_without_trailing_zeros -%}
-            {%- assign pill_max = f.max_value.value | default: f.range_max | money_without_trailing_zeros -%}
-            <a href="{{ f.url_to_remove }}" class="filter-pill fs-filter-remove">
-              {{ f.label }}: {{ pill_min }} – {{ pill_max }}
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        {%- for f in collection.filters -%}
+          {%- for v in f.active_values -%}
+            <a href="{{ v.url_to_remove }}" class="filter-pill fs-filter-remove">
+              {{ f.label }}: {{ v.label }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden="true"
+              >
                 <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </a>
+          {%- endfor -%}
+
+          {%- if f.type == 'price_range' -%}
+            {%- if f.min_value.value or f.max_value.value -%}
+              {%- assign pill_min = f.min_value.value | default: f.range_min | money_without_trailing_zeros -%}
+              {%- assign pill_max = f.max_value.value | default: f.range_max | money_without_trailing_zeros -%}
+              <a href="{{ f.url_to_remove }}" class="filter-pill fs-filter-remove">
+                {{ f.label }}: {{ pill_min }} – {{ pill_max }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </a>
+            {%- endif -%}
           {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
-
-  {%- paginate collection.products by page_size -%}
-    <div
-      id="CollectionProductGrid-{{ section.id }}"
-      class="collection-grid"
-      style="
-        --cols-desktop: {{ cols_desktop }};
-        --cols-mobile: {{ cols_mobile }};
-      "
-      tabindex="-1"
-      aria-label="{{ collection.title }} products"
-    >
-      {%- if collection.products.size == 0 -%}
-        <div class="collection-empty" role="status">
-          {% comment %} <span class="collection-empty__icon">{% render 'icon-search' %}</span> {% endcomment %}
-          <p class="collection-empty__text">{{ 'collections.general.no_matches' | t }}</p>
-        </div>
-
-      {%- else -%}
-        {%- for product in collection.products -%}
-          {%- render 'Product-card',
-            product: product,
-            show_quick_add: settings.show_quick_add,
-            quick_add_hover_only: settings.enable_quick_button_on_hover,
-            lazy: forloop.index
-          -%}
         {%- endfor -%}
-      {%- endif -%}
-    </div>
-
-    {%- if paginate.pages > 1 -%}
-      <div
-        id="CollectionPagination-{{ section.id }}"
-        class="collection-pagination"
-        aria-label="{{ 'accessibility.pagination_label' | t }}"
-      >
-        {%- render 'pagination', pagination: paginate -%}
       </div>
     {%- endif -%}
-  {%- endpaginate -%}
+
+    {%- paginate collection.products by page_size -%}
+      <div
+        id="CollectionProductGrid-{{ section.id }}"
+        class="collection-grid"
+        style="
+          --cols-desktop: {{ cols_desktop }};
+          --cols-mobile: {{ cols_mobile }};
+        "
+        tabindex="-1"
+        aria-label="{{ collection.title }} products"
+      >
+        {%- if collection.products.size == 0 -%}
+          <div class="collection-empty" role="status">
+            {% comment %} <span class="collection-empty__icon">{% render 'icon-search' %}</span> {% endcomment %}
+            <p class="collection-empty__text">{{ 'collections.general.no_matches' | t }}</p>
+          </div>
+
+        {%- else -%}
+          {%- for product in collection.products -%}
+            {%- render 'Product-card',
+              product: product,
+              show_quick_add: settings.show_quick_add,
+              quick_add_hover_only: settings.enable_quick_button_on_hover,
+              lazy: forloop.index
+            -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div
+          id="CollectionPagination-{{ section.id }}"
+          class="collection-pagination"
+          aria-label="{{ 'accessibility.pagination_label' | t }}"
+        >
+          {%- render 'pagination', pagination: paginate -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
 </div>
 
 {% schema %}

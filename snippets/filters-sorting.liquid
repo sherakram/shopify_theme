@@ -9,137 +9,138 @@
   role="region"
   aria-label="{{ 'collections.general.filters_and_sorting' | t | default: 'Filters and sorting' }}"
 >
-  <form
-    id="FacetFiltersForm-{{ section.id }}"
-    class="fs-form"
-    method="get"
-    role="search"
-    aria-label="{{ 'collections.general.filter_products' | t | default: 'Filter products' }}"
-  >
-    <div class="fs-topbar" aria-live="polite">
-      {%- if allow_sort -%}
-        <label for="SortBy-{{ section.id }}" class="fs-label visually-hidden">
-          {{- 'collections.sorting.title' | t | default: 'Sort by' -}}
-        </label>
-        <select
-          id="SortBy-{{ section.id }}"
-          class="fs-select"
-          name="sort_by"
-          aria-controls="CollectionProductGrid-{{ section.id }}"
-        >
-          {%- for option in collection.sort_options -%}
-            <option
-              value="{{ option.value }}"
-              {% if option.value == collection.sort_by %}
-                selected
-              {% endif %}
-            >
-              {{ option.name }}
-            </option>
-          {%- endfor -%}
-        </select>
-      {%- endif -%}
+  <div class="page-width">
+    <form
+      id="FacetFiltersForm-{{ section.id }}"
+      class="fs-form"
+      method="get"
+      role="search"
+      aria-label="{{ 'collections.general.filter_products' | t | default: 'Filter products' }}"
+    >
+      <div class="fs-topbar" aria-live="polite">
+        {%- if allow_sort -%}
+          <label for="SortBy-{{ section.id }}" class="fs-label visually-hidden">
+            {{- 'collections.sorting.title' | t | default: 'Sort by' -}}
+          </label>
+          <select
+            id="SortBy-{{ section.id }}"
+            class="fs-select"
+            name="sort_by"
+            aria-controls="CollectionProductGrid-{{ section.id }}"
+          >
+            {%- for option in collection.sort_options -%}
+              <option
+                value="{{ option.value }}"
+                {% if option.value == collection.sort_by %}
+                  selected
+                {% endif %}
+              >
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- endif -%}
 
-      <noscript>
-        <button class="fs-apply" type="submit">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
-      </noscript>
-    </div>
+        <noscript>
+          <button class="fs-apply" type="submit">{{ 'collections.general.apply' | t | default: 'Apply' }}</button>
+        </noscript>
+      </div>
 
-    {%- if allow_filters -%}
-      <div class="fs-layout">
-        <aside class="fs-sidebar" aria-label="{{ 'collections.general.filters' | t | default: 'Filters' }}">
-          <button type="button" class="fs-toggle" aria-expanded="false" aria-controls="FiltersPanel-{{ section.id }}">
-            {{ 'collections.general.filter' | t | default: 'Filter' }}
-          </button>
+      {%- if allow_filters -%}
+        <div class="fs-layout">
+          <aside class="fs-sidebar" aria-label="{{ 'collections.general.filters' | t | default: 'Filters' }}">
+            <button type="button" class="fs-toggle" aria-expanded="false" aria-controls="FiltersPanel-{{ section.id }}">
+              {{ 'collections.general.filter' | t | default: 'Filter' }}
+            </button>
 
-          {%- if section.settings.filters_use_drawer -%}
-            <div class="fs-drawer" aria-hidden="true" id="FiltersDrawer-{{ section.id }}">
+            {%- if section.settings.filters_use_drawer -%}
+              <div class="fs-drawer" aria-hidden="true" id="FiltersDrawer-{{ section.id }}">
+                <div class="fs-drawer__backdrop" data-drawer-close hidden aria-hidden="true" tabindex="-1"></div>
 
-              <div class="fs-drawer__backdrop" data-drawer-close hidden aria-hidden="true" tabindex="-1"></div>
+                <div
+                  id="FiltersPanel-{{ section.id }}"
+                  class="fs-panels fs-drawer__panel"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="FiltersPanelTitle-{{ section.id }}"
+                  tabindex="-1"
+                  hidden
+                >
+                  <div class="fs-panel__header">
+                    <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
+                      {{ 'collections.general.filters' | t | default: 'Filters' }}
+                    </h3>
+                    <button
+                      class="fs-close"
+                      aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}"
+                      data-drawer-close
+                    >
+                      &times;
+                    </button>
+                  </div>
 
+                  {%- if collection.filters.size == 0 -%}
+                    <p class="fs-empty">
+                      {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
+                    </p>
+                  {%- endif -%}
+
+                  {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
+
+                  <div class="fs-panel__footer fs-drawer__footer">
+                    <button type="button" class="fs-clear">
+                      {{ 'collections.general.clear' | t | default: 'Clear' }}
+                    </button>
+                    <button type="submit" class="fs-apply">
+                      {{ 'collections.general.apply' | t | default: 'Apply' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            {%- else -%}
+              <!-- Modal popup (centered) -->
               <div
                 id="FiltersPanel-{{ section.id }}"
-                class="fs-panels fs-drawer__panel"
+                class="fs-panels"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="FiltersPanelTitle-{{ section.id }}"
                 tabindex="-1"
                 hidden
               >
-                <div class="fs-panel__header">
-                  <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
-                    {{ 'collections.general.filters' | t | default: 'Filters' }}
-                  </h3>
-                  <button
-                    class="fs-close"
-                    aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}"
-                    data-drawer-close
-                  >
-                    &times;
-                  </button>
-                </div>
+                <div class="fs-panel-inner">
+                  <div class="fs-panel__header">
+                    <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
+                      {{ 'collections.general.filters' | t | default: 'Filters' }}
+                    </h3>
+                    <button class="fs-close" aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}">
+                      &times;
+                    </button>
+                  </div>
+                  {%- if collection.filters.size == 0 -%}
+                    <p class="fs-empty">
+                      {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
+                    </p>
+                  {%- endif -%}
 
-                {%- if collection.filters.size == 0 -%}
-                  <p class="fs-empty">
-                    {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
-                  </p>
-                {%- endif -%}
+                  {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
 
-                {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
-
-                <div class="fs-panel__footer fs-drawer__footer">
-                  <button type="button" class="fs-clear">
-                    {{ 'collections.general.clear' | t | default: 'Clear' }}
-                  </button>
-                  <button type="submit" class="fs-apply">
-                    {{ 'collections.general.apply' | t | default: 'Apply' }}
-                  </button>
+                  <div class="fs-panel__footer fs-actions">
+                    <button type="button" class="fs-clear">
+                      {{ 'collections.general.clear' | t | default: 'Clear' }}
+                    </button>
+                    <button type="submit" class="fs-apply">
+                      {{ 'collections.general.apply' | t | default: 'Apply' }}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          {%- else -%}
-            <!-- Modal popup (centered) -->
-            <div
-              id="FiltersPanel-{{ section.id }}"
-              class="fs-panels"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="FiltersPanelTitle-{{ section.id }}"
-              tabindex="-1"
-              hidden
-            >
-              <div class="fs-panel-inner">
-                <div class="fs-panel__header">
-                  <h3 id="FiltersPanelTitle-{{ section.id }}" class="fs-panel__title">
-                    {{ 'collections.general.filters' | t | default: 'Filters' }}
-                  </h3>
-                  <button class="fs-close" aria-label="{{ 'collections.general.clear' | t | default: 'Clear' }}">
-                    &times;
-                  </button>
-                </div>
-                {%- if collection.filters.size == 0 -%}
-                  <p class="fs-empty">
-                    {{ 'collections.general.no_filters' | t | default: 'No filters enabled for this collection.' }}
-                  </p>
-                {%- endif -%}
-
-                {%- render 'filter-groups', section: section, collection: collection, current_sort: current_sort -%}
-
-                <div class="fs-panel__footer fs-actions">
-                  <button type="button" class="fs-clear">
-                    {{ 'collections.general.clear' | t | default: 'Clear' }}
-                  </button>
-                  <button type="submit" class="fs-apply">
-                    {{ 'collections.general.apply' | t | default: 'Apply' }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          {%- endif -%}
-        </aside>
-      </div>
-    {%- endif -%}
-  </form>
+            {%- endif -%}
+          </aside>
+        </div>
+      {%- endif -%}
+    </form>
+  </div>
 </div>
 
 <script src="{{ 'filters-sorting.js' | asset_url }}" defer="defer"></script>

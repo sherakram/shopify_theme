@@ -219,7 +219,9 @@
     },
     "page_width": {
       "narrow": "Narrow",
-      "wide": "Wide"
+      "default": "Default",
+      "wide": "Wide",
+      "full": "Full"
     },
     "size": {
       "large": "Large",

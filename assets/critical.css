@@ -9,6 +9,9 @@ body {
   flex-direction: column;
   margin: 0;
   min-height: 100svh;
+  font-family: var(--font-primary--family);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* screen-reader only text */
@@ -96,49 +99,42 @@ p:empty {
   margin-block-end: 0;
 }
 
-/** Theme styles below */
-body {
-  font-family: var(--font-primary--family);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  
+/* LAYOUT UTILITY CLASSES */
+.page-width {
+  width: 100%;
+  max-width: var(--page-width, 1400px);
+  margin-inline: auto;
+  padding-inline: var(--page-spacing, 20px);
 }
 
-/** Section layout utilities */
-
-/**
- * Setup a grid that enables both full-width and constrained layouts
- * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
- */
-.shopify-section {
-  --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
-  );
-  --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
-
-  /* This is required to make <img> elements work as background images */
-  position: relative;
-  grid-template-columns: var(--content-grid);
-  display: grid;
+/* Full bleed section */
+.page-width--full-bleed {
   width: 100%;
 }
 
-/* Child elements, by default, are constrained to the central column of the grid. */
-.shopify-section > * {
-  grid-column: 2;
+.page-width--full-bleed .page-width {
+  max-width: var(--page-width, 1400px);
+  margin-inline: auto;
+  padding-inline: var(--page-spacing, 20px);
 }
 
-/* Child elements that use the full-width utility class span the entire viewport. */
-.shopify-section > .full-width {
-  grid-column: 1 / -1;
+/* Narrow variant */
+.page-width--narrow {
+  max-width: min(var(--page-width, 1400px), 720px);
+  margin-inline: auto;
+  padding-inline: var(--page-spacing, 20px);
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .page-width {
+    padding-inline: max(var(--page-spacing, 20px), 24px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .page-width {
+    padding-inline: 15px;
+  }
+}

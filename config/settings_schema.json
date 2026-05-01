@@ -66,22 +66,30 @@
         "label": "t:labels.page_width",
         "options": [
           {
-            "value": "90rem",
+            "value": "1200px",
             "label": "t:options.page_width.narrow"
           },
           {
-            "value": "100%",
+            "value": "1400px",
+            "label": "t:options.page_width.narrow"
+          },
+          {
+            "value": "1600px",
             "label": "t:options.page_width.wide"
+          },
+          {
+            "value": "100%",
+            "label": "t:options.page_width.full"
           }
         ],
-        "default": "90rem"
+        "default": "1400px"
       },
       {
         "type": "range",
-        "id": "min_page_margin",
+        "id": "page_spacing",
         "min": 0,
-        "max": 100,
-        "step": 1,
+        "max": 80,
+        "step": 4,
         "unit": "px",
         "label": "t:labels.page_margin",
         "default": 20
