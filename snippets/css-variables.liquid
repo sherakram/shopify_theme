@@ -1,69 +1,113 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  {%- comment -%} HEADING FONT {%- endcomment -%}
+  {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  {%- comment -%} SUBHEADING FONT {%- endcomment -%}
+  {{ settings.type_subheading_font | font_face: font_display: 'swap' }}
+  {{ settings.type_subheading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.type_subheading_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  {%- comment -%} BODY FONT {%- endcomment -%}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  {%- comment -%} ACCENT FONT {%- endcomment -%}
+  {{ settings.type_accent_font | font_face: font_display: 'swap' }}
+  {{ settings.type_accent_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
 
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
+    {%- comment -%} Heading {%- endcomment -%}
+    --font-heading--family:          {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --font-heading--weight:          {{ settings.type_heading_font.weight }};
+    --font-heading--style:           {{ settings.type_heading_font.style }};
+    --font-heading--scale:           {{ settings.type_heading_size_scale | divided_by: 100.0 }};
+    --font-heading--letter-spacing:  {{ settings.type_heading_letter_spacing }}em;
+    --font-heading--text-case:       {{ settings.type_heading_text_case }};
+    --font-heading--word-break:      {{ settings.type_heading_word_break }};
+
+    {%- comment -%} Subheading {%- endcomment -%}
+    --font-subheading--family:          {{ settings.type_subheading_font.family }}, {{ settings.type_subheading_font.fallback_families }};
+    --font-subheading--weight:          {{ settings.type_subheading_font.weight }};
+    --font-subheading--style:           {{ settings.type_subheading_font.style }};
+    --font-subheading--scale:           {{ settings.type_subheading_size_scale | divided_by: 100.0 }};
+    --font-subheading--letter-spacing:  {{ settings.type_subheading_letter_spacing }}em;
+    --font-subheading--text-case:       {{ settings.type_subheading_text_case }};
+    --font-subheading--word-break:      {{ settings.type_subheading_word_break }};
+    
+    {%- comment -%} Body {%- endcomment -%}
+    --font-body--family:          {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body--weight:          {{ settings.type_body_font.weight }};
+    --font-body--style:           {{ settings.type_body_font.style }};
+    --font-body--scale:           {{ settings.type_body_size_scale | divided_by: 100.0 }};
+    --font-body--letter-spacing:  {{ settings.type_body_letter_spacing }}em;
+    --font-body--text-case:       {{ settings.type_body_text_case }};
+
+    {%- comment -%} Accent {%- endcomment -%}
+    --font-accent--family:          {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
+    --font-accent--weight:          {{ settings.type_accent_font.weight }};
+    --font-accent--style:           {{ settings.type_accent_font.style }};
+    --font-accent--scale:           {{ settings.type_accent_size_scale | divided_by: 100.0 }};
+    --font-accent--letter-spacing:  {{ settings.type_accent_letter_spacing }}em;
+    --font-accent--text-case:       {{ settings.type_accent_text_case }};
+
+    {%- comment -%} Width {%- endcomment -%}
     --page-width: {{ settings.max_page_width | default: '1400px' }};
     --page-spacing: {{ settings.page_spacing | default: 20 }}px;
     --style-border-radius: {{ settings.corner_radius }}px;
     
-    /* Color schemes */
-    {% # Generate CSS class for each color scheme %}
-  {% for scheme in settings.color_schemes %}
-    .color-scheme-{{ scheme.id }} {
-      --color-background:                   {{ scheme.settings.background }};
-      --color-foreground-heading:           {{ scheme.settings.foreground_heading }};
-      --color-foreground:                   {{ scheme.settings.foreground }};
-      --color-primary:                      {{ scheme.settings.primary }};
-      --color-primary-hover:                {{ scheme.settings.primary_hover }};
-      --color-border:                       {{ scheme.settings.border }};
-      --color-shadow:                       {{ scheme.settings.shadow }};
+    {%- comment -%} Color schemes {%- endcomment -%}
+    {% for scheme in settings.color_schemes %}
+      .color-scheme-{{ scheme.id }} {
+        --color-background:                   {{ scheme.settings.background }};
+        --color-foreground-heading:           {{ scheme.settings.foreground_heading }};
+        --color-foreground:                   {{ scheme.settings.foreground }};
+        --color-primary:                      {{ scheme.settings.primary }};
+        --color-primary-hover:                {{ scheme.settings.primary_hover }};
+        --color-border:                       {{ scheme.settings.border }};
+        --color-shadow:                       {{ scheme.settings.shadow }};
 
-      /* Primary Button */
-      --color-btn-primary-bg:              {{ scheme.settings.primary_button_background }};
-      --color-btn-primary-text:            {{ scheme.settings.primary_button_text }};
-      --color-btn-primary-border:          {{ scheme.settings.primary_button_border }};
-      --color-btn-primary-hover-bg:        {{ scheme.settings.primary_button_hover_background }};
-      --color-btn-primary-hover-text:      {{ scheme.settings.primary_button_hover_text }};
-      --color-btn-primary-hover-border:    {{ scheme.settings.primary_button_hover_border }};
+        /* Primary Button */
+        --color-btn-primary-bg:              {{ scheme.settings.primary_button_background }};
+        --color-btn-primary-text:            {{ scheme.settings.primary_button_text }};
+        --color-btn-primary-border:          {{ scheme.settings.primary_button_border }};
+        --color-btn-primary-hover-bg:        {{ scheme.settings.primary_button_hover_background }};
+        --color-btn-primary-hover-text:      {{ scheme.settings.primary_button_hover_text }};
+        --color-btn-primary-hover-border:    {{ scheme.settings.primary_button_hover_border }};
 
-      /* Secondary Button */
-      --color-btn-secondary-bg:            {{ scheme.settings.secondary_button_background }};
-      --color-btn-secondary-text:          {{ scheme.settings.secondary_button_text }};
-      --color-btn-secondary-border:        {{ scheme.settings.secondary_button_border }};
-      --color-btn-secondary-hover-bg:      {{ scheme.settings.secondary_button_hover_background }};
-      --color-btn-secondary-hover-text:    {{ scheme.settings.secondary_button_hover_text }};
-      --color-btn-secondary-hover-border:  {{ scheme.settings.secondary_button_hover_border }};
+        /* Secondary Button */
+        --color-btn-secondary-bg:            {{ scheme.settings.secondary_button_background }};
+        --color-btn-secondary-text:          {{ scheme.settings.secondary_button_text }};
+        --color-btn-secondary-border:        {{ scheme.settings.secondary_button_border }};
+        --color-btn-secondary-hover-bg:      {{ scheme.settings.secondary_button_hover_background }};
+        --color-btn-secondary-hover-text:    {{ scheme.settings.secondary_button_hover_text }};
+        --color-btn-secondary-hover-border:  {{ scheme.settings.secondary_button_hover_border }};
 
-      /* Inputs */
-      --color-input-bg:                    {{ scheme.settings.input_background }};
-      --color-input-text:                  {{ scheme.settings.input_text_color }};
-      --color-input-border:                {{ scheme.settings.input_border_color }};
-      --color-input-hover-bg:              {{ scheme.settings.input_hover_background }};
+        /* Inputs */
+        --color-input-bg:                    {{ scheme.settings.input_background }};
+        --color-input-text:                  {{ scheme.settings.input_text_color }};
+        --color-input-border:                {{ scheme.settings.input_border_color }};
+        --color-input-hover-bg:              {{ scheme.settings.input_hover_background }};
 
-      /* Variants */
-      --color-variant-bg:                  {{ scheme.settings.variant_background_color }};
-      --color-variant-text:                {{ scheme.settings.variant_text_color }};
-      --color-variant-border:              {{ scheme.settings.variant_border_color }};
-      --color-variant-hover-bg:            {{ scheme.settings.variant_hover_background_color }};
-      --color-variant-hover-text:          {{ scheme.settings.variant_hover_text_color }};
-      --color-variant-hover-border:        {{ scheme.settings.variant_hover_border_color }};
+        /* Variants */
+        --color-variant-bg:                  {{ scheme.settings.variant_background_color }};
+        --color-variant-text:                {{ scheme.settings.variant_text_color }};
+        --color-variant-border:              {{ scheme.settings.variant_border_color }};
+        --color-variant-hover-bg:            {{ scheme.settings.variant_hover_background_color }};
+        --color-variant-hover-text:          {{ scheme.settings.variant_hover_text_color }};
+        --color-variant-hover-border:        {{ scheme.settings.variant_hover_border_color }};
 
-      /* Selected Variants */
-      --color-selected-variant-bg:         {{ scheme.settings.selected_variant_background_color }};
-      --color-selected-variant-text:       {{ scheme.settings.selected_variant_text_color }};
-      --color-selected-variant-border:     {{ scheme.settings.selected_variant_border_color }};
-      --color-selected-variant-hover-bg:   {{ scheme.settings.selected_variant_hover_background_color }};
-      --color-selected-variant-hover-text: {{ scheme.settings.selected_variant_hover_text_color }};
-      --color-selected-variant-hover-border: {{ scheme.settings.selected_variant_hover_border_color }};
-    }
-  {% endfor %}
+        /* Selected Variants */
+        --color-selected-variant-bg:         {{ scheme.settings.selected_variant_background_color }};
+        --color-selected-variant-text:       {{ scheme.settings.selected_variant_text_color }};
+        --color-selected-variant-border:     {{ scheme.settings.selected_variant_border_color }};
+        --color-selected-variant-hover-bg:   {{ scheme.settings.selected_variant_hover_background_color }};
+        --color-selected-variant-hover-text: {{ scheme.settings.selected_variant_hover_text_color }};
+        --color-selected-variant-hover-border: {{ scheme.settings.selected_variant_hover_border_color }};
+      }
+    {% endfor %}
 
     /* Card Grid Layout Settings */
     --grid-cards-columns-desktop: {{ settings.grid_cards_columns_desktop }};

@@ -47,14 +47,398 @@
     "settings": [
       {
         "type": "header",
-        "content": "t:general.fonts"
+        "content": "Heading"
       },
       {
         "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
+        "id": "type_heading_font",
+        "default": "poppins_n7",
+        "label": "Font"
       },
+      {
+        "type": "range",
+        "id": "type_heading_size_scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size scale",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "type_heading_letter_spacing",
+        "label": "Letter spacing (em)",
+        "default": "-0.02",
+        "options": [
+          { 
+            "value": "-0.05", 
+            "label": "-0.05" 
+          },
+          { 
+            "value": "-0.04", 
+            "label": "-0.04" 
+          },
+          { 
+            "value": "-0.03", 
+            "label": "-0.03" 
+          },
+          { 
+            "value": "-0.02", 
+            "label": "-0.02" 
+          },
+          { 
+            "value": "-0.01", 
+            "label": "-0.01" 
+          },
+          { 
+            "value": "0",
+            "label": "0" 
+          },
+          { "value": "0.01",  
+            "label": "0.01" 
+          },
+          { "value": "0.02",  
+            "label": "0.02" 
+          },
+          { 
+            "value": "0.05",  
+            "label": "0.05" 
+          },
+          { 
+            "value": "0.1",   
+            "label": "0.1" 
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_heading_text_case",
+        "label": "Text letter case",
+        "default": "uppercase",
+        "options": [
+          { 
+            "value": "none",       
+            "label": "Default" 
+          },
+          { 
+            "value": "uppercase",  
+            "label": "Uppercase" 
+          },
+          { 
+            "value": "lowercase",  
+            "label": "Lowercase" 
+          },
+          { 
+            "value": "capitalize", 
+            "label": "Capitalize" 
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_heading_word_break",
+        "label": "Word break",
+        "default": "normal",
+        "options": [
+          { 
+            "value": "normal",     
+            "label": "Normal" 
+          },
+          { 
+            "value": "break-all",  
+            "label": "All" 
+          },
+          { 
+            "value": "break-word", 
+            "label": "Word" 
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Subheading"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_subheading_font",
+        "default": "poppins_n4",
+        "label": "Font"
+      },
+      {
+        "type": "range",
+        "id": "type_subheading_size_scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size scale",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "type_subheading_letter_spacing",
+        "label": "Letter spacing (em)",
+        "default": "0",
+        "options": [
+          { 
+            "value": "-0.05", 
+            "label": "-0.05" 
+          },
+          { 
+            "value": "-0.04", 
+            "label": "-0.04" 
+          },
+          { 
+            "value": "-0.03", 
+            "label": "-0.03" 
+          },
+          { 
+            "value": "-0.02", 
+            "label": "-0.02" 
+          },
+          { 
+            "value": "-0.01", 
+            "label": "-0.01" 
+          },
+          { 
+            "value": "0",     
+            "label": "0" 
+          },
+          { 
+            "value": "0.01",  
+            "label": "0.01" 
+          },
+          { 
+            "value": "0.02",  
+            "label": "0.02" 
+          },
+          { 
+            "value": "0.05",  
+            "label": "0.05" 
+          },
+          { 
+            "value": "0.1",   
+            "label": "0.1" 
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_subheading_text_case",
+        "label": "Text letter case",
+        "default": "none",
+        "options": [
+          { 
+            "value": "none",       
+            "label": "Default" 
+          },
+          { 
+            "value": "uppercase",  
+            "label": "Uppercase" 
+          },
+          { 
+            "value": "lowercase",  
+            "label": "Lowercase" 
+          },
+          { 
+            "value": "capitalize", 
+            "label": "Capitalize" 
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_subheading_word_break",
+        "label": "Word break",
+        "default": "normal",
+        "options": [
+          { 
+            "value": "normal",     
+            "label": "Normal" 
+          },
+          { 
+            "value": "break-all",  
+            "label": "All" 
+          },
+          { 
+            "value": "break-word", 
+            "label": "Word" 
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "work_sans_n4",
+        "label": "Font"
+      },
+      {
+        "type": "range",
+        "id": "type_body_size_scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size scale",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "type_body_letter_spacing",
+        "label": "Letter spacing (em)",
+        "default": "0",
+        "options": [
+          { 
+            "value": "-0.05", 
+            "label": "-0.05" 
+          },
+          { 
+            "value": "-0.04", 
+            "label": "-0.04" 
+          },
+          { 
+            "value": "-0.03", 
+            "label": "-0.03" 
+          },
+          { 
+            "value": "-0.02", 
+            "label": "-0.02" 
+          },
+          { 
+            "value": "-0.01", 
+            "label": "-0.01" 
+          },
+          { 
+            "value": "0",     
+            "label": "0" 
+          },
+          { 
+            "value": "0.01",  
+            "label": "0.01" 
+          },
+          { 
+            "value": "0.02",  
+            "label": "0.02" 
+          },
+          { 
+            "value": "0.05",  
+            "label": "0.05" 
+          },
+          { 
+            "value": "0.1",   
+            "label": "0.1" 
+          }
+       ]
+     },
+     {
+        "type": "select",
+        "id": "type_body_text_case",
+        "label": "Text letter case",
+        "default": "none",
+        "options": [
+          { 
+            "value": "none",       
+            "label": "Default" 
+          },
+          { 
+            "value": "uppercase",  
+            "label": "Uppercase" 
+          },
+          { 
+            "value": "lowercase",  
+            "label": "Lowercase" 
+          },
+          { 
+            "value": "capitalize", 
+            "label": "Capitalize" 
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Accent"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_accent_font",
+        "default": "work_sans_n6",
+        "label": "Font"
+      },
+      {
+        "type": "range",
+        "id": "type_accent_size_scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size scale",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "type_accent_letter_spacing",
+        "label": "Letter spacing (em)",
+        "default": "0.05",
+        "options": [
+          { 
+            "value": "-0.05", 
+            "label": "-0.05" 
+          },
+          { 
+            "value": "-0.02", 
+            "label": "-0.02" 
+          },
+          { 
+            "value": "0",     
+            "label": "0" 
+          },
+          { 
+            "value": "0.01",  
+            "label": "0.01" 
+          },
+          { 
+            "value": "0.02",  
+            "label": "0.02" 
+          },
+          { 
+            "value": "0.05",  
+            "label": "0.05" 
+          },
+          { 
+            "value": "0.1",   
+            "label": "0.1" 
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_accent_text_case",
+        "label": "Text letter case",
+        "default": "uppercase",
+        "options": [
+          { 
+            "value": "none",       
+            "label": "Default" 
+          },
+          { 
+            "value": "uppercase",  
+            "label": "Uppercase" 
+          },
+          { 
+            "value": "lowercase",  
+            "label": "Lowercase" 
+          },
+          { 
+            "value": "capitalize", 
+            "label": "Capitalize" 
+          }
+        ]
+      }
     ]
   },
   {

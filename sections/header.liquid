@@ -1,8 +1,8 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 
 
-<header class="site-header logo-{{ section.settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
-  <div class="container header__container logo-position--{{ section.settings.logo_position }}">
+<header class="site-header color-scheme-{{ section.settings.header_color_scheme }} logo-{{ section.settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
+  <div class="container page-width header__container logo-position--{{ section.settings.logo_position }}">
     
     <!-- ========== Store Name & Logo ========== -->
     <div class="logo-wrapper">
@@ -308,6 +308,7 @@
 {% schema %}
 {
   "name": "t:general.header",
+  "tag": "section",
   "settings": [
     {
       "type": "link_list",
@@ -368,7 +369,13 @@
     },
     {
       "type": "header",
-      "content": "t:labels.padding"
+      "content": "Section settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "header_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
       "type": "range",

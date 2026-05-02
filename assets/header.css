@@ -60,23 +60,33 @@
 .logo-position--right {
   justify-content: space-between;
 }
-.logo-position--right .site-nav { order: 1; }
-.logo-position--right .logo-wrapper { order: 2; margin-left: auto; margin-right: 16px; }
-.logo-position--right .header__utilities { order: 3; }
 
+.logo-position--right .site-nav { 
+  order: 1; 
+}
+
+.logo-position--right .logo-wrapper { 
+  order: 2; 
+  margin-left: auto; 
+  margin-right: 16px; 
+}
+
+.logo-position--right .header__utilities { 
+  order: 3; 
+}
 
 button#mobile-menu-toggle {
   border: none;
   background: transparent;
   text-align: center;
-  color: var(--header-foreground);
+  color: var(--color-foreground);
   cursor: pointer;
 }
 
 .icon-menu {
   width: 24px;
   height: 24px;
-  stroke: var(--header-foreground); /* or currentColor */
+  stroke: var(--color-foreground);
 }
 
 .close-btn {
@@ -102,16 +112,15 @@ button#mobile-menu-toggle {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Original CSS with minor enhancements */
 h1.site-title {
     display: flex;
     align-items: center;
 }
 
 .site-header {
-  background: var(--header-bg);
-  color: var(--header-foreground);
-  border-bottom: 1px solid #eee;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border-bottom: 1px solid var(--color-border);
   z-index: 100;
   height: auto;
   padding-top: var(--header-padding-top);
@@ -126,9 +135,10 @@ h1.site-title {
 }
 
 .site-title__link {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #222;
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-size: calc(1.5rem * var(--font-heading--scale));
+  color: var(--color-foreground-heading);
   text-decoration: none;
 }
 
@@ -145,11 +155,14 @@ h1.site-title {
 
 .nav__link,
 .dropdown-toggle {
-  background: none;
+  background: var(--color-background);
   border: none;
-  font: inherit;
-  font-size: 14px;
-  color: var(--header-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: calc(0.875rem * var(--font-accent--scale));
+  letter-spacing: var(--font-accent--letter-spacing);
+  text-transform: var(--font-accent--text-case);
+  color: var(--color-foreground-heading);
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -162,7 +175,7 @@ h1.site-title {
 
 .nav__link:hover,
 .dropdown-toggle:hover {
-  background-color: var(--header-bg);
+  background-color: var(--color-background);
 }
 
 .dropdown-menu {
@@ -170,13 +183,13 @@ h1.site-title {
   top: 100%;
   left: 0;
   min-width: 180px;
-  background-color: var(--header-bg);
-  border: 1px solid #ccc;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
   padding: 0.5rem 0;
   display: none;
   z-index: 10;
   list-style: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px var(--color-shadow);
   border-radius: 4px;
 }
 
@@ -185,11 +198,12 @@ h1.site-title {
   padding: 0.5rem 1rem;
   color: var(--color-foreground);
   text-decoration: none;
-  font-size: 14px;
+  font-family: var(--font-accent--family);
+  font-size: calc(0.875rem * var(--font-accent--scale));
 }
 
 .dropdown__link:hover {
-  background-color: var(--header-bg);
+  background-color: var(--color-background);
 }
 
 .header__utilities {
@@ -204,28 +218,28 @@ h1.site-title {
   justify-content: center;
   padding: 6px;
   border-radius: 4px;
-  color: var(--header-foreground);
+  color: var(--color-foreground);
   text-decoration: none;
   transition: background 0.2s, opacity 0.2s;
 }
 
 .utility-link:hover {
-  background: var(--header-bg);
+  background: var(--color-background);
   opacity: 0.8;
 }
 
 .utility-link a svg {
   width: 24px;
   height: 24px;
-  color: var(--header-foreground);
+  color: var(--color-foreground);
 }
 
 .cart-count {
   position: absolute;
   top: 0px;
   right: 0px;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   border-radius: 50%;
   font-size: 0.75rem;
   width: 18px;
@@ -240,10 +254,10 @@ h1.site-title {
 }
 
 .account-link {
-  color: var(--header-foreground);
+  color: var(--color-foreground);
   text-decoration: none;
   font: inherit;
-  font-size: 14px;
+  font-size: calc(0.875rem * var(--font-accent--scale));
   transition: opacity 0.2s;
   display: flex;
   align-items: center;
@@ -255,7 +269,7 @@ h1.site-title {
 .account-link:hover {
   opacity: 0.7;
   text-decoration: underline;
-  background-color: var(--header-bg);
+  background-color: var(--color-background);
 }
 
 .cart-link {
@@ -268,7 +282,7 @@ h1.site-title {
 }
 
 .cart-link:hover {
-  background-color: var(--header-bg);
+  background-color: var(--color-background);
   opacity: 0.7;
 }
 
@@ -277,7 +291,7 @@ h1.site-title {
   width: 24px;
   height: 24px;
   display: block;
-  color: var(--header-foreground);
+  color: var(--color-foreground);
 } 
 
 button.utility-link.search-link {
@@ -291,8 +305,8 @@ button.utility-link.search-link {
   border-top: 1px solid var(--color-border, #e5e5e5);
   padding: 10px 0;
   margin-top: 10px;
-  background: var(--header-bg);         
-  color: var(--header-foreground); 
+  background: var(--color-background);         
+  color: var(--color-foreground); 
 }
 
 .header__row--bottom .nav__list {
@@ -415,7 +429,7 @@ button.utility-link.search-link {
     left: 0;
     width: 300px;
     height: 100%;
-    background: var(--header-bg);
+    background: var(--color-background);
     padding: 20px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1001;
@@ -436,16 +450,18 @@ button.utility-link.search-link {
   }
 
   span.menu-name {
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-family: var(--font-accent--family);
+    font-weight: var(--font-accent--weight);
+    font-size: calc(1rem * var(--font-accent--scale));
+    letter-spacing: var(--font-accent--letter-spacing);
+    text-transform: var(--font-accent--text-case);
   }
   
   .close-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--header-foreground);
+    color: var(--color-foreground);
     transition: transform 0.3s ease, color 0.3s ease;
   }
 
@@ -459,14 +475,15 @@ button.utility-link.search-link {
     align-items: center;
     width: 100%;
     background: none;
-    color: var(--header-foreground);
+    color: var(--color-foreground);
     border: none;
     text-align: left;
     padding: 15px 0;
-    font-size: 1rem;
-    font-family: var(--font-body-family);
+    font-size: calc(1rem * var(--font-body--scale));
+    font-family: var(--font-body--family);
+    font-weight: var(--font-body--weight);
     cursor: pointer;
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid var(--color-border);
   }
   
   .mobile-dropdown-icon {
@@ -491,11 +508,13 @@ button.utility-link.search-link {
   
   .mobile__nav__link,
   .mobile__dropdown__link {
+    font-family: var(--font-body--family);
+    font-size: calc(1rem * var(--font-body--scale));
     display: block;
     padding: 15px 0;
-    color: var(--header-foreground);
+    color: var(--color-foreground);
     text-decoration: none;
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .header__utilities {
@@ -511,19 +530,19 @@ button.utility-link.search-link {
     justify-content: start;
     align-items: center;
     gap: 1.5rem;
-    font-size: medium;
-    font-weight: 600;
+    font-size: calc(1rem * var(--font-body--scale));
+    font-weight: var(--font-accent--weight);
   }
 
   a.mobile-login-link {
     text-decoration: none;
-    color: #000;
+    color: var(--color-foreground);
     padding: 15px 0;
   }
 
   a.mobile-register-link {
     text-decoration: none;
-    color: #000;
+    color: var(--color-foreground);
     padding: 15px 0;
   }
 
@@ -631,7 +650,7 @@ button.utility-link.search-link {
     left: 0;
     width: 400px;
     height: 100%;
-    background: var(--header-bg);
+    background: var(--color-background);
     padding: 20px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1001;
@@ -661,8 +680,7 @@ button.utility-link.search-link {
     background: none;
     border: none;
     cursor: pointer;
-    /* padding: 2px; */
-    color: var(--header-foreground);
+    color: var(--color-foreground);
   }
   
   .mobile-dropdown-toggle {
@@ -671,14 +689,14 @@ button.utility-link.search-link {
     align-items: center;
     width: 100%;
     background: none;
-    color: var(--header-foreground);
+    color: var(--color-foreground);
     border: none;
     text-align: left;
     padding: 15px 0;
     font-size: 1rem;
     font-family: var(--font-body-family);
     cursor: pointer;
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid var(--color-border);
   }
   
   .mobile-dropdown-icon {
@@ -705,9 +723,9 @@ button.utility-link.search-link {
   .mobile__dropdown__link {
     display: block;
     padding: 15px 0;
-    color: var(--header-foreground);
+    color: var(--color-foreground);
     text-decoration: none;
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .header__utilities {
@@ -723,19 +741,19 @@ button.utility-link.search-link {
     justify-content: start;
     align-items: center;
     gap: 1.5rem;
-    font-size: medium;
+    font-size: calc(1rem * var(--font-body--scale));
     font-weight: 600;
   }
 
   a.mobile-login-link {
     text-decoration: none;
-    color: #000;
+    color: var(--color-foreground);
     padding: 15px 0;
   }
 
   a.mobile-register-link {
     text-decoration: none;
-    color: #000;
+    color: var(--color-foreground);
     padding: 15px 0;
   }
 
@@ -748,70 +766,56 @@ button.utility-link.search-link {
 }
 
 
-/* Desktop & Mobile Logo 
-.site-logo {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-}*/
-
-
 /* Fallback text - make sure it's always hidden if an image is present */
 .site-logo--text {
   display: inline-block;
   font-weight: 600;
   font-size: 1.5rem;
-  color: var(--header-foreground);
+  color: var(--color-foreground);
 }
 
 
 /* Logo-picture display helpers */
-.logo-picture { display: inline-block; line-height: 0; } 
-.site-logo { display: block; max-width: 100%; height: auto; }
+.logo-picture { 
+  display: inline-block; 
+  line-height: 0; 
+}
+
+.site-logo { 
+  display: block; 
+  max-width: 100%; 
+  height: auto; 
+}
 
 /* Default: desktop image visible, mobile image hidden */
-.site-logo--desktop { display: block; }
-.site-logo--mobile  { display: none; }
+.site-logo--desktop { 
+  display: block; 
+}
+
+.site-logo--mobile  { 
+  display: none; 
+}
 
 /* Dark-only single image uses this class but doesn't conflict */
-.site-logo--dark { display: block; }
+.site-logo--dark { 
+  display: block; 
+}
 
 /* Mobile: swap visibility */
 @media (max-width: 768px) {
-  .site-logo--desktop { display: none !important; }
-  .site-logo--mobile  { display: block !important; }
+  .site-logo--desktop { 
+    display: none !important; 
+  }
+
+  .site-logo--mobile { 
+    display: block !important; 
+  }
 }
 
-/* Optional: ensure nothing collapses awkwardly */
-.logo-wrapper { line-height: 0; }
-
-/* ============================================
-   DEBUG MODE: Visual Alignment Outlines
-   ============================================ 
-
-.header__container {
-  outline: 2px dashed orange;   
+.logo-wrapper { 
+  line-height: 0; 
 }
 
-.logo-wrapper {
-  outline: 2px solid red; 
-}
-
-.site-logo,
-.site-logo--text {
-  outline: 2px solid blue; }
-
-.header__utilities {
-  outline: 2px solid green;   
-}
-
-.mobile-menu-icon {
-  outline: 2px solid purple; 
-}*/
-
-
-/* Spacer (balances utilities on the right) */
 .logo-position--center .header__spacer {
   flex-grow: 1;
   flex-basis: 0;
