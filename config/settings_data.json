@@ -13,7 +13,7 @@
     "type_body_font": "work_sans_n4",
     "type_accent_font": "work_sans_n6",
     "type_accent_size_scale": 100,
-    "type_accent_letter_spacing": "-0.05",
+    "type_accent_letter_spacing": "0.01",
     "max_page_width": "1200px",
     "page_spacing": 20,
     "type_primary_font": "work_sans_n4",
