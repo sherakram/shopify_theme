@@ -498,35 +498,35 @@
             "type": "color",
             "id": "foreground_heading",
             "label": "t:settings.headings",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "foreground",
             "label": "t:settings.text",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "primary",
             "label": "t:settings.primary_color",
-            "default": "#000F9F",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "primary_hover",
             "label": "t:settings.primary_hover_color",
-            "default": "#000000",
+            "default": "#65706E",
             "alpha": true
           },
           {
             "type": "color",
             "id": "border",
             "label": "t:settings.borders",
-            "default": "#E6E6E6",
+            "default": "#EBEBEB",
             "alpha": true
           },
           {
@@ -544,7 +544,7 @@
             "type": "color",
             "id": "primary_button_background",
             "label": "t:settings.background",
-            "default": "#000F9F",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -558,14 +558,14 @@
             "type": "color",
             "id": "primary_button_border",
             "label": "t:settings.borders",
-            "default": "#000F9F",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "primary_button_hover_background",
             "label": "t:settings.hover_background",
-            "default": "#000F9F",
+            "default": "#000000",
             "alpha": true
           },
           {
@@ -579,7 +579,7 @@
             "type": "color",
             "id": "primary_button_hover_border",
             "label": "t:settings.hover_borders",
-            "default": "#000F9F",
+            "default": "#000000",
             "alpha": true
           },
           {
@@ -597,14 +597,14 @@
             "type": "color",
             "id": "secondary_button_text",
             "label": "t:settings.text",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "secondary_button_border",
             "label": "t:settings.borders",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -618,14 +618,14 @@
             "type": "color",
             "id": "secondary_button_hover_text",
             "label": "t:settings.hover_text",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "secondary_button_hover_border",
             "label": "t:settings.hover_borders",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -643,14 +643,14 @@
             "type": "color",
             "id": "input_text_color",
             "label": "t:settings.text",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
             "type": "color",
             "id": "input_border_color",
             "label": "t:settings.borders",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -675,7 +675,7 @@
             "type": "color",
             "id": "variant_text_color",
             "label": "t:settings.text",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -714,7 +714,7 @@
             "type": "color",
             "id": "selected_variant_background_color",
             "label": "t:settings.background",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -728,7 +728,7 @@
             "type": "color",
             "id": "selected_variant_border_color",
             "label": "t:settings.borders",
-            "default": "#000000",
+            "default": "#151515",
             "alpha": true
           },
           {
@@ -828,27 +828,7 @@
         "id": "badge_soldout_scheme",
         "label": "t:labels.badge_soldout_scheme",
         "default": "scheme-2"
-      },
-      {
-        "type": "header",
-        "content": "t:general.typography"
-      },
-      {
-      "type": "select",
-      "id": "badge_text_case",
-      "label": "t:labels.badge_text_case",
-      "options": [
-        { 
-          "value": "uppercase", 
-          "label": "t:options.text_case.uppercase" 
-        },
-        { 
-          "value": "lowercase", 
-          "label": "t:options.text_case.lowercase" 
-        }
-      ],
-      "default": "uppercase"
-    }
+      }
     ]
   },
   {

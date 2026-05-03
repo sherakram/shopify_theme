@@ -113,17 +113,7 @@
   padding: 3px 8px;
   border-radius: 0px;
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
   line-height: 1.4;
-}
-
-.text-uppercase {
-  text-transform: uppercase;
-}
-
-.text-lowercase {
-  text-transform: lowercase;
 }
 
 .pc__badge--sale {
@@ -165,8 +155,6 @@
   padding: 9px 14px;
   border-radius: var(--color-btn-primary-border);
   font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
   cursor: pointer;
   text-decoration: none;
   border: none;
@@ -192,7 +180,6 @@
 .pc__vendor {
   margin: 0;
   font-size: 0.72rem;
-  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-foreground);
@@ -202,11 +189,6 @@
 .pc__title {
   margin: 0;
   font-size: 0.8rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: .48px;
-  text-transform: uppercase;
 }
 
 .pc__title a {
@@ -231,26 +213,22 @@
 
 .pc__price-regular {
   font-size: 0.8rem;
-  font-weight: 700;
   color: var(--color-foreground);
 }
 
 .pc__price-compare {
   font-size: 0.8rem;
-  font-weight: 400;
   color: var(--color-foreground);
   text-decoration: line-through;
 }
 
 .pc__price-sale {
   font-size: 0.8rem;
-  font-weight: 700;
   color: var(--color-primary);
 }
 
 .pc__price-soldout {
   font-size: 0.8rem;
-  font-weight: 500;
   color: var(--color-foreground);
   letter-spacing: 0.03em;
 }

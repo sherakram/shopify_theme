@@ -135,8 +135,6 @@ h1.site-title {
 }
 
 .site-title__link {
-  font-family: var(--font-heading--family);
-  font-weight: var(--font-heading--weight);
   font-size: calc(1.5rem * var(--font-heading--scale));
   color: var(--color-foreground-heading);
   text-decoration: none;
@@ -157,11 +155,7 @@ h1.site-title {
 .dropdown-toggle {
   background: var(--color-background);
   border: none;
-  font-family: var(--font-accent--family);
-  font-weight: var(--font-accent--weight);
   font-size: calc(0.875rem * var(--font-accent--scale));
-  letter-spacing: var(--font-accent--letter-spacing);
-  text-transform: var(--font-accent--text-case);
   color: var(--color-foreground-heading);
   cursor: pointer;
   text-decoration: none;
@@ -198,7 +192,6 @@ h1.site-title {
   padding: 0.5rem 1rem;
   color: var(--color-foreground);
   text-decoration: none;
-  font-family: var(--font-accent--family);
   font-size: calc(0.875rem * var(--font-accent--scale));
 }
 
@@ -238,8 +231,8 @@ h1.site-title {
   position: absolute;
   top: 0px;
   right: 0px;
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
   border-radius: 50%;
   font-size: 0.75rem;
   width: 18px;
@@ -256,7 +249,6 @@ h1.site-title {
 .account-link {
   color: var(--color-foreground);
   text-decoration: none;
-  font: inherit;
   font-size: calc(0.875rem * var(--font-accent--scale));
   transition: opacity 0.2s;
   display: flex;
@@ -508,7 +500,6 @@ button.utility-link.search-link {
   
   .mobile__nav__link,
   .mobile__dropdown__link {
-    font-family: var(--font-body--family);
     font-size: calc(1rem * var(--font-body--scale));
     display: block;
     padding: 15px 0;
@@ -531,7 +522,6 @@ button.utility-link.search-link {
     align-items: center;
     gap: 1.5rem;
     font-size: calc(1rem * var(--font-body--scale));
-    font-weight: var(--font-accent--weight);
   }
 
   a.mobile-login-link {

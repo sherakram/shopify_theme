@@ -3,7 +3,6 @@
   width: 100%;
   padding-bottom: 20px;
   box-sizing: border-box;
-  font-family: var(--font-primary--family);
 }
 
 .fs-form {
@@ -32,11 +31,11 @@
   border: none;
   border-right: 1px solid var(--color-border);
   cursor: pointer;
-  font-family: var(--font-primary--family);
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: calc(0.875rem * var(--font-accent--scale));
+  letter-spacing: var(--font-accent--letter-spacing);
+  text-transform: var(--font-accent--text-case);
   transition: background 0.25s ease, color 0.25s ease;
   position: relative;
   overflow: hidden;
@@ -96,11 +95,11 @@
   color: var(--color-foreground);
   border: none;
   border-left: 1px solid var(--color-border);
-  font-family: var(--font-primary--family);
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: calc(0.875rem * var(--font-accent--scale));
+  letter-spacing: var(--font-accent--letter-spacing);
+  text-transform: var(--font-accent--text-case);
   cursor: pointer;
   appearance: none;
   width: fit-content;
@@ -125,8 +124,13 @@
 }
 
 /* ── Layout ── */
-.fs-layout  { display: contents; }
-.fs-sidebar { display: contents; }
+.fs-layout  { 
+  display: contents; 
+}
+
+.fs-sidebar { 
+  display: contents; 
+}
 
 /* MODAL POPUP */
 .fs-panels {
@@ -237,12 +241,7 @@
 
 .fs-panel__title {
   margin: 0;
-  font-family: var(--font-primary--family);
-  font-size: 28px;
-  font-weight: var(--font-primary--weight, 600);
   color: var(--color-foreground-heading);
-  letter-spacing: 0.01em;
-  line-height: 1;
 }
 
 /* ── Close Button ── */
@@ -276,12 +275,12 @@
 
 /* ── Empty message ── */
 .fs-empty {
-  font-family: var(--font-primary--family);
-  font-size: 14px;
+  font-family: var(--font-body--family);
+  font-size: calc(0.875rem * var(--font-accent--scale));
   color: var(--color-foreground);
   opacity: 0.5;
   padding: 24px 36px;
-  font-style: italic;
+  font-style: var(--font-body--style);
 }
 
 /* FILTER GROUPS */
@@ -302,11 +301,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--font-primary--family);
+  font-family: var(--font-accent--family);
   font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-weight: var(--font-accent--weight);
+  letter-spacing: var(--font-accent--letter-spacing);
+  text-transform: var(--font-accent--text-case);
   color: var(--color-foreground);
   opacity: 0.55;
   padding-bottom: 12px;
