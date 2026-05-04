@@ -1,7 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "logo_max_width": 144,
+    "type_heading_font": "poppins_n7",
+    "type_heading_size_scale": 100,
+    "type_heading_letter_spacing": "-0.02",
+    "type_heading_text_case": "uppercase",
+    "type_heading_word_break": "normal",
+    "type_subheading_font": "poppins_n4",
+    "type_subheading_size_scale": 100,
     "type_body_font": "work_sans_n4",
+    "type_body_size_scale": 100,
+    "type_body_letter_spacing": "0",
+    "type_body_text_case": "none",
     "type_accent_font": "work_sans_n6",
     "type_accent_size_scale": 100,
     "type_accent_letter_spacing": "0.05",
@@ -18,7 +37,7 @@
           "foreground": "#151515",
           "primary": "#000000",
           "primary_hover": "#151515",
-          "border": "#EBEBEB",
+          "border": "#ebebeb",
           "shadow": "#000000",
           "primary_button_background": "#151515",
           "primary_button_text": "#ffffff",
