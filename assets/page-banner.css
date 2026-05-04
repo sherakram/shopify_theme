@@ -77,20 +77,14 @@
 .page-banner__title {
   margin: 0;
   font-size: var(--banner-title-size);
-  font-weight: var(--banner-title-weight);
-  line-height: var(--banner-title-lh);
   color: var(--color-foreground-heading);
-  letter-spacing: -0.02em;
-  text-wrap: balance;
 }
 
 /* Description */
 .page-banner__description {
   margin-block: 0.75em 0;
   font-size: var(--banner-desc-size);
-  line-height: var(--banner-desc-lh);
   color: var(--color-foreground);
-  text-wrap: pretty;
 }
 
 .page-banner__description p { 
