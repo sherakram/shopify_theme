@@ -6,6 +6,7 @@
 {{ 'accordion-default.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign scheme = section.settings.product_color
   assign object_fit   = section.settings.gallery_media_object_fit | default: 'cover'
   assign auto_height  = section.settings.enable_slider_auto_height
   assign aspect_ratio = section.settings.gallery_aspect_ratio | default: 'auto'
@@ -25,6 +26,7 @@
   id="product-section-{{ section.id }}"
   class="
     product-section
+    color-scheme-{{ scheme }}
     product-section--media-{{ section.settings.media_position }}
     product-section--{{ section.settings.product_media_width }}
   "
@@ -37,7 +39,7 @@
     {% if aspect_ratio == 'fit' %}--gallery-fit-viewport: 1;{% endif %}
   "
 >
-  <div class="product-inner" role="region" aria-label="{{product.title}} details">
+  <div class="product-inner page-width" role="region" aria-label="{{product.title}} details">
     {%- comment -%} column layout: media + info {%- endcomment -%}
     <div class="product-columns">
       <div
@@ -594,7 +596,13 @@
     },
     {
       "type": "header",
-      "content": "t:labels.padding"
+      "content": "Section settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "product_color",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
       "id": "padding_top",

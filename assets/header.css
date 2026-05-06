@@ -1,4 +1,3 @@
-/* --- Logo Positions (desktop only) --- */
 .logo-position--left {
   display: flex;
   align-items: center;
@@ -156,6 +155,10 @@ h1.site-title {
   background: var(--color-background);
   border: none;
   font-size: calc(0.875rem * var(--font-accent--scale));
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  letter-spacing: var(--font-body--letter-spacing);
+  text-transform: var(--font-body--text-case);
   color: var(--color-foreground-heading);
   cursor: pointer;
   text-decoration: none;
@@ -290,6 +293,13 @@ button.utility-link.search-link {
   border: none;
   background: transparent;
   cursor: pointer;
+}
+
+svg.size-6 {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: var(--color-foreground);
 }
 
 /* Bottom Menu */
@@ -683,8 +693,11 @@ button.utility-link.search-link {
     border: none;
     text-align: left;
     padding: 15px 0;
-    font-size: 1rem;
-    font-family: var(--font-body-family);
+    font-size: calc(1rem * var(--font-body--scale));
+    font-family: var(--font-body--family);
+    font-weight: var(--font-body--weight);
+    letter-spacing: var(--font-body--letter-spacing);
+    text-transform: var(--font-body--text-case);
     cursor: pointer;
     border-bottom: 1px solid var(--color-border);
   }

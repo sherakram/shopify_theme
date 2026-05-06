@@ -1,42 +1,25 @@
-/* ── Tokens ──────────────────────────────────────────────── */
-:root {
-  --accordion-border-color    : #e5e5e5;
-  --accordion-text-color      : #111;
-  --accordion-body-color      : #333;
-  --accordion-font-size-title : 1rem;
-  --accordion-font-weight     : 700;
-  --accordion-transition      : 280ms cubic-bezier(0.4, 0, 0.2, 1);
-  --accordion-icon-size       : 1.25rem;
-  --accordion-padding-y       : 1.25rem;
-  --accordion-padding-x       : 0;
-}
-
-/* ── Host element ────────────────────────────────────────── */
-accordion-default {
+.accordion-default {
   display: block;
 }
 
-/* ── Section wrapper ─────────────────────────────────────── */
 .accordion__section:last-child {
-  border-bottom: 1px solid var(--accordion-border-color);
+  border-bottom: 1px solid var(--color-border);
 }
 
-/* Remove native marker */
 .accordion__section > summary { list-style: none; }
 .accordion__section > summary::-webkit-details-marker { display: none; }
 
-/* ── Summary / trigger ───────────────────────────────────── */
 .accordion__button {
   display        : flex;
   align-items    : center;
   justify-content: space-between;
   width          : 100%;
-  padding        : var(--accordion-padding-y) var(--accordion-padding-x);
+  padding        : 1.25rem 0;
   cursor         : pointer;
   user-select    : none;
-  font-size      : var(--accordion-font-size-title);
-  font-weight    : var(--accordion-font-weight);
-  color          : var(--accordion-text-color);
+  font-size      : 1rem;
+  font-weight    : 700;
+  color          : var(--color-foreground-heading);
   background     : transparent;
   border         : none;
   text-align     : left;
@@ -47,12 +30,12 @@ accordion-default {
   border-radius: 2px;
 }
 
-/* ── Icon container ──────────────────────────────────────── */
+
 .accordion__icon {
   position   : relative;
   flex-shrink: 0;
-  width      : var(--accordion-icon-size);
-  height     : var(--accordion-icon-size);
+  width      : 1.25rem;
+  height     : 1.25rem;
   margin-left: 1rem;
 }
 .accordion__icon svg {
@@ -60,32 +43,26 @@ accordion-default {
   inset     : 0;
   width     : 100%;
   height    : 100%;
-  transition: opacity var(--accordion-transition),
-              transform var(--accordion-transition);
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Plus — visible when CLOSED */
+
 .accordion__icon--plus  { opacity: 1; transform: rotate(0deg); }
-/* Minus — hidden when CLOSED */
+
 .accordion__icon--minus { opacity: 0; transform: rotate(-45deg) scale(0.8); }
 
-/* When OPEN: swap */
 .accordion__section[open] .accordion__icon--plus  { opacity: 0; transform: rotate(45deg) scale(0.8); }
 .accordion__section[open] .accordion__icon--minus { opacity: 1; transform: rotate(0deg); }
 
-/* ── Collapsible body ────────────────────────────────────── */
-/*
- * SEO: height:0 + overflow:hidden keeps content in the DOM
- * and fully crawlable — we never use display:none.
- */
 .accordion__body {
   overflow  : hidden;
-  transition: height var(--accordion-transition);
+  transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .accordion__body-inner {
   padding-bottom: 1.25rem;
-  color         : var(--accordion-body-color);
+  color         : var(--color-foreground);
   font-size     : 0.9375rem;
   line-height   : 1.65;
 }
@@ -97,7 +74,6 @@ accordion-default {
 .accordion__body-inner p  { margin: 0.5rem 0; }
 .accordion__body-inner p:last-child { margin-bottom: 0; }
 
-/* ── Reduced-motion ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .accordion__body,
   .accordion__icon svg { transition: none; }

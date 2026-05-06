@@ -53,7 +53,7 @@
           "secondary_button_hover_border": "#151515",
           "input_background": "#ffffff",
           "input_text_color": "#151515",
-          "input_border_color": "#151515",
+          "input_border_color": "#EBEBEB",
           "input_hover_background": "#f5f5f5",
           "variant_background_color": "#ffffff",
           "variant_text_color": "#151515",

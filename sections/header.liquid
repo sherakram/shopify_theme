@@ -143,7 +143,10 @@
     <div class="header__utilities">
       <!-- Search -->
       <button type="button" class="utility-link search-link" aria-label="Search" 
-        data-open-search>{{ 'search.svg' | inline_asset_content }}
+        data-open-search>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
       </button>
       {% render 'search-modal' %}
 
@@ -161,7 +164,9 @@
         {% else %}
           <!--login-->
           <a href="{{ routes.account_login_url }}" class="account-link login-link" aria-label="Login">
-            {{ 'log-in.svg' | inline_asset_content }}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
           </a>
 
         {% endif %}
@@ -172,7 +177,9 @@
         <span class="cart-count {% if cart.item_count == 0 %}is-empty{% endif %}">
           {{ cart.item_count }}
         </span>
-        {{ 'icon-cart.svg' | inline_asset_content }}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
       </a>
     </div>
 
@@ -233,7 +240,9 @@
           <div class="mobile-account-links">
             {% if customer %}
               <a href="{{ routes.account_url }}" class="mobile-account-link" aria-label="My account">
-                {{ 'user-account.svg' | inline_asset_content }}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
               </a>
                
                <!-- Logout icon -->
@@ -243,13 +252,11 @@
             {% else %}
               <!-- Login icon -->
               <a href="{{ routes.account_login_url }}" class="mobile-login-link login-link" aria-label="Login">
-                {{ 'log-in.svg' | inline_asset_content }}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
               </a>
 
-              <!-- Register icon -->
-              {% comment %} <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
-                {{ 'user-register.svg' | inline_asset_content }}
-              </a> {% endcomment %}
             {% endif %}
           </div>
           

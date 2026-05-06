@@ -3,12 +3,14 @@ h1.product-title {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: 600;
+    color: var(--color-foreground-heading);
 }
 
 /*Price Block*/
 .product-price {
   font-size: 1.1rem;
   font-weight: 600;
+   color: var(--color-primary);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -16,7 +18,7 @@ h1.product-title {
 
 .price--compare {
   font-size: 1.1rem;
-  color: #999;
+  color: var(--color-foreground);
   text-decoration: line-through;
 }
 
@@ -24,7 +26,7 @@ h1.product-title {
 .product-divider {
   border: 0;                   
   height: 1px;                  
-  background-color: #ddd;
+  background-color: var(--color-border);
 }
 
 /*Variants Block*/
@@ -53,7 +55,7 @@ h1.product-title {
 .variant-option__legend {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #333;
+  color: var(--color-foreground);
   padding: 0;
   margin-bottom: 2px;
   float: left;
@@ -69,15 +71,16 @@ h1.product-title {
   padding: 12px;
   padding-right: 36px;
   font-size: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-input-border);
   border-radius: 0px;
   appearance: none;
-  background-color: #fff;
+  background: var(--color-input-bg);
+  color: var(--color-input-text);
   cursor: pointer;
 }
 
 .variant-option__select:focus {
-  border-color: #000;
+  border-color: var(--color-primary);
   outline: none;
 }
 
@@ -110,12 +113,21 @@ h1.product-title {
   align-items: center;
   justify-content: center;
   padding: .5rem;
-  border: 1px solid #ddd;
+  background: var(--color-variant-bg);
+  color: var(--color-variant-text);
+  border: 1px solid var(--color-variant-border);
   border-radius: 0px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.2s ease;
 }
+
+.variant-pill:hover {
+  background: var(--color-variant-hover-bg);
+  color: var(--color-variant-hover-text);
+  border-color: var(--color-variant-hover-border);
+}
+
 .variant-pill input { 
   position: absolute;
   opacity: 0;
@@ -123,7 +135,15 @@ h1.product-title {
 }
 
 .variant-pill.is-selected {
-  border-color: #000;
+  background: var(--color-selected-variant-bg);
+  color: var(--color-selected-variant-text);
+  border-color: var(--color-selected-variant-border);
+}
+
+.variant-pill.is-selected:hover {
+  background: var(--color-selected-variant-hover-bg);
+  color: var(--color-selected-variant-hover-text);
+  border-color: var(--color-selected-variant-hover-border);
 }
 
 /* Visible text for text-mode pills */
@@ -227,7 +247,8 @@ h1.product-title {
 .quantity-selector {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-input-border);
+  background: var(--color-input-bg);
   border-radius: 0px;
   overflow: hidden;
   height: 100%;
@@ -246,7 +267,8 @@ h1.product-title {
 .quantity-btn {
   width: 46px;
   height: 46px;
-  background: #fff;
+  background: var(--color-input-bg);
+  color: var(--color-input-text);
   border: none;
   font-size: 14px;
   font-weight: 600;
@@ -255,7 +277,7 @@ h1.product-title {
 }
 
 .quantity-btn:hover {
-  background: #f7f7f7;
+   background: var(--color-input-hover-bg);
 }
 
 /* Remove number input arrows (Chrome, Safari, Edge) */
@@ -276,20 +298,20 @@ h1.product-title {
   flex: 1;           
   padding: 12px 24px;
   border-radius: 0px;
-  background: transparent;
-  color: #000;
+  background: var(--color-btn-secondary-bg);
+  color: var(--color-btn-secondary-text);
   text-transform: uppercase;
   font-size: inherit;
   cursor: pointer;
-  border: 1px solid #000;
+  border: 1px solid var(--color-btn-secondary-border);
   position: relative;
   transition: background 0.3s ease;
 }
 
 .add-to-cart-button:hover {
-  background: #000;
-  color: #fff;
-  border: none;
+  background: var(--color-btn-secondary-hover-bg);
+  color: var(--color-btn-secondary-hover-text);
+  border: var(--color-btn-secondary-hover-border);
 }
 
 /* Add to cart states */
@@ -313,19 +335,19 @@ h1.product-title {
   width: 100%;
   padding: 12px 24px;
   border-radius: 0px;
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
   text-transform: uppercase;
   font-size: inherit;
-  border: none;
+   border: 1px solid var(--color-btn-primary-border);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .shopify-payment-button__button--unbranded:hover:not([disabled]) {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
+    background: var(--color-btn-primary-hover-bg);
+    color: var(--color-btn-primary-hover-text);
+    border: 1px solid var(--color-btn-primary-hover-border);
 }
 
 /*Inventory Block*/

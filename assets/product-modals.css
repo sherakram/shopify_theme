@@ -1,4 +1,3 @@
-/* ---------- Size Guide Block ---------- */
 button.product-size-trigger {
   background: none;
   border: none;
@@ -34,7 +33,7 @@ button.product-size-trigger:hover {
 }
 
 .product-size-modal__panel{
-  background:#fff;
+  background:var(--color-background);
   padding:20px;
   border-radius:8px;
   max-width:900px;
@@ -85,21 +84,21 @@ button.product-size-trigger:hover {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: #f3f3f3;
+  background: var(--color-input-bg);
   border: none;
   border-radius: 50%;
   width: 34px;
   height: 34px;
   font-size: 20px;
   cursor: pointer;
-  color: #333;
+  color: var(--color-foreground);
   transition: all 0.2s ease;
   z-index: 2;
 }
 
 .product-size-modal__close:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-hover);
 }
 
 /* --- Content --- */

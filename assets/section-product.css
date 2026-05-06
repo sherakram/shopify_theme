@@ -1,6 +1,8 @@
 .product-section{
   padding-top:var(--product-padding-top);
-  padding-bottom:var(--product-padding-bottom)
+  padding-bottom:var(--product-padding-bottom);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .product-columns{
@@ -73,13 +75,6 @@
   position:absolute !important;
   left:-9999px !important
 } 
-
-
-/* ============================================
-   Sticky Media Gallery (Desktop only)
-   Sticks while inside .product-columns,
-   unsticks naturally when section ends.
-   ============================================ */
 
 .product-media--sticky {
   position: sticky;
