@@ -1,0 +1,141 @@
+{{ 'collections-list.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign scheme = section.settings.collection_color_scheme
+  assign current_page_size = section.settings.page_size_default
+  assign cols_desktop = section.settings.card_per_row
+  assign cols_mobile = section.settings.card_per_row_mobile
+%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .collection-wrapper {
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .collections-list {
+    --cols-desktop: {{ cols_desktop }};
+    --cols-mobile: {{ cols_mobile }};
+  }
+{% endstyle %}
+
+<div class="collection-wrapper color-scheme-{{ scheme }}">
+  <div class="page-width">
+
+    {% paginate collections by current_page_size %}
+      <div class="collections-list">
+        {% for collection in collections %}
+          {% render 'collection-card', collection: collection, section: section %}
+        {% endfor %}
+      </div>
+
+      <div class="pagination">
+        {% render 'pagination', pagination: paginate %}
+      </div>
+    {% endpaginate %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:general.collections_list",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection grid"
+    },
+    {
+      "type": "select",
+      "id": "card_per_row",
+      "label": "Cards per row (desktop)",
+      "options": [
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "card_per_row_mobile",
+      "label": "Cards per row (mobile)",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "page_size_default",
+      "label": "Collections per page",
+      "min": 3,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Collection card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Collection product count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "collection_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.collections_list"
+    }
+  ]
+}
+{% endschema %}

@@ -6,21 +6,18 @@
   color: var(--color-foreground);
 }
 
-/* ── Product grid ── */
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));
   gap: 40px 12px;
 }
 
-/* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
   .collection-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* Mobile */
 @media (max-width: 767px) {
   .collection-grid {
     grid-template-columns: repeat(var(--cols-mobile, 2), minmax(0, 1fr));
@@ -28,7 +25,6 @@
   }
 }
 
-/* Empty state */
 .collection-empty {
   grid-column: 1 / -1;
   display: flex;

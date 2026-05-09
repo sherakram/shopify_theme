@@ -832,88 +832,45 @@
     ]
   },
   {
-    "name": "t:general.card_Grid_Layout",
+    "name": "t:general.card",
     "settings": [
       {
         "type": "header",
-        "content": "t:general.desktop_Grid"
+        "content": "t:labels.corner_radius"
       },
       {
         "type": "range",
-        "id": "grid_cards_columns_desktop",
-        "min": 1,
-        "max": 4,
-        "step": 1,
-        "default": 4,
-        "label": "t:labels.desktop_Columns"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_max_width_desktop",
-        "min": 200,
-        "max": 600,
-        "step": 10,
-        "unit": "px",
-        "default": 300,
-       "label": "t:labels.max_card_width_desktop"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_columns_tablet",
-        "min": 1,
-        "max": 3,
-        "step": 1,
-        "default": 3,
-        "label": "t:labels.table_columns"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_max_width_tablet",
-        "min": 150,
-        "max": 500,
-        "step": 10,
-        "unit": "px",
-        "default": 300,
-        "label": "t:labels.max_card_width_tablet"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_columns_mobile",
-        "min": 1,
-        "max": 3,
-        "step": 1,
-        "default": 1,
-        "label": "t:labels.mobile_columns"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_max_width_mobile",
-        "min": 120,
-        "max": 400,
-        "step": 10,
-        "unit": "px",
-        "default": 400,
-        "label": "t:labels.max_card_width_mobile"
-      },
-      {
-        "type": "range",
-        "id": "grid_cards_column_gap",
+        "id": "corner_radius",
         "min": 0,
-        "max": 50,
-        "step": 5,
+        "max": 20,
+        "step": 1,
         "unit": "px",
-        "default": 20,
-        "label": "t:labels.column_gap"
+        "label": "t:labels.corner_radius",
+        "default": 0
       },
       {
-        "type": "range",
-        "id": "grid_cards_row_gap",
-        "min": 0,
-        "max": 50,
-        "step": 5,
-        "unit": "px",
-        "default": 20,
-        "label": "t:labels.row_gap"
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Card media ratio",
+        "options": [
+          { 
+            "label": "t:options.image_ratio.auto", 
+            "value": "auto" 
+          },
+          { 
+            "label": "t:options.image_ratio.square", 
+            "value": "1/1" 
+          },
+          {  
+            "label": "t:options.image_ratio.portrait", 
+            "value": "3/4" 
+          },
+          { 
+            "label": "t:options.image_ratio.landscape", 
+            "value": "4/5" 
+          }
+        ],
+          "default": "1/1"
       },
       {
         "type": "header",
@@ -957,20 +914,6 @@
         "step": 5,
         "unit": "px",
         "label": "t:labels.card_shadow_blur",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:labels.corner_radius"
-      },
-      {
-        "type": "range",
-        "id": "corner_radius",
-        "min": 0,
-        "max": 20,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.corner_radius",
         "default": 0
       }
     ]

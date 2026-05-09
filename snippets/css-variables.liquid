@@ -109,20 +109,13 @@
       }
     {% endfor %}
 
-    /* Card Grid Layout Settings */
-    --grid-cards-columns-desktop: {{ settings.grid_cards_columns_desktop }};
-    --grid-cards-columns-tablet: {{ settings.grid_cards_columns_tablet }};
-    --grid-cards-columns-mobile: {{ settings.grid_cards_columns_mobile }};
-    --grid-cards-column-gap: {{ settings.grid_cards_column_gap }}px;
-    --grid-cards-row-gap: {{ settings.grid_cards_row_gap }}px;
-    --grid-cards-max-width-desktop: {{ settings.grid_cards_max_width_desktop }}px;
-    --grid-cards-max-width-tablet: {{ settings.grid_cards_max_width_tablet }}px;
-    --grid-cards-max-width-mobile: {{ settings.grid_cards_max_width_mobile }}px;
-    /* Card Shadow Settings */
+    /* Cards Settings */
+    --card-media-ratio: {{ settings.card_image_ratio }};
     --card-shadow-opacity: {{ settings.card_shadow_opacity  | divided_by: 100.0 }};
     --card-shadow-horizontal-offset: {{ settings.card_horizontal_offset }}px;
     --card-shadow-vertical-offset: {{ settings.card_vertical_offset }}px;
     --card-shadow-blur: {{ settings.card_shadow_blur }}px;
+
     /* Product Cards Settings */
     --product-card-image-ratio: {{ settings.image_ratio | default: '1/1' }};
 

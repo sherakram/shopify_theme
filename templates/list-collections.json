@@ -1,11 +1,32 @@
 {
   "sections": {
+    "page-banner": {
+      "type": "page-banner",
+      "settings": {
+        "custom_title": "Collections",
+        "custom_description": "",
+        "show_description": true,
+        "title_align": "left",
+        "title_size": "xl",
+        "show_collection_image": false,
+        "overlay_opacity": "30",
+        "page_banner_color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "main": {
-      "type": "collections",
-      "settings": {}
+      "type": "collections-list",
+      "settings": {
+        "card_per_row": "4",
+        "card_per_row_mobile": "2",
+        "page_size_default": 12,
+        "show_product_count": true
+      }
     }
   },
   "order": [
+    "page-banner",
     "main"
   ]
 }
