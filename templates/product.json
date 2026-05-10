@@ -75,11 +75,10 @@
       "settings": {
         "media_desktop_layout": "slideshow",
         "media_mobile_layout": "carousel",
-        "media_position": "left",
-        "media_info_gap": 30,
-        "column_width": "equal",
         "show_thumbnails": true,
         "thumb_position": "left",
+        "media_position": "left",
+        "media_info_gap": 30,
         "padding_top": 40,
         "padding_bottom": 40
       }
