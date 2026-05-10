@@ -354,6 +354,8 @@ h1.product-title {
 .product-inventory {
   margin-top: 10px;
   font-size: 0.95rem;
+  --padding-block-start: 0;
+  --padding-block-end: 0;
 }
 
 .inventory-status {

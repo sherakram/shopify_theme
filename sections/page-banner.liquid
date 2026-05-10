@@ -23,14 +23,14 @@
   endif
 -%}
 
-<style>
+{% style %}
   #shopify-section-{{ section.id }} .page-banner {
     --banner-pt: {{ section.settings.padding_top }}px;
     --banner-pb: {{ section.settings.padding_bottom }}px;
   }
-</style>
+{% endstyle %}
 
-<div class="page-banner color-scheme-{{ scheme }} page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }}{% if has_image %} page-banner--has-image page-banner--overlay-{{ section.settings.overlay_opacity }}{% endif %}">
+<div class="page-banner color-{{ scheme }} page-banner--align-{{ section.settings.title_align }} page-banner--title-{{ section.settings.title_size }}{% if has_image %} page-banner--has-image page-banner--overlay-{{ section.settings.overlay_opacity }}{% endif %}">
 
   {%- if has_image -%}
     <div class="page-banner__media" aria-hidden="true">

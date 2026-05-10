@@ -1,13 +1,3 @@
-{%- comment -%}
-  Snippet : product-card.liquid
-  Accepts :
-    product      {object}  – required
-    show_vendor  {bool}    – optional, default false
-    show_reviews {bool}    – optional, default false
-    show_quick_add {bool}  – optional, default false
-    lazy         {number}  – forloop.index; first 4 cards load eagerly
-{%- endcomment -%}
-
 {%- liquid
   assign show_vendor = show_vendor | default: settings.show_vendor
   assign show_reviews = show_reviews | default: settings.show_reviews
@@ -45,7 +35,6 @@
 
 <article
   class="pc{% if sold_out %} pc--sold-out{% endif %}{% if quick_add_hover_only and any_quick_button %} pc--quick-hover{% endif %}"
-  style="--image-ratio: var(--product-card-image-ratio, 1/1);"
   aria-label="{{ product.title | escape }}"
 >
   {{- '<!-- Product Card: ' | append: product.title | append: ' -->' -}}
@@ -89,24 +78,24 @@
 
     <div class="pc__badges pc__badges--{{ settings.badge_position }}">
       {%- if sold_out -%}
-        <span class="pc__badge badge pc__badge--sold-out color-scheme-{{ settings.badge_soldout_scheme }}">{{ 'products.sold_out_label' | t }}</span>
+        <span class="pc__badge badge pc__badge--sold-out color-{{ settings.badge_soldout_scheme }}">{{ 'products.sold_out_label' | t }}</span>
       {%- elsif product.metafields.custom.badge_text != blank -%}
-        <span class="pc__badge badge pc__badge--sale color-scheme-{{ settings.badge_sale_scheme }}">{{ product.metafields.custom.badge_text }}</span>
+        <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">{{ product.metafields.custom.badge_text }}</span>
         
       {%- elsif on_sale -%}
         {%- case settings.sale_badge_type -%}
 
           {%- when 'percent' -%}
-            <span class="pc__badge badge pc__badge--sale color-scheme-{{ settings.badge_sale_scheme }}"> -{{ savings_pct }}% </span>
+            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}"> -{{ savings_pct }}% </span>
 
           {%- when 'text' -%}
-            <span class="pc__badge badge pc__badge--sale color-scheme-{{ settings.badge_sale_scheme }}">
+            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">
               {{ settings.sale_badge_text }}
             </span>
 
           {%- when 'save_amount' -%}
             {%- assign save_amount = product.compare_at_price | minus: product.price -%}
-            <span class="pc__badge badge pc__badge--sale color-scheme-{{ settings.badge_sale_scheme }}"> Save {{ save_amount | money }} </span>
+            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}"> Save {{ save_amount | money }} </span>
         {%- endcase -%}
       {%- endif -%}
     </div>

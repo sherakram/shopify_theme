@@ -13,11 +13,16 @@
     --pt: {{ section.settings.padding_top }}px;
     --pb: {{ section.settings.padding_bottom }}px;
   }
+
+  #CollectionProductGrid-{{ section.id }} {
+    --cols-desktop: {{ cols_desktop }};
+    --cols-mobile: {{ cols_mobile }};
+  }
 {% endstyle %}
 
 <div
   id="CollectionSection-{{ section.id }}"
-  class="collection-section color-scheme-{{ scheme }}"
+  class="collection-section color-{{ scheme }}"
   data-section-id="{{ section.id }}"
 >
   
@@ -86,10 +91,6 @@
       <div
         id="CollectionProductGrid-{{ section.id }}"
         class="collection-grid"
-        style="
-          --cols-desktop: {{ cols_desktop }};
-          --cols-mobile: {{ cols_mobile }};
-        "
         tabindex="-1"
         aria-label="{{ collection.title }} products"
       >

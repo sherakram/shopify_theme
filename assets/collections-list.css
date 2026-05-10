@@ -1,6 +1,8 @@
 .collection-wrapper {
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .collections-list {
@@ -30,7 +32,7 @@
   overflow: hidden;
   aspect-ratio: var(--card-media-ratio, 1/1);
   text-decoration: none;
-  background: #1a1a1a;
+  background: var(--color-background);
   cursor: pointer;
 }
 
@@ -87,6 +89,7 @@
 
 .collection-card__title {
   font-size: calc(1.1rem * var(--font-heading--scale));
+  color: var(--color-foreground-heading);
   margin: 0 0 4px;
   line-height: 1.25;
   white-space: nowrap;
@@ -106,22 +109,26 @@
 
 .collection-card__count {
   font-size: calc(0.75rem * var(--font-body--scale));
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-primary);
   display: block;
+}
+
+.collection-card__count:hover {
+  color: var(--color-primary-hover);
 }
 
 .collection-card__arrow {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--color-btn-primary-bg);
+  border: 1px solid var(--color-btn-primary-border);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--color-btn-primary-text);
   font-family: var(--font-accent--family);
   font-size: 14px;
   flex-shrink: 0;
@@ -129,7 +136,9 @@
 }
 
 .collection-card:hover .collection-card__arrow {
-  background: rgba(255, 255, 255, 0.30);
+  background: var(--color-btn-primary-hover-bg);
+  color: var(--color-btn-primary-hover-text);
+  border: 1px solid var(--color-btn-primary-hover-border);
   transform: scale(1.1);
 }
 

@@ -60,7 +60,7 @@
     
     {%- comment -%} Color schemes {%- endcomment -%}
     {% for scheme in settings.color_schemes %}
-      .color-scheme-{{ scheme.id }} {
+      .color-{{ scheme.id }} {
         --color-background:                   {{ scheme.settings.background }};
         --color-foreground-heading:           {{ scheme.settings.foreground_heading }};
         --color-foreground:                   {{ scheme.settings.foreground }};

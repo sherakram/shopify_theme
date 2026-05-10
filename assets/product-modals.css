@@ -157,6 +157,9 @@ button.product-size-trigger:hover {
 
 /*CountDown Time Block*/
 .countdown-urgency {
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 24px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   transition: transform 0.3s ease;
 }
