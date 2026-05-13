@@ -95,11 +95,27 @@
     }
   },
   "gift_card": {
+    "gift_card": "Gift card",
     "add_to_apple_wallet": "Add to Apple Wallet",
-    "card": "Gift card",
+    "active": "Active",
+    "remaining_balance": "Remaining balance",
+    "original_value": "Orginal value",
+    "valid_thru": "Valid Thru",
+    "redeem_code": "Use this code at checkout to redeem your gift card",
     "expired": "This gift card has expired",
     "expires_on": "Expires on {{ expires_on }}",
-    "use_at_checkout": "Use this gift card at checkout"
+    "disabled": "Disabled",
+    "copy_code": "Copy code",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "recipient": "Gift for",
+    "send_on": "Send date",
+    "message": "Personal message",
+    "scan_qr": "Scan to redeem",
+    "print": "Print",
+    "shop_link": "Visit store",
+    "use_at_checkout": "Use this gift card at checkout",
+    "footer_note": "Valid for in-store and online purchases"
   },
   "password": {
     "title": "This shop is private",
