@@ -992,6 +992,79 @@
     ]
   },
   {
+    "name": "Gift Card",
+    "settings": [
+      { 
+        "type": "header", 
+        "content": "Colors" 
+      },
+      {
+        "type": "color_scheme",
+        "id": "gift_card_scheme",
+        "label": "Color scheme",
+        "default": "scheme-1",
+      },
+      {
+        "type": "header",
+        "content": "Gift Card Card Style"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_bg_1",
+        "label": "Background Color 1",
+        "default": "#1c1812"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_bg_2",
+        "label": "Background Color 2",
+        "default": "#2a2318"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_bg_3",
+        "label": "Background Color 3",
+        "default": "#0f0d09"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_heading",
+        "label": "Balance Color",
+        "default": "#e8c97a"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_text",
+        "label": "Primary Text Color",
+        "default": "#f0ebe2"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_muted",
+        "label": "Muted Text Color",
+        "default": "rgba(240,235,226,0.50)"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_border",
+        "label": "Border Color",
+        "default": "rgba(201,168,76,0.25)"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_accent",
+        "label": "Accent Color",
+        "default": "#c9a84c"
+      },
+      {
+        "type": "color",
+        "id": "gc_card_status",
+        "label": "Active Status Color",
+        "default": "#7ecfa0"
+      }
+    ]
+  },
+  {
   "name": "t:general.social_media_icons",
   "settings": [
       { 

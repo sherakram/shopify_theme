@@ -22,27 +22,26 @@
       }
 
       :root {
-        --gold:        #c9a84c;
-        --gold-light:  #e8c97a;
-        --gold-dim:    #7a6229;
-        --ink:         #0b0a09;
-        --ink-2:       #181614;
-        --ink-3:       #231f1b;
-        --ink-4:       #2e2925;
-        --surface:     rgba(255,255,255,0.04);
-        --border:      rgba(201,168,76,0.18);
-        --text-main:   #f0ebe2;
         --text-muted:  rgba(240,235,226,0.50);
         --text-dim:    rgba(240,235,226,0.28);
         --radius-card: 20px;
         --radius-sm:   10px;
         --transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+        --gc-card-bg-1: {{ settings.gc_card_bg_1 }};
+        --gc-card-bg-2: {{ settings.gc_card_bg_2 }};
+        --gc-card-bg-3: {{ settings.gc_card_bg_3 }};
+
+        --gc-card-heading: {{ settings.gc_card_heading }};
+        --gc-card-text: {{ settings.gc_card_text }};
+        --gc-card-muted: {{ settings.gc_card_muted }};
+        --gc-card-border: {{ settings.gc_card_border }};
+        --gc-card-accent: {{ settings.gc_card_accent }};
+        --gc-card-status: {{ settings.gc_card_status }};
       }
 
       html, body {
         min-height: 100%;
-        background-color: var(--ink);
-        color: var(--text-main);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
       }
@@ -111,7 +110,7 @@
 
       .gc-shop-name h1 {
         font-size: calc(1.3rem * var(--font-heading--scale));
-        color: var(--gold-light);
+        color: var(--color-foreground-heading);
       }
 
       /* ── Physical card ── */
@@ -120,8 +119,8 @@
         aspect-ratio: 1.586 / 1;
         border-radius: var(--radius-card);
         background:
-          linear-gradient(135deg, #1c1812 0%, #2a2318 40%, #1a160f 70%, #0f0d09 100%);
-        border: 1px solid rgba(201,168,76,0.25);
+          linear-gradient(135deg,var(--gc-card-bg-1) 0%, var(--gc-card-bg-2) 50%, #1a160f 70%,  var(--gc-card-bg-3) 100%);
+        border: 1px solid var(--gc-card-border);
         position: relative;
         overflow: hidden;
         display: flex;
@@ -144,9 +143,7 @@
         background: linear-gradient(
           105deg,
           transparent 30%,
-          rgba(201,168,76,0.07) 45%,
-          rgba(201,168,76,0.12) 50%,
-          rgba(201,168,76,0.07) 55%,
+          color-mix(in srgb, var(--gc-card-accent) 12%, transparent) 50%,
           transparent 70%
         );
         background-size: 200% 100%;
@@ -163,7 +160,7 @@
         width: 220px;
         height: 220px;
         border-radius: 50%;
-        border: 1px solid rgba(201,168,76,0.08);
+        border: 1px solid color-mix(in srgb, var(--gc-card-accent) 18%, transparent);
         pointer-events: none;
       }
       .gc-card-circle::before {
@@ -181,12 +178,14 @@
         position: relative;
         z-index: 1;
       }
+
       .gc-card-label {
         font-size: 10px;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--gold-dim);
-        font-weight: 500;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
+        color: var(--gc-card-accent);
       }
 
       {% if settings.logo %}
@@ -203,18 +202,29 @@
         align-items: center;
         gap: 5px;
         font-size: 10px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        font-weight: 500;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
         padding: 3px 10px;
         border-radius: 20px;
       }
+
       .gc-card-status.active {
         background: rgba(100,190,130,0.12);
         border: 1px solid rgba(100,190,130,0.25);
-        color: #7ecfa0;
+        color: var(--gc-card-status);
       }
-      .gc-card-status.active::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: #7ecfa0; }
+
+      .gc-card-status.active::before { 
+        content: ''; 
+        display: block; 
+        width: 5px; 
+        height: 5px; 
+        border-radius: 50%; 
+        background: #7ecfa0; 
+      }
+
       .gc-card-status.inactive {
         background: rgba(220,80,80,0.12);
         border: 1px solid rgba(220,80,80,0.2);
@@ -228,23 +238,21 @@
       }
       .gc-balance-label {
         font-size: 10px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--gold-dim);
-        font-weight: 500;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
+        color: var(--gc-card-accent);
         margin-bottom: 4px;
       }
       .gc-balance {
-        font-family: var(--font-display);
         font-size: clamp(38px, 9vw, 52px);
-        font-weight: 300;
         line-height: 1;
-        color: var(--gold-light);
-        letter-spacing: -0.01em;
+        color: var(--gc-card-heading);
       }
       .gc-initial-value {
         font-size: 11px;
-        color: var(--gold-dim);
+        color: var(--gc-card-muted);
         margin-top: 5px;
       }
 
@@ -255,27 +263,39 @@
         position: relative;
         z-index: 1;
       }
+
       .gc-code-masked {
         font-family: var(--font-mono);
         font-size: 15px;
         letter-spacing: 0.18em;
-        color: var(--text-muted);
+        color: var(--gc-card-muted);
       }
+
       .gc-code-last4 {
-        color: var(--gold-light);
+        color: var(--gc-card-accent);
         font-weight: 500;
       }
-      .gc-expiry-area { text-align: right; }
+
+      .gc-expiry-area { 
+        text-align: right; 
+      }
+
       .gc-expiry-label {
         font-size: 9px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
         color: var(--text-dim);
         display: block;
       }
+
       .gc-expiry-value {
-        font-family: var(--font-mono);
-        font-size: 12px;
+        font-family: var(--font-subheading--family);
+        font-weight: var(--font-subheading--weight);
+        text-transform: var(--font-subheading--text-case);
+        letter-spacing: var(--font-subheading--letter-spacing);
+        font-size: 0.75rem;
         color: var(--text-muted);
         margin-top: 2px;
       }
@@ -291,8 +311,12 @@
       }
 
       .gc-panel {
-        background: var(--surface);
-        border: 1px solid var(--border);
+        font-family: var(--font-body--family);
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        letter-spacing: var(--font-body--letter-spacing);
+        background: var(--color-background);
+        border: 1px dotted var(--color-border);
         border-radius: var(--radius-sm);
         padding: 18px 20px;
       }
@@ -314,40 +338,46 @@
       }
 
       .gc-code-panel-label {
-        font-size: 10px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--text-dim);
+        font-size: calc(0.688rem * var(--font-body--scale));
+        font-family: var(--font-body--family);
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        letter-spacing: var(--font-body--letter-spacing);
+        color: var(--color-foreground);
         margin-bottom: 6px;
-        font-weight: 500;
+        text-align: center;
       }
+
       .gc-code-full {
-        font-family: var(--font-mono);
-        font-size: 20px;
-        font-weight: 500;
-        color: var(--text-main);
-        letter-spacing: 0.12em;
-        word-break: break-all;
+        font-family: var(--font-subheading--family);
+        font-size: calc(1.25rem * var(--font-subheading--scale));
+        font-weight: var(--font-subheading--weight);
+        text-transform: var(--font-subheading--text-case);
+        color: var(--color-foreground-heading);
+        letter-spacing: var(--font-subheading--letter-spacing);
+        word-break: var(--font-subheading--word-break);
       }
 
       .gc-copy-btn {
-        background: rgba(201,168,76,0.1);
-        border: 1px solid rgba(201,168,76,0.25);
-        color: var(--gold-light);
+        background: var(--color-btn-secondary-bg);
+        border: 1px solid var(--color-btn-secondary-border);
+        color: var(--color-btn-secondary-text);
         border-radius: 8px;
         padding: 10px 16px;
-        font-family: var(--font-body);
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.08em;
+        font-family: var(--font-body--family);
+        font-size: calc(0.75rem * var(--font-body--scale));
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        letter-spacing: var(--font-body--letter-spacing);
         cursor: pointer;
         transition: var(--transition);
         white-space: nowrap;
         flex-shrink: 0;
       }
       .gc-copy-btn:hover {
-        background: rgba(201,168,76,0.18);
-        border-color: rgba(201,168,76,0.45);
+        background: var(--color-btn-secondary-hover-bg);
+        color: var(--color-btn-secondary-hover-text);
+        border-color: var(--color-btn-secondary-hover-border);
       }
       .gc-copy-btn.copied {
         background: rgba(100,190,130,0.12);
@@ -362,10 +392,11 @@
       }
       .gc-expired-label {
         font-size: 12px;
-        font-weight: 500;
+        font-family: var(--font-body--family);
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        letter-spacing: var(--font-body--letter-spacing);
         color: #e0746a;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -383,17 +414,18 @@
       /* Message panel */
       .gc-message-panel-label {
         font-size: 10px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
         color: var(--text-dim);
         margin-bottom: 8px;
-        font-weight: 500;
       }
       .gc-message-text {
-        font-family: var(--font-display);
+        font-family: var(--font-body--family);
         font-size: 18px;
         font-weight: 400;
-        color: var(--text-main);
+        color: var(--color-foreground);
         font-style: italic;
         line-height: 1.5;
       }
@@ -408,18 +440,24 @@
       }
       .gc-recipient-label {
         font-size: 10px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
         color: var(--text-dim);
         margin-bottom: 4px;
-        font-weight: 500;
       }
       .gc-recipient-value {
-        font-size: 14px;
-        color: var(--text-main);
-        font-weight: 400;
+        font-size: 0.875rem;
+        font-family: var(--font-body--family);
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        letter-spacing: var(--font-body--letter-spacing);
+        color: var(--color-foreground);
       }
-      .gc-send-date { text-align: right; }
+      .gc-send-date { 
+        text-align: right; 
+      }
 
       /* ── QR + Wallet ── */
       .gc-qr-wallet {
@@ -433,22 +471,26 @@
       }
 
       .gc-qr-wrap {
-        background: #fff;
-        border-radius: 14px;
+        background: transparent;
         padding: 14px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
       }
+
       .gc-qr-wrap canvas,
-      .gc-qr-wrap img { display: block; border-radius: 4px; }
+      .gc-qr-wrap img { 
+        display: block;  
+      }
+
       .gc-qr-hint {
         font-size: 10px;
         color: #555;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        font-family: var(--font-body);
+        font-family: var(--font-accent--family);
+        font-weight: var(--font-accent--weight);
+        text-transform: var(--font-accent--text-case);
+        letter-spacing: var(--font-accent--letter-spacing);
       }
 
       /* ── Action row ── */
@@ -467,37 +509,44 @@
         justify-content: center;
         gap: 8px;
         padding: 14px 20px;
-        border-radius: 10px;
-        font-family: var(--font-body);
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: 0.06em;
         cursor: pointer;
         text-decoration: none;
         transition: var(--transition);
         border: none;
       }
-      .gc-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+      .gc-btn svg { 
+        width: 16px; 
+        height: 16px; 
+        flex-shrink: 0; 
+      }
 
       .gc-btn-primary {
-        background: var(--gold);
-        color: var(--ink);
+        background: var(--color-btn-primary-bg);
+        color: var(--color-btn-primary-text);
+        border: 1px solid var(--color-btn-primary-border);
       }
-      .gc-btn-primary:hover { background: var(--gold-light); }
+      .gc-btn-primary:hover { 
+        background: var(--color-btn-primary-hover-bg); 
+        color: var(--color-btn-primary-hover-text);
+        border: 1px solid var(--color-btn-primary-hover-border);
+      }
 
       .gc-btn-ghost {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        color: var(--text-muted);
+        background: var(--color-btn-secondary-bg);
+        border: 1px solid var(--color-btn-secondary-border);
+        color: var(--color-btn-secondary-text);
       }
       .gc-btn-ghost:hover {
-        background: rgba(255,255,255,0.07);
-        border-color: rgba(201,168,76,0.3);
-        color: var(--text-main);
+        background: var(--color-btn-secondary-hover-bg);
+        border-color: var(--color-btn-secondary-hover-border);
+        color: var(--color-btn-secondary-hover-text);
       }
 
       /* Apple Wallet */
-      .gc-apple-wallet { display: block; margin-top: -4px; }
+      .gc-apple-wallet { 
+        display: block; 
+        margin-top: -4px; 
+      }
       .gc-apple-wallet img {
         display: block;
         height: 42px;
@@ -505,15 +554,21 @@
         transition: var(--transition);
         opacity: 0.9;
       }
-      .gc-apple-wallet:hover img { opacity: 1; transform: scale(1.03); }
+      .gc-apple-wallet:hover img { 
+        opacity: 1; 
+        transform: scale(1.03); 
+      }
 
       /* ── Footer ── */
       .gc-footer {
         margin-top: 8px;
-        font-size: 11px;
-        color: var(--text-dim);
+        font-size: calc(0.75rem * var(--font-body--scale));
+        font-family: var(--font-body--family);
+        font-weight: var(--font-body--weight);
+        text-transform: var(--font-body--text-case);
+        color: var(--color-foreground);
         text-align: center;
-        letter-spacing: 0.08em;
+        letter-spacing: var(--font-body--letter-spacing);
         animation: fadeUp 0.65s 0.3s ease both;
         opacity: 0;
       }
@@ -557,7 +612,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="color-{{ settings.gift_card_scheme | default: 'scheme-1' }}">
     <main>
       <div class="gc-wrapper">
         
@@ -581,7 +636,7 @@
 
           <div class="gc-card-top">
             <div>
-              <div class="gc-card-label">{{ 'gift_card.gift_card' | t | default: 'Gift Card' }}</div>
+              <p class="gc-card-label">{{ 'gift_card.gift_card' | t | default: 'Gift Card' }}</p>
             </div>
             {% if gift_card.enabled == false or gift_card.expired %}
               <span class="gc-card-status inactive">{{ 'gift_card.expired' | t | default: 'Expired' }}</span>
@@ -591,8 +646,8 @@
           </div>
 
           <div class="gc-card-balance-area">
-            <div class="gc-balance-label">{{ 'gift_card.remaining_balance' | t | default: 'Remaining Balance' }}</div>
-            <div class="gc-balance">{{ gift_card.balance | money }}</div>
+            <p class="gc-balance-label">{{ 'gift_card.remaining_balance' | t | default: 'Remaining Balance' }}</p>
+            <h2 class="gc-balance">{{ gift_card.balance | money }}</h2>
             {% if gift_card.balance != gift_card.initial_value %}
               <div class="gc-initial-value">
                 {{ 'gift_card.original_value' | t | default: 'Original' }}:
@@ -602,9 +657,9 @@
           </div>
 
           <div class="gc-card-bottom">
-            <div class="gc-code-masked" aria-hidden="true">
+            <p class="gc-code-masked" aria-hidden="true">
               •••• •••• •••• <span class="gc-code-last4">{{ gift_card.last_four_characters }}</span>
-            </div>
+            </p>
             {% if gift_card.expires_on %}
               {%- assign expires_formatted = gift_card.expires_on | date: '%m / %y' -%}
               <div class="gc-expiry-area">
@@ -613,8 +668,8 @@
               </div>
             {% else %}
               <div class="gc-expiry-area">
-                <span class="gc-expiry-label">{{ 'gift_card.valid_thru' | t | default: 'Valid Thru' }}</span>
-                <div class="gc-expiry-value">No Expiry</div>
+                <p class="gc-expiry-label">{{ 'gift_card.valid_thru' | t | default: 'Valid Thru' }}</p>
+                <p class="gc-expiry-value">No Expiry</p>
               </div>
             {% endif %}
           </div>
@@ -643,8 +698,8 @@
           <div class="gc-panel">
             <div class="gc-code-panel">
               <div class="gc-code-panel-left">
-                <div class="gc-code-panel-label">{{ 'gift_card.redeem_code' | t | default: 'Redeem Code' }}</div>
-                <div class="gc-code-full" id="gc-code-text">{{ gift_card.code | format_code }}</div>
+                <p class="gc-code-panel-label">{{ 'gift_card.redeem_code' | t | default: 'Redeem Code' }}</p>
+                <code class="gc-code-full" id="gc-code-text">{{ gift_card.code | format_code }}</code>
               </div>
               <button
                 class="gc-copy-btn"
@@ -702,9 +757,9 @@
             </div>
           {% endif %}
 
-          <div style="text-align:center; font-size:12px; color: var(--text-dim); letter-spacing:0.05em; padding: 4px 0;">
+          <p style="text-align:center; font-size:calc(0.75rem * var(--font-body--scale)); color: var(--color-foreground); padding: 4px 0;">
             {{ 'gift_card.use_at_checkout' | t | default: 'Use this code at checkout to redeem your balance.' }}
-          </div>
+          </p>
         </div>
 
         {%- comment -%} ── QR Code + Apple Wallet ── {%- endcomment -%}
