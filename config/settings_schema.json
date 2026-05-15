@@ -992,74 +992,80 @@
     ]
   },
   {
-    "name": "Gift Card",
+    "name": "t:names.gift_card",
     "settings": [
       { 
         "type": "header", 
-        "content": "Colors" 
+        "content": "t:general.colors" 
       },
       {
         "type": "color_scheme",
         "id": "gift_card_scheme",
-        "label": "Color scheme",
+        "label": "t:labels.color_scheme",
         "default": "scheme-1",
       },
       {
         "type": "header",
-        "content": "Gift Card Card Style"
+        "content": "t:names.gift_card_settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "gift_card_shimmer",
+        "label": "t:labels.gift_card_effect",
+        "default": true
       },
       {
         "type": "color",
         "id": "gc_card_bg_1",
-        "label": "Background Color 1",
+        "label": "t:labels.gift_card_bg_1",
         "default": "#1c1812"
       },
       {
         "type": "color",
         "id": "gc_card_bg_2",
-        "label": "Background Color 2",
+        "label": "t:labels.gift_card_bg_2",
         "default": "#2a2318"
       },
       {
         "type": "color",
         "id": "gc_card_bg_3",
-        "label": "Background Color 3",
+        "label": "t:labels.gift_card_bg_3",
         "default": "#0f0d09"
       },
       {
         "type": "color",
         "id": "gc_card_heading",
-        "label": "Balance Color",
+        "label": "t:labels.gift_card_bal",
         "default": "#e8c97a"
       },
       {
         "type": "color",
         "id": "gc_card_text",
-        "label": "Primary Text Color",
+        "label": "t:labels.gift_card_primary",
         "default": "#f0ebe2"
       },
       {
         "type": "color",
         "id": "gc_card_muted",
-        "label": "Muted Text Color",
+        "label": "t:labels.gift_card_muted_text",
         "default": "rgba(240,235,226,0.50)"
       },
       {
         "type": "color",
         "id": "gc_card_border",
-        "label": "Border Color",
+        "label": "t:labels.gift_card_border",
         "default": "rgba(201,168,76,0.25)"
       },
       {
         "type": "color",
         "id": "gc_card_accent",
-        "label": "Accent Color",
+        "label": "t:labels.gift_card_accent",
         "default": "#c9a84c"
       },
       {
         "type": "color",
         "id": "gc_card_status",
-        "label": "Active Status Color",
+        "label": "t:labels.gift_card_status",
         "default": "#7ecfa0"
       }
     ]

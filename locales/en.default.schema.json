@@ -95,6 +95,8 @@
     "links": "Links",
     "icons": "Icons",
     "cards": "Cards",
+    "gift_card": "Gift card",
+    "gift_card_settings": "Gift card settings",
     "navigation": "Navigation",
     "footer": "Footer"
   },
@@ -202,7 +204,17 @@
     "sale_badge_text": "Sale badge text",
     "badge_sale_scheme": "Sale badge color scheme",
     "badge_soldout_scheme": "Sold out badge color scheme",
-    "badge_text_case": "Badge text case"
+    "badge_text_case": "Badge text case",
+    "gift_card_effect": "Sweep effect",
+    "gift_card_bg_1": "Background Color 1",
+    "gift_card_bg_2": "Background Color 2",
+    "gift_card_bg_3": "Background Color 3",
+    "gift_card_bal": "Balance Color",
+    "gift_card_primary": "Primary text color",
+    "gift_card_muted_text": "Muted text color",
+    "gift_card_border": "Border color",
+    "gift_card_accent": "Accent color",
+    "gift_card_status": "Active status color"
   },
 
   "options": {
