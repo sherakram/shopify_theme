@@ -74,7 +74,7 @@
             <div>
               <span class="gc-card-label">{{ 'gift_card.gift_card' | t | default: 'Gift Card' }}</span>
             </div>
-            {% if gift_card.enabled == false or gift_card.expired or gift_card.balance == 0 %}
+            {% comment %} {% if gift_card.enabled == false or gift_card.expired or gift_card.balance == 0 %}
               <span class="gc-card-status inactive">
                 {% if gift_card.balance == 0 %}
                   {{ 'gift_card.used' | t | default: 'Used' }}
@@ -84,6 +84,23 @@
               </span>
             {% else %}
               <span class="gc-card-status active">{{ 'gift_card.active' | t | default: 'Active' }}</span>
+            {% endif %} {% endcomment %}
+            {% if gift_card.enabled == false %}
+              <span class="gc-card-status inactive">
+                {{ 'gift_card.disabled' | t | default: 'Disabled' }}
+              </span>
+            {% elsif gift_card.expired %}
+              <span class="gc-card-status inactive">
+                {{ 'gift_card.expired' | t | default: 'Expired' }}
+              </span>
+            {% elsif gift_card.balance == 0 %}
+              <span class="gc-card-status inactive">
+                {{ 'gift_card.used' | t | default: 'Used' }}
+              </span>
+            {% else %}
+              <span class="gc-card-status active">
+                {{ 'gift_card.active' | t | default: 'Active' }}
+              </span>
             {% endif %}
           </div>
 
@@ -199,10 +216,6 @@
               <div class="gc-message-text">"{{ gift_card.message }}"</div>
             </div>
           {% endif %}
-
-          {% comment %} <p style="text-align:center; font-size:calc(0.75rem * var(--font-body--scale)); color: var(--color-foreground); padding: 4px 0;">
-            {{ 'gift_card.use_at_checkout' | t | default: 'Use this code at checkout to redeem your balance.' }}
-          </p> {% endcomment %}
         </div>
 
         <!-- QR Code + Apple Wallet -->
