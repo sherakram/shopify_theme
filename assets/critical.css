@@ -32,6 +32,16 @@ body {
   border: 0 !important;
 }
 
+.visually-hidden.focusable:focus,
+.visually-hidden.focusable:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
 a.skip-to-content-link.button:focus {
   clip: auto;
   width: auto;

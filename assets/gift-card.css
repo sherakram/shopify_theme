@@ -37,20 +37,12 @@
 
       /* ── Entry animation ── */
       @media (prefers-reduced-motion: no-preference) {
-        @keyframes fadeUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(24px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
+
         @keyframes shimmer {
           0% { 
             background-position: -200% center; 
           }
+
           100% { 
             background-position:  200% center; 
           }
@@ -64,7 +56,6 @@
         flex-direction: column;
         align-items: center;
         gap: 28px;
-        animation: fadeUp 0.7s ease both;
       }
 
       /* ── Shop header ── */
@@ -73,8 +64,6 @@
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        animation: fadeUp 0.6s 0.05s ease both;
-        opacity: 0;
       }
 
       .gc-shop-logo img { 
@@ -103,8 +92,6 @@
         flex-direction: column;
         justify-content: space-between;
         padding: 28px 30px 24px;
-        animation: fadeUp 0.65s 0.1s ease both;
-        opacity: 0;
         box-shadow: 0 8px 24px rgba(0,0,0,.35);
       }
 
@@ -282,8 +269,6 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        animation: fadeUp 0.65s 0.15s ease both;
-        opacity: 0;
       }
 
       .gc-panel {
@@ -449,8 +434,6 @@
         justify-content: center;
         gap: 28px;
         flex-wrap: wrap;
-        animation: fadeUp 0.65s 0.2s ease both;
-        opacity: 0;
       }
 
       .gc-qr-wrap {
@@ -481,8 +464,6 @@
         display: flex;
         gap: 10px;
         width: 100%;
-        animation: fadeUp 0.65s 0.25s ease both;
-        opacity: 0;
       }
 
       .gc-btn {
@@ -552,21 +533,7 @@
         color: var(--color-foreground);
         text-align: center;
         letter-spacing: var(--font-body--letter-spacing);
-        animation: fadeUp 0.65s 0.3s ease both;
-        opacity: 0;
       }
-
-      @media (prefers-reduced-motion: no-preference) {
-        .gc-wrapper,
-        .gc-shop-header,
-        .gc-card,
-        .gc-panels,
-        .gc-qr-wallet,
-        .gc-actions,
-        .gc-footer {
-            will-change: transform, opacity;
-        }
-     }
 
       /* ── Print styles ── */
       @media print {

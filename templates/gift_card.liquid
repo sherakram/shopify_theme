@@ -21,8 +21,6 @@
       :root {
         --text-muted:  rgba(240,235,226,0.50);
         --text-dim:    rgba(240,235,226,0.28);
-        --radius-card: 20px;
-        --radius-sm:   10px;
         --transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
         --gc-card-bg-1: {{ settings.gc_card_bg_1 }};
@@ -66,7 +64,10 @@
           {% endif %}
         </header>
 
-        <div class="gc-card {% if settings.gift_card_shimmer %}has-shimmer{% endif %}" aria-label="{{ 'gift_card.gift_card' | t }}">
+        <div class="gc-card {% if settings.gift_card_shimmer %}has-shimmer{% endif %}" 
+            role="region" 
+            aria-label="{{ 'gift_card.gift_card' | t }}">
+
           <div class="gc-card-circle" aria-hidden="true"></div>
 
           <div class="gc-card-top">
@@ -201,7 +202,7 @@
         {%- comment -%} ── QR Code + Apple Wallet ── {%- endcomment -%}
         <div class="gc-qr-wallet">
           <div class="gc-qr-wrap">
-            <div id="gc-qr-code" aria-hidden="true"></div>
+            <div id="gc-qr-code" data-qr-identifier="{{ gift_card.qr_identifier }}" aria-hidden="true"></div>
             <div class="gc-qr-hint">{{ 'gift_card.scan_qr' | t | default: 'Scan to redeem' }}</div>
           </div>
 
