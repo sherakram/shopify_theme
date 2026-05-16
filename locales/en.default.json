@@ -103,6 +103,7 @@
     "valid_thru": "Valid Thru",
     "redeem_code": "Use this code at checkout to redeem your gift card",
     "expired": "This gift card has expired",
+    "used": "Used",
     "expires_on": "Expires on {{ expires_on }}",
     "disabled": "Disabled",
     "copy_code": "Copy code",

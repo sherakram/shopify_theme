@@ -74,8 +74,14 @@
             <div>
               <span class="gc-card-label">{{ 'gift_card.gift_card' | t | default: 'Gift Card' }}</span>
             </div>
-            {% if gift_card.enabled == false or gift_card.expired %}
-              <span class="gc-card-status inactive">{{ 'gift_card.expired' | t | default: 'Expired' }}</span>
+            {% if gift_card.enabled == false or gift_card.expired or gift_card.balance == 0 %}
+              <span class="gc-card-status inactive">
+                {% if gift_card.balance == 0 %}
+                  {{ 'gift_card.used' | t | default: 'Used' }}
+                {% else %}
+                  {{ 'gift_card.expired' | t | default: 'Expired' }}
+                {% endif %}
+              </span>
             {% else %}
               <span class="gc-card-status active">{{ 'gift_card.active' | t | default: 'Active' }}</span>
             {% endif %}
@@ -111,7 +117,7 @@
           </div>
         </div>
 
-        {%- comment -%} ── Info Panels ── {%- endcomment -%}
+        <!-- Info Panels -->
         <div class="gc-panels">
           {% if gift_card.enabled == false or gift_card.expired %}
             <div class="gc-panel gc-expired-panel" role="alert">
@@ -164,7 +170,7 @@
                 >
                   <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                 </svg>
-                {{ 'gift_card.expires_on' | t: expires_on: expires_on | default: 'Expires ' | append: expires_on }}
+                {{- 'gift_card.expires_on' | t: expires_on: expires_on | default: expires_on -}}
               </div>
             </div>
           {% endif %}
@@ -194,12 +200,12 @@
             </div>
           {% endif %}
 
-          <p style="text-align:center; font-size:calc(0.75rem * var(--font-body--scale)); color: var(--color-foreground); padding: 4px 0;">
+          {% comment %} <p style="text-align:center; font-size:calc(0.75rem * var(--font-body--scale)); color: var(--color-foreground); padding: 4px 0;">
             {{ 'gift_card.use_at_checkout' | t | default: 'Use this code at checkout to redeem your balance.' }}
-          </p>
+          </p> {% endcomment %}
         </div>
 
-        {%- comment -%} ── QR Code + Apple Wallet ── {%- endcomment -%}
+        <!-- QR Code + Apple Wallet -->
         <div class="gc-qr-wallet">
           <div class="gc-qr-wrap">
             <div id="gc-qr-code" data-qr-identifier="{{ gift_card.qr_identifier }}" aria-hidden="true"></div>
@@ -223,7 +229,7 @@
           {% endif %}
         </div>
 
-        {%- comment -%} ── Action Buttons ── {%- endcomment -%}
+        <!-- Action Buttons -->
         <div class="gc-actions">
           <button type="button" id="gc-print-btn" class="gc-btn gc-btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
