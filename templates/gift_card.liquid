@@ -36,6 +36,29 @@
     class="color-{{ settings.gift_card_scheme | default: 'scheme-1' }}"
     data-copied-text="{{ 'gift_card.copied' | t | default: 'Copied!' }}"
   >
+
+    {% assign gc_status = 'active' %}
+
+    {% unless gift_card.enabled %}
+      {% assign gc_status = 'disabled' %}
+    {% elsif gift_card.expired %}
+      {% assign gc_status = 'expired' %}
+    {% elsif gift_card.balance <= 0 %}
+      {% assign gc_status = 'used' %}
+    {% endunless %}
+    
+    {% assign display_balance = gift_card.balance %}
+
+    {% if gc_status == 'disabled' or gc_status == 'used' %}
+      {% assign display_balance = 0 %}
+    {% endif %}
+
+    enabled: {{ gift_card.enabled }}
+    expired: {{ gift_card.expired }}
+    balance: {{ gift_card.balance }}
+    initial_value: {{ gift_card.initial_value }}
+    gc_status: {{ gc_status }}
+
     <main>
       <div class="gc-wrapper">
         <header class="gc-shop-header">
@@ -74,29 +97,33 @@
               <span class="gc-card-label">{{ 'gift_card.gift_card' | t | default: 'Gift Card' }}</span>
             </div>
 
-            {% unless gift_card.enabled %}
-              <span class="gc-card-status inactive">
-                {{ 'gift_card.disabled' | t | default: 'Disabled' }}
-              </span>
-            {% elsif gift_card.expired %}
-              <span class="gc-card-status inactive">
-                {{ 'gift_card.expired' | t | default: 'Expired' }}
-              </span>
-            {% elsif gift_card.balance == 0 %}
-              <span class="gc-card-status inactive">
-                {{ 'gift_card.used' | t | default: 'Used' }}
-              </span>
-            {% else %}
-              <span class="gc-card-status active">
-                {{ 'gift_card.active' | t | default: 'Active' }}
-              </span>
-            {% endunless %}
+            {% case gc_status %}
+              {% when 'disabled' %}
+                <span class="gc-card-status inactive">
+                  {{ 'gift_card.disabled' | t | default: 'Disabled' }}
+                </span>
+
+              {% when 'expired' %}
+                <span class="gc-card-status inactive">
+                  {{ 'gift_card.expired' | t | default: 'Expired' }}
+                </span>
+
+              {% when 'used' %}
+                <span class="gc-card-status inactive">
+                  {{ 'gift_card.used' | t | default: 'Used' }}
+                </span>
+
+              {% else %}
+                <span class="gc-card-status active">
+                  {{ 'gift_card.active' | t | default: 'Active' }}
+                </span>
+              {% endcase %}
             
           </div>
 
           <div class="gc-card-balance-area">
             <p class="gc-balance-label">{{ 'gift_card.remaining_balance' | t | default: 'Remaining Balance' }}</p>
-            <h2 class="gc-balance">{{ gift_card.balance | money }}</h2>
+            <h2 class="gc-balance">{{ display_balance | money }}</h2>
             {% if gift_card.balance != gift_card.initial_value %}
               <div class="gc-initial-value">
                 {{ 'gift_card.original_value' | t | default: 'Original' }}:
@@ -145,20 +172,20 @@
               </div>
             {% endif %}
           {% endcomment %}
-          {% unless gift_card.enabled %}
+          {% if gc_status == 'disabled' %}
             <div class="gc-panel gc-expired-panel" role="alert">
               <div class="gc-expired-label">
                 {{ 'gift_card.disabled' | t | default: 'This gift card has been disabled' }}
               </div>
             </div>
-          {% elsif gift_card.expired %}
+          {% elsif gc_status == 'expired' %}
             <div class="gc-panel gc-expired-panel" role="alert">
               <div class="gc-expired-label">
                 {%- assign expires_on = gift_card.expires_on | date: '%B %-d, %Y' -%}
                 {{- 'gift_card.expires_on' | t: expires_on: expires_on | default: expires_on -}}
               </div>
             </div>
-          {% endunless %}
+          {% endif %}
 
           <div class="gc-panel">
             <div class="gc-code-panel">
@@ -178,7 +205,7 @@
             </div>
           </div>
 
-          {% if gift_card.expires_on and gift_card.expired == false and gift_card.enabled %}
+          {% if gift_card.expires_on and gc_status == 'active' %}
             {%- assign expires_on = gift_card.expires_on | date: '%B %-d, %Y' -%}
             <div class="gc-panel gc-expiry-panel">
               <div class="gc-expiry-info">
