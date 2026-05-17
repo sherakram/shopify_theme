@@ -1018,55 +1018,49 @@
         "type": "color",
         "id": "gc_card_bg_1",
         "label": "t:labels.gift_card_bg_1",
-        "default": "#1c1812"
+        "default": "#0D0D0D"
       },
       {
         "type": "color",
         "id": "gc_card_bg_2",
         "label": "t:labels.gift_card_bg_2",
-        "default": "#2a2318"
+        "default": "#1C1C1E"
       },
       {
         "type": "color",
         "id": "gc_card_bg_3",
         "label": "t:labels.gift_card_bg_3",
-        "default": "#0f0d09"
+        "default": "#111111"
       },
       {
         "type": "color",
         "id": "gc_card_heading",
         "label": "t:labels.gift_card_bal",
-        "default": "#e8c97a"
-      },
-      {
-        "type": "color",
-        "id": "gc_card_text",
-        "label": "t:labels.gift_card_primary",
-        "default": "#f0ebe2"
+        "default": "#A0A0A0"
       },
       {
         "type": "color",
         "id": "gc_card_muted",
         "label": "t:labels.gift_card_muted_text",
-        "default": "rgba(240,235,226,0.50)"
+        "default": "#A0A0A0"
       },
       {
         "type": "color",
         "id": "gc_card_border",
         "label": "t:labels.gift_card_border",
-        "default": "rgba(201,168,76,0.25)"
+        "default": "#A0A0A0"
       },
       {
         "type": "color",
         "id": "gc_card_accent",
         "label": "t:labels.gift_card_accent",
-        "default": "#c9a84c"
+        "default": "#A0A0A0"
       },
       {
         "type": "color",
         "id": "gc_card_status",
         "label": "t:labels.gift_card_status",
-        "default": "#7ecfa0"
+        "default": "#A0A0A0"
       }
     ]
   },

@@ -101,7 +101,7 @@
     "remaining_balance": "Remaining balance",
     "original_value": "Orginal value",
     "valid_thru": "Valid Thru",
-    "redeem_code": "Use this code at checkout to redeem your gift card",
+    "redeem_code": "Use the gift card code online or QR code in-store",
     "expired": "This gift card has expired",
     "used": "Used",
     "expires_on": "Expires on {{ expires_on }}",

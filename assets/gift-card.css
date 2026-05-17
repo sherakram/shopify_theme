@@ -16,8 +16,8 @@
         position: fixed;
         inset: 0;
         background-image:
-          radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 70%),
-          radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,168,76,0.05) 0%, transparent 60%);
+          radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,255,255,0.04) 0%, transparent 70%),
+          radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,255,255,0.02) 0%, transparent 60%);
         pointer-events: none;
         z-index: 0;
       }
@@ -84,7 +84,7 @@
         aspect-ratio: 1.586 / 1;
         border-radius: 0;
         background:
-          linear-gradient(135deg,var(--gc-card-bg-1) 0%, var(--gc-card-bg-2) 50%, #1a160f 70%,  var(--gc-card-bg-3) 100%);
+          linear-gradient(135deg,var(--gc-card-bg-1) 0%, var(--gc-card-bg-2) 50%, #161618 70%,  var(--gc-card-bg-3) 100%);
         border: 1px solid var(--gc-card-border);
         position: relative;
         overflow: hidden;
@@ -128,7 +128,7 @@
         position: absolute;
         inset: 20px;
         border-radius: 50%;
-        border: 1px solid rgba(201,168,76,0.06);
+        border: 1px solid rgba(255,255,255,0.06);
       }
 
       .gc-card-top {
@@ -241,7 +241,7 @@
         font-weight: var(--font-accent--weight);
         text-transform: var(--font-accent--text-case);
         letter-spacing: var(--font-accent--letter-spacing);
-        color: var(--text-dim);
+        color: var(--gc-card-muted);
         display: block;
       }
 
@@ -251,7 +251,7 @@
         text-transform: var(--font-subheading--text-case);
         letter-spacing: var(--font-subheading--letter-spacing);
         font-size: calc(0.75rem * var(--font-subheading--scale));
-        color: var(--text-muted);
+        color: var(--gc-card-heading);
         margin-top: 2px;
       }
 
@@ -387,7 +387,7 @@
         font-weight: var(--font-accent--weight);
         text-transform: var(--font-accent--text-case);
         letter-spacing: var(--font-accent--letter-spacing);
-        color: var(--text-dim);
+        color: var(--color-foreground);
         margin-bottom: 8px;
       }
       .gc-message-text {
@@ -413,7 +413,7 @@
         font-weight: var(--font-accent--weight);
         text-transform: var(--font-accent--text-case);
         letter-spacing: var(--font-accent--letter-spacing);
-        color: var(--text-dim);
+        color: var(--color-foreground);
         margin-bottom: 4px;
       }
       .gc-recipient-value {
@@ -565,22 +565,171 @@
         }
       }
 
-      /* ── Responsive ── */
+
+      /* ── Responsive: Tablet ── */
+      @media (max-width: 600px) {
+        .gc-wrapper {
+          gap: 20px;
+        }
+
+        main {
+          padding: 32px 16px;
+        }
+      }
+
+      /* ── Responsive: Mobile ── */
       @media (max-width: 480px) {
-        .gc-card { 
-          padding: 20px 18px 18px; 
+        main {
+          padding: 24px 14px;
+          justify-content: flex-start;
         }
 
-        .gc-code-full { 
-          font-size: 16px; 
-          letter-spacing: 0.08em; 
+        .gc-wrapper {
+          gap: 16px;
         }
 
-        .gc-qr-wallet { 
-          gap: 18px; 
+        /* Card core */
+        .gc-card {
+          padding: 16px 18px 16px;
+          border-radius: 0;
         }
 
-        .gc-actions { 
-          flex-direction: column; 
+        /* Top row — GIFT CARD + ACTIVE badge */
+        .gc-card-top {
+          margin-bottom: 2px;
+        }
+
+        .gc-card-label {
+          font-size: 0.55rem;
+          letter-spacing: 0.12em;
+        }
+
+        .gc-card-status {
+          font-size: 0.55rem;
+          padding: 2px 8px;
+          gap: 4px;
+        }
+
+        /* Balance area */
+        .gc-balance-label {
+          font-size: 0.55rem;
+          letter-spacing: 0.12em;
+          margin-bottom: 4px;
+        }
+
+        .gc-balance {
+          font-size: clamp(28px, 8.5vw, 38px);
+          line-height: 1;
+        }
+
+        .gc-initial-value {
+          font-size: 10px;
+          margin-top: 3px;
+        }
+
+        /* Bottom row — code + expiry */
+        .gc-card-bottom {
+          align-items: flex-end;
+          gap: 8px;
+        }
+
+        .gc-code-masked {
+          font-size: 0.75rem;
+          letter-spacing: 0.06em;
+        }
+
+        .gc-expiry-label {
+          font-size: 0.5rem;
+          letter-spacing: 0.1em;
+        }
+
+        .gc-expiry-value {
+          font-size: 0.65rem;
+          margin-top: 1px;
+        }
+
+        /* Decorative circle — thoda chota */
+        .gc-card-circle {
+          width: 160px;
+          height: 160px;
+          top: -45px;
+          right: -45px;
+        }
+
+        /* Panels */
+        .gc-panel {
+          padding: 14px 16px;
+        }
+
+        .gc-code-full {
+          font-size: clamp(14px, 4vw, 18px);
+          letter-spacing: 0.06em;
+          padding: 0.35rem 1rem;
+        }
+
+        .gc-code-panel-label {
+          font-size: 0.7rem;
+        }
+
+        /* QR section */
+        .gc-qr-wallet {
+          gap: 16px;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .gc-qr-wrap {
+          padding: 10px;
+        }
+
+        .gc-qr-hint {
+          font-size: 0.55rem;
+        }
+
+        /* Action buttons */
+        .gc-actions {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .gc-btn {
+          padding: 12px 16px;
+          font-size: 0.8rem;
+        }
+
+        /* Footer */
+        .gc-footer {
+          font-size: 0.65rem;
+          text-align: center;
+          padding: 0 8px;
+        }
+
+        /* Shop name/logo */
+        .gc-shop-name h1 {
+          font-size: 1.1rem;
+        }
+
+        .gc-shop-logo img {
+          max-height: 28px;
+        }
+      }
+
+      /* ── Very small screens (iPhone SE, 375px) ── */
+      @media (max-width: 375px) {
+        main {
+          padding: 16px 12px;
+        }
+
+        .gc-balance {
+          font-size: clamp(24px, 7.5vw, 30px);
+        }
+
+        .gc-card {
+          padding: 14px 14px;
+        }
+
+        .gc-code-full {
+          font-size: 13px;
+          letter-spacing: 0.04em;
         }
       }
