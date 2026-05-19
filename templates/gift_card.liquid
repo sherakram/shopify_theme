@@ -53,13 +53,13 @@
       {% assign display_balance = 0 %}
     {% endif %}
 
-    enabled: {{ gift_card.enabled }}
-    expired: {{ gift_card.expired }}
-    balance: {{ gift_card.balance }}
-    initial_value: {{ gift_card.initial_value }}
-    gc_status: {{ gc_status }}
+    <div id="skiptocontent" role="region" aria-label="Keyboard Navigation links" tabindex="-1">
+      <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+        {{ 'accessibility.skip_to_text' | t }}
+      </a>
+    </div>
 
-    <main>
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       <div class="gc-wrapper">
         <header class="gc-shop-header">
           {% if settings.logo_image %}

@@ -58,8 +58,14 @@
   "cart": {
     "checkout": "Proceed to Checkout",
     "title": "Cart total",
+    "bag_title": "Shopping bag",
     "update": "Update cart",
     "remove": "Remove",
+    "image": "Image",
+    "product_title": "Product title",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
     "subtotal": "Subtotal"
   },
   "customers": {

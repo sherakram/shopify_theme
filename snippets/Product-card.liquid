@@ -78,15 +78,20 @@
 
     <div class="pc__badges pc__badges--{{ settings.badge_position }}">
       {%- if sold_out -%}
-        <span class="pc__badge badge pc__badge--sold-out color-{{ settings.badge_soldout_scheme }}">{{ 'products.sold_out_label' | t }}</span>
+        <span class="pc__badge badge pc__badge--sold-out color-{{ settings.badge_soldout_scheme }}">
+          {{- 'products.sold_out_label' | t -}}
+        </span>
       {%- elsif product.metafields.custom.badge_text != blank -%}
-        <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">{{ product.metafields.custom.badge_text }}</span>
-        
+        <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">
+          {{- product.metafields.custom.badge_text -}}
+        </span>
+
       {%- elsif on_sale -%}
         {%- case settings.sale_badge_type -%}
-
           {%- when 'percent' -%}
-            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}"> -{{ savings_pct }}% </span>
+            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">
+              -{{ savings_pct }}%
+            </span>
 
           {%- when 'text' -%}
             <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">
@@ -95,7 +100,9 @@
 
           {%- when 'save_amount' -%}
             {%- assign save_amount = product.compare_at_price | minus: product.price -%}
-            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}"> Save {{ save_amount | money }} </span>
+            <span class="pc__badge badge pc__badge--sale color-{{ settings.badge_sale_scheme }}">
+              Save {{ save_amount | money }}
+            </span>
         {%- endcase -%}
       {%- endif -%}
     </div>
@@ -106,6 +113,8 @@
         <div class="pc__quick-add">
           <form action="{{ routes.cart_add_url }}" method="post">
             <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <input type="hidden" name="quantity" value="1">
+
             <button type="submit" class="pc__quick-btn" aria-label="{{ 'products.add_to_cart' | t }}">
               <svg
                 width="16"
@@ -128,10 +137,10 @@
 
       {% if product.variants.size > 1 and quick_multiple_options %}
         <div class="pc__quick-add">
-          <button
+          <a
             type="button"
+            href="{{ product.url }}"
             class="pc__quick-btn"
-            onclick="window.location.href='{{ product.url }}'"
             aria-label="{{ 'products.select_options' | t }}"
           >
             <svg
@@ -146,9 +155,10 @@
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <span>{{ 'products.select_options' | t }}</span>
-          </button>
+          </a>
         </div>
       {% endif %}
+      
     {%- endif -%}
   </a>
 

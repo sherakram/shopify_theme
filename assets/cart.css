@@ -101,7 +101,7 @@
 .actions-right {
   margin-left: auto;
   display: flex;
-  gap: 10px; /* space between update/checkout buttons */
+  gap: 10px;
 }
 
 .coupon {
@@ -136,21 +136,18 @@
 }
 
 .update_cart .button {
-  margin: 0; /* remove any unwanted spacing */
+  margin: 0;
 }
 
 .update_cart .button,
 .checkout_cart .button {
-  background: #777;
+  background: #000;
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  border-radius: 4px;
+  padding: 8px 40px;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.2s ease;
-}
-.update_cart .button:hover {
-  background: #555;
 }
 
 .checkout_cart .button:hover {
@@ -216,7 +213,7 @@
   padding: 12px 24px;
   border-radius: 20%;
   border: none;
-  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));;
+  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));
   background-size: 200% auto;
   color: var(--btn-text);
   cursor: pointer;
@@ -473,7 +470,7 @@
   padding: 12px 24px;
   border-radius: 20%;
   border: none;
-  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));;
+  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));
   background-size: 200% auto;
   color: var(--btn-text);
   cursor: pointer;
