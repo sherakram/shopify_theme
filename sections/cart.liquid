@@ -1,6 +1,6 @@
 {{ 'cart.css' | asset_url | stylesheet_tag }}
 
-{% liquid
+{% comment %} {% liquid
   assign scheme = section.settings.cart_color_scheme
 %}
 
@@ -141,9 +141,9 @@
 
 {%- else -%}
   <div
-    class="empty-cart color-{{ scheme }}"
-    style="--cart-padding-top:{{ section.settings.padding_top }}px; --cart-padding-bottom:{{ section.settings.padding_bottom }}px;"
-  >
+      class="empty-cart color-{{ scheme }}"
+      style="--cart-padding-top:{{ section.settings.padding_top }}px; --cart-padding-bottom:{{ section.settings.padding_bottom }}px;"
+    >
     <div class="page-width">
       <div class="cart-header">
         {%- if section.settings.show_empty_cart_image == true and section.settings.empty_cart_image != blank -%}
@@ -172,7 +172,20 @@
       </div>
     </div>
   </div>
-{%- endif -%}
+{%- endif -%} {% endcomment %}
+
+
+
+<div class="cart-wrapper">
+  <div class="page-width">
+    {% if cart.empty? %}
+      <!-- Code for Empty Cart -->
+    {% else %}
+      <!-- Code for Filled Cart -->
+    {% endif %}
+  </div>
+</div>
+
 
 {% schema %}
 {
