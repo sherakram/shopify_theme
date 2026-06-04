@@ -186,50 +186,47 @@
 <div class="cart-wrapper color-{{ scheme }}">
   <div id="cart-section-{{ section.id }}" class="cart-page" data-cart-page>
     <div class="page-width">
+      {% if cart.empty? %}
+        
+        <div class="cart-empty" data-cart-empty>
+          <div class="cart-empty__icon" aria-hidden="true">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <path d="M26 32h28l-4 24H30L26 32z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+              <path d="M33 32c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <circle cx="35" cy="44" r="1.5" fill="currentColor"/>
+              <circle cx="45" cy="44" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
 
-      <div class="cart-page__header">
-        <div class="cart-page__header-inner">
+          <h2 class="cart-empty__heading">{{ section.settings.empty_cart_heading }}</h2>
+          <p class="cart-empty__subtext">{{ section.settings.empty_cart_subtext }}</p>
+
+          <a href="{{ routes.all_products_collection_url }}" class="cart-empty__btn btn btn--primary">
+            {{ section.settings.empty_cart_button_text }}
+          </a>
+        </div>
+
+      {% else %}
+
+        <div class="cart-page__header">
           <h1 class="cart-page__title">
             {{ 'cart.bag_title' | t | default: 'SHOPPING BAG' }}
             {% if cart.item_count > 0 %}
               <span class="cart-page__count">{{ cart.item_count }}</span>
             {% endif %}
           </h1>
-          <a href="{{ routes.all_products_collection_url }}" class="cart-page__continue-link">
-            {% comment %} {%- render 'icon-arrow-left' -%} {% endcomment %}
+          <a href="{{ routes.all_products_collection_url }}" class="cart-page__continue-link btn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             {{ section.settings.empty_cart_button_text }}
           </a>
         </div>
-      </div>
 
-      {% if cart.empty? %}
-        <div class="cart-empty" data-cart-empty>
-          <div class="cart-empty__inner">
-            
-            <div class="cart-empty__icon">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
-                <path d="M26 32h28l-4 24H30L26 32z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-                <path d="M33 32c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                <circle cx="35" cy="44" r="1.5" fill="currentColor"/>
-                <circle cx="45" cy="44" r="1.5" fill="currentColor"/>
-              </svg>
-            </div>
-
-            <h2 class="cart-empty__heading">{{ section.settings.empty_cart_heading }}</h2>
-            <p class="cart-empty__subtext">{{ section.settings.empty_cart_subtext }}</p>
-
-            <a href="{{ routes.all_products_collection_url }}" class="cart-empty__btn btn btn--primary">
-              {{ section.settings.empty_cart_button_text }}
-            </a>
-
-          </div>
-        </div>
-      {% else %}
         <div class="cart-layout" data-cart-layout>
           {% comment %} LEFT: Cart Items {% endcomment %}
           <div class="cart-items" data-cart-items>
-
             {% comment %} Cart Items Table Header {% endcomment %}
             <div class="cart-items__header">
               <span class="cart-items__header-product">{{ 'cart.product' | t }}</span>
@@ -238,6 +235,7 @@
               <span class="cart-items__header-total">{{ 'cart.total' | t }}</span>
             </div>
 
+            {% comment %} Cart Items List {% endcomment %}
             <div class="cart-items__list" role="list">
               {% for item in cart.items %}
                 <div class="cart-item" data-cart-item data-item-key="{{ item.key }}" role="listitem">
@@ -246,13 +244,13 @@
                     <a href="{{ item.url }}" class="cart-item__image-link" tabindex="-1" aria-hidden="true">
                       {% if item.image %}
                         <img
-                          src="{{ item.image | image_url: width: 300 | image_tag }}"
+                          src="{{ item.image | image_url: width: 300 }}"
                           srcset="
                             {{ item.image | image_url: width: 80 }} 80w,
                             {{ item.image | image_url: width: 160 }} 160w,
                             {{ item.image | image_url: width: 240 }} 240w
                           "
-                          class= "cart-item__image"
+                          class="cart-item__image"
                           sizes="80px"
                           alt="{{ item.image.alt | escape }}"
                           width="150"
@@ -322,14 +320,13 @@
                     </button>
                   </div>
 
-                
                   <div class="cart-item__price-col">
                     {% if item.original_price != item.final_price %}
                       <s class="cart-item__original-price">{{ item.original_price | money }}</s>
                     {% endif %}
                     <span class="cart-item__price">{{ item.final_price | money }}</span>
                   </div>
-                  
+
                   <div class="cart-item__qty-col">
                     <div class="qty-stepper" data-qty-stepper data-item-key="{{ item.key }}">
                       <button
@@ -381,7 +378,7 @@
                       </svg>
                     </button>
                   </div>
-                  
+
                   <div class="cart-item__line-total" data-line-total>
                     {{ item.final_line_price | money }}
                   </div>
@@ -432,7 +429,6 @@
             <div class="cart-summary__inner">
               <h2 class="cart-summary__title">Order Summary</h2>
 
-              
               {% if section.settings.show_free_shipping_bar %}
                 {%- assign free_shipping_threshold = section.settings.free_shipping_threshold | times: 100 -%}
                 {%- assign remaining = free_shipping_threshold | minus: cart.total_price -%}
@@ -451,8 +447,10 @@
                     {%- if progress > 100 %}{%- assign progress = 100 -%}{%- endif -%}
                     <div
                       class="free-shipping-bar__fill"
-                      {% comment %} style="width: "{{ progress }}%"
-                      data-progress="{{ progress }}" {% endcomment %}
+                      {% comment %}
+                        style="width: "{{ progress }}%"
+                        data-progress="{{ progress }}"
+                      {% endcomment %}
                     ></div>
                   </div>
                 </div>
@@ -464,7 +462,6 @@
                   <span data-cart-subtotal>{{ cart.total_price | money }}</span>
                 </div>
 
-                
                 {% if cart.cart_level_discount_applications.size > 0 %}
                   {% for discount in cart.cart_level_discount_applications %}
                     <div class="cart-summary__row cart-summary__row--discount">
@@ -520,7 +517,6 @@
                 {% endif %}
               </div>
 
-              
               {% if section.settings.show_trust_badges %}
                 <div class="cart-trust">
                   <div class="cart-trust__item">
@@ -544,7 +540,6 @@
                 </div>
               {% endif %}
 
-              
               {% if section.settings.show_payment_icons %}
                 <div class="cart-payment-icons">
                   {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}
@@ -552,10 +547,8 @@
               {% endif %}
             </div>
           </div>
-          
         </div>
       {% endif %}
-
     </div>
 
     <div class="cart-loading-overlay" aria-hidden="true" data-cart-loading>
@@ -565,10 +558,8 @@
     <div class="cart-toast" role="status" aria-live="polite" data-cart-toast>
       <span data-toast-message></span>
     </div>
-
   </div>
 </div>
-
 
 {% schema %}
 {
@@ -618,8 +609,8 @@
       "type": "text",
       "id": "free_shipping_progress_text",
       "label": "Progress Message",
-      "default": "Add {{amount}} more for free shipping!",
-      "info": "Use {{amount}} where the remaining price should appear"
+      "default": "Add more for free shipping!",
+      "info": "Use where the remaining price should appear"
     },
     {
       "type": "text",
@@ -737,7 +728,6 @@
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
     }
-
   ],
 
   "presets": [

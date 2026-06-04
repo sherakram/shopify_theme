@@ -6,13 +6,13 @@
 }
 
 .cart-page__header {
-  margin-bottom: 1.75rem;
-}
-
-.cart-page__header-inner {
+  margin-bottom: 32px;
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .cart-page__title {
@@ -22,16 +22,98 @@
   gap: 8px;
 }
 
-.cart-page__header-inner .cart-page__continue-link {
+.cart-page__count {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0,0,0,.4);
+}
+
+.cart-page__continue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: rgba(0,0,0,.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.cart-page__continue-link:hover {
+  color: rgba(0,0,0,.85);
+}
+
+.cart-page__header .cart-page__continue-link {
   text-decoration: none;
   color: var(--color-foreground);
-  font-size: var(--font-accent--scale);
-  font-family: var(--font-accent--family);
-  font-weight: var(--font-accent--weight);
-  letter-spacing: var(--font-accent--letter-spacing);
-  text-transform: var(--font-accent--text-case);
+}
+
+/* Empty State*/
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.cart-empty__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.cart-empty__icon:hover {
+  color: var(--color-primary-hover);
+}
+
+.cart-empty__btn {
+  background-color: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
+  border: 1px solid var(--color-btn-primary-border);
+  padding: 15px 30px;
+  text-decoration: none;
+}
+
+.cart-empty__btn:hover {
+  background-color: var(--color-btn-primary-hover-bg);
+  color: var(--color-btn-primary-hover-text);
+  border: 1px solid var(--color-btn-primary-hover-border);
 }
 
 
+@media (max-width: 767px) {
+  .cart-page__title {
+    font-size: 18px;
+    gap: 5px;
+  }
 
+  .cart-page__count {
+    font-size: 12px;
+  }
 
+  .cart-page__continue-link {
+    font-size: 12px;
+  }
+
+  .cart-page__continue-link svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Empty State */
+
+  .cart-empty__heading {
+    font-size: 24px;
+  }
+
+  .cart-empty__subtext {
+    font-size: 14px;
+  }
+}
