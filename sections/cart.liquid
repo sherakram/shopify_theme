@@ -187,7 +187,6 @@
   <div id="cart-section-{{ section.id }}" class="cart-page" data-cart-page>
     <div class="page-width">
       {% if cart.empty? %}
-        
         <div class="cart-empty" data-cart-empty>
           <div class="cart-empty__icon" aria-hidden="true">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +207,6 @@
         </div>
 
       {% else %}
-
         <div class="cart-page__header">
           <h1 class="cart-page__title">
             {{ 'cart.bag_title' | t | default: 'SHOPPING BAG' }}
@@ -229,10 +227,10 @@
           <div class="cart-items" data-cart-items>
             {% comment %} Cart Items Table Header {% endcomment %}
             <div class="cart-items__header">
-              <span class="cart-items__header-product">{{ 'cart.product' | t }}</span>
-              <span class="cart-items__header-price">{{ 'cart.price' | t }}</span>
-              <span class="cart-items__header-qty">{{ 'cart.quantity' | t }}</span>
-              <span class="cart-items__header-total">{{ 'cart.total' | t }}</span>
+              <span class="label cart-items__header-product">{{ 'cart.product' | t }}</span>
+              <span class="label cart-items__header-price">{{ 'cart.price' | t }}</span>
+              <span class="label cart-items__header-qty">{{ 'cart.quantity' | t }}</span>
+              <span class="label cart-items__header-total">{{ 'cart.total' | t }}</span>
             </div>
 
             {% comment %} Cart Items List {% endcomment %}
@@ -240,84 +238,68 @@
               {% for item in cart.items %}
                 <div class="cart-item" data-cart-item data-item-key="{{ item.key }}" role="listitem">
                   {% comment %} Product Image {% endcomment %}
-                  <div class="cart-item__image-wrap">
-                    <a href="{{ item.url }}" class="cart-item__image-link" tabindex="-1" aria-hidden="true">
-                      {% if item.image %}
-                        <img
-                          src="{{ item.image | image_url: width: 300 }}"
-                          srcset="
-                            {{ item.image | image_url: width: 80 }} 80w,
-                            {{ item.image | image_url: width: 160 }} 160w,
-                            {{ item.image | image_url: width: 240 }} 240w
-                          "
-                          class="cart-item__image"
-                          sizes="80px"
-                          alt="{{ item.image.alt | escape }}"
-                          width="150"
-                          height="150"
-                          loading="lazy"
-                        >
-                      {% else %}
-                        <div class="cart-item__image cart-item__image--placeholder">
-                          {{ 'product-1' | placeholder_svg_tag }}
-                        </div>
+                  <div class="cart-item__content">
+                    <div class="cart-item__media">
+                      <a href="{{ item.url }}" class="cart-item__image-link" tabindex="-1" aria-hidden="true">
+                        {% if item.image %}
+                          <img
+                            src="{{ item.image | image_url: width: 300 }}"
+                            srcset="
+                              {{ item.image | image_url: width: 80 }} 80w,
+                              {{ item.image | image_url: width: 160 }} 160w,
+                              {{ item.image | image_url: width: 240 }} 240w
+                            "
+                            class="cart-item__image"
+                            sizes="80px"
+                            alt="{{ item.image.alt | escape }}"
+                            width="150"
+                            height="150"
+                            loading="lazy"
+                          >
+                        {% else %}
+                          <div class="cart-item__image cart-item__image--placeholder">
+                            {{ 'product-1' | placeholder_svg_tag }}
+                          </div>
+                        {% endif %}
+                      </a>
+                    </div>
+
+                    {% comment %} Product Info {% endcomment %}
+                    <div class="cart-item__info">
+                      <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+
+                      {% comment %} Variant (Size, Color, etc.) {% endcomment %}
+                      {% unless item.variant.title == 'Default Title' %}
+                        <p class="cart-item__variant">{{ item.variant.title }}</p>
+                      {% endunless %}
+
+                      {% comment %} Item Properties custom options  {% endcomment %}
+                      {% if item.properties.size > 0 %}
+                        <ul class="cart-item__properties" aria-label="Item options">
+                          {% for property in item.properties %}
+                            {% unless property.last == blank %}
+                              <li class="cart-item__property">
+                                <span class="cart-item__property-name">{{ property.first }}:</span>
+                                <span class="cart-item__property-value">{{ property.last }}</span>
+                              </li>
+                            {% endunless %}
+                          {% endfor %}
+                        </ul>
                       {% endif %}
-                    </a>
-                  </div>
 
-                  {% comment %} Product Info {% endcomment %}
-                  <div class="cart-item__info">
-                    <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
-
-                    {% comment %} Variant (Size, Color, etc.) {% endcomment %}
-                    {% unless item.variant.title == 'Default Title' %}
-                      <p class="cart-item__variant">{{ item.variant.title }}</p>
-                    {% endunless %}
-
-                    {% comment %} Item Properties custom options  {% endcomment %}
-                    {% if item.properties.size > 0 %}
-                      <ul class="cart-item__properties" aria-label="Item options">
-                        {% for property in item.properties %}
-                          {% unless property.last == blank %}
-                            <li class="cart-item__property">
-                              <span class="cart-item__property-name">{{ property.first }}:</span>
-                              <span class="cart-item__property-value">{{ property.last }}</span>
+                      {% comment %} Discount Badges {% endcomment %}
+                      {% if item.discounts.size > 0 %}
+                        <ul class="cart-item__discounts" aria-label="Discounts">
+                          {% for discount in item.discounts %}
+                            <li class="cart-item__discount-badge">
+                              {% comment %} {%- render 'icon-tag' -%} {% endcomment %}
+                              {{ discount.title }}
                             </li>
-                          {% endunless %}
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-
-                    {% comment %} Discount Badges {% endcomment %}
-                    {% if item.discounts.size > 0 %}
-                      <ul class="cart-item__discounts" aria-label="Discounts">
-                        {% for discount in item.discounts %}
-                          <li class="cart-item__discount-badge">
-                            {% comment %} {%- render 'icon-tag' -%} {% endcomment %}
-                            {{ discount.title }}
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-
-                    {% comment %} Mobile price {% endcomment %}
-                    <p class="cart-item__price cart-item__price--mobile">
-                      {{ item.original_price | money }}
-                      {% if item.original_price != item.final_price %}
-                        <s class="cart-item__original-price">{{ item.price | money }}</s>
+                          {% endfor %}
+                        </ul>
                       {% endif %}
-                    </p>
 
-                    {% comment %} Remove button mobile {% endcomment %}
-                    <button
-                      class="cart-item__remove cart-item__remove--mobile"
-                      data-remove-item
-                      data-item-key="{{ item.key }}"
-                      aria-label="Remove {{ item.title | escape }} from cart"
-                      type="button"
-                    >
-                      Remove
-                    </button>
+                    </div>
                   </div>
 
                   <div class="cart-item__price-col">
@@ -367,13 +349,13 @@
 
                     {% comment %} Remove desktop {% endcomment %}
                     <button
-                      class="cart-item__remove cart-item__remove--desktop"
+                      class="cart-item__remove"
                       data-remove-item
                       data-item-key="{{ item.key }}"
                       aria-label="Remove {{ item.title | escape }} from cart"
                       type="button"
                     >
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                       </svg>
                     </button>
