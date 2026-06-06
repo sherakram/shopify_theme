@@ -218,7 +218,7 @@
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            {{ section.settings.empty_cart_button_text }}
+            {{ section.settings.continue_shopping_text }}
           </a>
         </div>
 
@@ -298,13 +298,19 @@
                           {% endfor %}
                         </ul>
                       {% endif %}
-
                     </div>
                   </div>
 
                   <div class="cart-item__price-col">
-                    {% if item.original_price != item.final_price %}
-                      <s class="cart-item__original-price">{{ item.original_price | money }}</s>
+                    {% comment %}
+                      {% if item.original_price != item.final_price %}
+                        <s class="cart-item__original-price">{{ item.original_price | money }}</s>
+                      {% endif %}
+                    {% endcomment %}
+                    {% if item.variant.compare_at_price > item.final_price %}
+                      <s class="cart-item__original-price">
+                        {{ item.variant.compare_at_price | money }}
+                      </s>
                     {% endif %}
                     <span class="cart-item__price">{{ item.final_price | money }}</span>
                   </div>
@@ -478,17 +484,25 @@
               </div>
 
               <div class="cart-summary__actions">
-                <a
+                {% comment %} <a
                   href="/checkout"
                   class="btn btn--primary btn--checkout"
                   {% if cart.requires_shipping and cart.checkout_charge_amount == 0 %}
                     aria-disabled="true"
                   {% endif %}
                 >
-                  {{ 'cart.checkout' | t }}
+                  <span>{{ 'cart.checkout' | t }}</span>
                   {%- unless section.settings.hide_checkout_price -%}
-                    &nbsp;·&nbsp;
                     <span data-checkout-total>{{ cart.total_price | money }}</span>
+                  {%- endunless -%}
+                </a> {% endcomment %}
+
+                <a href="/checkout" class="btn btn--checkout">
+                  <span class="btn--checkout__label">{{ 'cart.checkout' | t }}</span>
+                  {%- unless section.settings.hide_checkout_price -%}
+                    <span class="btn--checkout__price" data-checkout-total>
+                      {{ cart.total_price | money }}
+                    </span>
                   {%- endunless -%}
                 </a>
 
@@ -524,7 +538,9 @@
 
               {% if section.settings.show_payment_icons %}
                 <div class="cart-payment-icons">
-                  {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}
+                  {% for type in shop.enabled_payment_types %}
+                    {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+                  {% endfor %}
                 </div>
               {% endif %}
             </div>
@@ -566,9 +582,9 @@
     },
     {
       "type": "text",
-      "id": "empty_cart_button_text",
-      "label": "Empty Cart Button Text",
-      "default": "Start Shopping"
+      "id": "continue_shopping_text",
+      "label": "Continue shopping",
+      "default": "Continue Shopping"
     },
     {
       "type": "header",
