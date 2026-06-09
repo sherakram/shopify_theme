@@ -202,7 +202,7 @@
           <p class="cart-empty__subtext">{{ section.settings.empty_cart_subtext }}</p>
 
           <a href="{{ routes.all_products_collection_url }}" class="cart-empty__btn btn btn--primary">
-            {{ section.settings.empty_cart_button_text }}
+            {{ section.settings.continue_shopping_text }}
           </a>
         </div>
 
@@ -423,7 +423,7 @@
             {% if section.settings.show_clear_cart %}
               <div class="cart-clear">
                 <form action="{{ routes.cart_clear_url }}" method="post" id="clear-form">
-                  <button class="cart-clear__btn" data-clear-cart type="button">
+                  <button class="cart-clear__btn" data-clear-cart type="submit">
                     {{ section.settings.clear_cart_text }}
                   </button>
                 </form>
@@ -564,6 +564,8 @@
     </div>
   </div>
 </div>
+
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
