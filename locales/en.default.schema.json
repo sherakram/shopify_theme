@@ -95,6 +95,7 @@
     "links": "Links",
     "icons": "Icons",
     "cards": "Cards",
+    "cart": "Cart",
     "gift_card": "Gift card",
     "gift_card_settings": "Gift card settings",
     "navigation": "Navigation",
@@ -214,7 +215,28 @@
     "gift_card_muted_text": "Muted text color",
     "gift_card_border": "Border color",
     "gift_card_accent": "Accent color",
-    "gift_card_status": "Active status color"
+    "gift_card_status": "Active status color",
+    "show_free_shipping_bar": "Show Free Shipping Bar",
+    "free_shipping_threshold": "Free Shipping Threshold (in your currency)",
+    "progress_message": "Progress Message",
+    "achieved_message": "Achieved Message",
+    "show_order_note": "Show Order Note Field",
+    "note_toggle": "Note Toggle Label",
+    "note_placeholder": "Note Placeholder Text",
+    "show_clear_cart": "Show Clear Cart Button",
+    "clear_cart_text": "Clear Cart Button Text",
+    "hide_checkout_price": "Hide Price in Checkout Button",
+    "show_continue_shopping_btn": "Show Continue Shopping Button in Summary",
+    "show_taxes_note": "Show Taxes Note",
+    "show_trust_badges": "Show Trust Badges",
+    "show_payment_method": "Show Payment Method Icons"
+  },
+  "content":{
+    "free_shipping_bar": "Free Shipping Bar",
+    "order_note": "Order Note",
+    "cart_actions": "Cart Actions",
+    "checkout": "Checkout",
+    "show_trust_badges": "Trust & Payment"
   },
 
   "options": {

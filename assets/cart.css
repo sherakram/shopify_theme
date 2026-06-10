@@ -443,7 +443,7 @@
   transition: max-height 0.25s ease;
 }
 .cart-note__body.is-open {
-  min-height: 200px;
+  min-height: 80px;
 }
 .cart-note__input {
   width: 100%;

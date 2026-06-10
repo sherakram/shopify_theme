@@ -992,6 +992,121 @@
     ]
   },
   {
+    "name": "t:names.cart",
+    "settings": [
+      {
+      "type": "header",
+      "content": "t:content.free_shipping_bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_free_shipping_bar",
+      "label": "t:labels.show_free_shipping_bar",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "t:labels.free_shipping_threshold",
+      "default": 100,
+      "info": "Enter the amount e.g. 100 for $100"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_progress_text",
+      "label": "t:labels.progress_message",
+      "default": "Add more for free shipping!",
+      "info": "Use where the remaining price should appear"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_achieved_text",
+      "label": "t:labels.achieved_message",
+      "default": "You've unlocked free shipping!"
+    },
+
+    {
+      "type": "header",
+      "content": "t:content.order_note"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_order_note",
+      "label": "t:labels.show_order_note",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "note_label",
+      "label": "t:labels.note_toggle",
+      "default": "Add a note to your order"
+    },
+    {
+      "type": "text",
+      "id": "note_placeholder",
+      "label": "t:labels.note_placeholder",
+      "default": "Special instructions, gift messages..."
+    },
+
+    {
+      "type": "header",
+      "content": "t:content.cart_actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_clear_cart",
+      "label": "t:labels.show_clear_cart",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "clear_cart_text",
+      "label": "t:labels.clear_cart_text",
+      "default": "Clear cart"
+    },
+
+    {
+      "type": "header",
+      "content": "t:content.checkout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_checkout_price",
+      "label": "t:labels.hide_checkout_price",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_continue_shopping_btn",
+      "label": "t:labels.show_continue_shopping_btn",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_taxes_note",
+      "label": "t:labels.show_taxes_note",
+      "default": true
+    },
+
+    {
+      "type": "header",
+      "content": "t:content.show_trust_badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "t:labels.show_trust_badges",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:labels.show_payment_method",
+      "default": true
+    }
+    ]
+  },
+  {
     "name": "t:names.gift_card",
     "settings": [
       { 
