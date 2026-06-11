@@ -66,7 +66,16 @@
     "price": "Price",
     "quantity": "Quantity",
     "total": "Total",
-    "subtotal": "Subtotal"
+    "subtotal": "Subtotal",
+    "order_summary": "Order Summary",
+    "shipping": "Shipping",
+    "calculated_at_checkout": "Calculated at checkout",
+    "taxes_include": "Taxes included",
+    "taxes_calculated_at-checkout": "Taxes calculated at checkout",
+    "summary_total": "Total",
+    "secure_checkout": "Secure Checkout",
+    "encrypted_pay": "Encrypted Payment",
+    "easy_returns": "Easy Returns"
   },
   "customers": {
     "login": {

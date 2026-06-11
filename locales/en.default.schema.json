@@ -229,9 +229,14 @@
     "show_continue_shopping_btn": "Show Continue Shopping Button in Summary",
     "show_taxes_note": "Show Taxes Note",
     "show_trust_badges": "Show Trust Badges",
-    "show_payment_method": "Show Payment Method Icons"
+    "show_payment_method": "Show Payment Method Icons",
+    "empty_cart_heading": "Empty Cart Heading",
+    "empty_cart_sub_text": "Empty Cart Sub-text",
+    "continue_shopping": "Continue shopping"
   },
   "content":{
+    "section_settings": "Section settings",
+    "empty_cart": "Empty Cart",
     "free_shipping_bar": "Free Shipping Bar",
     "order_note": "Order Note",
     "cart_actions": "Cart Actions",

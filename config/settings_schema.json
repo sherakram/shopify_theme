@@ -1015,7 +1015,7 @@
       "type": "text",
       "id": "free_shipping_progress_text",
       "label": "t:labels.progress_message",
-      "default": "Add more for free shipping!",
+      "default": "Add [amount] more for free shipping!",
       "info": "Use where the remaining price should appear"
     },
     {
