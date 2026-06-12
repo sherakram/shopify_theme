@@ -724,6 +724,14 @@
   transform: translateY(0);
 }
 
+.cart-item__price--mobile {
+  display: none;
+}
+
+.cart-item__remove--mobile {
+  display: none;
+}
+
 
 @media  screen and (max-width: 900px) {
   .cart-layout {
@@ -783,6 +791,7 @@
     align-items: center;
     gap: 6px;
   }
+
   .cart-item__qty-col {
     grid-area: qty;
     display: flex;
@@ -795,5 +804,5 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 2px;
-  }
+  } 
 }

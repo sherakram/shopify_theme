@@ -294,12 +294,83 @@
                             {% endfor %}
                           </ul>
                         {% endif %}
+
+                        {% comment %} Mobile price {% endcomment %}
+                        <div class="cart-item__price-col cart-item__price--mobile">
+                          <span class="cart-item__price">{{ item.final_price | money }}</span>
+
+                          {% if item.variant.compare_at_price > item.final_price %}
+                            <s class="cart-item__original-price">
+                              {{ item.variant.compare_at_price | money }}
+                            </s>
+                          {% endif %}
+                        </div>
+
+                        {% comment %} Remove button (mobile) {% endcomment %}
+                        <div class="cart-item__qty-col cart-item__remove--mobile">
+                          <div class="qty-stepper" data-qty-stepper data-item-key="{{ item.key }}">
+                            <button
+                              class="qty-stepper__btn qty-stepper__btn--minus"
+                              data-qty-minus
+                              aria-label="Decrease quantity for {{ item.title | escape }}"
+                              type="button"
+                              {% if item.quantity <= 1 %}
+                                data-at-min
+                              {% endif %}
+                            >
+                              <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
+                                <rect y="0.5" width="12" height="1" fill="currentColor"/>
+                              </svg>
+                            </button>
+                            <input
+                              class="qty-stepper__input"
+                              type="number"
+                              name="updates[]"
+                              value="{{ item.quantity }}"
+                              min="0"
+                              max="99"
+                              aria-label="Quantity for {{ item.title | escape }}"
+                              data-quantity-input
+                              data-item-key="{{ item.key }}"
+                            >
+                            <button
+                              class="qty-stepper__btn qty-stepper__btn--plus"
+                              data-qty-plus
+                              aria-label="Increase quantity for {{ item.title | escape }}"
+                              type="button"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <rect y="5.5" width="12" height="1" fill="currentColor"/><rect x="5.5" width="1" height="12" fill="currentColor"/>
+                              </svg>
+                            </button>
+                          </div>
+
+                          {% comment %} Remove desktop {% endcomment %}
+                          <button
+                            class="cart-item__remove"
+                            data-remove-item
+                            data-item-key="{{ item.key }}"
+                            aria-label="Remove {{ item.title | escape }} from cart"
+                            type="button"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 14 14"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                          </button>
+                        </div>
+                        
                       </div>
                     </div>
 
                     <div class="cart-item__price-col">
                       <span class="cart-item__price">{{ item.final_price | money }}</span>
-                      
+
                       {% if item.variant.compare_at_price > item.final_price %}
                         <s class="cart-item__original-price">
                           {{ item.variant.compare_at_price | money }}
