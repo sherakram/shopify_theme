@@ -61,11 +61,15 @@ const CartUI = {
     const totalEl = document.querySelector("[data-cart-total]");
     const checkoutEl = document.querySelector("[data-checkout-total]");
     const countEl = document.querySelector("[data-cart-count]");
+    const pageCount = document.querySelector(".cart-page__count");
+    const headerCount = document.querySelector(".cart-count");
 
     if (subtotalEl) subtotalEl.textContent = format(cart.total_price);
     if (totalEl) totalEl.textContent = format(cart.total_price);
     if (checkoutEl) checkoutEl.textContent = format(cart.total_price);
     if (countEl) countEl.textContent = `(${cart.item_count})`;
+    if (pageCount) pageCount.textContent = cart.item_count;
+    if (headerCount) headerCount.textContent = cart.item_count;
   },
 
   // Line total
@@ -174,10 +178,11 @@ const CartEvents = {
       const plusBtn = e.target.closest("[data-qty-plus]");
       if (plusBtn) {
         const stepper = plusBtn.closest("[data-qty-stepper]");
-        const input = stepper.querySelector("[data-quantity-input]");
-        const newQty = Math.min(parseInt(input.value) + 1, 99);
-        input.value = newQty;
-        await CartEvents.handleQtyChange(stepper.dataset.itemKey, newQty);
+        const key = stepper.dataset.itemKey;
+        const inputs = document.querySelectorAll(`[data-quantity-input][data-item-key="${key}"]`);
+        const newQty = Math.min(parseInt(inputs[0].value) + 1, 99);
+        inputs.forEach(inp => inp.value = newQty);
+        await CartEvents.handleQtyChange(key, newQty);
         return;
       }
 
@@ -185,10 +190,11 @@ const CartEvents = {
       const minusBtn = e.target.closest("[data-qty-minus]");
       if (minusBtn) {
         const stepper = minusBtn.closest("[data-qty-stepper]");
-        const input = stepper.querySelector("[data-quantity-input]");
-        const newQty = Math.max(parseInt(input.value) - 1, 0);
-        input.value = newQty;
-        await CartEvents.handleQtyChange(stepper.dataset.itemKey, newQty);
+        const key = stepper.dataset.itemKey;
+        const inputs = document.querySelectorAll(`[data-quantity-input][data-item-key="${key}"]`);
+        const newQty = Math.max(parseInt(inputs[0].value) - 1, 0);
+        inputs.forEach(inp => inp.value = newQty);
+        await CartEvents.handleQtyChange(key, newQty);
         return;
       }
     });
@@ -199,8 +205,13 @@ const CartEvents = {
       let qty = parseInt(input.value);
       if (isNaN(qty) || qty < 0) qty = 0;
       if (qty > 99) qty = 99;
-      input.value = qty;
-      await CartEvents.handleQtyChange(input.dataset.itemKey, qty);
+
+      const key = input.dataset.itemKey;
+      document
+        .querySelectorAll(`[data-quantity-input][data-item-key="${key}"]`)
+        .forEach(inp => inp.value = qty);
+
+      await CartEvents.handleQtyChange(key, qty);
     });
   },
 
