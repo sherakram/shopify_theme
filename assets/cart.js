@@ -1,3 +1,12 @@
+const formatMoney = (cents) => {
+  const currency = window.ShopifyCart?.currency?.iso_code || 'PKR';
+  return new Intl.NumberFormat('en-PK', {
+    style: 'currency',
+    currency: currency,
+    minimumFractionDigits: 2,
+  }).format(cents / 100);
+};
+
 const CartAPI = {
   // Cart read
   getCart: async () => {
@@ -55,7 +64,7 @@ const CartUI = {
 
   // Subtotal / Total update
   updateTotals: (cart) => {
-    const format = (cents) => `Rs.${(cents / 100).toFixed(2)}`;
+    const format = formatMoney;
 
     const subtotalEl = document.querySelector("[data-cart-subtotal]");
     const totalEl = document.querySelector("[data-cart-total]");
@@ -77,7 +86,7 @@ const CartUI = {
     const row = document.querySelector(`[data-item-key="${key}"]`);
     if (!row) return;
     const el = row.querySelector("[data-line-total]");
-    if (el) el.textContent = `Rs.${(linePriceCents / 100).toFixed(2)}`;
+    if (el) el.textContent = formatMoney(linePriceCents);
   },
 
   updateShippingBar: (cart) => {
@@ -109,12 +118,7 @@ const CartUI = {
       } else {
         msg.classList.remove("free-shipping-bar__message--achieved");
 
-        const formatted =
-          "Rs." +
-          (remaining / 100).toLocaleString("en-PK", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
+        const formatted = formatMoney(remaining);
 
         const template =
           window.ShopifyCart.settings.freeShippingProgressText || "";
