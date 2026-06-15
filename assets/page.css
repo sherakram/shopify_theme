@@ -1,8 +1,6 @@
-.custom-page-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+.page-wrapper {
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
 }
 
 .main-page-title {

@@ -1,12 +1,26 @@
 {{ 'page.css' | asset_url | stylesheet_tag }}
 
-<div class="custom-page-wrapper"
-     style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+{% liquid
+  assign scheme = section.settings.page_color_scheme
+%}
 
+{%- style -%}
+  #page-{{ section.id }} {
+    --pt: {{ section.settings.padding_top }}px;
+    --pb: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+
+<div class="page-wrapper color-{{ scheme }}" id="page-{{ section.id }}">
+  <div class="main-page">
+    <div class="page-width">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'title' %}
-          <h1 class="main-page-title" style="margin-bottom: {{ section.settings.title_gap }}px; --text-align:{{ block.settings.title_alignment }};">
+          <h1
+            class="main-page-title"
+            style="margin-bottom: {{ section.settings.title_gap }}px; --text-align:{{ block.settings.title_alignment }};"
+          >
             {{ page.title | escape }}
           </h1>
         {% when 'content' %}
@@ -14,16 +28,17 @@
             {{ page.content }}
           </div>
         {% else %}
-          
+
       {% endcase %}
     {% endfor %}
-
+    </div>
+  </div>
 </div>
-
 
 {% schema %}
 {
   "name": "t:general.page",
+  "tag": "section",
   "settings": [
     {
       "type": "range",
@@ -37,7 +52,13 @@
     },
     {
       "type": "header",
-      "content": "t:labels.padding"
+      "content": "t:content.section_settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "page_color_scheme",
+      "label": "t:sections.all.color_scheme",
+      "default": "scheme-1"
     },
     {
       "type": "range",
