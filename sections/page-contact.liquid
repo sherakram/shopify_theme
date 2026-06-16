@@ -1,0 +1,746 @@
+{{ 'page-contact.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign scheme = section.settings.page_color_scheme
+
+  assign hero_blocks = section.blocks | where: 'type', 'hero-text'
+  assign info_cards = section.blocks | where: 'type', 'info_card'
+  assign form_blocks = section.blocks | where: 'type', 'contact_form'
+  assign map_blocks = section.blocks | where: 'type', 'map_block'
+  assign faq_blocks = section.blocks | where: 'type', 'faq'
+%}
+
+{%- style -%}
+  #page-contact-{{ section.id }} {
+    --pt: {{ section.settings.padding_top }}px;
+    --pb: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+
+<div class="contact-wrapper color-{{ scheme }}" id="page-contact-{{ section.id }}">
+  {%- comment -%} HERO STRIP {%- endcomment -%}
+  <div class="contact-hero">
+    <div class="page-width">
+      <div class="contact-hero-inner">
+        {%- comment -%} LEFT: heading + description {%- endcomment -%}
+        <div class="contact-hero-left">
+          {% for block in hero_blocks %}
+            {% if block.settings.badge_label != blank %}
+              <span class="page-badge" {{ block.shopify_attributes }}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                {{ block.settings.badge_label }}
+              </span>
+            {% endif %}
+            {% if block.settings.heading != blank %}
+              <h1 class="contact-main-title">{{ block.settings.heading | escape }}</h1>
+            {% endif %}
+            {% if block.settings.subtext != blank %}
+              <p class="contact-subtext">{{ block.settings.subtext }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {%- comment -%} RIGHT: info cards {%- endcomment -%}
+        {% if info_cards.size > 0 %}
+          <div class="contact-info-cards">
+            {% for block in info_cards %}
+              <div class="contact-info-card" {{ block.shopify_attributes }}>
+                <div class="contact-info-icon" aria-hidden="true">
+                  {% case block.settings.icon %}
+                    {% when 'mail' %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    {% when 'phone' %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                    {% when 'clock' %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    {% when 'map-pin' %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    {% else %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+                      </svg>
+                  {% endcase %}
+                </div>
+                <div class="contact-info-text">
+                  {% if block.settings.title != blank %}
+                    <p class="contact-info-title">{{ block.settings.title }}</p>
+                  {% endif %}
+                  {% if block.settings.value != blank %}
+                    <p class="contact-info-sub">{{ block.settings.value }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      {%- comment -%} /.contact-hero-inner {%- endcomment -%}
+    </div>
+  </div>
+
+  {%- comment -%} FORM + MAP {%- endcomment -%}
+  {% if form_blocks.size > 0 or map_blocks.size > 0 %}
+    <div class="contact-form-section">
+      <div class="page-width">
+        <div class="contact-form-grid">
+          {%- comment -%} CONTACT FORM {%- endcomment -%}
+          {% for block in form_blocks %}
+            <div class="contact-form-wrap" {{ block.shopify_attributes }}>
+              {% if block.settings.form_heading != blank %}
+                <h2 class="contact-form-title">{{ block.settings.form_heading }}</h2>
+              {% endif %}
+              {% form 'contact', id: 'ContactForm', class: 'contact-form' %}
+                {% if form.posted_successfully? %}
+                  <div class="contact-success" role="alert">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <p>{{ 'contact.form.post_success' | t | default: "Thanks! We'll be in touch soon." }}</p>
+                  </div>
+                {% endif %}
+                {% if form.errors %}
+                  <div class="contact-errors" role="alert">
+                    {{ form.errors | default_errors }}
+                  </div>
+                {% endif %}
+
+                <div class="contact-field-row">
+                  <div class="contact-field">
+                    <label for="ContactForm-name" class="contact-label">
+                      {{- 'contact.form.name' | t | default: 'Full name' -}}
+                    </label>
+                    <input
+                      type="text"
+                      id="ContactForm-name"
+                      name="contact[name]"
+                      class="contact-input"
+                      autocomplete="name"
+                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                      placeholder="{{ 'contact.form.name' | t | default: 'Your name' }}"
+                    >
+                  </div>
+                  <div class="contact-field">
+                    <label for="ContactForm-email" class="contact-label">
+                      {{ 'contact.form.email' | t | default: 'Email address' }}
+                      <span class="contact-required" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="ContactForm-email"
+                      name="contact[email]"
+                      class="contact-input"
+                      autocomplete="email"
+                      required
+                      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                      placeholder="{{ 'contact.form.email' | t | default: 'you@example.com' }}"
+                    >
+                  </div>
+                </div>
+
+                {% if block.settings.show_phone_field %}
+                  <div class="contact-field">
+                    <label for="ContactForm-phone" class="contact-label">
+                      {{- 'contact.form.phone' | t | default: 'Phone number' -}}
+                    </label>
+                    <input
+                      type="tel"
+                      id="ContactForm-phone"
+                      name="contact[phone]"
+                      class="contact-input"
+                      autocomplete="tel"
+                      value="{{ form.phone }}"
+                      placeholder="+92 300 000 0000"
+                    >
+                  </div>
+                {% endif %}
+
+                {% if block.settings.show_subject_field %}
+                  <div class="contact-field">
+                    <label for="ContactForm-subject" class="contact-label">
+                      {{- 'contact.form.subject' | t | default: 'Subject' -}}
+                    </label>
+                    <input
+                      type="text"
+                      id="ContactForm-subject"
+                      name="contact[subject]"
+                      class="contact-input"
+                      value="{{ form.subject }}"
+                      placeholder="{{ 'contact.form.subject_placeholder' | t | default: 'How can we help?' }}"
+                    >
+                  </div>
+                {% endif %}
+
+                <div class="contact-field">
+                  <label for="ContactForm-body" class="contact-label">
+                    {{ 'contact.form.message' | t | default: 'Message' }}
+                    <span class="contact-required" aria-hidden="true">*</span>
+                  </label>
+                  <textarea
+                    id="ContactForm-body"
+                    name="contact[body]"
+                    class="contact-textarea"
+                    rows="6"
+                    required
+                    placeholder="{{ 'contact.form.message_placeholder' | t | default: 'Tell us a bit more...' }}"
+                  >{{ form.body }}</textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  {{ block.settings.button_label | default: 'Send message' }}
+                </button>
+              {% endform %}
+            </div>
+          {% endfor %}
+
+          {%- comment -%} MAP BLOCK {%- endcomment -%}
+          {% for block in map_blocks %}
+            <div class="contact-map-wrap" {{ block.shopify_attributes }}>
+              {% if block.settings.map_heading != blank %}
+                <h2 class="contact-form-title">{{ block.settings.map_heading }}</h2>
+              {% endif %}
+
+              {% if block.settings.google_maps_embed_url != blank %}
+                <div class="contact-map-embed">
+                  <iframe
+                    src="{{ block.settings.google_maps_embed_url }}"
+                    width="100%"
+                    height="260"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Store location map"
+                  ></iframe>
+                </div>
+              {% else %}
+                <div class="contact-map-placeholder" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <p>{{ block.settings.address_text }}</p>
+                </div>
+              {% endif %}
+
+              {% if block.settings.address_text != blank %}
+                <div class="contact-address-card">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <div>
+                    <p class="contact-address-main">{{ block.settings.address_text }}</p>
+                    {% if block.settings.landmark_text != blank %}
+                      <p class="contact-address-sub">{{ block.settings.landmark_text }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {%- comment -%} FAQ {%- endcomment -%}
+  {% for block in faq_blocks %}
+    <div class="contact-faq" {{ block.shopify_attributes }}>
+      <div class="page-width">
+        {% if block.settings.faq_heading != blank %}
+          <h2 class="contact-faq-title">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            {{ block.settings.faq_heading }}
+          </h2>
+        {% endif %}
+        <div class="faq-list">
+          {% assign faq_nums = '1,2,3' | split: ',' %}
+          {% for n in faq_nums %}
+            {% assign q_key = 'faq_' | append: n | append: '_q' %}
+            {% assign a_key = 'faq_' | append: n | append: '_a' %}
+            {% if block.settings[q_key] != blank %}
+              <details
+                class="faq-item"
+                {% if n == '1' %}
+                  open
+                {% endif %}
+              >
+                <summary class="faq-summary">
+                  {{ block.settings[q_key] }}
+                  <span class="faq-chevron" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </summary>
+                {% if block.settings[a_key] != blank %}
+                  <div class="faq-answer">{{ block.settings[a_key] }}</div>
+                {% endif %}
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  {%- comment -%} SOCIAL LINKS {%- endcomment -%}
+  {% if section.settings.show_social_links %}
+    {% assign has_social = false %}
+    {% if section.settings.instagram_url != blank
+      or section.settings.facebook_url != blank
+      or section.settings.whatsapp_number != blank
+    %}
+      {% assign has_social = true %}
+    {% endif %}
+    {% if has_social %}
+      <div class="contact-social">
+        <div class="page-width">
+          <p class="contact-social-label">Find us on</p>
+          <div class="contact-social-links">
+            {% if section.settings.instagram_url != blank %}
+              <a
+                href="{{ section.settings.instagram_url }}"
+                class="contact-social-link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Instagram
+              </a>
+            {% endif %}
+            {% if section.settings.facebook_url != blank %}
+              <a
+                href="{{ section.settings.facebook_url }}"
+                class="contact-social-link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Facebook"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+                Facebook
+              </a>
+            {% endif %}
+            {% if section.settings.whatsapp_number != blank %}
+              <a
+                href="https://wa.me/{{ section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}"
+                class="contact-social-link"
+                target="_blank"
+                rel="noopener"
+                aria-label="WhatsApp"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                WhatsApp
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Contact page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Social links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_links",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp number (with country code)",
+      "placeholder": "+923001234567"
+    },
+    {
+      "type": "header",
+      "content": "t:content.section_settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "page_color_scheme",
+      "label": "t:sections.all.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero-text",
+      "name": "Hero — Heading & text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_label",
+          "label": "Badge label",
+          "default": "Get in touch"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Contact Us"
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "We typically reply within 24 hours. Reach out via the form or through any of the channels listed here."
+        }
+      ]
+    },
+    {
+      "type": "info_card",
+      "name": "Info card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "mail", "label": "Email" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "clock", "label": "Hours" },
+            { "value": "map-pin", "label": "Location" }
+          ],
+          "default": "mail"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "placeholder": "Email"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "placeholder": "hello@yourstore.com"
+        }
+      ]
+    },
+    {
+      "type": "contact_form",
+      "name": "Contact form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "form_heading",
+          "label": "Form heading",
+          "default": "Send us a message"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_phone_field",
+          "label": "Show phone field",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_subject_field",
+          "label": "Show subject field",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Send message"
+        }
+      ]
+    },
+    {
+      "type": "map_block",
+      "name": "Map & address",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "map_heading",
+          "label": "Heading",
+          "default": "Find us"
+        },
+        {
+          "type": "textarea",
+          "id": "address_text",
+          "label": "Address"
+        },
+        {
+          "type": "text",
+          "id": "landmark_text",
+          "label": "Landmark / extra info"
+        },
+        {
+          "type": "text",
+          "id": "google_maps_embed_url",
+          "label": "Google Maps embed URL",
+          "info": "From Google Maps → Share → Embed a map → copy the src URL only"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ accordion",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "faq_heading",
+          "label": "Heading",
+          "default": "Frequently asked questions"
+        },
+        {
+          "type": "text",
+          "id": "faq_1_q",
+          "label": "Question 1"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_1_a",
+          "label": "Answer 1"
+        },
+        {
+          "type": "text",
+          "id": "faq_2_q",
+          "label": "Question 2"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_2_a",
+          "label": "Answer 2"
+        },
+        {
+          "type": "text",
+          "id": "faq_3_q",
+          "label": "Question 3"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_3_a",
+          "label": "Answer 3"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

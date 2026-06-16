@@ -19,6 +19,22 @@
     "comapre_at_price": "Compare at price",
     "unit_price": "Unit price"
   },
+  "contact": {
+    "form": {
+      "title": "Contact form",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "comment": "Comment",
+      "subject": "Subject",
+      "subject_placeholder": "How can we help?",
+      "message": "Message",
+      "message_placeholder": "Tell us a bit more...",
+      "send": "Send",
+      "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+      "error_heading": "Please adjust the following:"
+    }
+  },
   "404": {
     "title": "404",
     "not_found": "Page not found.",

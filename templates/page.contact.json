@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-contact",
+      "blocks": {
+        "hero_text": {
+          "type": "hero-text",
+          "settings": {
+            "badge_label": "Get in touch",
+            "heading": "Contact Us",
+            "subtext": "We typically reply within 24 hours. Reach out via the form or through any of the channels listed here."
+          }
+        },
+        "info_email": {
+          "type": "info_card",
+          "settings": {
+            "icon": "mail",
+            "title": "Email",
+            "value": "hello@yourstore.com"
+          }
+        },
+        "info_phone": {
+          "type": "info_card",
+          "settings": {
+            "icon": "phone",
+            "title": "Phone",
+            "value": "+92 300 000 0000"
+          }
+        },
+        "info_hours": {
+          "type": "info_card",
+          "settings": {
+            "icon": "clock",
+            "title": "Business Hours",
+            "value": "Mon – Sat, 10am – 6pm"
+          }
+        },
+        "contact_form": {
+          "type": "contact_form",
+          "settings": {
+            "form_heading": "Send us a message",
+            "show_phone_field": false,
+            "show_subject_field": true,
+            "button_label": "Send message"
+          }
+        },
+        "map_block": {
+          "type": "map_block",
+          "settings": {
+            "map_heading": "Find us",
+            "address_text": "123 Liberty Market, Lahore, Pakistan",
+            "landmark_text": "Near Gaddafi Stadium · 5 min walk",
+            "google_maps_embed_url": ""
+          }
+        },
+        "faq": {
+          "type": "faq",
+          "settings": {
+            "faq_heading": "Frequently asked questions",
+            "faq_1_q": "How long does shipping take?",
+            "faq_1_a": "Standard delivery takes 3–5 business days within Pakistan.",
+            "faq_2_q": "Can I return or exchange items?",
+            "faq_2_a": "Yes, we accept returns within 7 days of delivery. Items must be unused.",
+            "faq_3_q": "Do you offer bulk or wholesale orders?",
+            "faq_3_a": "Yes! Email us at wholesale@yourstore.com for pricing and terms."
+          }
+        }
+      },
+      "block_order": [
+        "hero_text",
+        "info_email",
+        "info_phone",
+        "info_hours",
+        "contact_form",
+        "map_block",
+        "faq"
+      ],
+      "settings": {
+        "page_color_scheme": "scheme-1",
+        "show_social_links": true,
+        "instagram_url": "",
+        "facebook_url": "",
+        "whatsapp_number": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
