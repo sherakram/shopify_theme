@@ -1,13 +1,16 @@
 .contact-wrapper {
+  background-color: var(--color-background);
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+
+.main-contact-page {
   width: 100%;
-  padding-top: var(--pt, 0px);
-  padding-bottom: var(--pb, 0px);
 }
 
 .contact-hero {
   background-color: rgba(var(--color-foreground), 0.03);
   border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
-  padding: 40px 0;
 }
 
 .contact-hero-inner {

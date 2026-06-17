@@ -4,7 +4,6 @@
   padding-bottom: var(--pb);
 }
 
-/* ── Layout ── */
 .main-page {
   width: 100%;
 }
@@ -15,7 +14,6 @@
   padding-inline: 24px;
 }
 
-/* ── Page Title ── */
 .main-page-title {
   font-family: var(--font-heading--family);
   font-weight: var(--font-heading--weight);
@@ -30,7 +28,6 @@
   opacity: 0.9;
 }
 
-/* ── Page Content ── */
 .page-content {
   margin-top: 0;
   color: var(--color-foreground);
@@ -122,7 +119,6 @@
   margin-block: 2em;
 }
 
-/* ── Responsive ── */
 @media (max-width: 600px) {
   .main-page .page-width {
     padding-inline: 16px;
