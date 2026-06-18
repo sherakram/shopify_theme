@@ -1,25 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "page-contact",
-      "settings": {
-        "page_color_scheme": "scheme-1",
-        "form_heading": "Send us a message",
-        "show_phone_field": true,
-        "show_subject_field": true,
-        "button_label": "Send message",
-        "show_map": false,
-        "map_heading": "Find us",
-        "address_text": "123 Liberty Market, Lahore, Pakistan",
-        "landmark_text": "Near Gaddafi Stadium · 5 min walk",
-        "google_maps_embed_url": "",
-        "show_social_links": false,
-        "instagram_url": "",
-        "facebook_url": "",
-        "whatsapp_number": "",
-        "padding_top": 20,
-        "padding_bottom": 20
-      },
       "blocks": {
         "hero_text": {
           "type": "hero-text",
@@ -59,7 +50,25 @@
         "info_email",
         "info_phone",
         "info_hours"
-      ]
+      ],
+      "settings": {
+        "form_heading": "Send us a message",
+        "show_phone_field": true,
+        "show_subject_field": true,
+        "button_label": "Send message",
+        "show_map": true,
+        "map_heading": "Find us",
+        "address_text": "123 Liberty Market, Lahore, Pakistan",
+        "landmark_text": "Near Gaddafi Stadium · 5 min walk",
+        "google_maps_embed_url": "",
+        "show_social_links": false,
+        "instagram_url": "",
+        "facebook_url": "",
+        "whatsapp_number": "",
+        "page_color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
     }
   },
   "order": [
