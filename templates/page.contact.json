@@ -5,7 +5,7 @@
       "settings": {
         "page_color_scheme": "scheme-1",
         "form_heading": "Send us a message",
-        "show_phone_field": false,
+        "show_phone_field": true,
         "show_subject_field": true,
         "button_label": "Send message",
         "show_map": false,
@@ -52,26 +52,13 @@
             "title": "Business Hours",
             "value": "Mon – Sat, 10am – 6pm"
           }
-        },
-        "faq": {
-          "type": "faq",
-          "settings": {
-            "faq_heading": "Frequently asked questions",
-            "faq_1_q": "How long does shipping take?",
-            "faq_1_a": "Standard delivery takes 3–5 business days within Pakistan.",
-            "faq_2_q": "Can I return or exchange items?",
-            "faq_2_a": "Yes, we accept returns within 7 days of delivery. Items must be unused.",
-            "faq_3_q": "Do you offer bulk or wholesale orders?",
-            "faq_3_a": "Yes! Email us at wholesale@yourstore.com for pricing and terms."
-          }
         }
       },
       "block_order": [
         "hero_text",
         "info_email",
         "info_phone",
-        "info_hours",
-        "faq"
+        "info_hours"
       ]
     }
   },

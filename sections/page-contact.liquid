@@ -5,7 +5,6 @@
 
   assign hero_blocks = section.blocks | where: 'type', 'hero-text'
   assign info_cards = section.blocks | where: 'type', 'info_card'
-  assign faq_blocks = section.blocks | where: 'type', 'faq'
 %}
 
 {%- style -%}
@@ -148,128 +147,20 @@
 
       {%- comment -%} FORM + MAP {%- endcomment -%}
       <div class="contact-form-section">
-        <div class="page-width">
-          <div class="contact-form-grid">
-            {%- comment -%} CONTACT FORM {%- endcomment -%}
+        <div class="contact-form-grid">
+          {%- comment -%} CONTACT FORM {%- endcomment -%}
 
-            <div class="contact-form-wrap">
-              {% if section.settings.form_heading != blank %}
-                <h2 class="contact-form-title">{{ section.settings.form_heading }}</h2>
-              {% endif %}
-              {% form 'contact', id: 'ContactForm', class: 'contact-form' %}
-                {% if form.posted_successfully? %}
-                  <div class="contact-success" role="alert">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <p>{{ 'contact.form.post_success' | t | default: "Thanks! We'll be in touch soon." }}</p>
-                  </div>
-                {% endif %}
-                {% if form.errors %}
-                  <div class="contact-errors" role="alert">
-                    {{ form.errors | default_errors }}
-                  </div>
-                {% endif %}
-
-                <div class="contact-field-row">
-                  <div class="contact-field">
-                    <label for="ContactForm-name" class="contact-label">
-                      {{- 'contact.form.name' | t | default: 'Full name' -}}
-                    </label>
-                    <input
-                      type="text"
-                      id="ContactForm-name"
-                      name="contact[name]"
-                      class="contact-input"
-                      autocomplete="name"
-                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-                      placeholder="{{ 'contact.form.name' | t | default: 'Your name' }}"
-                    >
-                  </div>
-                  <div class="contact-field">
-                    <label for="ContactForm-email" class="contact-label">
-                      {{ 'contact.form.email' | t | default: 'Email address' }}
-                      <span class="contact-required" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="ContactForm-email"
-                      name="contact[email]"
-                      class="contact-input"
-                      autocomplete="email"
-                      required
-                      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-                      placeholder="{{ 'contact.form.email' | t | default: 'you@example.com' }}"
-                    >
-                  </div>
-                </div>
-
-                <div class="contact-field-row">
-                  {% if section.settings.show_phone_field %}
-                    <div class="contact-field">
-                      <label for="ContactForm-phone" class="contact-label">
-                        {{- 'contact.form.phone' | t | default: 'Phone number' -}}
-                      </label>
-                      <input
-                        type="tel"
-                        id="ContactForm-phone"
-                        name="contact[phone]"
-                        class="contact-input"
-                        autocomplete="tel"
-                        value="{{ form.phone }}"
-                        placeholder="+92 300 000 0000"
-                      >
-                    </div>
-                  {% endif %}
-
-                  {% if section.settings.show_subject_field %}
-                    <div class="contact-field">
-                      <label for="ContactForm-subject" class="contact-label">
-                        {{- 'contact.form.subject' | t | default: 'Subject' -}}
-                      </label>
-                      <input
-                        type="text"
-                        id="ContactForm-subject"
-                        name="contact[subject]"
-                        class="contact-input"
-                        value="{{ form.subject }}"
-                        placeholder="{{ 'contact.form.subject_placeholder' | t | default: 'How can we help?' }}"
-                      >
-                    </div>
-                  {% endif %}
-                </div>
-
-                <div class="contact-field">
-                  <label for="ContactForm-body" class="contact-label">
-                    {{ 'contact.form.message' | t | default: 'Message' }}
-                    <span class="contact-required" aria-hidden="true">*</span>
-                  </label>
-                  <textarea
-                    id="ContactForm-body"
-                    name="contact[body]"
-                    class="contact-textarea"
-                    rows="6"
-                    required
-                    placeholder="{{ 'contact.form.message_placeholder' | t | default: 'Tell us a bit more...' }}"
-                  >{{ form.body }}</textarea>
-                </div>
-
-                <button type="submit" class="contact-submit">
+          <div class="contact-form-wrap">
+            {% if section.settings.form_heading != blank %}
+              <h2 class="contact-form-title">{{ section.settings.form_heading }}</h2>
+            {% endif %}
+            {% form 'contact', id: 'ContactForm', class: 'contact-form' %}
+              {% if form.posted_successfully? %}
+                <div class="contact-success" role="alert">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -278,145 +169,187 @@
                     stroke-linejoin="round"
                     aria-hidden="true"
                   >
-                    <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
-                  {{ section.settings.button_label | default: 'Send message' }}
-                </button>
-              {% endform %}
-            </div>
+                  <p>{{ 'contact.form.post_success' | t | default: "Thanks! We'll be in touch soon." }}</p>
+                </div>
+              {% endif %}
+              {% if form.errors %}
+                <div class="contact-errors" role="alert">
+                  {{ form.errors | default_errors }}
+                </div>
+              {% endif %}
 
-            {%- comment -%} MAP BLOCK {%- endcomment -%}
-            {% if section.settings.show_map %}
-              <div class="contact-map-wrap">
-                {% if section.settings.map_heading != blank %}
-                  <h2 class="contact-form-title">{{ section.settings.map_heading }}</h2>
+              <div class="contact-field-row">
+                <div class="contact-field">
+                  <label for="ContactForm-name" class="contact-label">
+                    {{- 'contact.form.name' | t | default: 'Full name' -}}
+                  </label>
+                  <input
+                    type="text"
+                    id="ContactForm-name"
+                    name="contact[name]"
+                    class="contact-input"
+                    autocomplete="name"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    placeholder="{{ 'contact.form.name' | t | default: 'Your name' }}"
+                  >
+                </div>
+                <div class="contact-field">
+                  <label for="ContactForm-email" class="contact-label">
+                    {{ 'contact.form.email' | t | default: 'Email address' }}
+                    <span class="contact-required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="ContactForm-email"
+                    name="contact[email]"
+                    class="contact-input"
+                    autocomplete="email"
+                    required
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    placeholder="{{ 'contact.form.email' | t | default: 'you@example.com' }}"
+                  >
+                </div>
+              </div>
+
+              <div class="contact-field-row">
+                {% if section.settings.show_phone_field %}
+                  <div class="contact-field">
+                    <label for="ContactForm-phone" class="contact-label">
+                      {{- 'contact.form.phone' | t | default: 'Phone number' -}}
+                    </label>
+                    <input
+                      type="tel"
+                      id="ContactForm-phone"
+                      name="contact[phone]"
+                      class="contact-input"
+                      autocomplete="tel"
+                      value="{{ form.phone }}"
+                      placeholder="+92 300 000 0000"
+                    >
+                  </div>
                 {% endif %}
 
-                {% if section.settings.google_maps_embed_url != blank %}
-                  <div class="contact-map-embed">
-                    <iframe
-                      src="{{ section.settings.google_maps_embed_url }}"
-                      width="100%"
-                      height="260"
-                      style="border:0;"
-                      allowfullscreen=""
-                      loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade"
-                      title="Store location map"
-                    ></iframe>
-                  </div>
-                {% else %}
-                  <div class="contact-map-placeholder" aria-hidden="true">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                {% if section.settings.show_subject_field %}
+                  <div class="contact-field">
+                    <label for="ContactForm-subject" class="contact-label">
+                      {{- 'contact.form.subject' | t | default: 'Subject' -}}
+                    </label>
+                    <input
+                      type="text"
+                      id="ContactForm-subject"
+                      name="contact[subject]"
+                      class="contact-input"
+                      value="{{ form.subject }}"
+                      placeholder="{{ 'contact.form.subject_placeholder' | t | default: 'How can we help?' }}"
                     >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <p>{{ section.settings.address_text }}</p>
-                  </div>
-                {% endif %}
-
-                {% if section.settings.address_text != blank %}
-                  <div class="contact-address-card">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <div>
-                      <p class="contact-address-main">{{ section.settings.address_text }}</p>
-                      {% if section.settings.landmark_text != blank %}
-                        <p class="contact-address-sub">{{ section.settings.landmark_text }}</p>
-                      {% endif %}
-                    </div>
                   </div>
                 {% endif %}
               </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
 
-      {%- comment -%} FAQ {%- endcomment -%}
-      {% for block in faq_blocks %}
-        <div class="contact-faq" {{ block.shopify_attributes }}>
-          <div class="page-width">
-            {% if block.settings.faq_heading != blank %}
-              <h2 class="contact-faq-title">
+              <div class="contact-field">
+                <label for="ContactForm-body" class="contact-label">
+                  {{ 'contact.form.message' | t | default: 'Message' }}
+                  <span class="contact-required" aria-hidden="true">*</span>
+                </label>
+                <textarea
+                  id="ContactForm-body"
+                  name="contact[body]"
+                  class="contact-textarea"
+                  rows="6"
+                  required
+                  placeholder="{{ 'contact.form.message_placeholder' | t | default: 'Tell us a bit more...' }}"
+                >{{ form.body }}</textarea>
+              </div>
+
+              <button type="submit" class="contact-submit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1.75"
+                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   aria-hidden="true"
                 >
-                  <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
-                {{ block.settings.faq_heading }}
-              </h2>
-            {% endif %}
-            <div class="faq-list">
-              {% assign faq_nums = '1,2,3' | split: ',' %}
-              {% for n in faq_nums %}
-                {% assign q_key = 'faq_' | append: n | append: '_q' %}
-                {% assign a_key = 'faq_' | append: n | append: '_a' %}
-                {% if block.settings[q_key] != blank %}
-                  <details
-                    class="faq-item"
-                    {% if n == '1' %}
-                      open
-                    {% endif %}
-                  >
-                    <summary class="faq-summary">
-                      {{ block.settings[q_key] }}
-                      <span class="faq-chevron" aria-hidden="true">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                      </span>
-                    </summary>
-                    {% if block.settings[a_key] != blank %}
-                      <div class="faq-answer">{{ block.settings[a_key] }}</div>
-                    {% endif %}
-                  </details>
-                {% endif %}
-              {% endfor %}
-            </div>
+                {{ section.settings.button_label | default: 'Send message' }}
+              </button>
+            {% endform %}
           </div>
+
+          {%- comment -%} MAP BLOCK {%- endcomment -%}
+          {% if section.settings.show_map %}
+            <div class="contact-map-wrap">
+              {% if section.settings.map_heading != blank %}
+                <h2 class="contact-form-title">{{ section.settings.map_heading }}</h2>
+              {% endif %}
+
+              {% if section.settings.google_maps_embed_url != blank %}
+                <div class="contact-map-embed">
+                  <iframe
+                    src="{{ section.settings.google_maps_embed_url }}"
+                    width="100%"
+                    height="260"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Store location map"
+                  ></iframe>
+                </div>
+              {% else %}
+                <div class="contact-map-placeholder" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <p>{{ section.settings.address_text }}</p>
+                </div>
+              {% endif %}
+
+              {% if section.settings.address_text != blank %}
+                <div class="contact-address-card">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <div>
+                    <p class="contact-address-main">{{ section.settings.address_text }}</p>
+                    {% if section.settings.landmark_text != blank %}
+                      <p class="contact-address-sub">{{ section.settings.landmark_text }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-      {% endfor %}
+      </div>
 
       {%- comment -%} SOCIAL LINKS {%- endcomment -%}
       {% if section.settings.show_social_links %}
@@ -429,85 +362,83 @@
         {% endif %}
         {% if has_social %}
           <div class="contact-social">
-            <div class="page-width">
-              <p class="contact-social-label">Find us on</p>
-              <div class="contact-social-links">
-                {% if section.settings.instagram_url != blank %}
-                  <a
-                    href="{{ section.settings.instagram_url }}"
-                    class="contact-social-link"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Instagram"
+            <p class="contact-social-label">Find us on</p>
+            <div class="contact-social-links">
+              {% if section.settings.instagram_url != blank %}
+                <a
+                  href="{{ section.settings.instagram_url }}"
+                  class="contact-social-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Instagram"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.75"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                    Instagram
-                  </a>
-                {% endif %}
-                {% if section.settings.facebook_url != blank %}
-                  <a
-                    href="{{ section.settings.facebook_url }}"
-                    class="contact-social-link"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Facebook"
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  Instagram
+                </a>
+              {% endif %}
+              {% if section.settings.facebook_url != blank %}
+                <a
+                  href="{{ section.settings.facebook_url }}"
+                  class="contact-social-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Facebook"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.75"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                    Facebook
-                  </a>
-                {% endif %}
-                {% if section.settings.whatsapp_number != blank %}
-                  <a
-                    href="https://wa.me/{{ section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}"
-                    class="contact-social-link"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="WhatsApp"
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                  Facebook
+                </a>
+              {% endif %}
+              {% if section.settings.whatsapp_number != blank %}
+                <a
+                  href="https://wa.me/{{ section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}"
+                  class="contact-social-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="WhatsApp"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.75"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    WhatsApp
-                  </a>
-                {% endif %}
-              </div>
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                  WhatsApp
+                </a>
+              {% endif %}
             </div>
           </div>
         {% endif %}
@@ -535,7 +466,7 @@
       "type": "checkbox",
       "id": "show_phone_field",
       "label": "Show phone field",
-      "default": false
+      "default": true
     },
     {
       "type": "checkbox",
@@ -605,7 +536,7 @@
       "type": "text",
       "id": "whatsapp_number",
       "label": "WhatsApp number (with country code)",
-      "placeholder": "+923001234567"
+      "placeholder": "+xxxxxxxxxxxx"
     },
     {
       "type": "header",
