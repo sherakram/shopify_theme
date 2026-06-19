@@ -71,43 +71,39 @@
         "label": "Letter spacing (em)",
         "default": "-0.02",
         "options": [
-          { 
-            "value": "-0.05", 
-            "label": "-0.05" 
+          {
+            "value": "-0.05",
+            "label": "-0.05"
           },
-          { 
-            "value": "-0.04", 
-            "label": "-0.04" 
+          {
+            "value": "-0.04",
+            "label": "-0.04"
           },
-          { 
-            "value": "-0.03", 
-            "label": "-0.03" 
+          {
+            "value": "-0.03",
+            "label": "-0.03"
           },
-          { 
-            "value": "-0.02", 
-            "label": "-0.02" 
+          {
+            "value": "-0.02",
+            "label": "-0.02"
           },
-          { 
-            "value": "-0.01", 
-            "label": "-0.01" 
+          {
+            "value": "-0.01",
+            "label": "-0.01"
           },
-          { 
+          {
             "value": "0",
-            "label": "0" 
+            "label": "0"
           },
-          { "value": "0.01",  
-            "label": "0.01" 
+          { "value": "0.01", "label": "0.01" },
+          { "value": "0.02", "label": "0.02" },
+          {
+            "value": "0.05",
+            "label": "0.05"
           },
-          { "value": "0.02",  
-            "label": "0.02" 
-          },
-          { 
-            "value": "0.05",  
-            "label": "0.05" 
-          },
-          { 
-            "value": "0.1",   
-            "label": "0.1" 
+          {
+            "value": "0.1",
+            "label": "0.1"
           }
         ]
       },
@@ -117,21 +113,21 @@
         "label": "Text letter case",
         "default": "uppercase",
         "options": [
-          { 
-            "value": "none",       
-            "label": "Default" 
+          {
+            "value": "none",
+            "label": "Default"
           },
-          { 
-            "value": "uppercase",  
-            "label": "Uppercase" 
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
           },
-          { 
-            "value": "lowercase",  
-            "label": "Lowercase" 
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
           },
-          { 
-            "value": "capitalize", 
-            "label": "Capitalize" 
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
           }
         ]
       },
@@ -141,17 +137,17 @@
         "label": "Word break",
         "default": "normal",
         "options": [
-          { 
-            "value": "normal",     
-            "label": "Normal" 
+          {
+            "value": "normal",
+            "label": "Normal"
           },
-          { 
-            "value": "break-all",  
-            "label": "All" 
+          {
+            "value": "break-all",
+            "label": "All"
           },
-          { 
-            "value": "break-word", 
-            "label": "Word" 
+          {
+            "value": "break-word",
+            "label": "Word"
           }
         ]
       },
@@ -181,45 +177,45 @@
         "label": "Letter spacing (em)",
         "default": "0",
         "options": [
-          { 
-            "value": "-0.05", 
-            "label": "-0.05" 
+          {
+            "value": "-0.05",
+            "label": "-0.05"
           },
-          { 
-            "value": "-0.04", 
-            "label": "-0.04" 
+          {
+            "value": "-0.04",
+            "label": "-0.04"
           },
-          { 
-            "value": "-0.03", 
-            "label": "-0.03" 
+          {
+            "value": "-0.03",
+            "label": "-0.03"
           },
-          { 
-            "value": "-0.02", 
-            "label": "-0.02" 
+          {
+            "value": "-0.02",
+            "label": "-0.02"
           },
-          { 
-            "value": "-0.01", 
-            "label": "-0.01" 
+          {
+            "value": "-0.01",
+            "label": "-0.01"
           },
-          { 
-            "value": "0",     
-            "label": "0" 
+          {
+            "value": "0",
+            "label": "0"
           },
-          { 
-            "value": "0.01",  
-            "label": "0.01" 
+          {
+            "value": "0.01",
+            "label": "0.01"
           },
-          { 
-            "value": "0.02",  
-            "label": "0.02" 
+          {
+            "value": "0.02",
+            "label": "0.02"
           },
-          { 
-            "value": "0.05",  
-            "label": "0.05" 
+          {
+            "value": "0.05",
+            "label": "0.05"
           },
-          { 
-            "value": "0.1",   
-            "label": "0.1" 
+          {
+            "value": "0.1",
+            "label": "0.1"
           }
         ]
       },
@@ -229,21 +225,21 @@
         "label": "Text letter case",
         "default": "none",
         "options": [
-          { 
-            "value": "none",       
-            "label": "Default" 
+          {
+            "value": "none",
+            "label": "Default"
           },
-          { 
-            "value": "uppercase",  
-            "label": "Uppercase" 
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
           },
-          { 
-            "value": "lowercase",  
-            "label": "Lowercase" 
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
           },
-          { 
-            "value": "capitalize", 
-            "label": "Capitalize" 
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
           }
         ]
       },
@@ -253,17 +249,17 @@
         "label": "Word break",
         "default": "normal",
         "options": [
-          { 
-            "value": "normal",     
-            "label": "Normal" 
+          {
+            "value": "normal",
+            "label": "Normal"
           },
-          { 
-            "value": "break-all",  
-            "label": "All" 
+          {
+            "value": "break-all",
+            "label": "All"
           },
-          { 
-            "value": "break-word", 
-            "label": "Word" 
+          {
+            "value": "break-word",
+            "label": "Word"
           }
         ]
       },
@@ -293,69 +289,69 @@
         "label": "Letter spacing (em)",
         "default": "0",
         "options": [
-          { 
-            "value": "-0.05", 
-            "label": "-0.05" 
+          {
+            "value": "-0.05",
+            "label": "-0.05"
           },
-          { 
-            "value": "-0.04", 
-            "label": "-0.04" 
+          {
+            "value": "-0.04",
+            "label": "-0.04"
           },
-          { 
-            "value": "-0.03", 
-            "label": "-0.03" 
+          {
+            "value": "-0.03",
+            "label": "-0.03"
           },
-          { 
-            "value": "-0.02", 
-            "label": "-0.02" 
+          {
+            "value": "-0.02",
+            "label": "-0.02"
           },
-          { 
-            "value": "-0.01", 
-            "label": "-0.01" 
+          {
+            "value": "-0.01",
+            "label": "-0.01"
           },
-          { 
-            "value": "0",     
-            "label": "0" 
+          {
+            "value": "0",
+            "label": "0"
           },
-          { 
-            "value": "0.01",  
-            "label": "0.01" 
+          {
+            "value": "0.01",
+            "label": "0.01"
           },
-          { 
-            "value": "0.02",  
-            "label": "0.02" 
+          {
+            "value": "0.02",
+            "label": "0.02"
           },
-          { 
-            "value": "0.05",  
-            "label": "0.05" 
+          {
+            "value": "0.05",
+            "label": "0.05"
           },
-          { 
-            "value": "0.1",   
-            "label": "0.1" 
+          {
+            "value": "0.1",
+            "label": "0.1"
           }
-       ]
-     },
-     {
+        ]
+      },
+      {
         "type": "select",
         "id": "type_body_text_case",
         "label": "Text letter case",
         "default": "none",
         "options": [
-          { 
-            "value": "none",       
-            "label": "Default" 
+          {
+            "value": "none",
+            "label": "Default"
           },
-          { 
-            "value": "uppercase",  
-            "label": "Uppercase" 
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
           },
-          { 
-            "value": "lowercase",  
-            "label": "Lowercase" 
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
           },
-          { 
-            "value": "capitalize", 
-            "label": "Capitalize" 
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
           }
         ]
       },
@@ -385,33 +381,33 @@
         "label": "Letter spacing (em)",
         "default": "0.05",
         "options": [
-          { 
-            "value": "-0.05", 
-            "label": "-0.05" 
+          {
+            "value": "-0.05",
+            "label": "-0.05"
           },
-          { 
-            "value": "-0.02", 
-            "label": "-0.02" 
+          {
+            "value": "-0.02",
+            "label": "-0.02"
           },
-          { 
-            "value": "0",     
-            "label": "0" 
+          {
+            "value": "0",
+            "label": "0"
           },
-          { 
-            "value": "0.01",  
-            "label": "0.01" 
+          {
+            "value": "0.01",
+            "label": "0.01"
           },
-          { 
-            "value": "0.02",  
-            "label": "0.02" 
+          {
+            "value": "0.02",
+            "label": "0.02"
           },
-          { 
-            "value": "0.05",  
-            "label": "0.05" 
+          {
+            "value": "0.05",
+            "label": "0.05"
           },
-          { 
-            "value": "0.1",   
-            "label": "0.1" 
+          {
+            "value": "0.1",
+            "label": "0.1"
           }
         ]
       },
@@ -421,21 +417,21 @@
         "label": "Text letter case",
         "default": "uppercase",
         "options": [
-          { 
-            "value": "none",       
-            "label": "Default" 
+          {
+            "value": "none",
+            "label": "Default"
           },
-          { 
-            "value": "uppercase",  
-            "label": "Uppercase" 
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
           },
-          { 
-            "value": "lowercase",  
-            "label": "Lowercase" 
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
           },
-          { 
-            "value": "capitalize", 
-            "label": "Capitalize" 
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
           }
         ]
       }
@@ -776,12 +772,12 @@
         "id": "badge_position",
         "label": "t:labels.badge_position",
         "options": [
-          { 
-            "value": "left", 
-            "label": "t:options.badge_position.top_left" 
+          {
+            "value": "left",
+            "label": "t:options.badge_position.top_left"
           },
-          { 
-            "value": "right", 
+          {
+            "value": "right",
             "label": "t:options.badge_position.top_right"
           }
         ],
@@ -792,17 +788,17 @@
         "id": "sale_badge_type",
         "label": "t:labels.sale_badge_type",
         "options": [
-          { 
-            "value": "percent", 
-            "label": "t:options.sale_badge_type.percentage" 
+          {
+            "value": "percent",
+            "label": "t:options.sale_badge_type.percentage"
           },
-          { 
-            "value": "text", 
-            "label": "t:options.sale_badge_type.text" 
+          {
+            "value": "text",
+            "label": "t:options.sale_badge_type.text"
           },
-          { 
-            "value": "save_amount", 
-            "label": "t:options.sale_badge_type.amount" 
+          {
+            "value": "save_amount",
+            "label": "t:options.sale_badge_type.amount"
           }
         ],
         "default": "percent"
@@ -853,24 +849,24 @@
         "id": "card_image_ratio",
         "label": "Card media ratio",
         "options": [
-          { 
-            "label": "t:options.image_ratio.auto", 
-            "value": "auto" 
+          {
+            "label": "t:options.image_ratio.auto",
+            "value": "auto"
           },
-          { 
-            "label": "t:options.image_ratio.square", 
-            "value": "1/1" 
+          {
+            "label": "t:options.image_ratio.square",
+            "value": "1/1"
           },
-          {  
-            "label": "t:options.image_ratio.portrait", 
-            "value": "3/4" 
+          {
+            "label": "t:options.image_ratio.portrait",
+            "value": "3/4"
           },
-          { 
-            "label": "t:options.image_ratio.landscape", 
-            "value": "4/5" 
+          {
+            "label": "t:options.image_ratio.landscape",
+            "value": "4/5"
           }
         ],
-          "default": "1/1"
+        "default": "1/1"
       },
       {
         "type": "header",
@@ -928,7 +924,7 @@
         "default": false
       },
       {
-        "type": "header", 
+        "type": "header",
         "content": "t:labels.media"
       },
       {
@@ -948,27 +944,27 @@
         "id": "image_ratio",
         "label": "t:labels.image_ratio",
         "options": [
-          { 
-            "label": "t:options.image_ratio.auto", 
-            "value": "auto" 
+          {
+            "label": "t:options.image_ratio.auto",
+            "value": "auto"
           },
-          { 
-            "label": "t:options.image_ratio.square", 
-            "value": "1/1" 
+          {
+            "label": "t:options.image_ratio.square",
+            "value": "1/1"
           },
-          {  
-            "label": "t:options.image_ratio.portrait", 
-            "value": "3/4" 
+          {
+            "label": "t:options.image_ratio.portrait",
+            "value": "3/4"
           },
-          { 
-            "label": "t:options.image_ratio.landscape", 
-            "value": "4/5" 
+          {
+            "label": "t:options.image_ratio.landscape",
+            "value": "4/5"
           }
         ],
-          "default": "1/1"
+        "default": "1/1"
       },
       {
-        "type": "header", 
+        "type": "header",
         "content": "t:general.quick_buy"
       },
       {
@@ -995,129 +991,129 @@
     "name": "t:names.cart",
     "settings": [
       {
-      "type": "header",
-      "content": "t:content.free_shipping_bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_free_shipping_bar",
-      "label": "t:labels.show_free_shipping_bar",
-      "default": true
-    },
-    {
-      "type": "number",
-      "id": "free_shipping_threshold",
-      "label": "t:labels.free_shipping_threshold",
-      "default": 100,
-      "info": "Enter the amount e.g. 100 for $100"
-    },
-    {
-      "type": "text",
-      "id": "free_shipping_progress_text",
-      "label": "t:labels.progress_message",
-      "default": "Add [amount] more for free shipping!",
-      "info": "Use where the remaining price should appear"
-    },
-    {
-      "type": "text",
-      "id": "free_shipping_achieved_text",
-      "label": "t:labels.achieved_message",
-      "default": "You've unlocked free shipping!"
-    },
+        "type": "header",
+        "content": "t:content.free_shipping_bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_free_shipping_bar",
+        "label": "t:labels.show_free_shipping_bar",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "t:labels.free_shipping_threshold",
+        "default": 100,
+        "info": "Enter the amount e.g. 100 for $100"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_progress_text",
+        "label": "t:labels.progress_message",
+        "default": "Add [amount] more for free shipping!",
+        "info": "Use where the remaining price should appear"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_achieved_text",
+        "label": "t:labels.achieved_message",
+        "default": "You've unlocked free shipping!"
+      },
 
-    {
-      "type": "header",
-      "content": "t:content.order_note"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_order_note",
-      "label": "t:labels.show_order_note",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "note_label",
-      "label": "t:labels.note_toggle",
-      "default": "Add a note to your order"
-    },
-    {
-      "type": "text",
-      "id": "note_placeholder",
-      "label": "t:labels.note_placeholder",
-      "default": "Special instructions, gift messages..."
-    },
+      {
+        "type": "header",
+        "content": "t:content.order_note"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_order_note",
+        "label": "t:labels.show_order_note",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "note_label",
+        "label": "t:labels.note_toggle",
+        "default": "Add a note to your order"
+      },
+      {
+        "type": "text",
+        "id": "note_placeholder",
+        "label": "t:labels.note_placeholder",
+        "default": "Special instructions, gift messages..."
+      },
 
-    {
-      "type": "header",
-      "content": "t:content.cart_actions"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_clear_cart",
-      "label": "t:labels.show_clear_cart",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "clear_cart_text",
-      "label": "t:labels.clear_cart_text",
-      "default": "Clear cart"
-    },
+      {
+        "type": "header",
+        "content": "t:content.cart_actions"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_clear_cart",
+        "label": "t:labels.show_clear_cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "clear_cart_text",
+        "label": "t:labels.clear_cart_text",
+        "default": "Clear cart"
+      },
 
-    {
-      "type": "header",
-      "content": "t:content.checkout"
-    },
-    {
-      "type": "checkbox",
-      "id": "hide_checkout_price",
-      "label": "t:labels.hide_checkout_price",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_continue_shopping_btn",
-      "label": "t:labels.show_continue_shopping_btn",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_taxes_note",
-      "label": "t:labels.show_taxes_note",
-      "default": true
-    },
+      {
+        "type": "header",
+        "content": "t:content.checkout"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_checkout_price",
+        "label": "t:labels.hide_checkout_price",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_continue_shopping_btn",
+        "label": "t:labels.show_continue_shopping_btn",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_taxes_note",
+        "label": "t:labels.show_taxes_note",
+        "default": true
+      },
 
-    {
-      "type": "header",
-      "content": "t:content.show_trust_badges"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_trust_badges",
-      "label": "t:labels.show_trust_badges",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_method",
-      "default": true
-    }
+      {
+        "type": "header",
+        "content": "t:content.show_trust_badges"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_trust_badges",
+        "label": "t:labels.show_trust_badges",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "t:labels.show_payment_method",
+        "default": true
+      }
     ]
   },
   {
     "name": "t:names.gift_card",
     "settings": [
-      { 
-        "type": "header", 
-        "content": "t:general.colors" 
+      {
+        "type": "header",
+        "content": "t:general.colors"
       },
       {
         "type": "color_scheme",
         "id": "gift_card_scheme",
         "label": "t:labels.color_scheme",
-        "default": "scheme-1",
+        "default": "scheme-1"
       },
       {
         "type": "header",
@@ -1180,113 +1176,127 @@
     ]
   },
   {
-  "name": "t:general.social_media_icons",
-  "settings": [
-      { 
-        "type": "checkbox", 
-        "id": "show_social_icons", 
-        "label": "t:labels.show_social_icons", 
-        "default": true 
+    "name": "t:general.social_media_icons",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_social_icons",
+        "label": "t:labels.show_social_icons",
+        "default": true
       },
-      { 
-        "type": "select", 
-        "id": "social_icon_style", 
-        "label": "t:labels.icon_style", 
-        "default": "mono",
+      {
+        "type": "select",
+        "id": "social_icon_display",
+        "label": "t:labels.display_style",
+        "default": "icon_only",
         "options": [
           { 
-            "value": "mono", 
-            "label": "t:labels.monochrome_color" 
+            "value": "icon_only", 
+            "label": "t:labels.icon_only" 
           },
           { 
-            "value": "brand", 
-            "label": "t:labels.brand_colors" 
+            "value": "icon_text", 
+            "label": "t:labels.icon_and_text" 
           }
-       ]
+        ]
       },
-      { 
-        "type": "range", 
-        "id": "social_icon_size", 
-        "label": "t:labels.icon_size", 
-        "min": 14, 
-        "max": 36, 
-        "step": 2, 
-        "unit": "px", 
-        "default": 18 
+      {
+        "type": "range",
+        "id": "social_icon_size",
+        "label": "t:labels.icon_size",
+        "min": 14,
+        "max": 36,
+        "step": 2,
+        "unit": "px",
+        "default": 18
       },
-      { 
-        "type": "range", 
-        "id": "social_icon_gap", 
-        "label": "t:labels.icon_gap", 
-        "min": 4, 
-        "max": 24, 
-        "step": 2, 
-        "unit": "px", 
-        "default": 10 
+      {
+        "type": "range",
+        "id": "social_icon_gap",
+        "label": "t:labels.icon_gap",
+        "min": 4,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 10
       },
-      { 
-        "type": "range", 
-        "id": "social_icon_radius", 
-        "label": "t:labels.icon_corner_radius", 
-        "min": 0, 
-        "max": 12, 
-        "step": 2, 
-        "unit": "px", 
-        "default": 6 
+      {
+        "type": "range",
+        "id": "social_icon_radius",
+        "label": "t:labels.icon_corner_radius",
+        "min": 0,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "default": 6
       },
-      { 
-        "type": "color", 
-        "id": "social_icon_color", 
-        "label": "t:labels.monochrome", 
-        "default": "#222222" 
+      {
+        "type": "color",
+        "id": "social_icon_color",
+        "label": "t:labels.monochrome",
+        "default": "#222222",
+        "visible_if": "{{ settings.social_icon_style == 'mono' }}"
       },
-      { 
-        "type": "color", 
-        "id": "social_icon_hover_color", 
-        "label": "t:labels.hover_color", 
-        "default": "#000000" 
+      {
+        "type": "color",
+        "id": "social_icon_hover_color",
+        "label": "t:labels.hover_color",
+        "default": "#000000",
+        "visible_if": "{{ settings.social_icon_style == 'mono' }}"
       },
-      { 
-        "type": "text", 
-        "id": "social_facebook_url", 
-        "label": "t:labels.facebook_url", 
-        "placeholder": "https://facebook.com/shopify" 
+      {
+        "type": "header",
+        "content": "t:labels.social_links"
       },
-      { 
-        "type": "text", 
-        "id": "social_instagram_url", 
-        "label": "t:labels.instagram_url", 
-        "placeholder": "https://Instagram.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_facebook_url",
+        "label": "t:labels.facebook_url"
       },
-      { 
-        "type": "text", 
-        "id": "social_twitter_url", 
-        "label": "t:labels.twitter_url", 
-        "placeholder": "https://Twitter.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_instagram_url",
+        "label": "t:labels.instagram_url"
       },
-      { 
-        "type": "text", 
-        "id": "social_youtube_url", 
-        "label": "t:labels.youtube_url", 
-        "placeholder": "https://YouTube.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_twitter_url",
+        "label": "t:labels.twitter_url"
       },
-      { 
-        "type": "text", 
-        "id": "social_linkedin_url", 
-        "label": "t:labels.linkedin_url", 
-        "placeholder": "https://LinkedIn.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_youtube_url",
+        "label": "t:labels.youtube_url"
       },
-      { 
-        "type": "text", 
-        "id": "social_pinterest_url", 
-        "label": "t:labels.pinterest_url", 
-        "placeholder": "https://Pinterest.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_linkedin_url",
+        "label": "t:labels.linkedin_url"
       },
-      { 
-        "type": "text", 
-        "id": "social_tiktok_url", 
-        "label": "t:labels.tiktok_url", 
-        "placeholder": "https://TikTok.com/shopify" 
+      {
+        "type": "url",
+        "id": "social_pinterest_url",
+        "label": "t:labels.pinterest_url"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_url",
+        "label": "t:labels.tiktok_url"
+      },
+      {
+        "type": "url",
+        "id": "social_snapchat_url",
+        "label": "t:labels.snapchat_url"
+      },
+      {
+        "type": "url",
+        "id": "social_tumblr_url",
+        "label": "t:labels.tumblr_url"
+      },
+      {
+        "type": "url",
+        "id": "social_vimeo_url",
+        "label": "t:labels.vimeo_url"
       }
     ]
   }

@@ -116,6 +116,15 @@
   align-items: start;
 }
 
+.contact-form-grid--single {
+  display: block;
+}
+
+.contact-form-grid--single .contact-form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
 .contact-form-title {
   font-size: calc(1rem * var(--font-heading--scale));
   color: var(--color-foreground);
@@ -313,7 +322,7 @@
   margin: 0 0 12px;
 }
 
-.contact-social-links {
+/* .contact-social-links {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -335,7 +344,7 @@
 .contact-social-link:hover {
   color: var(--color-foreground);
   border-color: var(--color-foreground);
-}
+} */
 
 @media (max-width: 989px) {
   .contact-hero-inner {

@@ -147,7 +147,7 @@
 
       {%- comment -%} FORM + MAP {%- endcomment -%}
       <div class="contact-form-section">
-        <div class="contact-form-grid">
+        <div class="contact-form-grid{% unless section.settings.show_map %} contact-form-grid--single{% endunless %}">
           {%- comment -%} CONTACT FORM {%- endcomment -%}
 
           <div class="contact-form-wrap">
@@ -364,7 +364,10 @@
           <div class="contact-social">
             <p class="contact-social-label">Find us on</p>
             <div class="contact-social-links">
-              {% if section.settings.instagram_url != blank %}
+
+              {% render 'social-icons' %}
+
+              {% comment %} {% if section.settings.instagram_url != blank %}
                 <a
                   href="{{ section.settings.instagram_url }}"
                   class="contact-social-link"
@@ -438,7 +441,8 @@
                   </svg>
                   WhatsApp
                 </a>
-              {% endif %}
+              {% endif %} {% endcomment %}
+               
             </div>
           </div>
         {% endif %}
