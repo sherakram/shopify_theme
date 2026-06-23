@@ -1234,15 +1234,13 @@
         "type": "color",
         "id": "social_icon_color",
         "label": "t:labels.monochrome",
-        "default": "#222222",
-        "visible_if": "{{ settings.social_icon_style == 'mono' }}"
+        "default": "#222222"
       },
       {
         "type": "color",
         "id": "social_icon_hover_color",
         "label": "t:labels.hover_color",
-        "default": "#000000",
-        "visible_if": "{{ settings.social_icon_style == 'mono' }}"
+        "default": "#000000"
       },
       {
         "type": "header",

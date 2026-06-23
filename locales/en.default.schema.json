@@ -64,6 +64,31 @@
     "contact_form": "Contact Form"
   },
 
+  "blocks": {
+    "names": {
+      "hero_text": "Hero — Heading & text",
+      "info_card": "Info card",
+      "content": "Content"
+    },
+    "labels": {
+      "badge_label": "Badge label",
+      "heading": "Heading",
+      "subtext": "Subtext",
+      "icon": "Icon",
+      "title": "Title",
+      "value": "Value"
+    },
+    "options": {
+      "email_label": "Email",
+      "phone_label": "Phone",
+      "hours_label": "Hours",
+      "location_label": "Location",
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    }
+  },
+
   "settings": {
     "background": "Background",
     "headings": "Headings",
@@ -99,6 +124,7 @@
     "gift_card": "Gift card",
     "gift_card_settings": "Gift card settings",
     "navigation": "Navigation",
+    "contact_page": "Contact page",
     "footer": "Footer"
   },
 
@@ -238,7 +264,19 @@
     "show_payment_method": "Show Payment Method Icons",
     "empty_cart_heading": "Empty Cart Heading",
     "empty_cart_sub_text": "Empty Cart Sub-text",
-    "continue_shopping": "Continue shopping"
+    "continue_shopping": "Continue shopping",
+    "title_gap": "Title gap",
+    "form_heading": "Form heading",
+    "show_phone_field": "Show phone field",
+    "show_subject_field": "Show subject field",
+    "form_button_label": "Button label",
+    "map_address": "Map & address",
+    "show_map_address": "Show Map & Address",
+    "map_heading": "Heading",
+    "address": "Address",
+    "land_info": "Landmark / extra info",
+    "google_maps_embed_url": "Google Maps embed URL",
+    "show_social_links": "Show social links"
   },
   "content":{
     "section_settings": "Section settings",
@@ -247,7 +285,9 @@
     "order_note": "Order Note",
     "cart_actions": "Cart Actions",
     "checkout": "Checkout",
-    "show_trust_badges": "Trust & Payment"
+    "show_trust_badges": "Trust & Payment",
+    "contact_form": "Contact form",
+    "social_links": "Social links"
   },
 
   "options": {
