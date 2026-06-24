@@ -1,6 +1,10 @@
-.blog-banner {
-  background: linear-gradient(135deg, #f9fafb, #ffffff);
-  padding: 40px 20px;
+.blog-wrapper {
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+
+.main-blog {
+  width: 100%;
 }
 
 .title {
@@ -25,8 +29,6 @@
   grid-template-columns: repeat(var(--grid-cards-columns-desktop), 1fr);
   column-gap: var(--grid-cards-column-gap);
   row-gap: var(--grid-cards-row-gap);
-  padding-top: var(--padding-top);
-  padding-bottom: var(--padding-bottom);
   box-sizing: border-box;
 }
 

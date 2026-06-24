@@ -276,7 +276,12 @@
     "address": "Address",
     "land_info": "Landmark / extra info",
     "google_maps_embed_url": "Google Maps embed URL",
-    "show_social_links": "Show social links"
+    "show_social_links": "Show social links",
+    "show_excerpt": "Show excerpt",
+    "show_date": "Show date",
+    "show_author": "Show author",
+    "author_icon": "Author icon",
+    "content_align": "Content alignment"
   },
   "content":{
     "section_settings": "Section settings",
@@ -287,7 +292,9 @@
     "checkout": "Checkout",
     "show_trust_badges": "Trust & Payment",
     "contact_form": "Contact form",
-    "social_links": "Social links"
+    "social_links": "Social links",
+    "general": "General",
+    "card_article": "Card article"
   },
 
   "options": {
@@ -377,7 +384,7 @@
       },
       "color_scheme": "Color scheme",
       "section_width": "Section width",
-      "section_id": "Section ID (for anchor links)"
+      "section_id": "Section ID"
     }
   }
 }
