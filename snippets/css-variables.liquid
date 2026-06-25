@@ -56,7 +56,6 @@
     {%- comment -%} Width {%- endcomment -%}
     --page-width: {{ settings.max_page_width | default: '1400px' }};
     --page-spacing: {{ settings.page_spacing | default: 20 }}px;
-    --style-border-radius: {{ settings.corner_radius }}px;
     
     {%- comment -%} Color schemes {%- endcomment -%}
     {% for scheme in settings.color_schemes %}
@@ -110,6 +109,7 @@
     {% endfor %}
 
     /* Cards Settings */
+    --style-border-radius: {{ settings.corner_radius }}px;
     --card-media-ratio: {{ settings.card_image_ratio }};
     --card-shadow-opacity: {{ settings.card_shadow_opacity  | divided_by: 100.0 }};
     --card-shadow-horizontal-offset: {{ settings.card_horizontal_offset }}px;

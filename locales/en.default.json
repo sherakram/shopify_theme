@@ -64,6 +64,9 @@
     "pagination_label": "Pagination"
   },
   "blog": {
+    "featured": "Featured",
+    "all": "All",
+    "no_articles_found": "No articles found",
     "article_comments": "Comments",
     "article_metadata_html": "{{ date }} by {{ author }}",
     "comment_form_body": "Comment",

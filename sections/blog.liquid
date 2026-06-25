@@ -1,6 +1,6 @@
 {{ 'blog.css' | asset_url | stylesheet_tag }}
 
-{% liquid
+{% comment %} {% liquid
   assign scheme = section.settings.blog_color_scheme
   assign articles_per_page = section.settings.articles_per_page
 %}
@@ -207,6 +207,331 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
+    }
+  ]
+}
+{% endschema %} {% endcomment %}
+
+
+{% liquid
+  assign show_hero = false
+  assign scheme = section.settings.blog_color_scheme
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign posts_per_page = section.settings.posts_per_page
+%}
+
+{% style %}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .section-{{ section.id }} .blog-grid {
+    --blog-columns: {{ section.settings.columns_desktop }};
+  }
+{% endstyle %}
+
+{% comment %} Hero only shows on the unfiltered ("All") view {% endcomment %}
+{% if section.settings.show_featured_post and blog.articles.size > 0 %}
+  {% unless current_tags %}
+    {% assign show_hero = true %}
+  {% endunless %}
+{% endif %}
+
+<div
+  class="blog-wrapper section-{{ section.id }} color-{{ scheme }}"
+  data-blog-section
+  data-section-id="{{ section.id }}"
+  data-blog-url="{{ blog.url }}"
+>
+  <div class="page-width">
+
+    {% if heading != blank %}
+      <div class="blog-header">
+        <h1 class="blog-header__heading">{{ section.settings.heading }}</h1>
+        {% if subheading != blank %}
+          <p class="blog-header__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% comment %} Visually-hidden live region for AJAX a11y announcements {% endcomment %}
+    <div class="blog-visually-hidden" aria-live="polite" data-blog-status></div>
+
+    {% if show_hero %}
+      {% assign featured_article = blog.articles.first %}
+      <a href="{{ featured_article.url }}" class="blog-hero" aria-label="{{ featured_article.title | escape }}">
+        <div class="blog-hero__media">
+          {% if featured_article.image %}
+            <img
+              class="blog-hero__image"
+              src="{{ featured_article.image | image_url: width: 1600 }}"
+              srcset="
+                {{ featured_article.image | image_url: width: 800 }} 800w,
+                {{ featured_article.image | image_url: width: 1200 }} 1200w,
+                {{ featured_article.image | image_url: width: 1600 }} 1600w
+              "
+              sizes="100vw"
+              alt="{{ featured_article.image.alt | default: featured_article.title | escape }}"
+              width="{{ featured_article.image.width }}"
+              height="{{ featured_article.image.height }}"
+              loading="eager"
+              fetchpriority="high"
+            >
+          {% else %}
+            <div class="blog-hero__placeholder">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="blog-hero__content">
+          <span class="blog-hero__badge">{{ 'blog.featured' | t }}</span>
+          {% if featured_article.tags.size > 0 %}
+            <span class="blog-hero__tag">{{ featured_article.tags.first }}</span>
+          {% endif %}
+          <h2 class="blog-hero__title">{{ featured_article.title }}</h2>
+          {% if section.settings.show_excerpt %}
+            <p class="blog-hero__excerpt">
+              {% if featured_article.excerpt.size > 0 %}
+                {{ featured_article.excerpt | strip_html | truncatewords: 35 }}
+              {% else %}
+                {{ featured_article.content | strip_html | truncatewords: 35 }}
+              {% endif %}
+            </p>
+          {% endif %}
+          {% if section.settings.show_author or section.settings.show_date %}
+            <div class="blog-hero__meta">
+              {% if section.settings.show_author %}
+                <span class="blog-hero__author">{{ featured_article.author }}</span>
+              {% endif %}
+              {% if section.settings.show_author and section.settings.show_date %}
+                <span class="blog-hero__divider" aria-hidden="true">&middot;</span>
+              {% endif %}
+              {% if section.settings.show_date %}
+                <time datetime="{{ featured_article.published_at | date: '%Y-%m-%d' }}">
+                  {{ featured_article.published_at | date: '%B %d, %Y' }}
+                </time>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </a>
+    {% endif %}
+
+    {% if section.settings.show_filter and blog.all_tags.size > 0 %}
+      <div class="blog-filter" data-blog-filter role="group" aria-label="Filter articles by tag">
+        <button
+          type="button"
+          class="blog-filter__pill{% unless current_tags %} is-active{% endunless %}"
+          data-tag=""
+          aria-pressed="{% if current_tags %}false{% else %}true{% endif %}"
+        >
+          {{ 'blog.all' | t }}
+        </button>
+        {% for tag in blog.all_tags %}
+          <button
+            type="button"
+            class="blog-filter__pill{% if current_tags contains tag %} is-active{% endif %}"
+            data-tag="{{ tag | escape }}"
+            aria-pressed="{% if current_tags contains tag %}true{% else %}false{% endif %}"
+          >
+            {{ tag }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% paginate blog.articles by posts_per_page %}
+
+      {% if blog.articles.size > 0 %}
+        <div class="blog-grid" data-blog-grid>
+          {% for article in blog.articles %}
+            {% unless show_hero and forloop.first and paginate.current_page == 1 %}
+              {% render 'blog-card',
+                article: article,
+                show_excerpt: section.settings.show_excerpt,
+                show_author: section.settings.show_author,
+                show_date: section.settings.show_date,
+                show_tags: section.settings.show_tags_on_card
+              %}
+            {% endunless %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="blog-empty">
+          <p>
+            {{ 'blog.no_articles_found' | t }}{% if current_tags %} for "{{ current_tags | join: ', ' }}"{% endif %}.
+          </p>
+        </div>
+      {% endif %}
+
+      <div class="blog-load-more" data-load-more-wrapper>
+        {% if paginate.next %}
+          <button
+            type="button"
+            class="button button--secondary blog-load-more__button"
+            data-load-more-button
+            data-next-url="{{ paginate.next.url }}"
+          >
+            <span class="blog-load-more__text">Load more</span>
+            <span class="blog-load-more__spinner" aria-hidden="true"></span>
+          </button>
+        {% endif %}
+      </div>
+
+    {% endpaginate %}
+
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": {{ blog.title | json }},
+    "url": {{ blog.url | prepend: request.origin | json }},
+    "blogPost": [
+      {% for article in blog.articles limit: 10 %}
+        {
+          "@type": "BlogPosting",
+          "headline": {{ article.title | json }},
+          "url": {{ article.url | prepend: request.origin | json }},
+          "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
+          "author": {
+            "@type": "Person",
+            "name": {{ article.author | json }}
+          }
+          {% if article.image %},
+          "image": {{ article.image | image_url: width: 1200 | json }}
+          {% endif %}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+</script>
+
+<script src="{{ 'blog.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "t:general.blog",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["blog"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.blog_heading",
+      "default": "From the blog"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:labels.blog_subheading"
+    },
+    {
+      "type": "header",
+      "content": "t:content.featured_post"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_post",
+      "label": "t:labels.show_featured_post",
+      "info": "t:informative_content.featured_post_info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.blog_filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter",
+      "label": "t:labels.show_tag_filter",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.card_content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "t:labels.show_excerpt",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:labels.show_author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:labels.show_date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags_on_card",
+      "label": "t:labels.show_tag_on_card",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.blog_card_layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "t:labels.columns_on_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "label": "t:labels.articles_per_page",
+      "min": 4,
+      "max": 20,
+      "step": 4,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:content.section_settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "blog_color_scheme",
+      "label": "t:sections.all.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
     }
   ]
 }

@@ -281,7 +281,14 @@
     "show_date": "Show date",
     "show_author": "Show author",
     "author_icon": "Author icon",
-    "content_align": "Content alignment"
+    "show_tag_on_card": "Show tag on card",
+    "content_align": "Content alignment",
+    "blog_heading": "Heading",
+    "blog_subheading": "Subheading",
+    "show_featured_post": "Show featured post",
+    "show_tag_filter": "Show tag filter pills",
+    "columns_on_desktop": "Columns on desktop",
+    "articles_per_page": "Articles per page"
   },
   "content":{
     "section_settings": "Section settings",
@@ -294,7 +301,10 @@
     "contact_form": "Contact form",
     "social_links": "Social links",
     "general": "General",
-    "card_article": "Card article"
+    "card_content": "Card content",
+    "featured_post": "Featured post",
+    "blog_filters": "Filtering",
+    "blog_card_layout": "Layout"
   },
 
   "options": {
@@ -373,7 +383,8 @@
     "favicon_info": "Displayed at 32 x 32px",
     "info_about_thumbs": "On mobile, thumbnails are horizontal and below the main image.",
     "color_scheme_info": "Editing this scheme's colors will affect all sections using this scheme.",
-    "custom_css_info": "Add custom CSS to this section. Access section class with .section-{{ id }}."
+    "custom_css_info": "Add custom CSS to this section. Access section class with .section-{{ id }}.",
+    "featured_post_info": "Shows the most recent article as a large hero card. Automatically hidden when a tag filter is active."
   },
 
   "sections": {
