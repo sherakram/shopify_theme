@@ -7,6 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
   "sections": {
     "main": {
@@ -15,21 +16,17 @@
         "featured_image": {
           "type": "featured_image",
           "settings": {
-            "image_height": "large"
+            "aspect_ratio": "landscape"
           }
         },
         "title": {
           "type": "title",
           "settings": {
-            "title_align": "left"
-          }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share",
-            "share_bg": "#f7f7f8",
-            "share_dc": "#eee"
+            "title_align": "left",
+            "show_date": true,
+            "show_author": true,
+            "show_reading_time": true,
+            "show_tags": true
           }
         },
         "content": {
@@ -37,19 +34,30 @@
           "settings": {
             "enable_dropcap": true
           }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "share_alignment": "flex-start"
+          }
         }
       },
       "block_order": [
         "featured_image",
         "title",
-        "share",
-        "content"
+        "content",
+        "share"
       ],
       "settings": {
-        "enabled_image": true,
-        "enabled_auth": true,
-        "enabled_date": true,
-        "enabled_title": true
+        "header_layout": "stacked",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "show_prev_next": true,
+        "enable_comments": true,
+        "comment_corner_radius": 8,
+        "enable_comment_shadow": true
       }
     }
   },
