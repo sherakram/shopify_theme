@@ -32,7 +32,7 @@
         "content": {
           "type": "content",
           "settings": {
-            "enable_dropcap": true
+            "enable_dropcap": false
           }
         },
         "share": {
@@ -56,7 +56,6 @@
         "padding_bottom": 36,
         "show_prev_next": true,
         "enable_comments": true,
-        "comment_corner_radius": 8,
         "enable_comment_shadow": true
       }
     }
