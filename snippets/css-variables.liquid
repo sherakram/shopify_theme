@@ -56,13 +56,6 @@
     {%- comment -%} Width {%- endcomment -%}
     --page-width: {{ settings.max_page_width | default: '1400px' }};
     --page-spacing: {{ settings.page_spacing | default: 20 }}px;
-    --page-padding:20px;
-    --page-width:1400px;
-    --container-xs:480px;
-    --container-sm:720px;
-    --container-md:960px;
-    --container-lg:1200px;
-    --container-xl:1400px;
     
     {%- comment -%} Color schemes {%- endcomment -%}
     {% for scheme in settings.color_schemes %}

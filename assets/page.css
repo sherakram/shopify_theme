@@ -8,12 +8,6 @@
   width: 100%;
 }
 
-.main-page .page-width {
-  max-width: 780px;
-  margin-inline: auto;
-  padding-inline: 24px;
-}
-
 .main-page-title {
   font-family: var(--font-heading--family);
   font-weight: var(--font-heading--weight);
@@ -120,10 +114,6 @@
 }
 
 @media (max-width: 600px) {
-  .main-page .page-width {
-    padding-inline: 16px;
-  }
-
   .main-page-title {
     font-size: clamp(1.5rem, 6vw, calc(2rem * var(--font-heading--scale)));
   }

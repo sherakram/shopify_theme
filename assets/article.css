@@ -36,7 +36,7 @@
 
 /* Title + meta */
 .article-head {
-  padding: 1rem 0;
+  padding-block: 1rem;
 }
 
 .article-head.is-overlay {
@@ -128,7 +128,7 @@
 .main-content {
   font-size: 1.05rem;
   line-height: 1.85;
-  padding: 2rem 0;
+  padding-block: 2rem;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -141,7 +141,7 @@
 }
 
 .social-sharing {
-  padding: 2rem 0;
+  padding-block: 2rem;
 }
 
 /* Prev / Next navigation */
@@ -149,7 +149,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 2rem 0;
+  padding-block: 2rem;
 }
 
 .article-pagination__link {
@@ -202,7 +202,7 @@
 
 /* Comments */
 .article-comments-wrapper {
-  padding: 2rem 0;
+  padding-block: 2rem;
   border-top: 1px solid var(--color-border);
 }
 

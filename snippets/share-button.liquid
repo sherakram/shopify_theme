@@ -8,8 +8,7 @@
 <div class="share-bar" style="--share-justify: {{ block.settings.share_alignment }};">
   <span class="share-label">{{ block.settings.share_label }}</span>
 
-  <a
-    class="share-btn"
+  <a class="share-btn"
     href="https://twitter.com/intent/tweet?url={{ share_url | url_param_escape }}&text={{ share_title }}"
     target="_blank"
     rel="noopener"
@@ -19,8 +18,7 @@
       <path fill="currentColor" fill-rule="evenodd" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z" clip-rule="evenodd"/>
     </svg>
   </a>
-  <a
-    class="share-btn"
+  <a class="share-btn"
     href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_param_escape }}"
     target="_blank"
     rel="noopener"
@@ -30,8 +28,7 @@
       <path fill="currentColor" d="M18 10.049C18 5.603 14.419 2 10 2s-8 3.603-8 8.049C2 14.067 4.925 17.396 8.75 18v-5.624H6.719v-2.328h2.03V8.275c0-2.017 1.195-3.132 3.023-3.132.874 0 1.79.158 1.79.158v1.98h-1.009c-.994 0-1.303.621-1.303 1.258v1.51h2.219l-.355 2.326H11.25V18c3.825-.604 6.75-3.933 6.75-7.951"/>
     </svg>
   </a>
-  <a
-    class="share-btn"
+  <a class="share-btn"
     href="https://pinterest.com/pin/create/button/?url={{ share_url | url_param_escape }}&media={{ article.image | image_url: width: 1200 }}&description={{ share_title }}"
     target="_blank"
     rel="noopener"

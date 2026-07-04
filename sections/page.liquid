@@ -13,25 +13,23 @@
 
 <div class="page-wrapper color-{{ scheme }}" id="page-{{ section.id }}">
   <div class="main-page">
-    <div class="page-width">
-    {% for block in section.blocks %}
-      {% case block.type %}
-        {% when 'title' %}
-          <h1
-            class="main-page-title"
-            style="margin-bottom: {{ section.settings.title_gap }}px; --text-align:{{ block.settings.title_alignment }};"
-          >
-            {{ page.title | escape }}
-          </h1>
-        {% when 'content' %}
-          <div class="page-content">
-            {{ page.content }}
-          </div>
-        {% else %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'title' %}
+            <h1
+              class="main-page-title page-width--narrow"
+              style="margin-bottom: {{ section.settings.title_gap }}px; --text-align:{{ block.settings.title_alignment }};"
+            >
+              {{ page.title | escape }}
+            </h1>
+          {% when 'content' %}
+            <div class="page-content page-width--narrow">
+              {{ page.content }}
+            </div>
+          {% else %}
 
-      {% endcase %}
-    {% endfor %}
-    </div>
+        {% endcase %}
+      {% endfor %}
   </div>
 </div>
 

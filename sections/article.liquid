@@ -1,7 +1,6 @@
 {{ 'article.css' | asset_url | stylesheet_tag }}
 
 {% liquid
-  assign section_width = section.settings.section_width
   assign has_image_block = false
   for block in section.blocks
     if block.type == 'featured_image'
@@ -46,7 +45,7 @@
           </div>
 
         {% when 'title' %}
-          <header class="article-head page-width {{section_width}} title-align-{{ block.settings.title_align }}{% if overlay_mode %} is-overlay{% endif %}">
+          <header class="article-head page-width--narrow title-align-{{ block.settings.title_align }}{% if overlay_mode %} is-overlay{% endif %}">
             {% if block.settings.show_tags and article.tags.size > 0 %}
               <div class="article-tags">
                 {% for tag in article.tags limit: 5 %}
@@ -106,19 +105,19 @@
           </header>
 
         {% when 'content' %}
-          <div class="main-content{% if block.settings.enable_dropcap %} dropcap{% endif %} page-width {{section_width}}">
+          <div class="main-content{% if block.settings.enable_dropcap %} dropcap{% endif %} page-width--narrow">
             {{ article.content }}
           </div>
 
         {% when 'share' %}
-          <div class="social-sharing page-width {{section_width}}">
+          <div class="social-sharing page-width--narrow">
             {% render 'share-button', block: block, article: article %}
           </div>
       {% endcase %}
     {% endfor %}
 
     {% if section.settings.show_prev_next and blog.previous_article or blog.next_article %}
-      <nav class="article-pagination page-width {{section_width}}" aria-label="Article navigation">
+      <nav class="article-pagination page-width--narrow" aria-label="Article navigation">
         {% if blog.previous_article %}
           <a class="article-pagination__link prev" href="{{ blog.previous_article.url }}">
             <span class="article-pagination__label">Previous</span>
@@ -135,7 +134,7 @@
     {% endif %}
 
     {% if section.settings.enable_comments and blog.comments_enabled? %}
-      <div class="article-comments-wrapper page-width {{section_width}}">
+      <div class="article-comments-wrapper page-width--narrow">
         {% paginate article.comments by 5 %}
           {% if article.comments_count > 0 %}
             <h2>{{ 'blog.article_comments' | t }}</h2>
@@ -250,8 +249,14 @@
       "id": "header_layout",
       "label": "Header layout",
       "options": [
-        { "value": "stacked", "label": "Classic (image, then title)" },
-        { "value": "overlay", "label": "Overlay (title on image)" }
+        { 
+          "value": "stacked", 
+          "label": "Classic (image, then title)" 
+        },
+        { 
+          "value": "overlay", 
+          "label": "Overlay (title on image)" 
+        }
       ],
       "default": "stacked",
       "info": "Overlay only applies when the Featured Image block sits above the Title block, and only when an image is set."
@@ -279,38 +284,6 @@
     {
       "type": "header",
       "content": "t:content.section_settings"
-    },
-    {
-      "type": "select",
-      "id": "section_width",
-      "label": "Section width",
-      "options": [
-        {
-          "value": "page-width--xs",
-          "label": "Extra Small"
-        },
-        {
-          "value": "page-width--sm",
-          "label": "Small"
-        },
-        {
-          "value": "page-width--md",
-          "label": "Medium"
-        },
-        {
-          "value":"page-width--lg",
-          "label":"Large"
-        },
-        {
-          "value":"page-width--xl",
-          "label":"Extra Large"
-        },
-        {
-          "value":"page-width--full",
-          "label":"Full Width"
-        }
-      ],
-      "default": "page-width--sm"
     },
     {
       "type": "color_scheme",

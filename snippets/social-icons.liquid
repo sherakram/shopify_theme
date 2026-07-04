@@ -21,8 +21,7 @@
   {%- if has_any_social -%}
     {{ 'social-icons.css' | asset_url | stylesheet_tag }}
 
-    <div
-      class="social-icons social-icons--{{ display_mode }}"
+    <div class="social-icons social-icons--{{ display_mode }}"
       style="
         --social-icon-size: {{ icon_size }}px;
         --social-icon-gap: {{ icon_gap }}px;
