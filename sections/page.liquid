@@ -6,13 +6,13 @@
 
 {%- style -%}
   #page-{{ section.id }} {
-    --pt: {{ section.settings.padding_top }}px;
-    --pb: {{ section.settings.padding_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 {%- endstyle -%}
 
-<div class="page-wrapper color-{{ scheme }}" id="page-{{ section.id }}">
-  <div class="main-page">
+<div class="page-wrapper color-{{ scheme }}">
+  <div class="main-page" id="page-{{ section.id }}">
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'title' %}

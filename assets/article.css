@@ -1,3 +1,7 @@
+.main-article {
+  width: 100%;
+}
+
 /* Featured image */
 .article-image-wrapper {
   width: 100%;
@@ -28,10 +32,14 @@
   transform: scale(1.04);
 }
 
+.article-hero {
+  position: relative;
+}
+
 .article-image-wrapper.is-overlay {
   position: relative;
+  aspect-ratio: 16 / 9;
   z-index: 1;
-  margin-bottom: -110px;
 }
 
 /* Title + meta */
@@ -40,7 +48,9 @@
 }
 
 .article-head.is-overlay {
-  position: relative;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
   z-index: 2;
   max-width: none;
   padding: 4rem 1.25rem 1.5rem;
@@ -60,9 +70,14 @@
 }
 
 .article-head .title {
-  font-size: clamp(1.5rem, 1rem + 2.5vw, 2.5rem);
-  font-weight: 700;
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-style: var(--font-heading--style);
+  letter-spacing: var(--font-heading--letter-spacing);
+  text-transform: var(--font-heading--text-case);
+  word-break: var(--font-heading--word-break);
   line-height: 1.25;
+  font-size: calc(clamp(1.5rem, 1rem + 2.5vw, 2.5rem) * var(--font-heading--scale));
   margin: 0 0 .75rem;
 }
 
@@ -82,7 +97,8 @@
 
 .article-tag {
   font-size: .75rem;
-  font-weight: 600;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
   text-transform: uppercase;
   letter-spacing: .03em;
   padding: .3rem .7rem;
@@ -126,8 +142,14 @@
 
 /* Content */
 .main-content {
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: calc(1rem * var(--font-body--scale));;
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-style: var(--font-body--style);
+  letter-spacing: var(--font-body--letter-spacing);
+  text-transform: var(--font-body--text-case);
+  color: var(--color-foreground);
+  line-height: 1.75;
   padding-block: 2rem;
   border-bottom: 1px solid var(--color-border);
 }
@@ -207,8 +229,12 @@
 }
 
 .article-comments-wrapper h2 {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-family: var(--font-subheading--family);
+  font-weight: var(--font-subheading--weight);
+  font-style: var(--font-subheading--style);
+  letter-spacing: var(--font-subheading--letter-spacing);
+  text-transform: var(--font-subheading--text-case);
   margin-bottom: 1.25rem;
 }
 
@@ -216,7 +242,7 @@
   padding: 1rem;
   margin-bottom: 1rem;
   border: 1px solid var(--color-border);
-  background: rgb(var(--color-background));
+  background: var(--color-background);
 }
 
 .comment-author {
@@ -266,7 +292,7 @@
 .comments-field textarea:focus {
   outline: none;
   border-color: var(--color-foreground);
-  box-shadow: var(--color-shadow);
+  box-shadow: 0 0 0 1px var(--color-shadow);
 }
 
 .comments-field textarea {
@@ -282,6 +308,8 @@
   border-radius: 0;
   background: var(--color-btn-primary-bg);
   color: var(--color-btn-primary-text);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
   font-size: 1rem;
   cursor: pointer;
   transition: opacity 0.15s, transform 0.1s;
@@ -305,19 +333,23 @@
 .pagination a,
 .pagination span {
   padding: .5rem .8rem;
-  border-radius: var(--comment-radius, 8px);
-  border: 1px solid rgba(var(--color-foreground), .12);
+  border-radius: 0;
+  border: 1px solid var(--color-foreground);
   text-decoration: none;
   color: inherit;
 }
 
 .pagination .current {
-  background: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+  background: var(--color-background);
+  color: var(--color-foregroundd);
   border-color: transparent;
 }
 
 @media (min-width: 768px) {
+  .article-image-wrapper.is-overlay {
+    aspect-ratio: 21 / 9;
+  }
+  
   .comments-field {
     display: grid;
     grid-template-columns: 1fr 1fr;

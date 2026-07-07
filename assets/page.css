@@ -1,7 +1,5 @@
 .page-wrapper {
   background-color: var(--color-background);
-  padding-top: var(--pt);
-  padding-bottom: var(--pb);
 }
 
 .main-page {
