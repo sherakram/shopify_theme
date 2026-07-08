@@ -6,7 +6,6 @@
   assign share_title = article.title | url_param_escape
 %}
 <div class="share-bar" style="--share-justify: {{ block.settings.share_alignment }};">
-  <span class="share-label">{{ block.settings.share_label }}</span>
 
   <a class="share-btn"
     href="https://twitter.com/intent/tweet?url={{ share_url | url_param_escape }}&text={{ share_title }}"

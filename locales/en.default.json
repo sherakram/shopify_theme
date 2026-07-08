@@ -75,6 +75,11 @@
     "comment_form_submit": "Post comment",
     "comment_form_title": "Add a comment"
   },
+  "article": {
+    "read_min": "min read",
+    "previous": "Previous",
+    "next": "Next"
+  },
   "cart": {
     "checkout": "Proceed to Checkout",
     "title": "Cart total",

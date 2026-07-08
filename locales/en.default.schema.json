@@ -135,6 +135,7 @@
     "logo_max_width": "Logo max width (px)",
     "favicon": "Favicon",
     "alignment": "Alignment",
+    "title_align": "Title alignment",
     "background": "Background",
     "foreground": "Foreground",
     "grid_gap": "Grid spacing",
@@ -281,6 +282,9 @@
     "show_date": "Show date",
     "show_author": "Show author",
     "author_icon": "Author icon",
+    "show_reading_time": "Show reading time",
+    "show_tag": "Show tags",
+    "show_drop_cap": "Show drop cap",
     "show_tag_on_card": "Show tag on card",
     "content_align": "Content alignment",
     "blog_heading": "Heading",
@@ -288,7 +292,9 @@
     "show_featured_post": "Show featured post",
     "show_tag_filter": "Show tag filter pills",
     "columns_on_desktop": "Columns on desktop",
-    "articles_per_page": "Articles per page"
+    "articles_per_page": "Articles per page",
+    "show_previous_and_next_links": "Show previous/next article links",
+    "enable_comments": "Enable comments section"
   },
   "content":{
     "section_settings": "Section settings",
@@ -304,7 +310,9 @@
     "card_content": "Card content",
     "featured_post": "Featured post",
     "blog_filters": "Filtering",
-    "blog_card_layout": "Layout"
+    "blog_card_layout": "Layout",
+    "navigation": "Navigation",
+    "comment": "Comments"
   },
 
   "options": {

@@ -2,24 +2,6 @@
 
 {% liquid
   assign scheme = section.settings.color_scheme
-  assign image_index = 0
-  assign title_index = 0
-  assign has_image_block = false
-
-  for block in section.blocks
-    case block.type
-      when 'featured_image'
-        assign image_index = forloop.index
-        assign has_image_block = true
-      when 'title'
-        assign title_index = forloop.index
-    endcase
-  endfor
-
-  assign overlay_mode = false
-  if section.settings.header_layout == 'overlay' and has_image_block and article.image and image_index < title_index
-    assign overlay_mode = true
-  endif
 %}
 
 {% style %}
@@ -29,15 +11,66 @@
   }
 {% endstyle %}
 
-<div class="color-{{ scheme }}">
+<div class="article-wrapper color-{{ scheme }}">
   <div class="main-article" id="post-{{ section.id }}">
     {% for block in section.blocks %}
       {% case block.type %}
+        {% when 'title' %}
+          <header class="article-head page-width--narrow title-align-{{ block.settings.title_align }}">
+            {% if block.settings.show_tags and article.tags.size > 0 %}
+              <div class="article-tags">
+                {% for tag in article.tags limit: 5 %}
+                  <span class="article-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <h1 class="title">{{ article.title | escape }}</h1>
+
+            <div class="article-meta">
+              {% if block.settings.show_date %}
+                <span class="meta-item">
+                  <svg class="meta-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
+                    <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 7H5v10h14V9Z"/>
+                  </svg>
+                  {{- article.published_at | time_tag: format: 'date' -}}
+                </span>
+              {% endif %}
+
+              {% if block.settings.show_author %}
+                <span class="meta-item author-block">
+                {% if block.settings.author_icon != blank %}
+                  <img
+                    src="{{ block.settings.author_icon | image_url: width: 48 }}"
+                    srcset="
+                      {{ block.settings.author_icon | image_url: width: 48 }} 1x,
+                      {{ block.settings.author_icon | image_url: width: 96 }} 2x,
+                      {{ block.settings.author_icon | image_url: width: 144 }} 3x
+                    "
+                    alt=""
+                    class="author-icon"
+                    width="24"
+                    height="24"
+                  >
+                {% endif %}
+                {{ article.author }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.show_reading_time %}
+                {% liquid
+                  assign word_count = article.content | strip_html | split: ' ' | size
+                  assign read_minutes = word_count | divided_by: 200 | at_least: 1
+                %}
+                <span class="meta-item">{{ read_minutes }} {{ "article.read_min" | t }}</span>
+              {% endif %}
+            </div>
+          </header>
+
         {% when 'featured_image' %}
-          {% capture image_block_html %}
-            <div class="article-image-wrapper{% unless overlay_mode %} aspect-{{ block.settings.aspect_ratio }}{% endunless %}{% if overlay_mode %} is-overlay{% endif %}">
-              {% if article.image %}
-                {{ article.image
+          <div class="article-image-wrapper aspect-{{ block.settings.aspect_ratio }}">
+            {% if article.image %}
+              {{ article.image
                 | image_url: width: 1600
                 | image_tag:
                   loading: 'eager',
@@ -47,79 +80,10 @@
                   alt: article.image.alt
                 | default: article.title, class: 'article-image'
               }}
-              {% else %}
-                {{ 'lifestyle-2' | placeholder_svg_tag: 'article-image placeholder' }}
-              {% endif %}
-            </div>
-          {% endcapture %}
-
-          {% unless overlay_mode %}
-            {{ image_block_html }}
-          {% endunless %}
-
-        {% when 'title' %}
-          {% capture title_block_html %}
-            <header class="article-head page-width--narrow title-align-{{ block.settings.title_align }}{% if overlay_mode %} is-overlay{% endif %}">
-              {% if block.settings.show_tags and article.tags.size > 0 %}
-                <div class="article-tags">
-                  {% for tag in article.tags limit: 5 %}
-                    <span class="article-tag">{{ tag }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              <h1 class="title">{{ article.title | escape }}</h1>
-
-              <div class="article-meta">
-                {% if block.settings.show_date %}
-                  <span class="meta-item">
-                    <svg class="meta-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
-                      <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 7H5v10h14V9Z"/>
-                    </svg>
-                    {{- article.published_at | time_tag: format: 'date' -}}
-                  </span>
-                {% endif %}
-
-                {% if block.settings.show_author %}
-                  <span class="meta-item author-block">
-                  {% if block.settings.author_icon != blank %}
-                    <img
-                      src="{{ block.settings.author_icon | image_url: width: 48 }}"
-                      srcset="
-                        {{ block.settings.author_icon | image_url: width: 48 }} 1x,
-                        {{ block.settings.author_icon | image_url: width: 96 }} 2x,
-                        {{ block.settings.author_icon | image_url: width: 144 }} 3x
-                      "
-                      alt=""
-                      class="author-icon"
-                      width="24"
-                      height="24"
-                      loading="lazy"
-                    >
-                  {% endif %}
-                  {{ article.author }}
-                  </span>
-                {% endif %}
-
-                {% if block.settings.show_reading_time %}
-                  {% liquid
-                    assign word_count = article.content | strip_html | split: ' ' | size
-                    assign read_minutes = word_count | divided_by: 200 | at_least: 1
-                  %}
-                  <span class="meta-item">{{ read_minutes }} min read</span>
-                {% endif %}
-              </div>
-            </header>
-          {% endcapture %}
-
-          {% if overlay_mode %}
-            <div class="article-hero">
-              {{ image_block_html }}
-              {{ title_block_html }}
-            </div>
-          {% else %}
-            {{ title_block_html }}
-          {% endif %}
+            {% else %}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'article-image placeholder' }}
+            {% endif %}
+          </div>
 
         {% when 'content' %}
           <div class="main-content{% if block.settings.enable_dropcap %} dropcap{% endif %} page-width--narrow">
@@ -137,14 +101,12 @@
       <nav class="article-pagination page-width--narrow" aria-label="Article navigation">
         {% if blog.previous_article %}
           <a class="article-pagination__link prev" href="{{ blog.previous_article.url }}">
-            <span class="article-pagination__label">Previous</span>
-            <span class="article-pagination__title">{{ blog.previous_article.title }}</span>
+            <span class="article-pagination__label">{{ "article.previous" | t }}</span>
           </a>
         {% endif %}
         {% if blog.next_article %}
           <a class="article-pagination__link next" href="{{ blog.next_article.url }}">
-            <span class="article-pagination__label">Next</span>
-            <span class="article-pagination__title">{{ blog.next_article.title }}</span>
+            <span class="article-pagination__label">{{ "article.next" | t }}</span>
           </a>
         {% endif %}
       </nav>
@@ -259,43 +221,22 @@
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "header_layout",
-      "label": "Header layout",
-      "options": [
-        {
-          "value": "stacked",
-          "label": "Classic (image, then title)"
-        },
-        {
-          "value": "overlay",
-          "label": "Overlay (title on image)"
-        }
-      ],
-      "default": "stacked",
-      "info": "Overlay only applies when the Featured Image block sits above the Title block, and only when an image is set."
-    },
-    {
-      "type": "header",
-      "content": "Navigation"
+      "content": "t:content.navigation"
     },
     {
       "type": "checkbox",
       "id": "show_prev_next",
-      "label": "Show previous/next article links",
+      "label": "t:labels.show_previous_and_next_links",
       "default": true
     },
     {
       "type": "header",
-      "content": "Comments"
+      "content": "t:content.comment"
     },
     {
       "type": "checkbox",
       "id": "enable_comments",
-      "label": "Enable comments section",
+      "label": "t:labels.enable_comments",
       "default": true
     },
     {
@@ -331,6 +272,62 @@
   ],
   "blocks": [
     {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "title_align",
+          "label": "t:labels.title_align",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:options.alignment.left"
+            },
+            {
+              "value": "center",
+              "label": "t:options.alignment.center"
+            },
+            {
+              "value": "right",
+              "label": "t:options.alignment.right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_date",
+          "label": "t:labels.show_date",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_author",
+          "label": "t:labels.show_author",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "author_icon",
+          "label": "t:labels.author_icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_reading_time",
+          "label": "t:labels.show_reading_time",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tags",
+          "label": "t:labels.show_tag",
+          "default": true
+        }
+      ]
+    },
+    {
       "type": "featured_image",
       "name": "Featured Image",
       "limit": 1,
@@ -339,7 +336,6 @@
           "type": "select",
           "id": "aspect_ratio",
           "label": "Aspect ratio",
-          "visible_if": "{{ section.settings.header_layout == 'stacked' }}",
           "options": [
             {
               "value": "adapt",
@@ -363,62 +359,6 @@
       ]
     },
     {
-      "type": "title",
-      "name": "Title",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "title_align",
-          "label": "Title alignment",
-          "options": [
-            {
-              "value": "left",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
-          ],
-          "default": "left"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_date",
-          "label": "Show date",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "show_author",
-          "label": "Show author",
-          "default": true
-        },
-        {
-          "type": "image_picker",
-          "id": "author_icon",
-          "label": "Author icon"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_reading_time",
-          "label": "Show reading time",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "show_tags",
-          "label": "Show tags",
-          "default": true
-        }
-      ]
-    },
-    {
       "type": "content",
       "name": "Content",
       "limit": 1,
@@ -426,7 +366,7 @@
         {
           "type": "checkbox",
           "id": "enable_dropcap",
-          "label": "Show drop cap",
+          "label": "t:labels.show_drop_cap",
           "default": false
         }
       ]
@@ -435,38 +375,7 @@
       "type": "share",
       "name": "Share",
       "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "Label",
-          "default": "Share"
-        },
-        {
-          "type": "select",
-          "id": "share_alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "value": "flex-start",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "flex-end",
-              "label": "Right"
-            },
-            {
-              "value": "space-between",
-              "label": "Space between"
-            }
-          ],
-          "default": "flex-start"
-        }
-      ]
+      "settings": []
     }
   ]
 }
