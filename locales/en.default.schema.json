@@ -76,7 +76,11 @@
       "subtext": "Subtext",
       "icon": "Icon",
       "title": "Title",
-      "value": "Value"
+      "value": "Value",
+      "adapt_image": "Adapt to image",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
     },
     "options": {
       "email_label": "Email",
