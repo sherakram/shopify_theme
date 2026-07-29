@@ -1,22 +1,110 @@
-<div id="search-modal" class="search-modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="search-modal__overlay" data-close></div>
-  <div class="search-modal__content" role="document">
-    <div class="search-close-btn">
-        <span class="search-title">{{ 'search.title' | t }}</span>
-        <button class="search-modal__close" data-close aria-label="Close search">&times;</button>
-    </div>
+{% comment %}
+  <div id="search-modal" class="search-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="search-modal__overlay" data-close></div>
+    <div class="search-modal__content" role="document">
+      <div class="search-close-btn">
+          <span class="search-title">{{ 'search.title' | t }}</span>
+          <button class="search-modal__close" data-close aria-label="Close search">&times;</button>
+      </div>
 
-    <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+        <input
+          type="search"
+          name="q"
+          id="search-input"
+          placeholder="Search products, collections, articles..."
+          autocomplete="off"
+        >
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+
+      <div id="search-suggestions" class="search-suggestions"></div>
+    </div>
+  </div>
+{% endcomment %}
+
+<button
+  type="button"
+  class="header-search-trigger"
+  data-search-trigger
+  aria-haspopup="dialog"
+  aria-controls="SearchModal"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+  </svg>
+  <span class="visually-hidden">{{ 'search.search' | t: default: 'Search' }}</span>
+</button>
+
+<dialog
+  id="SearchModal"
+  class="search-modal"
+  aria-label="{{ 'search.search' | t: default: 'Search' }}"
+  data-search-modal
+>
+  <div class="search-modal__panel" role="document">
+    <form
+      action="{{ routes.search_url }}"
+      method="get"
+      role="search"
+      class="search-modal__form"
+      data-search-form
+    >
+      <svg class="search-modal__form-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.75"/>
+        <line x1="21" y1="21" x2="16.2" y2="16.2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      </svg>
+
       <input
         type="search"
         name="q"
-        id="search-input"
-        placeholder="Search products, collections, articles..."
+        id="SearchModalInput"
+        class="search-modal__input"
+        placeholder="{{ 'search.placeholder' | t: default: 'Search products, collections, articles…' }}"
         autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        role="combobox"
+        aria-expanded="false"
+        aria-autocomplete="list"
+        aria-controls="SearchModalResults"
+        aria-describedby="SearchModalStatus"
+        data-search-input
       >
-      <button type="submit" class="search-btn">Search</button>
+
+      <button type="button" class="search-modal__clear" data-search-clear hidden>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+        <span class="visually-hidden">{{ 'search.clear' | t: default: 'Clear search' }}</span>
+      </button>
+
+      <button type="button" class="search-modal__close" data-search-close>
+        {{ 'search.close' | t: default: 'Esc' }}
+      </button>
+
+      <input type="hidden" name="type" value="product,article,page,collection">
     </form>
 
-    <div id="search-suggestions" class="search-suggestions"></div>
+    <p id="SearchModalStatus" class="visually-hidden" role="status" aria-live="polite" data-search-status></p>
+
+    <div class="search-modal__results" id="SearchModalResults" data-search-results>
+      <div class="search-modal__empty" data-search-empty>
+        <p class="search-modal__empty-title">
+          {{ 'search.start_typing' | t: default: 'Start typing to search' }}
+        </p>
+        <p class="search-modal__empty-hint">
+          {{ 'search.hint' | t: default: 'Search by product name, SKU, or keyword.' }}
+        </p>
+
+        {% comment %} {%- assign recent_wrapper = 'search.recent_searches' -%} {% endcomment %}
+        <div class="search-modal__recent" data-search-recent hidden>
+          <p class="search-modal__recent-label">{{ 'search.recent_searches' | t: default: 'Recent searches' }}</p>
+          <ul class="search-modal__recent-list" data-search-recent-list></ul>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</dialog>

@@ -1,4 +1,5 @@
 {{ 'blog.css' | asset_url | stylesheet_tag }}
+{{ 'blog-card.css' | asset_url | stylesheet_tag }}
 
 {% liquid
   assign show_hero = false
@@ -22,7 +23,6 @@
   }
 {% endstyle %}
 
-{% comment %} Hero only shows on the unfiltered ("All") view {% endcomment %}
 {% if section.settings.show_featured_post and blog.articles.size > 0 %}
   {% unless current_tags %}
     {% assign show_hero = true %}

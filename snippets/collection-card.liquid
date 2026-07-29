@@ -1,11 +1,13 @@
 <a class="collection-card" href="{{ collection.url }}" aria-label="{{ collection.title }}">
   <div class="collection-card__media">
     {% if collection.featured_image %}
-      {%
-        render 'image',
+      {%- liquid
+        assign collection_image_alt = collection.featured_image.alt | default: collection.title
+      -%}
+      {% render 'image',
         class: 'collection-card__image',
         image: collection.featured_image,
-        alt: collection.featured_image.alt | default: collection.title,
+        alt: collection_image_alt,
         width: 800
       %}
     {% else %}

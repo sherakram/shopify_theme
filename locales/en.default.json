@@ -164,11 +164,33 @@
     "enter": "Enter"
   },
   "search": {
-    "title": "Search",
-    "placeholder": "Search articles, pages, or products",
+    "search": "Search",
+    "title": "Search our store",
+    "placeholder": "Search products, collections, articles…",
     "submit": "Search",
-    "no_results_html": "No results found for {{ terms }}",
-    "results_for_html": "{{ count }} results found for {{ terms }}"
+    "no_terms": "Search",
+    "results_count": "Counts",
+    "no_results_title": "No results for “",
+    "results_for": "Results for “",
+    "no_results_text": "Check the spelling or try a more general term. Here are a few places to start instead.",
+    "clear": "Clear search",
+    "close": "Esc",
+    "start_typing": "Start typing to search",
+    "hint": "Search by product name, SKU, or keyword.",
+    "recent_searches": "Recent searches",
+    "page": "Page",
+    "filters": "Filters",
+    "min_price": "Min price",
+    "max_price": "Max price",
+    "apply": "Apply filters",
+    "items": "items",
+    "sort_by": "Sort by",
+    "prompt": "Enter a search term above to find products, collections, pages, and articles.",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page"
+    }
   },
   "social_meida_name": {
     "facebook": "Facebook",
