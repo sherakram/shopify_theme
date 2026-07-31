@@ -36,7 +36,7 @@
       "type": "search",
       "settings": {
         "products_per_page": 24,
-        "columns_desktop": 4,
+        "columns_desktop": "4",
         "image_ratio": "portrait",
         "show_vendor": true,
         "enable_filtering": true,

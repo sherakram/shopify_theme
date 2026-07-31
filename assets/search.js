@@ -87,18 +87,7 @@
 // });
 // });
 
-/**
- * search.js
- * ---------------------------------------------------------------------
- * Drives the header predictive-search modal (snippets/search-modal.liquid).
- * - Native <dialog> for focus trap / Esc-to-close / inert background (free a11y)
- * - Debounced fetch against /search/suggest.json with AbortController
- * - Grouped results: query suggestions, products, collections, pages, articles
- * - Full roving-focus keyboard navigation (Arrow Up/Down, Home/End, Enter)
- * - Recent searches persisted in localStorage
- * - ⌘K / Ctrl+K global shortcut to open
- * ---------------------------------------------------------------------
- */
+
 (() => {
   'use strict';
 
