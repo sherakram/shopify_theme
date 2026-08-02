@@ -41,54 +41,6 @@
         </ul>
 
       {%- when 'price_range' -%}
-        {% comment %}
-          <div class="fs-price">
-            {%- assign min_value = filter.min_value.value | default: '' -%}
-            {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-            {%- assign range_min = filter.range_min -%}
-            {%- assign range_max = filter.range_max -%}
-
-            <label for="{{ group_id }}-from" class="fs-label">
-              {{- 'collections.general.from' | t | default: 'From' -}}
-            </label>
-            <input
-              id="{{ group_id }}-from"
-              class="fs-input"
-              name="{{ filter.min_value.param_name }}"
-              data-param-name="{{ filter.min_value.param_name }}"
-              data-range-min="{{ range_min }}"
-              type="number"
-              inputmode="numeric"
-              min="{{ range_min }}"
-              max="{{ range_max }}"
-              value="{{ min_value }}"
-              placeholder="{{ range_min }}"
-              aria-describedby="{{ group_id }}-from-help"
-            >
-            <span class="fs-to" aria-hidden="true">–</span>
-            <label for="{{ group_id }}-to" class="fs-label">{{ 'collections.general.to' | t | default: 'To' }}</label>
-            <input
-              id="{{ group_id }}-to"
-              class="fs-input"
-              name="{{ filter.max_value.param_name }}"
-              data-param-name="{{ filter.max_value.param_name }}"
-              data-range-max="{{ range_max }}"
-              type="number"
-              inputmode="numeric"
-              min="{{ range_min }}"
-              max="{{ range_max }}"
-              value="{{ max_value }}"
-              placeholder="{{ range_max }}"
-              aria-describedby="{{ group_id }}-to-help"
-            >
-            <div class="visually-hidden" id="{{ group_id }}-from-help">
-              {{ 'collections.general.min_price' | t | default: 'Minimum price' }}
-            </div>
-            <div class="visually-hidden" id="{{ group_id }}-to-help">
-              {{ 'collections.general.max_price' | t | default: 'Maximum price' }}
-            </div>
-          </div>
-        {% endcomment %}
 
         {%- assign min_value = filter.min_value.value | default: '' -%}
         {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
