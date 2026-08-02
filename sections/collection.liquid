@@ -26,11 +26,11 @@
   data-section-id="{{ section.id }}"
 >
   
-  {%- render 'filters-sorting' -%}
+  {% comment %} {%- render 'filters-sorting' -%} {% endcomment %}
   
   <div class="page-width">
 
-    {%- assign has_active = false -%}
+    {% comment %} {%- assign has_active = false -%}
     {%- for f in collection.filters -%}
       {%- if f.active_values.size > 0 -%}
         {%- assign has_active = true -%}
@@ -85,7 +85,7 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
-    {%- endif -%}
+    {%- endif -%} {% endcomment %}
 
     {%- paginate collection.products by page_size -%}
       <div
@@ -136,27 +136,36 @@
     },
     {
       "type": "checkbox",
-      "id": "filters_use_drawer",
-      "label": "t:labels.drawer_popup",
-      "default": false
-    },
-    {
-      "type": "checkbox",
       "id": "enable_filters",
       "label": "t:labels.enable_filters",
-      "default": true
+      "default": true,
+      "info": "t:informative_content.filters_info"
+    },
+    {
+      "type": "select",
+      "id": "filter_type",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        },
+        {
+          "value": "drawer",
+          "label": "Drawer"
+        }
+      ],
+      "default": "horizontal",
+      "label": "Filter layout"
     },
     {
       "type": "checkbox",
       "id": "enable_sort",
       "label": "t:labels.sort_selector",
       "default": true
-    },
-    {
-      "type": "text",
-      "id": "sort_options",
-      "label": "t:labels.sort_options",
-      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
     },
     {
       "type": "header",

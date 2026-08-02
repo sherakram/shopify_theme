@@ -1,4 +1,4 @@
-{{ 'search.css' | asset_url | stylesheet_tag }}
+{{ 'facets.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 {{ 'collection-card.css' | asset_url | stylesheet_tag }}
 {{ 'blog-card.css' | asset_url | stylesheet_tag }}
@@ -99,7 +99,7 @@
                 <input type="hidden" name="q" value="{{ search.terms | escape }}">
                 <input type="hidden" name="type" value="product,article,page,collection">
               {%- endcapture -%}
-              {%- render 'search-filters',
+              {%- render 'facets',
                 filters: search.filters,
                 form_id: 'FacetFiltersForm',
                 extra_hidden_inputs: search_hidden_inputs
@@ -118,8 +118,8 @@
                   <label for="SearchSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
                   <select id="SearchSortBy" name="sort_by" onchange="this.form.submit()">
                     {%- for option in search.sort_options -%}
-                      <option value="{{ option.value }}" {% if option.value == search.sort_by %}selected{% endif %}>
-                        {{ option.name }}
+                      <option value="{{ option.value | escape }}" {% if option.value == search.sort_by %}selected{% endif %}>
+                        {{ option.name | escape }}
                       </option>
                     {%- endfor -%}
                   </select>
@@ -285,18 +285,39 @@
     },
     {
       "type": "header",
-      "content": "Filtering & sorting"
+      "content": "t:general.filter_and_sorting"
     },
     {
       "type": "checkbox",
       "id": "enable_filtering",
-      "label": "Enable filters",
-      "default": true
+      "label": "t:labels.enable_filters",
+      "default": true,
+      "info": "t:informative_content.filters_info"
+    },
+    {
+      "type": "select",
+      "id": "filter_type",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        },
+        {
+          "value": "drawer",
+          "label": "Drawer"
+        }
+      ],
+      "default": "horizontal",
+      "label": "Filter layout"
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
-      "label": "Enable sorting",
+      "label": "t:labels.sort_selector",
       "default": true
     },
     {

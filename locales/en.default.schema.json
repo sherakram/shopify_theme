@@ -396,7 +396,8 @@
     "info_about_thumbs": "On mobile, thumbnails are horizontal and below the main image.",
     "color_scheme_info": "Editing this scheme's colors will affect all sections using this scheme.",
     "custom_css_info": "Add custom CSS to this section. Access section class with .section-{{ id }}.",
-    "featured_post_info": "Shows the most recent article as a large hero card. Automatically hidden when a tag filter is active."
+    "featured_post_info": "Shows the most recent article as a large hero card. Automatically hidden when a tag filter is active.",
+    "filters_info": "Customize filters with the [Search & Discovery app](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
   },
 
   "sections": {
