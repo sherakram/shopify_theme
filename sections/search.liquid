@@ -117,24 +117,6 @@
 
           <div class="search-results__main">
 
-            {% comment %} {%- if section.settings.enable_sorting -%}
-              <div class="search-results__toolbar">
-                <p class="search-results__count">{{ search.results_count }} {{ 'search.items' | t: default: 'items' }}</p>
-                <form class="search-results__sort" action="{{ routes.search_url }}" method="get">
-                  <input type="hidden" name="q" value="{{ search.terms | escape }}">
-                  <input type="hidden" name="type" value="product,article,page,collection">
-                  <label for="SearchSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
-                  <select id="SearchSortBy" name="sort_by" onchange="this.form.submit()">
-                    {%- for option in search.sort_options -%}
-                      <option value="{{ option.value | escape }}" {% if option.value == search.sort_by %}selected{% endif %}>
-                        {{ option.name | escape }}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                </form>
-              </div>
-            {%- endif -%} {% endcomment %}
-
             <div class="search-results__toolbar">
               <div class="search-results__toolbar-start">
                 {%- if show_facets and filter_layout != 'vertical' -%}

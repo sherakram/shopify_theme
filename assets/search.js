@@ -1,93 +1,3 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   const modal = document.getElementById("search-modal");
-//   const searchInput = document.getElementById("search-input");
-//   const suggestions = document.getElementById("search-suggestions");
-//   let lastFocusedElement = null;
-
-//   function trapFocus(e) {
-//     const focusable = modal.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
-//     const first = focusable[0];
-//     const last = focusable[focusable.length - 1];
-
-//     if (e.key === "Tab") {
-//       if (e.shiftKey && document.activeElement === first) {
-//         e.preventDefault();
-//         last.focus();
-//       } else if (!e.shiftKey && document.activeElement === last) {
-//         e.preventDefault();
-//         first.focus();
-//       }
-//     }
-//   }
-
-//   document.querySelectorAll("[data-open-search]").forEach(btn =>
-//     btn.addEventListener("click", () => {
-//       lastFocusedElement = document.activeElement;
-//       modal.classList.add("active");
-//       modal.setAttribute("aria-hidden", "false");
-//       searchInput.focus();
-
-//       document.addEventListener("keydown", trapFocus);
-//     })
-//   );
-
-//   function closeModal() {
-//     modal.classList.remove("active");
-//     modal.setAttribute("aria-hidden", "true");
-//     document.removeEventListener("keydown", trapFocus);
-//     if (lastFocusedElement) lastFocusedElement.focus();
-//   }
-
-//   modal.querySelectorAll("[data-close]").forEach(btn =>
-//     btn.addEventListener("click", closeModal)
-//   );
-
-//   modal.addEventListener("click", (e) => {
-//     if (e.target.classList.contains("search-modal__overlay")) closeModal();
-//   });
-
-//   document.addEventListener("keydown", (e) => {
-//     if (e.key === "Escape" && modal.classList.contains("active")) {
-//       closeModal();
-//     }
-//   });
-
-// let timeout;
-// searchInput.addEventListener("input", (e) => {
-//   clearTimeout(timeout);
-//   const query = e.target.value.trim();
-//   if (query.length < 2) {
-//     suggestions.innerHTML = "";
-//     return;
-//   }
-
-//   timeout = setTimeout(() => {
-//     fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,article,page`)
-//       .then(res => res.json())
-//       .then(data => {
-//         let html = "";
-//         ["products", "collections", "articles"].forEach(type => {
-//           if (data.resources.results[type].length) {
-//             html += `<h4 class="suggestion-heading">${type}</h4><ul class="suggestion-list">`;
-//             data.resources.results[type].forEach(item => {
-//               html += `
-//                 <li class="suggestion-item">
-//                   <a href="${item.url}" class="suggestion-link">
-//                     ${item.image ? `<img src="${item.image}" alt="${item.title}" class="suggestion-img">` : ""}
-//                     <span class="suggestion-title">${item.title}</span>
-//                   </a>
-//                 </li>`;
-//             });
-//             html += "</ul>";
-//           }
-//         });
-//         suggestions.innerHTML = html || "<p class='no-results'>No suggestions found.</p>";
-//       });
-//   }, 300);
-// });
-// });
-
-
 (() => {
   'use strict';
 
@@ -151,13 +61,11 @@
 
       this.closeBtn?.addEventListener('click', () => this.close());
 
-      // Click on the ::backdrop area (outside the panel) closes the dialog.
       this.modal.addEventListener('click', (event) => {
         const panel = this.modal.querySelector('.search-modal__panel');
         if (panel && !panel.contains(event.target)) this.close();
       });
 
-      // <dialog> fires 'cancel' on native Esc; keep our own close logic in sync.
       this.modal.addEventListener('cancel', (event) => {
         event.preventDefault();
         this.close();
@@ -187,7 +95,6 @@
       if (this.modal.open) return;
       this.returnFocusEl = document.activeElement;
       this.modal.showModal();
-      // Guard iOS/Android viewport shift and allow the open transition to start first.
       requestAnimationFrame(() => this.input?.focus({ preventScroll: true }));
       document.documentElement.style.overflow = 'hidden';
     }
@@ -258,7 +165,6 @@
         if (!response.ok) throw new Error(`Search request failed: ${response.status}`);
         const data = await response.json();
 
-        // Stale response guard: only render if this is still the current query.
         if (query !== this.lastQuery) return;
 
         this.cache.set(query, data.resources.results);
@@ -400,8 +306,6 @@
       items[this.activeIndex].focus();
     }
 
-    // ---- Recent searches --------------------------------------------------
-
     getRecent() {
       try {
         return JSON.parse(window.localStorage.getItem(RECENT_KEY) || '[]');
@@ -416,7 +320,6 @@
       try {
         window.localStorage.setItem(RECENT_KEY, JSON.stringify(recent.slice(0, RECENT_LIMIT)));
       } catch {
-        /* localStorage unavailable (private mode, quota) — fail silently */
       }
     }
 
@@ -439,8 +342,6 @@
         });
       });
     }
-
-    // ---- Utilities ----------------------------------------------------------
 
     escape(str = '') {
       const div = document.createElement('div');
@@ -466,8 +367,6 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-search-trigger]').forEach((trigger) => {
-      // Trigger and dialog are siblings rendered by the same snippet include,
-      // so scope from the closest shared ancestor (falls back to document).
       const scope = trigger.closest('body') || document;
       new PredictiveSearch(scope);
     });
