@@ -518,7 +518,7 @@
 }
 
 @media (min-width: 990px) {
-  .search-results__layout:has(.search-results__facets) {
+  .search-results__layout--sidebar {
     grid-template-columns: 220px 1fr;
     align-items: start;
   }
@@ -536,6 +536,14 @@
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-results__toolbar-start,
+.search-results__toolbar-end {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 

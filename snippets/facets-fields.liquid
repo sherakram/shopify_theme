@@ -1,0 +1,75 @@
+{%- liquid
+  assign auto_submit = auto_submit | default: true
+  assign onchange = ''
+  if auto_submit
+    assign onchange = "document.getElementById('" | append: form_id | append: "').submit()"
+  endif
+-%}
+
+{%- case filter.type -%}
+
+  {%- when 'list' -%}
+    <ul class="facets__list">
+      {%- for value in filter.values -%}
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              name="{{ value.param_name }}"
+              value="{{ value.value }}"
+              {% if value.active %}checked{% endif %}
+              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+              {% if auto_submit %}onchange="{{ onchange }}"{% endif %}
+            >
+            {{ value.label }} ({{ value.count }})
+          </label>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+  {%- when 'price_range' -%}
+    <div class="facets__price">
+      <label class="visually-hidden" for="{{ form_id }}-PriceMin-{{ filter.param_name | handleize }}">
+        {{- 'search.min_price' | t: default: 'Min price' -}}
+      </label>
+      <input
+        type="number"
+        id="{{ form_id }}-PriceMin-{{ filter.param_name | handleize }}"
+        name="{{ filter.min_value.param_name }}"
+        value="{{ filter.min_value.value }}"
+        placeholder="{{ filter.range_min | money_without_currency }}"
+        min="0"
+      >
+      <span aria-hidden="true">–</span>
+      <label class="visually-hidden" for="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}">
+        {{- 'search.max_price' | t: default: 'Max price' -}}
+      </label>
+      <input
+        type="number"
+        id="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}"
+        name="{{ filter.max_value.param_name }}"
+        value="{{ filter.max_value.value }}"
+        placeholder="{{ filter.range_max | money_without_currency }}"
+        min="0"
+      >
+    </div>
+
+  {%- when 'boolean' -%}
+    <ul class="facets__list">
+      {%- for value in filter.values -%}
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              name="{{ value.param_name }}"
+              value="{{ value.value }}"
+              {% if value.active %}checked{% endif %}
+              {% if auto_submit %}onchange="{{ onchange }}"{% endif %}
+            >
+            {{ value.label }} ({{ value.count }})
+          </label>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+{%- endcase -%}

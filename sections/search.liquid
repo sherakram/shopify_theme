@@ -7,6 +7,7 @@
   assign scheme = section.settings.search_color_scheme
   assign cols_desktop = section.settings.card_per_row
   assign cols_mobile = section.settings.card_per_row_mobile
+  assign filter_layout = section.settings.filter_type | default: 'vertical'
 -%}
 
 {% style %}
@@ -91,25 +92,32 @@
           {%- endif -%}
         {%- endfor -%}
 
-        <div class="search-results__layout">
+        {%- assign show_facets = false -%}
+        {%- if section.settings.enable_filtering and has_shoppable_results and search.filters != empty -%}
+          {%- assign show_facets = true -%}
+        {%- endif -%}
 
-          {%- if section.settings.enable_filtering and has_shoppable_results and search.filters != empty -%}
+        {%- capture search_hidden_inputs -%}
+          <input type="hidden" name="q" value="{{ search.terms | escape }}">
+          <input type="hidden" name="type" value="product,article,page,collection">
+        {%- endcapture -%}
+
+        <div class="search-results__layout{% if show_facets and filter_layout == 'vertical' %} search-results__layout--sidebar{% endif %}">
+
+          {%- if show_facets and filter_layout == 'vertical' -%}
             <aside class="search-results__facets" aria-label="{{ 'search.filters' | t: default: 'Filters' }}">
-              {%- capture search_hidden_inputs -%}
-                <input type="hidden" name="q" value="{{ search.terms | escape }}">
-                <input type="hidden" name="type" value="product,article,page,collection">
-              {%- endcapture -%}
               {%- render 'facets',
                 filters: search.filters,
                 form_id: 'FacetFiltersForm',
-                extra_hidden_inputs: search_hidden_inputs
+                extra_hidden_inputs: search_hidden_inputs,
+                layout: 'vertical'
               -%}
             </aside>
           {%- endif -%}
 
           <div class="search-results__main">
 
-            {%- if section.settings.enable_sorting -%}
+            {% comment %} {%- if section.settings.enable_sorting -%}
               <div class="search-results__toolbar">
                 <p class="search-results__count">{{ search.results_count }} {{ 'search.items' | t: default: 'items' }}</p>
                 <form class="search-results__sort" action="{{ routes.search_url }}" method="get">
@@ -125,7 +133,38 @@
                   </select>
                 </form>
               </div>
-            {%- endif -%}
+            {%- endif -%} {% endcomment %}
+
+            <div class="search-results__toolbar">
+              <div class="search-results__toolbar-start">
+                {%- if show_facets and filter_layout != 'vertical' -%}
+                  {%- render 'facets',
+                    filters: search.filters,
+                    form_id: 'FacetFiltersForm',
+                    extra_hidden_inputs: search_hidden_inputs,
+                    layout: filter_layout
+                  -%}
+                {%- endif -%}
+              </div>
+
+              <div class="search-results__toolbar-end">
+                {%- if section.settings.enable_sorting -%}
+                  <form class="search-results__sort" action="{{ routes.search_url }}" method="get">
+                    <input type="hidden" name="q" value="{{ search.terms | escape }}">
+                    <input type="hidden" name="type" value="product,article,page,collection">
+                    <label for="SearchSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
+                    <select id="SearchSortBy" name="sort_by" onchange="this.form.submit()">
+                      {%- for option in search.sort_options -%}
+                        <option value="{{ option.value | escape }}" {% if option.value == search.sort_by %}selected{% endif %}>
+                          {{ option.name | escape }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </form>
+                {%- endif -%}
+                <p class="search-results__count">{{ search.results_count }} {{ 'search.items' | t: default: 'items' }}</p>
+              </div>
+            </div>
 
             <div
               id="SearchResultsGrid-{{ section.id }}"
@@ -190,6 +229,8 @@
 
   </div>
 </div>
+
+<script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

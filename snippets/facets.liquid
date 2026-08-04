@@ -1,85 +1,108 @@
-<form id="{{ form_id }}" class="facets">
-  {{ extra_hidden_inputs }}
+{%- liquid
+  assign layout = layout | default: 'vertical'
+-%}
 
-  {%- for filter in filters -%}
-    <div class="facets__group">
-      <p class="facets__title">{{ filter.label }}</p>
+{%- case layout -%}
 
-      {%- case filter.type -%}
-        {%- when 'list' -%}
-          <ul class="facets__list">
-            {%- for value in filter.values -%}
-              <li>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="{{ value.param_name }}"
-                    value="{{ value.value }}"
-                    {% if value.active %}
-                      checked
-                    {% endif %}
-                    {% if value.count == 0 and value.active == false %}
-                      disabled
-                    {% endif %}
-                    onchange="document.getElementById('{{ form_id }}').submit()"
-                  >
-                  {{ value.label }} ({{ value.count }})
-                </label>
-              </li>
-            {%- endfor -%}
-          </ul>
+  {%- when 'horizontal' -%}
 
-        {%- when 'price_range' -%}
-          <div class="facets__price">
-            <label class="visually-hidden" for="{{ form_id }}-PriceMin">
-              {{- 'search.min_price' | t: default: 'Min price' -}}
-            </label>
-            <input
-              type="number"
-              id="{{ form_id }}-PriceMin"
-              name="{{ filter.min_value.param_name }}"
-              value="{{ filter.min_value.value }}"
-              placeholder="{{ filter.range_min | money_without_currency }}"
-              min="0"
-            >
-            <span aria-hidden="true">–</span>
-            <label class="visually-hidden" for="{{ form_id }}-PriceMax">
-              {{- 'search.max_price' | t: default: 'Max price' -}}
-            </label>
-            <input
-              type="number"
-              id="{{ form_id }}-PriceMax"
-              name="{{ filter.max_value.param_name }}"
-              value="{{ filter.max_value.value }}"
-              placeholder="{{ filter.range_max | money_without_currency }}"
-              min="0"
-            >
-          </div>
+    <form id="{{ form_id }}" class="facets facets--horizontal">
+      {{ extra_hidden_inputs }}
+      <div class="facets__toolbar">
+        <span class="facets__toolbar-label">{{ 'search.filters' | t: default: 'Filter:' }}</span>
 
-        {%- when 'boolean' -%}
-          <ul class="facets__list">
-            {%- for value in filter.values -%}
-              <li>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="{{ value.param_name }}"
-                    value="{{ value.value }}"
-                    {% if value.active %}
-                      checked
-                    {% endif %}
-                    onchange="document.getElementById('{{ form_id }}').submit()"
-                  >
-                  {{ value.label }} ({{ value.count }})
-                </label>
-              </li>
-            {%- endfor -%}
-          </ul>
-      {%- endcase -%}
-    </div>
-  {%- endfor -%}
+        {%- for filter in filters -%}
+          <details class="facets__dropdown" data-facet-dropdown>
+            <summary class="facets__dropdown-trigger">
+              {{ filter.label }}
+              {%- if filter.active_values.size > 0 -%}
+                <span class="facets__badge">{{ filter.active_values.size }}</span>
+              {%- endif -%}
+            </summary>
+            <div class="facets__dropdown-panel">
+              <div class="facets__dropdown-panel-header">
+                <span>
+                  {{ filter.active_values.size }} {{ 'search.selected' | t: default: 'selected' }}
+                </span>
+                <button type="button" class="facets__dropdown-reset" data-facet-reset>
+                  {{ 'collections.general.clear_filter' | t: default: 'Reset' }}
+                </button>
+              </div>
+              {%- render 'facets-fields', filter: filter, form_id: form_id -%}
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+      <noscript><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript>
+    </form>
 
-  <noscript
-    ><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript
-  >
-</form>
+  {%- when 'drawer' -%}
+
+    {%- assign active_count = 0 -%}
+    {%- for filter in filters -%}
+      {%- assign active_count = active_count | plus: filter.active_values.size -%}
+      {%- if filter.type == 'price_range' and filter.min_value.value != blank or filter.max_value.value != blank -%}
+        {%- assign active_count = active_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    <button
+      type="button"
+      class="facets-drawer-trigger"
+      data-facets-drawer-trigger
+      aria-haspopup="dialog"
+      aria-controls="FacetsDrawer-{{ form_id }}"
+    >
+      {{ 'search.filters' | t: default: 'Filter' }}
+      {%- if active_count > 0 -%}<span class="facets__badge">{{ active_count }}</span>{%- endif -%}
+    </button>
+
+    <dialog id="FacetsDrawer-{{ form_id }}" class="facets-drawer" data-facets-drawer>
+      <div class="facets-drawer__panel">
+        <div class="facets-drawer__header">
+          <p class="facets-drawer__title">{{ 'search.filters' | t: default: 'Filters' }}</p>
+          <button
+            type="button"
+            class="facets-drawer__close"
+            data-facets-drawer-close
+            aria-label="{{ 'accessibility.close' | t: default: 'Close' }}"
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <form id="{{ form_id }}" class="facets facets--vertical facets-drawer__form">
+          {{ extra_hidden_inputs }}
+          {%- for filter in filters -%}
+            <div class="facets__group">
+              <p class="facets__title">{{ filter.label }}</p>
+              {%- render 'facets-fields', filter: filter, form_id: form_id, auto_submit: false -%}
+            </div>
+          {%- endfor -%}
+        </form>
+
+        <div class="facets-drawer__footer">
+          <button type="submit" form="{{ form_id }}" class="facets-drawer__apply">
+            {{ 'search.apply' | t: default: 'Apply filters' }}
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+  {%- else -%}
+
+    <form id="{{ form_id }}" class="facets facets--vertical">
+      {{ extra_hidden_inputs }}
+      {%- for filter in filters -%}
+        <div class="facets__group">
+          <p class="facets__title">{{ filter.label }}</p>
+          {%- render 'facets-fields', filter: filter, form_id: form_id -%}
+        </div>
+      {%- endfor -%}
+      <noscript><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript>
+    </form>
+
+{%- endcase -%}

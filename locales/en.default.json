@@ -181,6 +181,7 @@
     "result": "Search results",
     "page": "Page",
     "filters": "Filters",
+    "selected": "selected",
     "min_price": "Min price",
     "max_price": "Max price",
     "apply": "Apply filters",
