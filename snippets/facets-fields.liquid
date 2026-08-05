@@ -1,9 +1,5 @@
 {%- liquid
   assign auto_submit = auto_submit | default: true
-  assign onchange = ''
-  if auto_submit
-    assign onchange = "document.getElementById('" | append: form_id | append: "').submit()"
-  endif
 -%}
 
 {%- case filter.type -%}
@@ -19,7 +15,7 @@
               value="{{ value.value }}"
               {% if value.active %}checked{% endif %}
               {% if value.count == 0 and value.active == false %}disabled{% endif %}
-              {% if auto_submit %}onchange="{{ onchange }}"{% endif %}
+              {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
           </label>
@@ -37,7 +33,6 @@
         id="{{ form_id }}-PriceMin-{{ filter.param_name | handleize }}"
         name="{{ filter.min_value.param_name }}"
         value="{{ filter.min_value.value }}"
-        onchange="{{ onchange }}"
         placeholder="{{ filter.range_min | money_without_currency }}"
         min="0"
       >
@@ -50,7 +45,6 @@
         id="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}"
         name="{{ filter.max_value.param_name }}"
         value="{{ filter.max_value.value }}"
-        onchange="{{ onchange }}"
         placeholder="{{ filter.range_max | money_without_currency }}"
         min="0"
       >
@@ -66,7 +60,7 @@
               name="{{ value.param_name }}"
               value="{{ value.value }}"
               {% if value.active %}checked{% endif %}
-              {% if auto_submit %}onchange="{{ onchange }}"{% endif %}
+              {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
           </label>

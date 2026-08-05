@@ -71,6 +71,15 @@
   }
 }
 
+.collection-grid {
+  transition: opacity .25s ease;
+}
+
+.collection-grid.loading {
+  opacity: .45;
+  pointer-events: none;
+}
+
 /* .collection-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));

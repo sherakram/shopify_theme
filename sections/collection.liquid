@@ -26,9 +26,9 @@
   id="CollectionSection-{{ section.id }}"
   class="collection-section color-{{ scheme }}"
   data-section-id="{{ section.id }}"
+  data-section="{{ section.id }}"
 >
   <div class="page-width">
-
     {%- paginate collection.products by page_size -%}
       {%- assign show_facets = false -%}
       {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
@@ -43,7 +43,11 @@
 
       <div class="collection-products__layout{% if show_facets and filter_layout == 'vertical' %} collection-products__layout--sidebar{% endif %}">
         {%- if show_facets and filter_layout == 'vertical' -%}
-          <aside class="collection-products__facets" aria-label="{{ 'search.filters' | t: default: 'Filters' }}">
+          <aside
+            class="collection-products__facets"
+            id="CollectionFilters-{{ section.id }}"
+            aria-label="{{ 'search.filters' | t: default: 'Filters' }}"
+          >
             {%- render 'facets',
               filters: collection.filters,
               form_id: 'CollectionFacetsForm',
@@ -55,7 +59,7 @@
 
         <div class="collection-products__main">
           <div class="collection-products__toolbar">
-            <div class="collection-products__toolbar-start">
+            <div class="collection-products__toolbar-start"  id="CollectionFilters-{{ section.id }}">
               {%- if show_facets and filter_layout != 'vertical' -%}
                 {%- render 'facets',
                   filters: collection.filters,
@@ -68,26 +72,30 @@
 
             <div class="collection-products__toolbar-end">
               {%- if section.settings.enable_sorting -%}
-                <form class="collection-products__sort" action="{{ routes.collections_url }}" method="get">
-                  <label for="CollectionSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
-                  <select id="CollectionSortBy" name="sort_by" onchange="this.form.submit()">
-                    {%- for option in collection.sort_options -%}
-                      <option
-                        value="{{ option.value | escape }}"
-                        {% if option.value == collection.sort_by %}
-                          selected
-                        {% endif %}
-                      >
-                        {{ option.name | escape }}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                </form>
+                <div id="CollectionSort-{{ section.id }}">
+                  <form class="collection-products__sort" action="{{ collection.url }}" method="get">
+                    <label for="CollectionSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
+                    <select id="CollectionSortBy" name="sort_by">
+                      {%- for option in collection.sort_options -%}
+                        <option
+                          value="{{ option.value | escape }}"
+                          {% if option.value == collection.sort_by %}
+                            selected
+                          {% endif %}
+                        >
+                          {{ option.name | escape }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </form>
+                </div>
               {%- endif -%}
-              <p class="search-results__count">
-                {{ collection.products_count }}
-                {{ 'search.items' | t: default: 'items' }}
-              </p>
+              <div id="CollectionProductCount-{{ section.id }}">
+                <p class="collection-products__count">
+                  {{ collection.products_count }}
+                  {{ 'search.items' | t: default: 'items' }}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -113,7 +121,6 @@
               {%- endfor -%}
             {%- endif -%}
           </div>
-
         </div>
       </div>
 
@@ -126,7 +133,6 @@
           {%- render 'pagination', pagination: paginate -%}
         </div>
       {%- endif -%}
-
     {%- endpaginate -%}
   </div>
 </div>
