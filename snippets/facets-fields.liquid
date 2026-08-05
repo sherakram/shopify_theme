@@ -37,6 +37,7 @@
         id="{{ form_id }}-PriceMin-{{ filter.param_name | handleize }}"
         name="{{ filter.min_value.param_name }}"
         value="{{ filter.min_value.value }}"
+        onchange="{{ onchange }}"
         placeholder="{{ filter.range_min | money_without_currency }}"
         min="0"
       >
@@ -49,6 +50,7 @@
         id="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}"
         name="{{ filter.max_value.param_name }}"
         value="{{ filter.max_value.value }}"
+        onchange="{{ onchange }}"
         placeholder="{{ filter.range_max | money_without_currency }}"
         min="0"
       >

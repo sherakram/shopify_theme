@@ -6,7 +6,7 @@
 
   {%- when 'horizontal' -%}
 
-    <form id="{{ form_id }}" class="facets facets--horizontal">
+    <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--horizontal">
       {{ extra_hidden_inputs }}
       <div class="facets__toolbar">
         <span class="facets__toolbar-label">{{ 'search.filters' | t: default: 'Filter:' }}</span>
@@ -74,7 +74,7 @@
           </button>
         </div>
 
-        <form id="{{ form_id }}" class="facets facets--vertical facets-drawer__form">
+        <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--vertical facets-drawer__form">
           {{ extra_hidden_inputs }}
           {%- for filter in filters -%}
             <div class="facets__group">
@@ -94,7 +94,7 @@
 
   {%- else -%}
 
-    <form id="{{ form_id }}" class="facets facets--vertical">
+    <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--vertical">
       {{ extra_hidden_inputs }}
       {%- for filter in filters -%}
         <div class="facets__group">
