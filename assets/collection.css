@@ -71,33 +71,54 @@
   }
 }
 
-.collection-grid {
-  transition: opacity .25s ease;
-}
-
 .collection-grid.loading {
-  opacity: .45;
+  position: relative;
   pointer-events: none;
 }
 
-/* .collection-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));
-  gap: 40px 12px;
+.collection-grid.loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.45);
+  z-index: 2;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .collection-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.collection-grid.loading .product-card,
+.collection-grid.loading .card {
+  opacity: .25;
 }
 
-@media (max-width: 767px) {
-  .collection-grid {
-    grid-template-columns: repeat(var(--cols-mobile, 2), minmax(0, 1fr));
-    gap: 16px 12px;
+.collection-grid.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.45) 50%,
+    transparent 100%
+  );
+  animation: collection-loading 1s infinite;
+  z-index: 3;
+}
+
+[id^="CollectionProductGrid-"],
+[id^="CollectionFilters-"],
+[id^="CollectionPagination-"],
+[id^="CollectionProductCount-"] {
+  transition: opacity .2s ease;
+}
+
+@keyframes collection-loading {
+  from {
+    transform: translateX(-100%);
   }
-} */
+
+  to {
+    transform: translateX(100%);
+  }
+}
 
 .collection-empty {
   grid-column: 1 / -1;

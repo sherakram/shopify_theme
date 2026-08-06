@@ -3,9 +3,7 @@
 -%}
 
 {%- case layout -%}
-
   {%- when 'horizontal' -%}
-
     <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--horizontal">
       {{ extra_hidden_inputs }}
       <div class="facets__toolbar">
@@ -22,7 +20,8 @@
             <div class="facets__dropdown-panel">
               <div class="facets__dropdown-panel-header">
                 <span>
-                  {{ filter.active_values.size }} {{ 'search.selected' | t: default: 'selected' }}
+                  {{ filter.active_values.size }}
+                  {{ 'search.selected' | t: default: 'selected' }}
                 </span>
                 <button type="button" class="facets__dropdown-reset" data-facet-reset>
                   {{ 'collections.general.clear_filter' | t: default: 'Reset' }}
@@ -33,11 +32,12 @@
           </details>
         {%- endfor -%}
       </div>
-      <noscript><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript>
+      <noscript
+        ><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript
+      >
     </form>
 
   {%- when 'drawer' -%}
-
     {%- assign active_count = 0 -%}
     {%- for filter in filters -%}
       {%- assign active_count = active_count | plus: filter.active_values.size -%}
@@ -45,6 +45,10 @@
         {%- assign active_count = active_count | plus: 1 -%}
       {%- endif -%}
     {%- endfor -%}
+
+    {% comment %} {% for filter in filters %}
+      <p>{{ filter.label }} | Active: {{ filter.active_values.size }} | Type: {{ filter.type }}</p>
+    {% endfor %} {% endcomment %}
 
     <button
       type="button"
@@ -54,7 +58,9 @@
       aria-controls="FacetsDrawer-{{ form_id }}"
     >
       {{ 'search.filters' | t: default: 'Filter' }}
-      {%- if active_count > 0 -%}<span class="facets__badge">{{ active_count }}</span>{%- endif -%}
+      {%- if active_count > 0 -%}
+        <span class="facets__badge">{{ active_count }}</span>
+      {%- endif -%}
     </button>
 
     <dialog id="FacetsDrawer-{{ form_id }}" class="facets-drawer" data-facets-drawer>
@@ -74,7 +80,12 @@
           </button>
         </div>
 
-        <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--vertical facets-drawer__form">
+        <form
+          id="{{ form_id }}"
+          action="{{ request.path }}"
+          method="get"
+          class="facets facets--vertical facets-drawer__form"
+        >
           {{ extra_hidden_inputs }}
           {%- for filter in filters -%}
             <div class="facets__group">
@@ -93,7 +104,6 @@
     </dialog>
 
   {%- else -%}
-
     <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--vertical">
       {{ extra_hidden_inputs }}
       {%- for filter in filters -%}
@@ -102,7 +112,8 @@
           {%- render 'facets-fields', filter: filter, form_id: form_id -%}
         </div>
       {%- endfor -%}
-      <noscript><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript>
+      <noscript
+        ><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript
+      >
     </form>
-
 {%- endcase -%}

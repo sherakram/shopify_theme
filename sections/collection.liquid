@@ -59,7 +59,7 @@
 
         <div class="collection-products__main">
           <div class="collection-products__toolbar">
-            <div class="collection-products__toolbar-start"  id="CollectionFilters-{{ section.id }}">
+            <div class="collection-products__toolbar-start" id="CollectionFilters-{{ section.id }}">
               {%- if show_facets and filter_layout != 'vertical' -%}
                 {%- render 'facets',
                   filters: collection.filters,
@@ -97,6 +97,10 @@
                 </p>
               </div>
             </div>
+          </div>
+
+          <div id="CollectionActiveFilters-{{ section.id }}">
+            {%- render 'facets-active', filters: collection.filters -%}
           </div>
 
           <div

@@ -1,10 +1,29 @@
 (() => {
   "use strict";
 
+  function initFacets() {
+    document
+      .querySelectorAll("[data-facets-drawer-trigger]")
+      .forEach((trigger) => {
+        const dialog = document.getElementById(
+          trigger.getAttribute("aria-controls"),
+        );
+
+        if (dialog && !trigger.dataset.initialized) {
+          trigger.dataset.initialized = "true";
+
+          new FacetsDrawer(trigger, dialog);
+        }
+      });
+
+    new FacetsHorizontal();
+  }
+
   class FacetsAjax {
     constructor() {
       this.abortController = null;
       this.cache = {};
+      this.requestId = 0;
       this.form = document.getElementById("CollectionFacetsForm");
 
       if (!this.form) return;
@@ -18,6 +37,13 @@
         const target = event.target;
 
         if (!target.closest("#CollectionFacetsForm")) return;
+
+        if (
+          target.matches('input[name="filter.v.price.gte"]') ||
+          target.matches('input[name="filter.v.price.lte"]')
+        ) {
+          return;
+        }
 
         this.form = document.getElementById("CollectionFacetsForm");
 
@@ -63,6 +89,26 @@
           this.loadProducts();
         });
       });
+
+      document.addEventListener("click", (event) => {
+        const clear = event.target.closest("[data-clear-all]");
+
+        if (!clear) return;
+
+        event.preventDefault();
+
+        this.loadProducts(clear.href);
+      });
+
+      document.addEventListener("click", (event) => {
+        const activeFilter = event.target.closest("[data-active-filter]");
+
+        if (!activeFilter) return;
+
+        event.preventDefault();
+
+        this.loadProducts(activeFilter.href);
+      });
     }
 
     bindPopState() {
@@ -71,10 +117,25 @@
       });
     }
 
+    renderSection(wrapper, id) {
+      const current = document.querySelector(`[id^="${id}-"]`);
+      const updated = wrapper.querySelector(`[id^="${id}-"]`);
+
+      if (!current || !updated) return;
+
+      current.replaceWith(updated.cloneNode(true));
+
+      current.style.opacity = "0";
+
+      requestAnimationFrame(() => {
+        current.style.opacity = "1";
+      });
+    }
+
     async loadProducts(url = null) {
-      const section = document
-        .querySelector("[data-section]")
-        .dataset.section;
+      const currentRequest = ++this.requestId;
+
+      const section = document.querySelector("[data-section]").dataset.section;
 
       if (this.abortController) {
         this.abortController.abort();
@@ -89,7 +150,7 @@
       if (!url) {
         this.form = document.getElementById("CollectionFacetsForm");
         const params = new URLSearchParams(new FormData(this.form));
-        
+
         for (const [key, value] of [...params.entries()]) {
           if (value === "") {
             params.delete(key);
@@ -100,10 +161,10 @@
       }
 
       const fetchUrl = `${url}${url.includes("?") ? "&" : "?"}section_id=${section}`;
-  
+
       try {
         let html;
-        
+
         if (this.cache[fetchUrl]) {
           html = this.cache[fetchUrl];
         } else {
@@ -112,43 +173,93 @@
           });
 
           html = await response.text();
+
+          if (currentRequest !== this.requestId) {
+            return;
+          }
+
           this.cache[fetchUrl] = html;
         }
 
         const wrapper = document.createElement("div");
         wrapper.innerHTML = html;
 
-        const sections = [
+        [
           "CollectionProductGrid",
           "CollectionProductCount",
           "CollectionFilters",
           "CollectionSort",
           "CollectionPagination",
-        ];
+          "CollectionActiveFilters",
+        ].forEach((section) => this.renderSection(wrapper, section));
 
-        sections.forEach((section) => {
-          const current = document.querySelector(`[id^="${section}-"]`);
-          const updated = wrapper.querySelector(`[id^="${section}-"]`);
+        const productGrid = document.querySelector(
+          '[id^="CollectionProductGrid-"]',
+        );
 
-          if (current && updated) {
-            current.innerHTML = updated.innerHTML;
-          }
-        });
+        if (productGrid) {
+          productGrid.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
 
         if (window.location.href !== url) {
-          console.log("History URL:", url);
-          console.log("Fetch URL:", fetchUrl);
           history.pushState({}, "", url);
         }
+
+        document.documentElement.style.overflow = "";
+
+        document.body.style.overflow = "";
+
+        const dialog = document.querySelector("dialog[open]");
+
+        if (dialog) {
+          dialog.close();
+        }
+
+        initFacets();
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error(error);
         }
       } finally {
         if (grid) {
-          grid.classList.remove("loading");
+          requestAnimationFrame(() => {
+            grid.classList.remove("loading");
+          });
         }
       }
+    }
+  }
+
+  class FacetsHorizontal {
+    constructor() {
+      this.dropdowns = document.querySelectorAll("[data-facet-dropdown]");
+
+      this.bind();
+    }
+
+    bind() {
+      this.dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("toggle", () => {
+          if (!dropdown.open) return;
+
+          this.dropdowns.forEach((item) => {
+            if (item !== dropdown) {
+              item.open = false;
+            }
+          });
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        this.dropdowns.forEach((dropdown) => {
+          if (!dropdown.contains(e.target)) {
+            dropdown.open = false;
+          }
+        });
+      });
     }
   }
 
@@ -160,7 +271,10 @@
     }
 
     bind() {
-      this.trigger.addEventListener("click", () => this.open());
+      this.trigger.addEventListener("click", () => {
+        // console.log("Trigger clicked");
+        this.open();
+      });
 
       this.dialog
         .querySelector("[data-facets-drawer-close]")
@@ -177,30 +291,53 @@
       });
     }
 
+    // open() {
+    //   console.log("Drawer Open Clicked");
+    //   console.log(this.dialog);
+    //   this.returnFocusEl = document.activeElement;
+    //   this.dialog.showModal();
+    //   document.documentElement.style.overflow = "hidden";
+    // }
+
     open() {
+      // console.log("Old Dialog:", this.dialog);
+
+      const freshDialog = document.getElementById(
+        this.trigger.getAttribute("aria-controls"),
+      );
+
+      // console.log("Fresh Dialog:", freshDialog);
+      // console.log("Same Object?", this.dialog === freshDialog);
       this.returnFocusEl = document.activeElement;
-      this.dialog.showModal();
+      freshDialog.showModal();
       document.documentElement.style.overflow = "hidden";
     }
 
+    // close() {
+    //   this.dialog.close();
+    //   document.documentElement.style.overflow = "";
+    //   if (this.returnFocusEl instanceof HTMLElement) this.returnFocusEl.focus();
+    // }
+
     close() {
-      this.dialog.close();
+      this.dialog = document.getElementById(
+        this.trigger.getAttribute("aria-controls"),
+      );
+
+      if (this.dialog.open) {
+        this.dialog.close();
+      }
+
       document.documentElement.style.overflow = "";
-      if (this.returnFocusEl instanceof HTMLElement) this.returnFocusEl.focus();
+
+      if (this.returnFocusEl instanceof HTMLElement) {
+        this.returnFocusEl.focus();
+      }
     }
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    document
-      .querySelectorAll("[data-facets-drawer-trigger]")
-      .forEach((trigger) => {
-        const dialogId = trigger.getAttribute("aria-controls");
-        const dialog = dialogId ? document.getElementById(dialogId) : null;
-
-        if (dialog) {
-          new FacetsDrawer(trigger, dialog);
-        }
-      });
+    initFacets();
 
     new FacetsAjax();
   });

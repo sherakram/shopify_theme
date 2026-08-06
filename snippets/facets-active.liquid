@@ -1,0 +1,47 @@
+{%- assign has_active_filters = false -%}
+
+<div class="active-filters">
+  {%- for filter in filters -%}
+
+    {%- for value in filter.active_values -%}
+      {%- assign has_active_filters = true -%}
+
+      <a
+        href="{{ value.url_to_remove }}"
+        class="active-filter"
+        data-active-filter
+      >
+        {{ value.label }}
+        <span>×</span>
+      </a>
+    {%- endfor -%}
+
+    {%- if filter.type == 'price_range' -%}
+      {%- if filter.min_value.value != blank or filter.max_value.value != blank -%}
+        {%- assign has_active_filters = true -%}
+
+        <a
+          href="{{ filter.url_to_remove }}"
+          class="active-filter"
+          data-active-filter
+        >
+           {{ filter.min_value.value | default: 0 | money_without_currency }}
+          -
+          {{ filter.max_value.value | default: filter.range_max | money_without_currency }}
+          <span>×</span>
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+
+  {%- endfor -%}
+
+  {%- if has_active_filters -%}
+    <a
+      href="{{ request.path }}"
+      class="active-filter active-filter--clear"
+      data-clear-all
+    >
+      Clear All
+    </a>
+  {%- endif -%}
+</div>

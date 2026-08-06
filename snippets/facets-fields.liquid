@@ -3,7 +3,6 @@
 -%}
 
 {%- case filter.type -%}
-
   {%- when 'list' -%}
     <ul class="facets__list">
       {%- for value in filter.values -%}
@@ -13,8 +12,12 @@
               type="checkbox"
               name="{{ value.param_name }}"
               value="{{ value.value }}"
-              {% if value.active %}checked{% endif %}
-              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+              {% if value.active %}
+                checked
+              {% endif %}
+              {% if value.count == 0 and value.active == false %}
+                disabled
+              {% endif %}
               {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
@@ -59,7 +62,9 @@
               type="checkbox"
               name="{{ value.param_name }}"
               value="{{ value.value }}"
-              {% if value.active %}checked{% endif %}
+              {% if value.active %}
+                checked
+              {% endif %}
               {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
@@ -67,5 +72,4 @@
         </li>
       {%- endfor -%}
     </ul>
-
 {%- endcase -%}
