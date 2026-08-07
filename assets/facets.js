@@ -24,6 +24,7 @@
       this.abortController = null;
       this.cache = {};
       this.requestId = 0;
+      this.pendingDrawerClose = false;
       this.form = document.getElementById("CollectionFacetsForm");
 
       if (!this.form) return;
@@ -109,6 +110,30 @@
 
         this.loadProducts(activeFilter.href);
       });
+
+      document.addEventListener("click", (event) => {
+        const applyBtn = event.target.closest("[data-facet-price-apply]");
+        if (!applyBtn) return;
+        event.preventDefault();
+        this.form = document.getElementById("CollectionFacetsForm");
+        this.loadProducts();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        if (!event.target.matches("[data-facet-price-input]")) return;
+        event.preventDefault();
+        this.form = document.getElementById("CollectionFacetsForm");
+        this.loadProducts();
+      });
+
+      document.addEventListener("click", (event) => {
+        const drawerApply = event.target.closest(".facets-drawer__apply");
+        if (!drawerApply) return;
+        event.preventDefault();
+        this.form = document.getElementById("CollectionFacetsForm");
+        this.pendingDrawerClose = true;
+        this.loadProducts();
+      });
     }
 
     bindPopState() {
@@ -123,13 +148,99 @@
 
       if (!current || !updated) return;
 
-      current.replaceWith(updated.cloneNode(true));
+      if (id === "CollectionFilters") {
+        const openDrawer = current.querySelector(
+          "dialog[data-facets-drawer][open]",
+        );
+        const newDrawerForm = updated.querySelector(
+          "dialog[data-facets-drawer] form",
+        );
 
-      current.style.opacity = "0";
+        if (openDrawer && newDrawerForm) {
+          const oldForm = openDrawer.querySelector("form");
+          if (oldForm) {
+            oldForm.replaceWith(newDrawerForm.cloneNode(true));
+          }
+
+          const updatedClone = updated.cloneNode(true);
+          const updatedDrawer = updatedClone.querySelector(
+            "dialog[data-facets-drawer]",
+          );
+          if (updatedDrawer) updatedDrawer.remove();
+
+          [...current.childNodes].forEach((node) => {
+            if (
+              node.nodeType === 1 &&
+              node.matches?.("dialog[data-facets-drawer]")
+            )
+              return;
+            node.remove();
+          });
+          current.prepend(...updatedClone.childNodes);
+
+          return;
+        }
+      }
+
+      let openKeys = [];
+      if (id === "CollectionFilters") {
+        openKeys = [
+          ...current.querySelectorAll("[data-facet-dropdown][open]"),
+        ].map((el) => el.dataset.facetKey);
+      }
+
+      const newNode = updated.cloneNode(true);
+      current.replaceWith(newNode);
+
+      if (openKeys.length) {
+        openKeys.forEach((key) => {
+          const match = newNode.querySelector(`[data-facet-key="${key}"]`);
+          if (match) match.open = true;
+        });
+      }
+
+      newNode.style.opacity = "0";
 
       requestAnimationFrame(() => {
-        current.style.opacity = "1";
+        newNode.style.opacity = "1";
       });
+    }
+
+    announceResults() {
+      const countEl = document.querySelector('[id^="CollectionProductCount-"]');
+      const announceEl = document.querySelector('[id^="CollectionAnnounce-"]');
+      const emptyState = document.querySelector(".collection-empty");
+
+      if (!announceEl) return;
+
+      let message = "";
+
+      if (emptyState) {
+        message =
+          emptyState
+            .querySelector(".collection-empty__text")
+            ?.textContent.trim() || "No products found";
+      } else if (countEl) {
+        message = countEl.textContent.trim();
+      }
+
+      announceEl.textContent = "";
+
+      requestAnimationFrame(() => {
+        announceEl.textContent = message;
+      });
+    }
+
+    moveFocusAfterUpdate() {
+      const openDrawer = document.querySelector("dialog[data-facets-drawer][open]");
+      if (openDrawer) return;
+
+      const countEl = document.querySelector(
+        '[id^="CollectionProductCount-"] .collection-products__count',
+      );
+      if (countEl) {
+        countEl.focus();
+      }
     }
 
     async loadProducts(url = null) {
@@ -159,6 +270,7 @@
 
         url = `${window.location.pathname}?${params.toString()}`;
       }
+      console.log("FETCH URL:", url);
 
       const fetchUrl = `${url}${url.includes("?") ? "&" : "?"}section_id=${section}`;
 
@@ -193,6 +305,9 @@
           "CollectionActiveFilters",
         ].forEach((section) => this.renderSection(wrapper, section));
 
+        this.announceResults();
+        this.moveFocusAfterUpdate();
+
         const productGrid = document.querySelector(
           '[id^="CollectionProductGrid-"]',
         );
@@ -208,14 +323,15 @@
           history.pushState({}, "", url);
         }
 
-        document.documentElement.style.overflow = "";
+        if (this.pendingDrawerClose) {
+          const dialog = document.querySelector("dialog[open]");
+          if (dialog) dialog.close();
+          this.pendingDrawerClose = false;
+        }
 
-        document.body.style.overflow = "";
-
-        const dialog = document.querySelector("dialog[open]");
-
-        if (dialog) {
-          dialog.close();
+        if (!document.querySelector("dialog[open]")) {
+          document.documentElement.style.overflow = "";
+          document.body.style.overflow = "";
         }
 
         initFacets();
@@ -235,30 +351,31 @@
 
   class FacetsHorizontal {
     constructor() {
-      this.dropdowns = document.querySelectorAll("[data-facet-dropdown]");
-
+      if (FacetsHorizontal.instance) return;
+      FacetsHorizontal.instance = this;
       this.bind();
     }
 
     bind() {
-      this.dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("toggle", () => {
-          if (!dropdown.open) return;
+      document.addEventListener(
+        "toggle",
+        (e) => {
+          const dropdown = e.target.closest("[data-facet-dropdown]");
+          if (!dropdown || !dropdown.open) return;
 
-          this.dropdowns.forEach((item) => {
-            if (item !== dropdown) {
-              item.open = false;
-            }
+          document.querySelectorAll("[data-facet-dropdown]").forEach((item) => {
+            if (item !== dropdown) item.open = false;
           });
-        });
-      });
+        },
+        true,
+      );
 
       document.addEventListener("click", (e) => {
-        this.dropdowns.forEach((dropdown) => {
-          if (!dropdown.contains(e.target)) {
-            dropdown.open = false;
-          }
-        });
+        document
+          .querySelectorAll("[data-facet-dropdown]")
+          .forEach((dropdown) => {
+            if (!dropdown.contains(e.target)) dropdown.open = false;
+          });
       });
     }
   }
@@ -272,7 +389,6 @@
 
     bind() {
       this.trigger.addEventListener("click", () => {
-        // console.log("Trigger clicked");
         this.open();
       });
 
@@ -291,33 +407,15 @@
       });
     }
 
-    // open() {
-    //   console.log("Drawer Open Clicked");
-    //   console.log(this.dialog);
-    //   this.returnFocusEl = document.activeElement;
-    //   this.dialog.showModal();
-    //   document.documentElement.style.overflow = "hidden";
-    // }
-
     open() {
-      // console.log("Old Dialog:", this.dialog);
-
       const freshDialog = document.getElementById(
         this.trigger.getAttribute("aria-controls"),
       );
 
-      // console.log("Fresh Dialog:", freshDialog);
-      // console.log("Same Object?", this.dialog === freshDialog);
       this.returnFocusEl = document.activeElement;
       freshDialog.showModal();
       document.documentElement.style.overflow = "hidden";
     }
-
-    // close() {
-    //   this.dialog.close();
-    //   document.documentElement.style.overflow = "";
-    //   if (this.returnFocusEl instanceof HTMLElement) this.returnFocusEl.focus();
-    // }
 
     close() {
       this.dialog = document.getElementById(

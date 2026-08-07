@@ -35,9 +35,10 @@
         type="number"
         id="{{ form_id }}-PriceMin-{{ filter.param_name | handleize }}"
         name="{{ filter.min_value.param_name }}"
-        value="{{ filter.min_value.value }}"
+        value="{% unless filter.min_value.value == blank %}{{ filter.min_value.value | divided_by: 100.0 | round: 2 }}{% endunless %}"
         placeholder="{{ filter.range_min | money_without_currency }}"
         min="0"
+        data-facet-price-input
       >
       <span aria-hidden="true">–</span>
       <label class="visually-hidden" for="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}">
@@ -47,11 +48,15 @@
         type="number"
         id="{{ form_id }}-PriceMax-{{ filter.param_name | handleize }}"
         name="{{ filter.max_value.param_name }}"
-        value="{{ filter.max_value.value }}"
+        value="{% unless filter.max_value.value == blank %}{{ filter.max_value.value | divided_by: 100.0 | round: 2 }}{% endunless %}"
         placeholder="{{ filter.range_max | money_without_currency }}"
         min="0"
+        data-facet-price-input
       >
     </div>
+    <button type="button" class="facets__price-apply" data-facet-price-apply>
+      {{ 'search.apply' | t: default: 'Apply' }}
+    </button>
 
   {%- when 'boolean' -%}
     <ul class="facets__list">

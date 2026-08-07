@@ -10,7 +10,7 @@
         <span class="facets__toolbar-label">{{ 'search.filters' | t: default: 'Filter:' }}</span>
 
         {%- for filter in filters -%}
-          <details class="facets__dropdown" data-facet-dropdown>
+          <details class="facets__dropdown" data-facet-dropdown data-facet-key="{{ filter.label | handleize }}">
             <summary class="facets__dropdown-trigger">
               {{ filter.label }}
               {%- if filter.active_values.size > 0 -%}
@@ -45,10 +45,6 @@
         {%- assign active_count = active_count | plus: 1 -%}
       {%- endif -%}
     {%- endfor -%}
-
-    {% comment %} {% for filter in filters %}
-      <p>{{ filter.label }} | Active: {{ filter.active_values.size }} | Type: {{ filter.type }}</p>
-    {% endfor %} {% endcomment %}
 
     <button
       type="button"

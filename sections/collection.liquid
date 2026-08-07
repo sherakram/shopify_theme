@@ -58,8 +58,20 @@
         {%- endif -%}
 
         <div class="collection-products__main">
+          <div
+            id="CollectionAnnounce-{{ section.id }}"
+            class="visually-hidden"
+            aria-live="polite"
+            aria-atomic="true"
+            role="status"
+          ></div>
           <div class="collection-products__toolbar">
-            <div class="collection-products__toolbar-start" id="CollectionFilters-{{ section.id }}">
+            <div
+              class="collection-products__toolbar-start"
+              {% if show_facets and filter_layout != 'vertical' %}
+                id="CollectionFilters-{{ section.id }}"
+              {% endif %}
+            >
               {%- if show_facets and filter_layout != 'vertical' -%}
                 {%- render 'facets',
                   filters: collection.filters,
@@ -91,7 +103,7 @@
                 </div>
               {%- endif -%}
               <div id="CollectionProductCount-{{ section.id }}">
-                <p class="collection-products__count">
+                <p class="collection-products__count" tabindex="-1">
                   {{ collection.products_count }}
                   {{ 'search.items' | t: default: 'items' }}
                 </p>
