@@ -45,12 +45,12 @@
         {%- if show_facets and filter_layout == 'vertical' -%}
           <aside
             class="collection-products__facets"
-            id="CollectionFilters-{{ section.id }}"
+            id="FacetsFilters-{{ section.id }}"
             aria-label="{{ 'search.filters' | t: default: 'Filters' }}"
           >
             {%- render 'facets',
               filters: collection.filters,
-              form_id: 'CollectionFacetsForm',
+              form_id: 'FacetsForm',
               extra_hidden_inputs: extra_hidden_inputs,
               layout: 'vertical'
             -%}
@@ -59,7 +59,7 @@
 
         <div class="collection-products__main">
           <div
-            id="CollectionAnnounce-{{ section.id }}"
+            id="FacetsAnnounce-{{ section.id }}"
             class="visually-hidden"
             aria-live="polite"
             aria-atomic="true"
@@ -69,13 +69,13 @@
             <div
               class="collection-products__toolbar-start"
               {% if show_facets and filter_layout != 'vertical' %}
-                id="CollectionFilters-{{ section.id }}"
+                id="FacetsFilters-{{ section.id }}"
               {% endif %}
             >
               {%- if show_facets and filter_layout != 'vertical' -%}
                 {%- render 'facets',
                   filters: collection.filters,
-                  form_id: 'CollectionFacetsForm',
+                  form_id: 'FacetsForm',
                   extra_hidden_inputs: extra_hidden_inputs,
                   layout: filter_layout
                 -%}
@@ -84,10 +84,10 @@
 
             <div class="collection-products__toolbar-end">
               {%- if section.settings.enable_sorting -%}
-                <div id="CollectionSort-{{ section.id }}">
+                <div id="FacetsSort-{{ section.id }}">
                   <form class="collection-products__sort" action="{{ collection.url }}" method="get">
-                    <label for="CollectionSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
-                    <select id="CollectionSortBy" name="sort_by">
+                    <label for="FacetsSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
+                    <select id="FacetsSortBy" name="sort_by">
                       {%- for option in collection.sort_options -%}
                         <option
                           value="{{ option.value | escape }}"
@@ -99,10 +99,13 @@
                         </option>
                       {%- endfor -%}
                     </select>
+                    <noscript>
+                      <button type="submit">{{ 'search.apply' | t: default: 'Apply' }}</button>
+                    </noscript>
                   </form>
                 </div>
               {%- endif -%}
-              <div id="CollectionProductCount-{{ section.id }}">
+              <div id="FacetsProductCount-{{ section.id }}">
                 <p class="collection-products__count" tabindex="-1">
                   {{ collection.products_count }}
                   {{ 'search.items' | t: default: 'items' }}
@@ -111,18 +114,18 @@
             </div>
           </div>
 
-          <div id="CollectionActiveFilters-{{ section.id }}">
+          <div id="FacetsActiveFilters-{{ section.id }}">
             {%- render 'facets-active', filters: collection.filters -%}
           </div>
 
           <div
-            id="CollectionProductGrid-{{ section.id }}"
+            id="FacetsProductGrid-{{ section.id }}"
             class="collection-grid"
             tabindex="-1"
             aria-label="{{ collection.title }} products"
           >
             {%- if collection.products.size == 0 -%}
-              <div class="collection-empty" role="status">
+              <div class="collection-empty" data-facets-empty role="status">
                 <p class="collection-empty__text">{{ 'collections.general.no_matches' | t }}</p>
               </div>
 
@@ -142,8 +145,9 @@
 
       {%- if paginate.pages > 1 -%}
         <div
-          id="CollectionPagination-{{ section.id }}"
+          id="FacetsPagination-{{ section.id }}"
           class="collection-pagination"
+          data-facets-pagination
           aria-label="{{ 'accessibility.pagination_label' | t }}"
         >
           {%- render 'pagination', pagination: paginate -%}

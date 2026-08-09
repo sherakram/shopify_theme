@@ -10,7 +10,7 @@
         <span class="facets__toolbar-label">{{ 'search.filters' | t: default: 'Filter:' }}</span>
 
         {%- for filter in filters -%}
-          <details class="facets__dropdown" data-facet-dropdown data-facet-key="{{ filter.label | handleize }}">
+          <details class="facets__dropdown" data-facet-dropdown data-facet-toolbar-dropdown data-facet-key="{{ filter.label | handleize }}">
             <summary class="facets__dropdown-trigger">
               {{ filter.label }}
               {%- if filter.active_values.size > 0 -%}
@@ -86,7 +86,7 @@
           {%- for filter in filters -%}
             <div class="facets__group">
               <p class="facets__title">{{ filter.label }}</p>
-              {%- render 'facets-fields', filter: filter, form_id: form_id, auto_submit: false -%}
+              {%- render 'facets-fields', filter: filter, form_id: form_id -%}
             </div>
           {%- endfor -%}
         </form>
@@ -100,16 +100,60 @@
     </dialog>
 
   {%- else -%}
+
+    {%- assign has_active_filters = false -%}
+    {%- for filter in filters -%}
+      {%- if filter.active_values.size > 0 -%}
+        {%- assign has_active_filters = true -%}
+      {%- endif -%}
+      {%- if filter.type == 'price_range' and filter.min_value.value != blank or filter.max_value.value != blank -%}
+        {%- assign has_active_filters = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+
     <form id="{{ form_id }}" action="{{ request.path }}" method="get" class="facets facets--vertical">
       {{ extra_hidden_inputs }}
+
+      <div class="facets__header">
+        <p class="facets__header-title">{{ 'search.filters' | t: default: 'Filters' }}</p>
+        {%- if has_active_filters -%}
+          <a href="{{ request.path }}" class="facets__header-clear" data-clear-all>
+            {{ 'collections.general.clear_filter' | t: default: 'Clear all' }}
+          </a>
+        {%- endif -%}
+      </div>
+
       {%- for filter in filters -%}
-        <div class="facets__group">
-          <p class="facets__title">{{ filter.label }}</p>
-          {%- render 'facets-fields', filter: filter, form_id: form_id -%}
-        </div>
+        {%- assign group_active = false -%}
+        {%- if filter.active_values.size > 0 -%}
+          {%- assign group_active = true -%}
+        {%- endif -%}
+        {%- if filter.type == 'price_range' and filter.min_value.value != blank or filter.max_value.value != blank -%}
+          {%- assign group_active = true -%}
+        {%- endif -%}
+
+        <details
+          class="facets__accordion"
+          data-facet-dropdown
+          data-facet-key="{{ filter.label | handleize }}"
+          {% if group_active %}
+            open
+          {% endif %}
+        >
+          <summary class="facets__accordion-trigger">
+            <span class="facets__accordion-label">{{ filter.label }}</span>
+            {%- if filter.active_values.size > 0 -%}
+              <span class="facets__badge">{{ filter.active_values.size }}</span>
+            {%- endif -%}
+          </summary>
+          <div class="facets__accordion-panel">
+            {%- render 'facets-fields', filter: filter, form_id: form_id -%}
+          </div>
+        </details>
       {%- endfor -%}
-      <noscript
-        ><button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button></noscript
-      >
+
+      <noscript>
+        <button type="submit">{{ 'search.apply' | t: default: 'Apply filters' }}</button>
+      </noscript>
     </form>
 {%- endcase -%}

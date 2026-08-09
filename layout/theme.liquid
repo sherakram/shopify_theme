@@ -5,6 +5,27 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" />
     {% endif %}
 
+    {%- liquid
+      assign is_filtered_collection = false
+      if template.name == 'collection' and collection.filters.size > 0
+        for filter in collection.filters
+          if filter.active_values.size > 0
+            assign is_filtered_collection = true
+          endif
+          if filter.type == 'price_range' and filter.min_value.value != blank or filter.max_value.value != blank
+            assign is_filtered_collection = true
+          endif
+        endfor
+      endif
+    -%}
+
+    {%- if is_filtered_collection -%}
+      <link rel="canonical" href="{{ collection.url }}">
+      <meta name="robots" content="noindex, follow">
+    {%- else -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
     {% # Load and preload the critical CSS %}

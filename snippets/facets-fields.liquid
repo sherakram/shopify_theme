@@ -1,7 +1,3 @@
-{%- liquid
-  assign auto_submit = auto_submit | default: true
--%}
-
 {%- case filter.type -%}
   {%- when 'list' -%}
     <ul class="facets__list">
@@ -10,6 +6,7 @@
           <label>
             <input
               type="checkbox"
+              class="facets__checkbox"
               name="{{ value.param_name }}"
               value="{{ value.value }}"
               {% if value.active %}
@@ -18,7 +15,6 @@
               {% if value.count == 0 and value.active == false %}
                 disabled
               {% endif %}
-              {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
           </label>
@@ -65,12 +61,12 @@
           <label>
             <input
               type="checkbox"
+              class="facets__checkbox"
               name="{{ value.param_name }}"
               value="{{ value.value }}"
               {% if value.active %}
                 checked
               {% endif %}
-              {% comment %} {% if auto_submit %}{% endif %} {% endcomment %}
             >
             {{ value.label }} ({{ value.count }})
           </label>

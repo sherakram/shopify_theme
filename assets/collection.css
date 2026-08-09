@@ -58,6 +58,17 @@
   padding: 0 0.6rem;
 }
 
+.collection-products__sort noscript button {
+  min-height: 40px;
+  padding: 0 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-foreground);
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols-mobile, 2), 1fr);

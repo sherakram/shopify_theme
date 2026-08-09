@@ -23,9 +23,12 @@
     constructor() {
       this.abortController = null;
       this.cache = {};
+      this.cacheKeys = [];
+      this.maxCacheSize = 15;
       this.requestId = 0;
       this.pendingDrawerClose = false;
-      this.form = document.getElementById("CollectionFacetsForm");
+      // this.form = document.getElementById("CollectionFacetsForm");
+      this.form = document.getElementById("FacetsForm");
 
       if (!this.form) return;
 
@@ -37,7 +40,7 @@
       document.addEventListener("change", (event) => {
         const target = event.target;
 
-        if (!target.closest("#CollectionFacetsForm")) return;
+        if (!target.closest("#FacetsForm")) return;
 
         if (
           target.matches('input[name="filter.v.price.gte"]') ||
@@ -46,13 +49,13 @@
           return;
         }
 
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
 
         this.loadProducts();
       });
 
       document.addEventListener("click", (event) => {
-        const link = event.target.closest(".collection-pagination a");
+        const link = event.target.closest("[data-facets-pagination] a");
 
         if (!link) return;
 
@@ -62,7 +65,7 @@
       });
 
       document.addEventListener("change", (event) => {
-        if (!event.target.matches("#CollectionSortBy")) return;
+        if (!event.target.matches("#FacetsSortBy")) return;
 
         event.preventDefault();
 
@@ -85,7 +88,7 @@
         panel.querySelectorAll('input[type="number"]').forEach((input) => {
           input.value = "";
         });
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
         requestAnimationFrame(() => {
           this.loadProducts();
         });
@@ -115,14 +118,14 @@
         const applyBtn = event.target.closest("[data-facet-price-apply]");
         if (!applyBtn) return;
         event.preventDefault();
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
         this.loadProducts();
       });
       document.addEventListener("keydown", (event) => {
         if (event.key !== "Enter") return;
         if (!event.target.matches("[data-facet-price-input]")) return;
         event.preventDefault();
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
         this.loadProducts();
       });
 
@@ -130,7 +133,7 @@
         const drawerApply = event.target.closest(".facets-drawer__apply");
         if (!drawerApply) return;
         event.preventDefault();
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
         this.pendingDrawerClose = true;
         this.loadProducts();
       });
@@ -142,13 +145,25 @@
       });
     }
 
+    setCache(key, value) {
+      if (this.cache[key]) {
+        this.cacheKeys = this.cacheKeys.filter((k) => k !== key);
+      } else if (this.cacheKeys.length >= this.maxCacheSize) {
+        const oldestKey = this.cacheKeys.shift();
+        delete this.cache[oldestKey];
+      }
+
+      this.cache[key] = value;
+      this.cacheKeys.push(key);
+    }
+
     renderSection(wrapper, id) {
       const current = document.querySelector(`[id^="${id}-"]`);
       const updated = wrapper.querySelector(`[id^="${id}-"]`);
 
       if (!current || !updated) return;
 
-      if (id === "CollectionFilters") {
+      if (id === "FacetsFilters") {
         const openDrawer = current.querySelector(
           "dialog[data-facets-drawer][open]",
         );
@@ -183,7 +198,7 @@
       }
 
       let openKeys = [];
-      if (id === "CollectionFilters") {
+      if (id === "FacetsFilters") {
         openKeys = [
           ...current.querySelectorAll("[data-facet-dropdown][open]"),
         ].map((el) => el.dataset.facetKey);
@@ -207,9 +222,9 @@
     }
 
     announceResults() {
-      const countEl = document.querySelector('[id^="CollectionProductCount-"]');
-      const announceEl = document.querySelector('[id^="CollectionAnnounce-"]');
-      const emptyState = document.querySelector(".collection-empty");
+      const countEl = document.querySelector('[id^="FacetsProductCount-"]');
+      const announceEl = document.querySelector('[id^="FacetsAnnounce-"]');
+      const emptyState = document.querySelector("[data-facets-empty]");
 
       if (!announceEl) return;
 
@@ -232,11 +247,13 @@
     }
 
     moveFocusAfterUpdate() {
-      const openDrawer = document.querySelector("dialog[data-facets-drawer][open]");
+      const openDrawer = document.querySelector(
+        "dialog[data-facets-drawer][open]",
+      );
       if (openDrawer) return;
 
       const countEl = document.querySelector(
-        '[id^="CollectionProductCount-"] .collection-products__count',
+        '[id^="FacetsProductCount-"] [tabindex="-1"]',
       );
       if (countEl) {
         countEl.focus();
@@ -259,7 +276,7 @@
       }
 
       if (!url) {
-        this.form = document.getElementById("CollectionFacetsForm");
+        this.form = document.getElementById("FacetsForm");
         const params = new URLSearchParams(new FormData(this.form));
 
         for (const [key, value] of [...params.entries()]) {
@@ -270,7 +287,6 @@
 
         url = `${window.location.pathname}?${params.toString()}`;
       }
-      console.log("FETCH URL:", url);
 
       const fetchUrl = `${url}${url.includes("?") ? "&" : "?"}section_id=${section}`;
 
@@ -290,19 +306,19 @@
             return;
           }
 
-          this.cache[fetchUrl] = html;
+          this.setCache(fetchUrl, html);
         }
 
         const wrapper = document.createElement("div");
         wrapper.innerHTML = html;
 
         [
-          "CollectionProductGrid",
-          "CollectionProductCount",
-          "CollectionFilters",
-          "CollectionSort",
-          "CollectionPagination",
-          "CollectionActiveFilters",
+          "FacetsProductGrid",
+          "FacetsProductCount",
+          "FacetsFilters",
+          "FacetsSort",
+          "FacetsPagination",
+          "FacetsActiveFilters",
         ].forEach((section) => this.renderSection(wrapper, section));
 
         this.announceResults();
@@ -360,10 +376,10 @@
       document.addEventListener(
         "toggle",
         (e) => {
-          const dropdown = e.target.closest("[data-facet-dropdown]");
+          const dropdown = e.target.closest("[data-facet-toolbar-dropdown]");
           if (!dropdown || !dropdown.open) return;
 
-          document.querySelectorAll("[data-facet-dropdown]").forEach((item) => {
+          document.querySelectorAll("[data-facet-toolbar-dropdown]").forEach((item) => {
             if (item !== dropdown) item.open = false;
           });
         },
@@ -372,10 +388,24 @@
 
       document.addEventListener("click", (e) => {
         document
-          .querySelectorAll("[data-facet-dropdown]")
+          .querySelectorAll("[data-facet-toolbar-dropdown]")
           .forEach((dropdown) => {
             if (!dropdown.contains(e.target)) dropdown.open = false;
           });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+
+        const openDropdown = document.querySelector(
+          "[data-facet-toolbar-dropdown][open]",
+        );
+        if (!openDropdown) return;
+
+        const trigger = openDropdown.querySelector(".facets__dropdown-trigger");
+        openDropdown.open = false;
+
+        if (trigger) trigger.focus();
       });
     }
   }
