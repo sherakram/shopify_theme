@@ -18,16 +18,15 @@
     "main": {
       "type": "collection",
       "settings": {
-        "filters_use_drawer": false,
-        "enable_filters": true,
-        "enable_sort": true,
-        "sort_options": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
         "product_per_row": "4",
         "product_per_row_mobile": "2",
-        "page_size_default": 12,
+        "page_size_default": 24,
         "collection_color_scheme": "scheme-1",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },

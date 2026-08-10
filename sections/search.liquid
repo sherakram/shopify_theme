@@ -287,12 +287,49 @@
   "settings": [
     {
       "type": "header",
-      "content": "Search results grid"
+      "content": "t:general.filter_and_sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "t:labels.enable_filters",
+      "default": true,
+      "info": "t:informative_content.filters_info"
+    },
+    {
+      "type": "select",
+      "label": "t:labels.filter_layout",
+      "id": "filter_type",
+      "options": [
+        { 
+          "value": "horizontal", 
+          "label": "t:options.direction.horizontal" 
+        },
+        { 
+          "value": "vertical", 
+          "label": "t:options.direction.vertical" 
+        },
+        { 
+          "value": "drawer", 
+          "label": "t:options.direction.drawer" 
+        }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "t:labels.sort_selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.search_results_grid"
     },
     {
       "type": "select",
       "id": "card_per_row",
-      "label": "Cards per row (desktop)",
+      "label": "t:labels.card_per_row",
       "options": [
         { 
           "value": "2", 
@@ -312,7 +349,7 @@
     {
       "type": "select",
       "id": "card_per_row_mobile",
-      "label": "Cards per row (mobile)",
+      "label": "t:labels.card_per_row_mobile",
       "options": [
         { 
           "value": "1", 
@@ -328,7 +365,7 @@
     {
       "type": "range",
       "id": "products_per_page",
-      "label": "Results per page",
+      "label": "t:labels.results_per_page",
       "min": 8,
       "max": 48,
       "step": 4,
@@ -336,83 +373,46 @@
     },
     {
       "type": "header",
-      "content": "Card content"
+      "content": "t:content.card_content"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "label": "Show product vendor",
+      "label": "t:labels.show_product_vendor",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_excerpt",
-      "label": "Show article excerpt",
+      "label": "t:labels.show_article_excerpt",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_author",
-      "label": "Show article author",
+      "label": "t:labels.show_article_author",
       "default": false
     },
     {
       "type": "checkbox",
       "id": "show_date",
-      "label": "Show article date",
+      "label": "t:labels.show_article_date",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_tags_on_card",
-      "label": "Show article tag",
+      "label": "t:labels.show_article_tag",
       "default": false
     },
     {
       "type": "header",
-      "content": "t:general.filter_and_sorting"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_filtering",
-      "label": "t:labels.enable_filters",
-      "default": true,
-      "info": "t:informative_content.filters_info"
-    },
-    {
-      "type": "select",
-      "id": "filter_type",
-      "options": [
-        { 
-          "value": "horizontal", 
-          "label": "Horizontal" 
-        },
-        { 
-          "value": "vertical", 
-          "label": "Vertical" 
-        },
-        { 
-          "value": "drawer", 
-          "label": "Drawer" 
-        }
-      ],
-      "default": "horizontal",
-      "label": "Filter layout"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sorting",
-      "label": "t:labels.sort_selector",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Section settings"
+      "content": "t:content.section_settings"
     },
     {
       "type": "color_scheme",
       "id": "search_color_scheme",
-      "label": "Color scheme",
+      "label": "t:labels.color_scheme",
       "default": "scheme-1"
     },
     {
@@ -423,7 +423,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 32
+      "default": 48
     },
     {
       "type": "range",

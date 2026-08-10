@@ -46,7 +46,7 @@
           <aside
             class="collection-products__facets"
             id="FacetsFilters-{{ section.id }}"
-            aria-label="{{ 'search.filters' | t: default: 'Filters' }}"
+            aria-label="{{ 'collections.general.filters' | t: default: 'Filters' }}"
           >
             {%- render 'facets',
               filters: collection.filters,
@@ -86,7 +86,7 @@
               {%- if section.settings.enable_sorting -%}
                 <div id="FacetsSort-{{ section.id }}">
                   <form class="collection-products__sort" action="{{ collection.url }}" method="get">
-                    <label for="FacetsSortBy">{{ 'search.sort_by' | t: default: 'Sort by' }}</label>
+                    <label for="FacetsSortBy">{{ 'collections.sorting.title' | t: default: 'Sort by' }}</label>
                     <select id="FacetsSortBy" name="sort_by">
                       {%- for option in collection.sort_options -%}
                         <option
@@ -100,7 +100,7 @@
                       {%- endfor -%}
                     </select>
                     <noscript>
-                      <button type="submit">{{ 'search.apply' | t: default: 'Apply' }}</button>
+                      <button type="submit">{{ 'collections.general.apply' | t: default: 'Apply' }}</button>
                     </noscript>
                   </form>
                 </div>
@@ -108,7 +108,7 @@
               <div id="FacetsProductCount-{{ section.id }}">
                 <p class="collection-products__count" tabindex="-1">
                   {{ collection.products_count }}
-                  {{ 'search.items' | t: default: 'items' }}
+                  {{ 'collections.general.items' | t: default: 'items' }}
                 </p>
               </div>
             </div>
@@ -178,23 +178,23 @@
     },
     {
       "type": "select",
+      "label": "t:labels.filter_layout",
       "id": "filter_type",
       "options": [
         {
           "value": "horizontal",
-          "label": "Horizontal"
+          "label": "t:options.direction.horizontal"
         },
         {
           "value": "vertical",
-          "label": "Vertical"
+          "label": "t:options.direction.vertical"
         },
         {
           "value": "drawer",
-          "label": "Drawer"
+          "label": "t:options.direction.drawer"
         }
       ],
-      "default": "horizontal",
-      "label": "Filter layout"
+      "default": "horizontal"
     },
     {
       "type": "checkbox",
@@ -209,7 +209,7 @@
     {
       "type": "select",
       "id": "product_per_row",
-      "label": "Products per row (desktop)",
+      "label": "t:labels.card_per_row",
       "options": [
         {
           "label": "2",
@@ -229,7 +229,7 @@
     {
       "type": "select",
       "id": "product_per_row_mobile",
-      "label": "Products per row (mobile)",
+      "label": "t:labels.card_per_row_mobile",
       "options": [
         {
           "label": "1",
@@ -249,16 +249,16 @@
       "min": 12,
       "max": 50,
       "step": 1,
-      "default": 12
+      "default": 24
     },
     {
       "type": "header",
-      "content": "Section settings"
+      "content": "t:content.section_settings"
     },
     {
       "type": "color_scheme",
       "id": "collection_color_scheme",
-      "label": "Color scheme",
+      "label": "t:labels.color_scheme",
       "default": "scheme-1"
     },
     {
@@ -269,7 +269,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 20
+      "default": 48
     },
     {
       "type": "range",
@@ -279,7 +279,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 20
+      "default": 48
     }
   ]
 }

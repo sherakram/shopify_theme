@@ -168,6 +168,9 @@
     "max_card_width_tablet": "Max Card Width (Tablet)",
     "mobile_columns": "Mobile Columns",
     "max_card_width_mobile": "Max Card Width (Mobile)",
+    "card_per_row": "Cards per row (desktop)",
+    "card_per_row_mobile": "Cards per row (mobile)",
+    "results_per_page": "Results per page",
     "column_gap": "Column Gap",
     "row_gap": "Row Gap",
     "card_shadow_opacity": "Opacity",
@@ -200,7 +203,7 @@
     "enable_filters": "Enable filters (Search & Discovery)",
     "sort_selector": "Enable sort selector",
     "sort_options": "Sort options (Label:Value, comma-separated)",
-    "items_per_page": "Default items per page",
+    "items_per_page": "Cards per page",
     "position": "Position",
     "image": "Image",
     "video": "Video",
@@ -224,6 +227,7 @@
     "show_border": "Show border",
     "lazy_load": "Lazy load images",
     "show_vendor": "Show vendor",
+    "show_product_vendor": "Show product vendor",
     "show_reviews": "Show reviews",
     "show_rating": "Show rating",
     "show_price": "Show price",
@@ -283,13 +287,17 @@
     "google_maps_embed_url": "Google Maps embed URL",
     "show_social_links": "Show social links",
     "show_excerpt": "Show excerpt",
+    "show_article_excerpt": "Show article excerpt",
     "show_date": "Show date",
+    "show_article_date": "Show article date",
     "show_author": "Show author",
+    "show_article_author": "Show article author",
     "author_icon": "Author icon",
     "show_reading_time": "Show reading time",
     "show_tag": "Show tags",
     "show_drop_cap": "Show drop cap",
     "show_tag_on_card": "Show tag on card",
+    "show_article_tag": "Show article tag",
     "content_align": "Content alignment",
     "blog_heading": "Heading",
     "blog_subheading": "Subheading",
@@ -298,7 +306,8 @@
     "columns_on_desktop": "Columns on desktop",
     "articles_per_page": "Articles per page",
     "show_previous_and_next_links": "Show previous/next article links",
-    "enable_comments": "Enable comments section"
+    "enable_comments": "Enable comments section",
+    "filter_layout": "Filter layout"
   },
   "content":{
     "section_settings": "Section settings",
@@ -316,7 +325,8 @@
     "blog_filters": "Filtering",
     "blog_card_layout": "Layout",
     "navigation": "Navigation",
-    "comment": "Comments"
+    "comment": "Comments",
+    "search_results_grid": "Search results grid",
   },
 
   "options": {
@@ -329,7 +339,8 @@
     },
     "direction": {
       "horizontal": "Horizontal",
-      "vertical": "Vertical"
+      "vertical": "Vertical",
+      "drawer": "Drawer"
     },
     "page_width": {
       "narrow": "Narrow",
