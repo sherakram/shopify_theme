@@ -537,3 +537,61 @@ input[type=number] {
   color: var(--color-foreground);
   margin: 0;
 }
+
+/* Active Filter Chips */
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.active-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 34px;
+  padding: 0 0.5rem 0 0.85rem;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.15));
+  border-radius: 999px;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font: 400 0.82rem/1 var(--font-body--family, sans-serif);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.active-filter:hover {
+  border-color: var(--color-foreground);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.active-filter:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.active-filter span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+}
+
+.active-filter--clear {
+  border-style: dashed;
+  color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  font-weight: 500;
+  padding-inline: 0.85rem;
+}
+
+.active-filter--clear:hover {
+  color: var(--color-foreground);
+  border-color: var(--color-foreground);
+}

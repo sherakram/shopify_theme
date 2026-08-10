@@ -1,4 +1,5 @@
 {%- assign has_active_filters = false -%}
+{%- assign clear_all_url = clear_all_url | default: request.path -%}
 
 <div class="active-filters">
   {%- for filter in filters -%}
@@ -37,7 +38,7 @@
 
   {%- if has_active_filters -%}
     <a
-      href="{{ request.path }}"
+      href="{{ clear_all_url }}"
       class="active-filter active-filter--clear"
       data-clear-all
     >
