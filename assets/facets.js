@@ -17,6 +17,12 @@
       });
 
     new FacetsHorizontal();
+
+    document
+      .querySelectorAll("[data-facets-container]")
+      .forEach((container) => {
+        new FacetsMobilePanel(container);
+      });
   }
 
   class FacetsAjax {
@@ -27,7 +33,6 @@
       this.maxCacheSize = 15;
       this.requestId = 0;
       this.pendingDrawerClose = false;
-      // this.form = document.getElementById("CollectionFacetsForm");
       this.form = document.getElementById("FacetsForm");
 
       if (!this.form) return;
@@ -379,9 +384,11 @@
           const dropdown = e.target.closest("[data-facet-toolbar-dropdown]");
           if (!dropdown || !dropdown.open) return;
 
-          document.querySelectorAll("[data-facet-toolbar-dropdown]").forEach((item) => {
-            if (item !== dropdown) item.open = false;
-          });
+          document
+            .querySelectorAll("[data-facet-toolbar-dropdown]")
+            .forEach((item) => {
+              if (item !== dropdown) item.open = false;
+            });
         },
         true,
       );
@@ -409,6 +416,17 @@
       });
     }
   }
+
+  const facetsDesktopMQ = window.matchMedia("(min-width: 990px)");
+  facetsDesktopMQ.addEventListener("change", (e) => {
+    if (!e.matches) return;
+    document
+      .querySelectorAll("[data-facets-container].is-open")
+      .forEach((c) => {
+        c.classList.remove("is-open");
+      });
+    document.documentElement.style.overflow = "";
+  });
 
   class FacetsDrawer {
     constructor(trigger, dialog) {
