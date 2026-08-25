@@ -68,19 +68,26 @@
     "names": {
       "hero_text": "Hero — Heading & text",
       "info_card": "Info card",
-      "content": "Content"
+      "content": "Content",
+      "newsletter": "Newsletter signup"
     },
     "labels": {
       "badge_label": "Badge label",
       "heading": "Heading",
+      "heading_text": "Heading text",
       "subtext": "Subtext",
+      "subheading_text": "Subheading text",
       "icon": "Icon",
       "title": "Title",
       "value": "Value",
       "adapt_image": "Adapt to image",
       "small": "Small",
       "medium": "Medium",
-      "large": "Large"
+      "large": "Large",
+      "top": "Top",
+      "bottom": "Bottom",
+      "left": "Left",
+      "right": "Right"
     },
     "options": {
       "email_label": "Email",
@@ -90,6 +97,10 @@
       "left": "Left",
       "center": "Center",
       "right": "Right"
+    },
+    "content": {
+      "padding": "Padding",
+      "newsletter_width": "Newsletter Width"
     }
   },
 
@@ -141,6 +152,8 @@
     "alignment": "Alignment",
     "title_align": "Title alignment",
     "background": "Background",
+    "background_image": "Background image",
+    "background_video": "Background video",
     "foreground": "Foreground",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
@@ -307,7 +320,10 @@
     "articles_per_page": "Articles per page",
     "show_previous_and_next_links": "Show previous/next article links",
     "enable_comments": "Enable comments section",
-    "filter_layout": "Filter layout"
+    "filter_layout": "Filter layout",
+    "container_position": "Container position",
+    "background_select": "Background type",
+    "input_radius": "Input Radius"
   },
   "content":{
     "section_settings": "Section settings",
@@ -327,6 +343,9 @@
     "navigation": "Navigation",
     "comment": "Comments",
     "search_results_grid": "Search results grid",
+    "container": "Container",
+    "background_type": "Background",
+    "submit-button": "Submit button"
   },
 
   "options": {
@@ -408,7 +427,8 @@
     "color_scheme_info": "Editing this scheme's colors will affect all sections using this scheme.",
     "custom_css_info": "Add custom CSS to this section. Access section class with .section-{{ id }}.",
     "featured_post_info": "Shows the most recent article as a large hero card. Automatically hidden when a tag filter is active.",
-    "filters_info": "Customize filters with the [Search & Discovery app](https://help.shopify.com/manual/online-store/search-and-discovery/filters)"
+    "filters_info": "Customize filters with the [Search & Discovery app](https://help.shopify.com/manual/online-store/search-and-discovery/filters)",
+    "video_frame": "Also used as video poster frame"
   },
 
   "sections": {
