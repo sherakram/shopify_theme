@@ -39,7 +39,8 @@
   "404": {
     "title": "404",
     "not_found": "Page not found.",
-    "back_to_shopping": "Back to shopping"
+    "back_to_shopping": "Back to shopping",
+    "quick_links": "Popular pages"
   },
   "mobile_menu":{
     "menu":"Menu"

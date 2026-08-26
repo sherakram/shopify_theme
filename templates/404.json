@@ -1,40 +1,22 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "404",
       "settings": {
-        "bg_height": "large",
-        "background_animation": "none",
-        "background_animation_speed": "medium",
-        "main_bg_color": "#ffffff",
+        "color_scheme": "scheme-1",
+        "background_type": "image",
         "overlay_opacity": 30,
-        "text_align": "center",
-        "enable_box_shadow": false,
-        "title": "404",
-        "heading_color": "#000000",
-        "notfound": "Oops, Page Not Found",
-        "not_found_color": "#000000",
-        "message": "Page that you're looking for isn't found",
-        "message_color": "#000000",
-        "button_link_404": "",
-        "button_text_404": "Back to Home",
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "background_height": "large",
+        "heading": "Oops, page not found",
+        "message": "The page you're looking for doesn't exist or has been moved.",
+        "show_search": true,
+        "button_text": "Back to home",
+        "button_link": "",
+        "enable_shadow": true,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }
