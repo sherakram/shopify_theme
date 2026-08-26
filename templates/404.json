@@ -5,14 +5,15 @@
       "settings": {
         "color_scheme": "scheme-1",
         "background_type": "image",
+        "overlay_color": "#000000",
         "overlay_opacity": 30,
-        "background_height": "large",
         "heading": "Oops, page not found",
         "message": "The page you're looking for doesn't exist or has been moved.",
         "show_search": true,
         "button_text": "Back to home",
         "button_link": "",
         "enable_shadow": true,
+        "background_height": "large",
         "padding_top": 40,
         "padding_bottom": 40
       }

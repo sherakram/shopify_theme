@@ -1,115 +1,149 @@
-{{ 'base.css' | asset_url | stylesheet_tag }}
 {{ '404.css' | asset_url | stylesheet_tag }}
 
 {% if template.name == '404' %}
-  {%- liquid
-    assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0
-  -%}
+  {% liquid
+    assign bg_type = section.settings.background_type
+    assign placeholder_image = 'lifestyle-1'
+
+    if section.settings.bg_image != blank
+      assign bg_image_url = section.settings.bg_image | image_url: width: 2000
+      assign is_placeholder = false
+    else
+      assign is_placeholder = true
+    endif
+
+    assign content_align = 'center'
+    if section.settings.alignment == 'left'
+      assign content_align = 'flex-start'
+    elsif section.settings.alignment == 'right'
+      assign content_align = 'flex-end'
+    endif
+
+    assign container_align = 'center'
+    if section.settings.container_position == 'left'
+      assign container_align = 'flex-start'
+    elsif section.settings.container_position == 'right'
+      assign container_align = 'flex-end'
+    endif
+  %}
+
+  {% style %}
+    #notfound-{{ section.id }} {
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+      --container-position: {{ container_align }};
+    }
+
+    #notfound-{{ section.id }} .bg-overlay {
+      opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+      background: {{ section.settings.overlay_color | default: '#000000' }};
+    }
+
+    #notfound-{{ section.id }} .notfound-container {
+      --container-align:{{ section.settings.alignment }};
+      --container-align-items: {{ content_align }};
+    }
+
+    {% if section.settings.transparent_background %}
+      #notfound-{{ section.id }} .notfound-container {
+        background-color: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+      }
+    {% endif %}
+  {% endstyle %}
 
   <div
-    class="notfound-hero color-{{ section.settings.color_scheme }} notfound-hero--{{ section.settings.background_height }}"
-    style="--notfound-overlay-opacity: {{ overlay_alpha }}; --notfound-padding-top: {{ section.settings.padding_top }}px; --notfound-padding-bottom: {{ section.settings.padding_bottom }}px;"
+    id="notfound-{{ section.id }}"
+    class="notfound-page notfound-page--{{ section.settings.background_height }} full-width color-{{ section.settings.color_scheme }}"
   >
-
-    {%- if section.settings.background_type == 'image' and section.settings.background_image -%}
-      <div class="notfound-hero__media" aria-hidden="true">
-        <img
-          src="{{ section.settings.background_image | image_url: width: 2000 }}"
-          srcset="{{ section.settings.background_image | image_url: width: 750 }} 750w,
-                  {{ section.settings.background_image | image_url: width: 1100 }} 1100w,
-                  {{ section.settings.background_image | image_url: width: 1500 }} 1500w,
-                  {{ section.settings.background_image | image_url: width: 2000 }} 2000w,
-                  {{ section.settings.background_image | image_url: width: 2500 }} 2500w"
-          sizes="100vw"
-          width="{{ section.settings.background_image.width }}"
-          height="{{ section.settings.background_image.height }}"
-          alt=""
-          loading="eager"
-          fetchpriority="high"
-        >
-        <div class="notfound-hero__overlay"></div>
+    {% if bg_type == 'image' %}
+      <div class="page-background">
+        {% if is_placeholder %}
+          {{ placeholder_image | placeholder_svg_tag: '2000x1500' }}
+        {% else %}
+          <img
+            src="{{ bg_image_url }}"
+            alt=""
+            role="presentation"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            width="2000"
+            height="1500"
+            srcset="
+              {{ section.settings.bg_image | image_url: width: 750 }} 750w,
+              {{ section.settings.bg_image | image_url: width: 1100 }} 1100w,
+              {{ section.settings.bg_image | image_url: width: 1500 }} 1500w,
+              {{ section.settings.bg_image | image_url: width: 2000 }} 2000w,
+              {{ section.settings.bg_image | image_url: width: 2500 }} 2500w
+            "
+            sizes="100vw"
+          >
+        {% endif %}
+        <div class="bg-overlay"></div>
       </div>
 
-    {%- elsif section.settings.background_type == 'video' and section.settings.background_video -%}
-      <div class="notfound-hero__media notfound-hero__media--video" aria-hidden="true">
-        {{
-          section.settings.background_video
-          | video_tag:
-            image_size: '1920x',
-            autoplay: true,
-            loop: true,
-            muted: true,
-            controls: false,
-            class: 'notfound-hero__video'
-        }}
-        <div class="notfound-hero__overlay"></div>
+    {% elsif bg_type == 'video' %}
+      <div class="notfound-video-wrapper">
+        {% assign video = section.settings.bg_video %}
+        {% if video != blank %}
+          <video
+            class="notfound-bg-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            {% if section.settings.bg_image != blank %}
+              poster="{{ bg_image_url }}"
+            {% endif %}
+          >
+            {% if video.sources %}
+              {% for source in video.sources %}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {% endfor %}
+            {% else %}
+              <source src="{{ video | file_url }}" type="video/mp4">
+            {% endif %}
+          </video>
+        {% else %}
+          {{ placeholder_image | placeholder_svg_tag: '2000x1500' }}
+        {% endif %}
+        <div class="bg-overlay"></div>
       </div>
-    {%- endif -%}
+    {% endif %}
 
-    <div class="notfound-hero__content page-width">
-      <div class="notfound-hero__card{% if section.settings.enable_shadow %} notfound-hero__card--shadow{% endif %}">
+    <div class="notfound-container{% if section.settings.enable_shadow %} notfound-container--shadow{% endif %}">
+      <span class="notfound-code" aria-hidden="true">404</span>
 
-        <span class="notfound-hero__code" aria-hidden="true">404</span>
+      <h1 class="notfound-heading">{{ section.settings.heading }}</h1>
 
-        <h1 class="notfound-hero__heading">{{ section.settings.heading }}</h1>
+      {% if section.settings.message != blank %}
+        <p class="notfound-subtext">{{ section.settings.message }}</p>
+      {% endif %}
 
-        {%- if section.settings.message != blank -%}
-          <p class="notfound-hero__message">{{ section.settings.message }}</p>
-        {%- endif -%}
+      {% if section.settings.button_text != blank %}
+        <div class="notfound-actions">
+          <a href="{{ section.settings.button_link | default: routes.root_url }}" class="notfound-button">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {% endif %}
 
-        {%- if section.settings.show_search -%}
-          <div class="notfound-hero__search">
-            {%- comment -%} Swap this for your predictive-search component if you have one {%- endcomment -%}
-            <form action="{{ routes.search_url }}" method="get" role="search" class="notfound-hero__search-form">
-              <label for="NotFoundSearch-{{ section.id }}" class="visually-hidden">
-                {{ 'search.placeholder' | t: default: 'Search our store' }}
-              </label>
-              <input
-                type="search"
-                name="q"
-                id="NotFoundSearch-{{ section.id }}"
-                class="notfound-hero__search-input"
-                placeholder="{{ 'search.placeholder' | t: default: 'Search our store' }}"
-                autocomplete="off"
-              >
-              <input type="hidden" name="type" value="product">
-              <button
-                type="submit"
-                class="notfound-hero__search-submit"
-                aria-label="{{ 'search.submit' | t: default: 'Search' }}"
-              >
-                <span aria-hidden="true">&#8594;</span>
-              </button>
-            </form>
-          </div>
-        {%- endif -%}
-
-        {%- if section.settings.button_text != blank -%}
-          <div class="notfound-hero__actions">
-            
-            <a  href="{{ section.settings.button_link | default: routes.root_url }}"
-              class="notfound-hero__button"
-            >
-              {{ section.settings.button_text }}
-            </a>
-          </div>
-        {%- endif -%}
-
-        {%- if section.blocks.size > 0 -%}
-          <nav class="notfound-hero__quicklinks" aria-label="{{ '404.quick_links' | t: default: 'Popular pages' }}">
-            <ul>
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'quick_link' and block.settings.title != blank -%}
-                  <li {{ block.shopify_attributes }}>
-                    <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.title }}</a>
-                  </li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
-          </nav>
-        {%- endif -%}
-
-      </div>
+      {% if section.blocks.size > 0 %}
+        <nav class="notfound-quicklinks" aria-label="{{ '404.quick_links' | t: default: 'Popular pages' }}">
+          <ul>
+            {% for block in section.blocks %}
+              {% if block.type == 'quick_link' and block.settings.title != blank %}
+                <li {{ block.shopify_attributes }}>
+                  <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
     </div>
   </div>
 {% endif %}
@@ -117,75 +151,134 @@
 {% schema %}
 {
   "name": "t:general.404",
+  "tag": "section",
   "settings": [
     {
       "type": "header",
-      "content": "Background"
+      "content": "t:general.layout"
     },
     {
       "type": "select",
-      "id": "background_type",
-      "label": "Background type",
+      "id": "container_position",
+      "label": "t:labels.container_position",
       "options": [
-        { 
-          "value": "image", 
-          "label": "Image" 
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
         },
-        { 
-          "value": "video", 
-          "label": "Video" 
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
         }
       ],
-      "default": "image"
+      "default": "center"
     },
     {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image",
-      "info": "Used when Background type is set to Image",
-      "visible_if": "{{ section.settings.background_type == 'image' }}"
-    },
-    {
-      "type": "video",
-      "id": "background_video",
-      "label": "Background video",
-      "info": "Used when Background type is set to Video. Muted, autoplay, loops.",
-      "visible_if": "{{ section.settings.background_type == 'video' }}"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay darkness",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 30,
-      "info": "Applies to image and video backgrounds only"
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
+        },
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",
       "id": "background_height",
       "label": "Section height",
       "options": [
-        { 
-          "value": "small", 
-          "label": "Small" 
+        {
+          "value": "small",
+          "label": "Small"
         },
-        { 
-          "value": "medium", 
-          "label": "Medium" 
+        {
+          "value": "medium",
+          "label": "Medium"
         },
-        { 
-          "value": "large", 
-          "label": "Large" 
+        {
+          "value": "large",
+          "label": "Large"
         },
-        { 
-          "value": "full", 
-          "label": "Full screen" 
+        {
+          "value": "full",
+          "label": "Full screen"
         }
       ],
       "default": "large"
+    },
+    {
+      "type": "header",
+      "content": "t:content.container"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_background",
+      "label": "t:labels.background",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.background_type"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "t:labels.background_select",
+      "options": [
+        {
+          "value": "image",
+          "label": "t:labels.image"
+        },
+        {
+          "value": "video",
+          "label": "t:labels.video"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "t:labels.background_image",
+      "info": "t:informative_content.video_frame",
+      "visible_if": "{{ section.settings.background_type == 'image' }}"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "t:labels.background_video",
+      "visible_if": "{{ section.settings.background_type == 'video' }}"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:settings.overlay_color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:settings.overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
     },
     {
       "type": "header",
@@ -202,12 +295,6 @@
       "id": "message",
       "label": "Message",
       "default": "The page you're looking for doesn't exist or has been moved."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_search",
-      "label": "Show search bar",
-      "default": true
     },
     {
       "type": "text",
@@ -234,27 +321,27 @@
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "t:sections.all.color_scheme",
+      "label": "t:labels.color_scheme",
       "default": "scheme-1"
     },
     {
       "type": "range",
       "id": "padding_top",
+      "label": "t:sections.all.padding.padding_top",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 10,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
       "default": 40
     },
     {
       "type": "range",
       "id": "padding_bottom",
+      "label": "t:sections.all.padding.padding_bottom",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 10,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
       "default": 40
     }
   ],
@@ -276,6 +363,9 @@
         }
       ]
     }
-  ]
+  ],
+  "enabled_on": {
+    "templates": ["404"]
+  }
 }
 {% endschema %}
