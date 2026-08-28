@@ -345,7 +345,8 @@
     "search_results_grid": "Search results grid",
     "container": "Container",
     "background_type": "Background",
-    "submit-button": "Submit button"
+    "submit-button": "Submit button",
+    "footer_utilities": "Utilities"
   },
 
   "options": {

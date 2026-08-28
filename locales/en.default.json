@@ -200,5 +200,20 @@
   "social_meida_name": {
     "facebook": "Facebook",
     "instagram": "Instagram"
+  },
+  "footer": {
+    "payment" : {
+      "methods": "Payment Methods"
+    },
+    "newsletter_form": {
+      "email_placeholder": "Email address",
+      "submit": "Subscribe",
+      "confirmation": "Thanks for subscribing!"
+    }
+  },
+  "localization": {
+    "country_label": "Country/region",
+    "language_label": "Language",
+    "update": "Update"
   }
 }
