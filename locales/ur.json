@@ -688,7 +688,31 @@
         "paid_label": "ادا کیا گیا۔",
         "payment_due_label": "ادائیگی واجب الادا",
         "vat_label_html": "ٹیکسوں میں %{amount} شامل ہیں",
-        "duties_included_label": "کل رقم میں ٹیکس اور ڈیوٹیز شامل ہیں۔ ترسیل پر کوئی اضافی چارجز نہیں ہیں۔"
+        "duties_included_label": "کل رقم میں ٹیکس اور ڈیوٹیز شامل ہیں۔ ترسیل پر کوئی اضافی چارجز نہیں ہیں۔",
+        "title": "آرڈر کا خلاصہ",
+        "product_disclosures": {
+          "title": "مصنوعات سے متعلق انکشافات"
+        },
+        "group_title_label": "\"%{group_title}\" کا حصہ",
+        "for_add_on": "اس کے لیے: %{group_title}",
+        "from_shop_heading": "%{shop_name} سے",
+        "from_other_stores_heading": "دوسرے اسٹورز سے",
+        "from_multiple_stores_heading": "متعدد سٹورز سے",
+        "number_items": {
+          "one": "%۔۱ آئٹم",
+          "other": "% {count} آئٹمز"
+        },
+        "view_all_items": {
+          "one": "ایک شے دیکھیں",
+          "other": "تمام %{count} اشیاء دیکھیں"
+        },
+        "more_items_modal": {
+          "search_item": "تلاش کریں",
+          "clear_search": "تلاش صاف کریں",
+          "empty_results": "\"%{searchText}\" کے لیے کوئی نتیجہ نہیں ملا۔ املا کی جانچ کریں یا کوئی دوسرا لفظ یا جملہ استعمال کریں۔",
+          "number_items_shown": "%{shownNumber} از %{totalNumber} اشیاء"
+        },
+        "order_name_label": "آرڈر %{name}"
       },
       "change_currency": {
         "currency_not_supported_by_shop": "آپ کی منتخب کردہ کرنسی اب دستیاب نہیں ہے۔ تمام قیمتیں اب %{currency_code} میں ہیں۔",
@@ -1219,6 +1243,150 @@
         "shipping_company_required_error": "{{shopName}} کو شپنگ ایڈریس کے لیے کمپنی کا نام درکار ہے۔",
         "decision_rule_block": "آپ کی ادائیگی پر کارروائی کرنے میں ایک مسئلہ پیش آیا ہے۔ براہ کرم دکان کے مالک سے رابطہ کریں۔",
         "cancelled_payment": "آپ کی ادائیگی منسوخ کر دی گئی ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔"
+      },
+      "remote_merchandise_only": {
+        "checkout_on_shop_label": "%{shop_name} پر دیکھیں۔",
+        "single_shop_transition": "آپ کو اپنی خریداری مکمل کرنے کے لیے %{advertiser} پر بھیجا جا رہا ہے۔"
+      },
+      "stock": {
+        "page_title": "انوینٹری کے مسائل",
+        "title": "اسٹاک میں نہیں",
+        "items_unavailable_notice": "کچھ اشیاء اب دستیاب نہیں ہیں۔",
+        "product_column_header": "مصنوعات",
+        "quantity_column_header": "مقدار",
+        "price_column_header": "قیمت",
+        "status_column_header": "سٹیٹس",
+        "removed_from_cart_notice": "کارٹ سے ہٹا دیا گیا",
+        "sold_out_label": "بِک گیا",
+        "reduced_label": "کم کر دیا گیا",
+        "reduced_with_quantity_label": "صرف %{quantity_available} باقی ہیں۔",
+        "remove_from_cart_button_label": "کارٹ سے ہٹائیں",
+        "continue_shopping_button_label": "جاری رکھیں",
+        "go_back_to_cart_button_label": "میری کارٹ پر واپس جائیں",
+        "remove": "ہٹائیں",
+        "return_to_store_label": "اسٹور پر واپس جائیں",
+        "continue_cta_label": "چیک آؤٹ جاری رکھیں",
+        "item_label": {
+          "one": "{{count}} آئٹم",
+          "other": "{{count}} آئٹمز"
+        },
+        "empty_cart_label": "آپ کی کارٹ خالی ہے۔",
+        "quantity_update": {
+          "page_title": "مقدار میں تازہ کاری",
+          "title": "مقدار میں تازہ کاری",
+          "description": "ان آئٹمز کی دستیاب مقداریں تبدیل ہو گئی ہیں اور آپ کے کارٹ میں اپ ڈیٹ کر دی گئی ہیں۔"
+        },
+        "unpurchasable_product": {
+          "title": "ایسی مصنوعات جو خریدی نہیں جا سکتیں",
+          "header": "آپ کی کارٹ سے کچھ چیزیں ہٹا دی گئی ہیں۔",
+          "message": "یہ اشیاء B2B آرڈرز کے لیے دستیاب نہیں ہیں۔",
+          "status_column_header": "دستیاب نہیں"
+        },
+        "unpurchasable_product_generic": {
+          "title": "ایسی مصنوعات جو خریدی نہیں جا سکتیں",
+          "header": "آپ کی کارٹ سے کچھ چیزیں ہٹا دی گئی ہیں۔",
+          "message": "یہ اشیاء دستیاب نہیں ہیں۔",
+          "status_column_header": "دستیاب نہیں"
+        },
+        "unfulfillable_product": {
+          "title": "فراہمی دستیاب نہیں ہے۔",
+          "message": {
+            "one": "%{delivery_method} اب اس آئٹم کے لیے دستیاب نہیں ہے۔",
+            "other": "یہ اشیاء اب %{delivery_method} کے ذریعے دستیاب نہیں ہیں۔"
+          },
+          "default_message": {
+            "one": "منتخب کردہ ڈیلیوری کا طریقہ اب اس آئٹم کے لیے دستیاب نہیں ہے۔",
+            "other": "منتخب کردہ ڈیلیوری کا طریقہ اب ان اشیاء کے لیے دستیاب نہیں ہے۔"
+          }
+        },
+        "unshippable_product": {
+          "title": "ڈیلیوری دستیاب نہیں ہے۔",
+          "header": {
+            "one": "%{count} آئٹم کی ڈیلیوری دستیاب نہیں",
+            "other": "%{count} آئٹمز کے لیے ڈیلیوری دستیاب نہیں ہے۔"
+          },
+          "message": {
+            "one": "اس چیز کو آپ کی کارٹ سے ہٹا دیا جائے گا کیونکہ آپ کے ایڈریس کے لیے کوئی ڈیلیوری کا طریقہ دستیاب نہیں ہے۔",
+            "other": "یہ چیزیں آپ کے کارٹ سے ہٹا دی جائیں گی کیونکہ آپ کے ایڈریس کے لیے کوئی ڈیلیوری کا طریقہ دستیاب نہیں ہے۔"
+          },
+          "status_column_header": "کوئی ڈیلیوری نہیں"
+        },
+        "price_update": {
+          "title": "قیمت کی تازہ کاری",
+          "description": "ان اشیاء کی قیمتیں تبدیل ہوگئی ہیں اور آپ کی کارٹ میں اپ ڈیٹ کر دی گئی ہیں۔",
+          "updated_price": "تازہ ترین قیمت"
+        },
+        "price_and_quantity_update": {
+          "title": "قیمت اور مقدار کی تازہ کاری",
+          "description": "ان اشیاء کی قیمتیں اور دستیاب مقدار تبدیل ہو گئی ہیں اور آپ کے کارٹ میں اپ ڈیٹ کر دی گئی ہیں۔"
+        },
+        "out_of_stock": {
+          "description": "یہ آئٹمز اب دستیاب نہیں ہیں اور آپ کی کارٹ سے ہٹا دی جائیں گی۔",
+          "items_unavailable": "کچھ آئٹمز اب دستیاب نہیں ہیں اور آپ کی کارٹ سے ہٹا دیے جائیں گے۔",
+          "missing_items": {
+            "title": {
+              "one": "{{count}} آئٹم اب دستیاب نہیں ہے",
+              "other": "{{count}} آئٹمز اب دستیاب نہیں ہیں۔"
+            },
+            "some_available_notice": {
+              "one": "باقی اشیاء اب بھی چیک آؤٹ کے لیے دستیاب ہیں۔ ناقابل دستیاب آئٹم کو کارٹ سے ہٹا دیا جائے گا۔",
+              "other": "بقیہ اشیاء اب بھی چیک آؤٹ کے لیے دستیاب ہیں۔ جو اشیاء دستیاب نہیں ہیں انہیں کارٹ سے ہٹا دیا جائے گا۔"
+            },
+            "none_available_notice": {
+              "one": "یہ آئٹم اب دستیاب نہیں ہے اور اسے آپ کے کارٹ سے ہٹا دیا گیا ہے۔",
+              "other": "یہ اشیاء اب دستیاب نہیں ہیں اور آپ کی کارٹ سے ہٹا دی گئی ہیں۔"
+            },
+            "mixed_issues_title": "کچھ اشیاء اب دستیاب نہیں ہیں۔"
+          }
+        },
+        "out_of_stock_in_context_label": "یہ پروڈکٹ آپ کے ملک/علاقے میں دستیاب نہیں ہے۔"
+      },
+      "contextual_availability": {
+        "title": {
+          "one": "دستیاب نہیں ہے۔",
+          "other": "دستیاب نہیں مصنوعات"
+        },
+        "products_not_available": {
+          "one": "یہ پروڈکٹ آپ کے کارٹ سے ہٹا دی جائے گی کیونکہ یہ آپ کے ملک/علاقے میں دستیاب نہیں ہے۔",
+          "other": "یہ مصنوعات آپ کے کارٹ سے ہٹا دی جائیں گی کیونکہ یہ آپ کے ملک/علاقے میں دستیاب نہیں ہیں۔"
+        },
+        "all_products_in_cart_unavailable": {
+          "one": "یہ پروڈکٹ آپ کے ملک/علاقے میں دستیاب نہیں ہے۔",
+          "other": "یہ مصنوعات آپ کے ملک/علاقے میں دستیاب نہیں ہیں۔"
+        },
+        "unavailable_label": "دستیاب نہیں"
+      },
+      "merchandise_unavailable_in_buyer_location": {
+        "banner_title": {
+          "some_products_one": "یہ پروڈکٹ %{location_name} میں ڈیلیوری کے لیے دستیاب نہیں ہے۔",
+          "some_products_other": "یہ مصنوعات %{location_name} میں ترسیل کے لیے دستیاب نہیں ہیں۔",
+          "all_products_one": "آپ کی کارٹ میں موجود پروڈکٹ %{location_name} پر ڈیلیوری کے لیے دستیاب نہیں ہے۔",
+          "all_products_other": "آپ کی کارٹ میں موجود مصنوعات %{location_name} پر ڈیلیوری کے لیے دستیاب نہیں ہیں۔"
+        },
+        "missing_country_fallback": "آپ کا ملک",
+        "indeterminate_location_fallback": "آپ کا مقام",
+        "cart_updated": "آپ کی کارٹ کو اپ ڈیٹ کر دیا گیا ہے۔",
+        "change_address_only": "جاری رکھنے کے لیے ترسیل کا پتہ تبدیل کریں۔",
+        "change_address_or_remove": "ڈلیوری کا پتہ تبدیل کریں یا %{remove_action}۔",
+        "remove_items_action": {
+          "one": "دستیاب نہ ہونے والی چیز ہٹا دیں",
+          "other": "دستیاب نہ ہونے والی اشیاء کو ہٹا دیں"
+        },
+        "empty_cart_action": "کارٹ خالی کریں اور اسٹور پر واپس جائیں",
+        "unavailable_line_item": "%{product_name} / %{variant_label}"
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "title": {
+            "one": "%{count} آئٹم کی ڈیلیوری دستیاب نہیں",
+            "other": "%{count} آئٹمز کے لیے ڈیلیوری دستیاب نہیں ہے۔"
+          },
+          "message": {
+            "one": "اس چیز کو آپ کی کارٹ سے ہٹا دیا جائے گا کیونکہ آپ کے ایڈریس کے لیے کوئی ڈیلیوری کا طریقہ دستیاب نہیں ہے۔",
+            "other": "یہ چیزیں آپ کے کارٹ سے ہٹا دی جائیں گی کیونکہ آپ کے ایڈریس کے لیے کوئی ڈیلیوری کا طریقہ دستیاب نہیں ہے۔"
+          },
+          "label": "کوئی ڈیلیوری نہیں"
+        }
       }
     },
     "errors": {
