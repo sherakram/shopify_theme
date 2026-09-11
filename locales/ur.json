@@ -3393,7 +3393,36 @@
         "attempted_delivery_label": "ڈیلیوری کی کوشش کی گئی",
         "attempted_to_deliver_label": "ڈیلیور کرنے کی کوشش کی گئی۔",
         "preparing_for_shipping_label": "ترسیل کی تیاری ہو رہی ہے",
-        "ready_for_pickup_label": "پک اپ کے لیے تیار ہیں؟"
+        "ready_for_pickup_label": "پک اپ کے لیے تیار ہیں؟",
+        "arrives": "پہنچتا ہے {{date}}",
+        "delivery_estimate_backed_by": "کی حمایت یافتہ",
+        "delivery_estimate_delayed_description": "آپ کے علاقے میں ڈیلیوری معمول سے سست ہے۔ آپ کا آرڈر دیر سے پہنچ سکتا ہے۔",
+        "delivery_estimate_delayed_title": "تاخیر سے",
+        "delivery_estimate_early_description": "آپ کے علاقے میں ڈیلیوری معمول سے زیادہ تیز ہیں۔ یہ آرڈر جلد پہنچ سکتا ہے۔",
+        "delivery_exception_action_required": "کارروائی درکار ہے",
+        "delivery_exception_attempted_action": "نئی ڈیلیوری کا شیڈول بنائیں",
+        "delivery_exception_attempted_description": "{{link}} کے ساتھ {{carrier}} یا ترسیل کا نوٹس چیک کریں",
+        "delivery_exception_attempted_description_unknown": "{{link}} یا ڈیلیوری نوٹس چیک کریں۔",
+        "delivery_exception_attempted_title": "ترسیل کی کوشش کی گئی",
+        "delivery_exception_delivery_failed": "ڈیلیوری ناکام ہو گئی",
+        "delivery_exception_failed_action": "{{carrier}} سے چیک کریں۔",
+        "delivery_exception_failed_description": "{{link}} یا مزید معلومات کے لیے ہم سے رابطہ کریں",
+        "delivery_exception_failed_description_unknown": "مزید معلومات کے لیے کیریئر سے رابطہ کریں۔",
+        "delivery_exception_failed_title": "ڈیلیور نہیں ہوا",
+        "delivery_exception_on_hold_action": "ڈیلیوری کی تفصیلات اپ ڈیٹ کریں۔",
+        "delivery_exception_on_hold_description": "{{link}} کے ساتھ {{carrier}} کے ذریعے اپنا آرڈر دوبارہ شروع کریں",
+        "delivery_exception_on_hold_description_unknown": "{{link}} دوبارہ اپنا آرڈر جاری کرنے کے لیے",
+        "delivery_exception_on_hold_title": "انتظار پر",
+        "delivery_exception_returning_to_sender_action": "{{carrier}} سے رابطہ کریں",
+        "delivery_exception_returning_to_sender_description": "{{link}} مزید معلومات کے لیے",
+        "delivery_exception_returning_to_sender_description_unknown": "مزید معلومات کے لیے کیریئر سے رابطہ کریں۔",
+        "delivery_exception_returning_to_sender_title": "ڈیلیور نہیں ہوا",
+        "delivery_exception_shop_promise_delivered_late_description": "<p>آپ کا آرڈر شاپ پرامیس کے ذریعے محفوظ ہے۔ چونکہ یہ دیر سے پہنچا، لہٰذا {{amount}} شاپ کیش میں حاصل کریں۔</p>",
+        "delivery_exception_shop_promise_delivered_late_title": "دیر سے پہنچایا گیا",
+        "pickup_address_map_link_accessibility_label": "پک اپ لوکیشن کو نقشے پر دیکھیں (نئی ونڈو میں کھلے گا)",
+        "pickup_location_label": "پک اپ مقام:",
+        "pickup_qr_code_accessibility_label": "جب آپ اپنا آرڈر لینے آئیں تو اسٹور میں اسکین کرنے کے لیے QR کوڈ",
+        "predicted_by_shop": "شاپ کی پیش گوئی کردہ"
       },
       "order_list": {
         "four_images_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}}، {{lineItemName3}}، {{lineItemName4}} شامل ہے",
@@ -3509,7 +3538,15 @@
         "show_order_actions_accessibility_label": "آرڈر {{name}} کے لیے آرڈر کے اقدامات دکھائیں",
         "view_order": "آرڈر دیکھیں",
         "view_order_accessibility_label": "آرڈر دیکھیں {{orderName}}"
-      }
+      },
+      "status_mark_as_delivered": "ڈلیور شدہ کے طور پر نشان زد کریں۔",
+      "fulfillment_status_title": "Fulfillment status: {{status}}",
+      "buy_again": "دوبارہ خریدیں",
+      "buy_again_accessibility_label": "<p>آرڈر {{orderId}} کے لیے دوبارہ خریدیں</p>",
+      "manage": "انتظام کریں",
+      "manage_accessiblity_label": "آرڈر کا انتظام کریں {{orderId}}",
+      "group_title_label": "حصہ: {{groupTitle}}",
+      "group_title_label_with_parent": "اس کے لیے: {{groupTitle}}"
     },
     "payment_method_brands": {
       "elo": "ایلو",
@@ -3805,6 +3842,97 @@
         "invalid": {
           "invalid_email": "درست ای میل پتہ درج کریں۔",
           "invalid_code": "درست 6 ہندسوں والا کوڈ درج کریں"
+        }
+      }
+    },
+    "order_details": {
+      "shipment_timeline": {
+        "expand_events_label": "تفصیلات دکھائیں۔",
+        "expand_events_accessibility_label": "آرڈر کی ترسیل کی تفصیلات دکھائیں۔",
+        "hide_events_label": "تفصیلات چھپائیں",
+        "hide_events_accessibility_label": "آرڈر کی ترسیل کی تفصیلات چھپائیں"
+      },
+      "addresses_section_title": "بلنگ اور شپنگ",
+      "order_details": "آرڈر کی تفصیلات",
+      "order_details_skeleton_accessibility_label": "تمام آرڈر کی تفصیلات دیکھنے کے لیے سائن ان کریں۔",
+      "billing_address": "بلنگ کا پتہ",
+      "card_ending_with": "{{lastDigits}} پر ختم ہو رہا ہے",
+      "contact": "رابطہ کریں۔",
+      "company": "کمپنی",
+      "fully_refunded_label": "رقم واپس کردی گئی",
+      "fulfillment_images": {
+        "one_products_accessibility_label": "فراہمی میں {{lineItemName1}} مقدار {{lineItemQuantity1}} شامل ہے",
+        "two_products_accessibility_label": "پورا کرنے میں شامل ہیں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}",
+        "three_products_accessibility_label": "Fulfillment includes {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}",
+        "four_products_accessibility_label": "تکمیل میں شامل ہیں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}",
+        "five_products_accessibility_label": "وفلمنٹ میں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}} شامل ہے",
+        "six_products_accessibility_label": "تکمیل میں شامل ہے {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}}، {{lineItemName6}} مقدار {{lineItemQuantity6}}",
+        "six_and_more_products_accessibility_label": "<p>تکمیل میں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}}، {{lineItemName6}} مقدار {{lineItemQuantity6}} اور مزید شامل ہیں</p>"
+      },
+      "group_title_label": "حصہ: {{groupTitle}}",
+      "group_title_label_with_parent": "اس کے لیے: {{groupTitle}}",
+      "view_controls": {
+        "gallery": "گیلری",
+        "list": "فہرست"
+      },
+      "grouped_view_components": {
+        "expand_line_items": "{{count}} آئٹمز دکھائیں",
+        "collapse_line_items": "{{count}} آئٹمز چھپائیں",
+        "line_item_summary_list_accessibility_label": "{{productTitle}} بنڈل میں اشیاء"
+      },
+      "discount": "چھوٹ",
+      "discount_order_stacking": {
+        "one": "آرڈر پر رعایت",
+        "other": "آرڈر ڈسکاؤنٹس"
+      },
+      "price_before_discount_accessibility_label": "اصل قیمت",
+      "price_after_discount_accessibility_label": "رعایتی قیمت",
+      "compare_at_sale": "سیل ({{saleAmount}})",
+      "hide_items": "اشیاء چھپائیں",
+      "loading": "آرڈر کی تفصیلات لوڈ ہو رہی ہیں",
+      "loading_finished_accessibility_message": "آرڈر کی تفصیلات لوڈ کر دی گئی ہیں۔",
+      "location": "مقام",
+      "image_gallery": {
+        "next": "اگلی چیزیں دکھائیں۔",
+        "previous": "پچھلی چیزیں دکھائیں۔",
+        "load_more_items": {
+          "one": "مزید {{count}} آئٹمز دکھائیں",
+          "other": "مزید {{count}} آئٹمز دکھائیں"
+        }
+      },
+      "mobile_summary_toggle_button": {
+        "open": "آرڈر کا خلاصہ دکھائیں",
+        "closed": "آرڈر کا خلاصہ چھپائیں"
+      },
+      "no_data": "کوئی نہیں۔",
+      "no_data_provided_accessibility_label": "{{fieldName}} خالی ہے",
+      "not_applicable": "دستیاب نہیں ہے۔",
+      "paid_amount": "ادا کیا گیا۔",
+      "partially_refunded_label": "جزوی طور پر واپس کر دیا گیا",
+      "payment_confirmation": {
+        "payment_received": "شکریہ! آپ کی {{amount}} ادائیگی موصول ہوگئی۔",
+        "full_payment_received": "شکریہ! آپ کی {{amount}} ادائیگی موصول ہو گئی ہے، اور اب اس آرڈر کی پوری ادائیگی ہو چکی ہے۔",
+        "payment_authorized": "شکریہ! ادائیگی موصول ہونے پر بیلنس اپ ڈیٹ کر دیا جائے گا۔",
+        "dismiss_label": "ادائیگی کی تصدیق کو برخاست کریں۔"
+      },
+      "payment": {
+        "status_in_review": "جائزے کے بعد ادائیگی واجب الادا ہے۔",
+        "status_unpaid": "<p>ادائیگی کی آخری تاریخ {{date}}</p>",
+        "title": "ادائیگی",
+        "payment_type": {
+          "gift_card": "گفٹ کارڈ",
+          "store_credit": "اسٹور کریڈٹ",
+          "money_order": "منی آرڈر",
+          "cash_on_delivery": "کیش آن ڈیلیوری (COD)",
+          "bank_deposit": "بینک ڈپازٹ",
+          "manual": "دستی کتابچہ"
+        },
+        "shop_pay_installments": {
+          "summary": "اقساط پر خریداری",
+          "view_schedule": "شیڈول دیکھیں"
+        },
+        "transactions": {
+          "show_all": "سب دکھائیں"
         }
       }
     }
