@@ -1432,6 +1432,150 @@
         "title": "ادائیگی کا طریقہ اپ ڈیٹ کریں",
         "button_title": "تازہ کاری"
       }
+    },
+    "orders": {
+      "order_status": {
+        "ready_for_pickup_description": "یہ اشیاء اٹھانے کے لیے تیار ہیں۔ اپنا آرڈر وصول کرتے وقت براہ کرم اپنے آرڈر کی تصدیق ساتھ لائیں۔",
+        "ready_for_pickup_location": "آپ کا آرڈر لینے کے لیے تیار ہے اس جگہ سے",
+        "ready_for_pickup_show_qr_description": "آرڈر لیتے وقت یہ QR کوڈ دکھائیں۔",
+        "picked_up_label": "اُٹھایا گیا۔",
+        "canceled_label": "منسوخ کر دیا گیا۔",
+        "canceled_title": "آپ کا آرڈر منسوخ کر دیا گیا ہے",
+        "come_back": "اپنی شپمنٹ کی صورتحال پر اپ ڈیٹس کے لیے اس صفحے پر دوبارہ آئیں۔",
+        "company_tracking_number": "{{company}} ٹریکنگ نمبر:",
+        "confirmed_label": "تصدیق ہو گئی",
+        "confirmed_title": "آپ کا آرڈر کنفرم ہو گیا ہے۔",
+        "confirmed_description_pickup": "ہم یہ اشیاء پک اپ کے لیے تیار کر رہے ہیں۔",
+        "confirmed_description_shipping": "ہم یہ اشیاء ترسیل کے لیے تیار کر رہے ہیں۔",
+        "confirmed_description_digital": "جب آپ کا آرڈر تیار ہو جائے گا تو آپ کو ایک ای میل موصول ہو جائے گی۔",
+        "confirmed_description_gift_card_text": "جب آپ کا آرڈر تیار ہو جائے گا تو آپ کو ایک ٹیکسٹ موصول ہو جائے گا۔",
+        "complete_label": "مکمل کریں",
+        "delivered_label": "فراہم کردہ",
+        "delivered_description_gift_card": {
+          "one": "گفٹ کارڈ ای میل کے ذریعے بھیجا گیا تھا۔",
+          "other": "گفٹ کارڈز ای میل کے ذریعے بھیجے گئے تھے۔"
+        },
+        "delivered_description_gift_card_text": {
+          "one": "گفٹ کارڈ ٹیکسٹ کے ذریعے بھیجا گیا تھا۔",
+          "other": "گفٹ کارڈز بذریعہ ٹیکسٹ بھیجے گئے۔"
+        },
+        "gift_card_label": {
+          "one": "گفٹ کارڈ",
+          "other": "گفٹ کارڈز"
+        },
+        "gift_card_resend_button": {
+          "one": "گفٹ کارڈ دوبارہ بھیجیں",
+          "other": "گفٹ کارڈز دوبارہ بھیجیں"
+        },
+        "gift_resend_success": {
+          "one": "گفٹ کارڈ دوبارہ بھیجا گیا",
+          "other": "گفٹ کارڈز دوبارہ بھیجے گئے"
+        },
+        "gift_resend_failure": {
+          "one": "آپ کے گفٹ کارڈ کو دوبارہ بھیجنے میں ایک مسئلہ پیش آیا۔ دوبارہ کوشش کریں یا ہم سے رابطہ کریں۔",
+          "other": "آپ کے گفٹ کارڈز کو دوبارہ بھیجنے میں ایک مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا ہم سے رابطہ کریں۔"
+        },
+        "confirmed_gift_card_additional_description": {
+          "one": "گفٹ کارڈ ایک علیحدہ ای میل میں بھیجا جائے گا۔",
+          "other": "ہر گفٹ کارڈ ایک الگ ای میل میں بھیجا جائے گا۔"
+        },
+        "confirmed_gift_card_additional_description_text": {
+          "one": "گفٹ کارڈ ایک علیحدہ ٹیکسٹ میں بھیجا جائے گا۔",
+          "other": "ہر گفٹ کارڈ علیحدہ ٹیکسٹ میں بھیجا جائے گا۔"
+        },
+        "status_timestamp": "{{date}} کو اپ ڈیٹ کیا گیا",
+        "estimated_delivery": "توقع ہے {{date}}",
+        "expected_by": "{{date}} تک متوقع ہے۔",
+        "was_expected_by": "{{date}} تک متوقع تھا۔",
+        "delivered": "ڈیلیور کیا گیا {{date}}",
+        "buy_with_prime_logo_accessibility_label": "ایمیزون بائے وِد پرائم لوگو",
+        "in_review_label": "زیر نظر",
+        "in_review_title": "آپ کے آرڈر کا جائزہ لیا جا رہا ہے",
+        "last_updated": "آخری اپڈیٹ {{date}}",
+        "multiple_shipments_label": "متعدد ترسیلات",
+        "multiple_statuses_label": "متعدد آرڈر کی حیثیتیں",
+        "no_tracking_number": "اس کھیپ کے لیے کوئی ٹریکنگ نمبر نہیں ہے۔",
+        "tracking_number": {
+          "one": "ٹریکنگ نمبر",
+          "other": "ٹریکنگ نمبرز"
+        },
+        "on_its_way_label": "راستے میں",
+        "out_for_delivery_label": "ترسیل کے لیے روانہ کر دیا گیا ہے",
+        "resume_tracking": "ریزیومے ٹریکنگ",
+        "submitted_label": "جمع کرایا گیا۔",
+        "submitted_description": "آرڈر اور ادائیگی کی تفصیلات کا جائزہ لیں۔",
+        "there_was_a_problem_label": "ایک مسئلہ پیش آیا",
+        "track_shipment": "کھیپ کو ٹریک کریں۔",
+        "request_return": "واپسی کی درخواست",
+        "view_order_for_details": "تفصیلات کے لیے آرڈر دیکھیں۔",
+        "external_promise_manage_button_label": {
+          "buy_with_prime": "ایمیزون پر نظم کریں۔"
+        },
+        "amazon_buy_with_prime": {
+          "order_tracking_link": {
+            "text": "ایمیزون کے ساتھ نظم و نسق کریں",
+            "new_window_disclaimer": "(ایک نئی ونڈو کھولتا ہے)"
+          }
+        },
+        "delivery_promise_v2": {
+          "promise_line": {
+            "shop_promise_brand_label": "ڈیلیوری کی ضمانت",
+            "external_promise_brand_label": "ترسیل بذریعہ",
+            "not_delivered_by_label": "<span dir=\"rtl\">فراہم کردہ تاریخ {{date}} کے بعد</span>",
+            "delivery_guarantee_expired_label": "ڈیلیوری گارنٹی کی میعاد ختم ہو گئی ہے۔",
+            "modal_accessibility_button_label": "ڈیلیوری وعدے کی تفصیلات",
+            "download_shop_app_button_label": "شاپ ٹریک کرنے کیلئے ڈاؤن لوڈ کریں",
+            "track_with_shop_button_label": "ٹریک مع دکان",
+            "claim_shop_cash_button_label": "شاپ کیش کلیم کریں۔"
+          },
+          "details_modal": {
+            "title": "ڈلیوری کی ضمانت",
+            "active_delivery_guarantee_label": "{{date}} تک ڈیلیوری",
+            "expired_delivery_guarantee_description": "اس آرڈر کی 30 دن کی شاپ پرومیس کی گارنٹی ختم ہو چکی ہے۔",
+            "expired_badge_label": "میعاد ختم ہو گئی",
+            "order_includes_guarantees_label": "آپ کے آرڈر میں {{deliveryAgreementsCount}} ضمانتیں شامل ہیں",
+            "order_includes_guarantees_description": "<p>شاپ پرومس تیز، قابل بھروسہ ڈیلیوری کی ضمانت دیتا ہے۔ اگر آپ کا آرڈر {{date}} کے بعد پہنچتا ہے تو شاپ کیش کا دعویٰ کریں۔</p>",
+            "delivered_after_label": "<span dir=\"rtl\">فراہم کردہ تاریخ {{date}} کے بعد</span>",
+            "delivered_after_description": "<p>آپ کا آرڈر دیر سے پہنچنے کی وجہ سے، آپ {{amount}} شاپ کیش کا دعویٰ کرنے کے اہل ہیں۔</p>",
+            "claimed_shop_cash_description": "کیونکہ یہ آرڈر دیر سے پہنچا تھا، آپ نے {{amount}} شاپ کیش کا دعویٰ کیا۔",
+            "eligible_to_claim_shop_cash_description": "<p>آپ کا آرڈر دیر سے پہنچنے کی وجہ سے، آپ {{amount}} شاپ کیش کا دعویٰ کرنے کے اہل ہیں۔</p>",
+            "learn_more_button_label": "مزید جانیں",
+            "claim_shop_cash_button_label": "شاپ کیش کلیم کریں۔",
+            "view_balance_in_shop_button_label": "دکان میں بیلنس دیکھیں",
+            "scan_to_claim_shop_cash_label": "<p dir=\"rtl\">\nQR سکین کرکے {{amount}} شاپ کیش حاصل کریں\n</p>"
+          }
+        },
+        "delivery_promise": {
+          "promise_line": {
+            "single_brand_label": "ترسیل کو تقویت دی گئی۔",
+            "mixed_brands_label": "ڈیلیوری کی ضمانت ہے",
+            "not_delivered_by_label": "{{date}} تک ڈیلیور نہیں کیا گیا۔",
+            "modal_accessibility_button_label": "ڈیلیوری وعدے کی تفصیلات"
+          },
+          "claim_shop_cash_cta": {
+            "has_shop_app_label": "اپنا شاپ کیش حاصل کریں۔",
+            "no_shop_app_label": "{{appDownloadLink}} پر شاپ کیش حاصل کریں",
+            "download_shop_app_label": "دکان ڈاؤن لوڈ کریں"
+          },
+          "details_modal": {
+            "title": "ترسیل کو تقویت دی گئی۔",
+            "modal_accessiblity_label": "ڈیلیوری وعدے کی تفصیلات",
+            "delivery_guarantee_label": "ڈلیوری کی ضمانت",
+            "delivery_by_label": "{{date}} تک ڈیلیوری",
+            "delivery_guaranteed_by_label": "{{date}} تک ڈیلیوری کی ضمانت ہے",
+            "shop_cash_claim": {
+              "may_be_eligible_label": "شاپ پرامس تیز، قابل بھروسہ ڈیلیوری کی ضمانت دیتا ہے۔ اگر آپ کا آرڈر دیر سے پہنچتا ہے تو شاپ کیش کا دعویٰ کریں۔",
+              "may_be_eligible_not_authorized_label": "چونکہ یہ آرڈر دیر سے پہنچا ہے، لہٰذا آپ شاپ کیش کا دعویٰ کرنے کے اہل ہو سکتے ہیں۔ تفصیلات دیکھنے کے لیے سائن ان کریں۔",
+              "redeemed_label": "آپ نے پہلے ہی شاپ کیش کا دعویٰ کر لیا ہے کیونکہ یہ آرڈر دیر سے پہنچا ہے۔",
+              "expired_label": "یہ آرڈر لیٹ ڈیلیوری کلیم کے لیے اہل نہیں ہے کیونکہ 30 دن کی گارنٹی کی میعاد ختم ہو گئی ہے۔",
+              "no_shop_cash_label": "یہ آرڈر تاخیر سے ڈیلیوری کے دعوے کے لیے اہل نہیں ہے کیونکہ اس کی ادائیگی Shop Pay کے ذریعے نہیں کی گئی تھی۔",
+              "no_longer_guaranteed_label": "ان اشیاء پر ڈیلیوری کی ضمانت اب لاگو نہیں ہے۔",
+              "claim_shop_cash_title": "شاپ کیش میں {{amount}} کا دعویٰ کرنے کے لیے سکین کریں",
+              "claim_shop_cash_description": "آپ اپنی شاپ کیش شاپ ایپ میں آئندہ خریداریوں پر استعمال کر سکتے ہیں۔"
+            }
+          }
+        }
+      }
     }
   }
 }
