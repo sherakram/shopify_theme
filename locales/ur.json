@@ -3627,7 +3627,17 @@
       "badge_traffic": "{{percentage}} فیصد ٹریفک",
       "edit": "ترمیم کریں",
       "exit_preview": "پیش منظر سے باہر نکلیں",
-      "hide_bar_action": "بار چھپائیں۔"
+      "hide_bar_action": "بار چھپائیں۔",
+      "rollout_label": "رول آؤٹ",
+      "customize_button": "ترتیب دیں",
+      "hide_bar": "بار چھپائیں",
+      "navigate_to_admin": "ایڈمن پر جائیں",
+      "close_preview": "پیش منظر بند کریں۔",
+      "previewing": "آپ کا پیش منظر:",
+      "saved_at": "محفوظ کردہ {{date}} کو {{time}} بجے",
+      "viewing": "آپ دیکھ رہے ہیں:",
+      "not_available": "پروفائل ڈیٹا دستیاب نہیں ہے۔",
+      "actions_button": "کارروائیاں"
     },
     "errors": {
       "address_deletion_error": {
@@ -3700,6 +3710,136 @@
         "message": "بہت زیادہ کوششیں",
         "description": "براہ کرم چند منٹ میں دوبارہ کوشش کریں۔"
       }
+    },
+    "active_inspector": {
+      "extension": {
+        "select": "{{extensionName}} نامی ایکسٹینشن کو منتخب کریں",
+        "unselect": "{{extensionName}} نامی ایکسٹینشن کو ان منتخب کریں۔",
+        "move_down": "توسیع کو اگلی پوزیشن پر منتقل کریں",
+        "move_up": "ایکسٹینشن کو پچھلی پوزیشن پر منتقل کریں۔",
+        "remove": "ایکسٹینشن ہٹائیں",
+        "move_down_tooltip": "اگلی پوزیشن پر جائیں",
+        "move_up_tooltip": "پچھلی پوزیشن پر جائیں",
+        "remove_tooltip": "ہٹائیں"
+      }
+    },
+    "editor": {
+      "link_new_tab_confirmation": "یہ لنک ایڈیٹر کے اندر نہیں کھولا جا سکتا ہے۔ یہ ایک نئی ونڈو ({{resolved_to_link}}) میں کھلے گا۔ جاری رکھنے کے لیے اوکے پر کلک کریں۔"
+    },
+    "settings": {
+      "title": "ترتیبات",
+      "loading_accessibility_message": "ترتیبات کا صفحہ لوڈ ہو رہا ہے",
+      "log_out_everywhere": {
+        "title": "ہر جگہ سائن آؤٹ کریں۔",
+        "description": "اگر آپ نے کوئی ڈیوائس گم کر دی ہے یا آپ کو سیکیورٹی سے متعلق خدشات ہیں تو اپنے اکاؤنٹ کی سیکیورٹی یقینی بنانے کے لیے ہر جگہ سے لاگ آؤٹ کریں۔",
+        "button": "تمام ڈیوائسز سے سائن آؤٹ کریں",
+        "warning_message": "آپ اس ڈیوائس پر بھی سائن آؤٹ ہو جائیں گے۔"
+      }
+    },
+    "shop_ads": {
+      "title": "دیگر مصنوعات جو آپ کو پسند آ سکتی ہیں",
+      "subtitle": "محدود وقت کے لیے دستیاب ہے۔",
+      "button": "دکان پر دریافت کریں۔",
+      "previous_button": "پچھلا",
+      "next_button": "اگلا"
+    },
+    "knowledge_base": {
+      "self_serve_returns": {
+        "enabled": "صارفین خود ہی واپسی کی درخواست اور انتظام کر سکتے ہیں۔",
+        "disabled": "صارفین کو واپسی کی درخواست کرنے کے لیے مرچنٹ سے رابطہ کرنا چاہیے۔"
+      }
+    },
+    "subscriptions": {
+      "update_payment_instrument": {
+        "title": "ادائیگی کا طریقہ بدلیں",
+        "loading": "ادائیگی کے طریقے لوڈ ہو رہے ہیں",
+        "no_payment_methods_available": "ادائیگی کے طریقے دستیاب نہیں ہیں۔",
+        "select_new_payment_method": "ادائیگی کا نیا طریقہ منتخب کریں",
+        "current_method": "موجودہ",
+        "cancel": "منسوخ کریں",
+        "save": "محفوظ کریں۔",
+        "success": "ادائیگی کا طریقہ اپ ڈیٹ کر دیا گیا ہے۔",
+        "use_new_payment_method": "+ نیا ادائیگی کا طریقہ استعمال کریں"
+      }
+    },
+    "intents": {
+      "subscription_replace_payment_method": {
+        "card_number": "کارڈ نمبر",
+        "title": "ادائیگی کا طریقہ بدلیں",
+        "replace_with": "اس کے ساتھ بدلیں",
+        "add_new_payment_method": "نئی چیزیں شامل کریں۔",
+        "save_button": "محفوظ کریں۔",
+        "close_button": "بند کریں",
+        "loading": "ادائیگی کا طریقہ بدلنے کا موڈل لوڈ ہو رہا ہے۔",
+        "success": "ادائیگی کا طریقہ اپ ڈیٹ کر دیا گیا ہے۔",
+        "invalid_subscription_contract": "سبسکرپشن تلاش کرنے سے قاصر",
+        "expiry_date": "میعاد {{expiryDate}}",
+        "edit_current_payment_method": "موجودہ ادائیگی کا طریقہ تبدیل کریں۔",
+        "edit_selected_payment_method": "منتخب کردہ ادائیگی کا طریقہ ترمیم کریں"
+      }
+    },
+    "sign_in": {
+      "brand_logo_alt_text": "%{shop_name} لوگو",
+      "processing": "پروسیسنگ ہو رہی ہے…",
+      "step_one": {
+        "page_title": "سائن اِن کریں - %{shop_name}",
+        "heading": "سائن اِن کریں۔",
+        "subheading": "اپنا ای میل درج کریں اور ہم آپ کو ایک تصدیقی کوڈ بھیجیں گے۔",
+        "subheading_with_sign_in_options": "سائن ان کریں یا اکاؤنٹ بنائیں",
+        "input_field_label": "ای میل",
+        "button": "جاری رکھیں",
+        "or": "یا",
+        "consent_agreement": "جاری رکھنے سے، آپ %{terms} سے اتفاق کرتے ہیں۔",
+        "last_used_pill": "آخری بار استعمال کیا گیا۔"
+      },
+      "step_two": {
+        "page_title": "کوڈ درج کریں - %{shop_name}",
+        "heading": "کوڈ درج کریں",
+        "subheading": "کو %{email} بھیجا گیا",
+        "change_email": "تبدیلی",
+        "restart_link": "کسی اور ای میل سے سائن ان کریں۔",
+        "input_field_label": "6 ہندسوں کا کوڈ",
+        "button": "جمع کرائیں۔"
+      },
+      "error": {
+        "invalid": {
+          "invalid_email": "درست ای میل پتہ درج کریں۔",
+          "invalid_code": "درست 6 ہندسوں والا کوڈ درج کریں"
+        }
+      }
+    }
+  },
+  "products": {
+    "product_label": "پروڈکٹ",
+    "sale_label": "بکری",
+    "sold_out_label": "بِک گیا",
+    "unit_price_separator": "فی",
+    "vendor": "وینڈر",
+    "add_to_cart": "کارٹ میں شامل کریں۔",
+    "quick_add": "فوری اضافہ",
+    "view_product": "پروڈکٹ دیکھیں",
+    "color": "رنگ",
+    "size": "سائز",
+    "quantity": "مقدار",
+    "select_options": "آپشنز منتخب کریں",
+    "unavailable": "دستیاب نہیں",
+    "on_sale": "برائے فروخت",
+    "regular_price": "اصل قیمت",
+    "sale_price": "قیمت فروخت",
+    "comapre_at_price": "مقابلے کی قیمت پر",
+    "unit_price": "فی یونٹ قیمت"
+  },
+  "contact": {
+    "form": {
+      "title": "رابطہ فارم",
+      "name": "نام",
+      "email": "ای میل",
+      "phone": "فون نمبر",
+      "comment": "تبصرہ",
+      "subject": "مضمون",
+      "subject_placeholder": "ہم کیسے مدد کر سکتے ہیں؟",
+      "message": "پیغام",
+      "message_placeholder": "ہمیں کچھ مزید بتائیں..."
     }
   }
 }
