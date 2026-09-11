@@ -11,8 +11,8 @@
 
 {% style %}
   #footer-{{ section.id }} {
-    --padding-top: {{ section.settings.padding_top }}px;
-    --padding-bottom: {{ section.settings.padding_bottom }}px;
+    --footer-padding-top: {{ section.settings.padding_top }}px;
+    --footer-padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 {% endstyle %}
 
@@ -140,30 +140,38 @@
             </div>
           {%- when 'brand_info' -%}
             <div class="footer__block footer__block--brand">
-              {%- if section.settings.logo != blank -%}
-                {%- assign logo_alt = section.settings.logo.alt | default: shop.name -%}
+              {%- if block.settings.logo != blank -%}
+                {%- assign logo_alt = block.settings.logo.alt | default: shop.name -%}
+                {%- assign logo_height = block.settings.logo_width | divided_by: block.settings.logo.aspect_ratio -%}
                 <a href="{{ routes.root_url }}" class="footer__logo-link" aria-label="{{ shop.name }}">
                   {{
-                    section.settings.logo
+                    block.settings.logo
                     | image_url: width: 400
                     | image_tag:
                       loading: 'lazy',
-                      width: section.settings.logo_width,
-                      height: section.settings.logo_width
-                    | divided_by: section.settings.logo.aspect_ratio, alt: logo_alt, class: 'footer__logo'
+                      width: block.settings.logo_width,
+                      height: logo_height,
+                      alt: logo_alt,
+                      class: 'footer__logo'
                   }}
                 </a>
               {%- else -%}
                 <a href="{{ routes.root_url }}" class="footer__brand-name">{{ shop.name }}</a>
               {%- endif -%}
 
-              {%- if section.settings.brand_text != blank -%}
-                <div class="footer__brand-text">{{ section.settings.brand_text }}</div>
+              {%- if block.settings.brand_text != blank -%}
+                <div class="footer__brand-text">{{ block.settings.brand_text }}</div>
               {%- endif -%}
 
               {%- if section.settings.show_social_icons -%}
                 <div class="footer__social">
                   {%- render 'social-icons' -%}
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.enable_follow_on_shop and shop.features.follow_on_shop? -%}
+                <div class="footer__follow-on-shop">
+                  {{ shop | login_button: action: 'follow' }}
                 </div>
               {%- endif -%}
             </div>
