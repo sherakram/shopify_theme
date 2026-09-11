@@ -1676,7 +1676,137 @@
       },
       "update_payment_method": {
         "title": "ادائیگی کا طریقہ اپ ڈیٹ کریں",
-        "button_title": "تازہ کاری"
+        "button_title": "تازہ کاری",
+        "billing_address": "بلنگ کا پتہ",
+        "disclaimer": "ادائیگی کا یہ طریقہ آئندہ خریداریوں کے لیے محفوظ کیا جائے گا اور اسے کسی بھی بار بار ہونے والی یا مؤخر کردہ خریداری کے لیے استعمال کیا جا سکتا ہے۔",
+        "error_message": "ادائیگی کا طریقہ کار اپ ڈیٹ کرنے سے قاصر ہیں۔",
+        "current": "موجودہ",
+        "subscriptions_title": "سبسکرپشنز",
+        "subscriptions_list_accessibility_label": "سبسکرپشن مصنوعات کی فہرست",
+        "pre_orders_title": "آنے والا",
+        "pre_orders_list_accessibility_label": "زیر التواء آرڈر مصنوعات کی فہرست",
+        "resources_list_accessibility_label": "اس ادائیگی کے طریقے کو استعمال کرتے ہوئے خریدی گئی سبسکرپشن مصنوعات اور زیر التواء آرڈر والی مصنوعات",
+        "resources_card_scroll": "مزید اشیاء کے لیے سکرول کریں۔",
+        "resources_card_show_more": "مزید دکھائیں",
+        "resources_card_show_less": "کم دکھائیں",
+        "loading_form_accessibility_message": "ادائیگی کا طریقہ اپ ڈیٹ فارم لوڈ ہو رہا ہے۔",
+        "loading_current_payment_method": "موجودہ ادائیگی کا طریقہ لوڈ کر رہے ہیں",
+        "loading_digital_wallets": "ڈیجیٹل والیٹ کے آپشنز لوڈ ہو رہے ہیں۔",
+        "loading_card_fields": "کریڈٹ کارڈ کے خانے لوڈ ہو رہے ہیں",
+        "loading_resources": "سبسکرپشنز اور آنے والے آرڈرز لوڈ ہو رہے ہیں۔"
+      },
+      "link_expired": {
+        "message": "آپ کی ادائیگی کا طریقہ اپ ڈیٹ کرنے کا یہ لنک میعاد ختم ہو چکا ہے۔",
+        "update_message": "آپ کی ادائیگی کا طریقہ اپ ڈیٹ کرنے کا یہ لنک میعاد ختم ہو چکا ہے۔",
+        "add_message": "آپ کے ادائیگی کے طریقہ کار کو شامل کرنے کا یہ لنک میعاد ختم ہو چکا ہے۔",
+        "return_home_button": "ہوم پیج پر واپس جائیں"
+      },
+      "update_success": {
+        "title": "ادائیگی کا طریقہ اپ ڈیٹ کر دیا گیا ہے۔",
+        "done_button": "خریداری جاری رکھیں"
+      },
+      "add_success": {
+        "title": "ادائیگی کا طریقہ شامل کر دیا گیا",
+        "done_button": "خریداری جاری رکھیں"
+      },
+      "card_fields": {
+        "card_number_label": "کارڈ نمبر",
+        "card_number_placeholder": "کارڈ نمبر",
+        "name_on_card_label": "کارڈ پر نام",
+        "name_on_card_placeholder": "کارڈ پر نام",
+        "card_expiry_label": "میعاد ختم ہونے کی تاریخ (MM / YY)",
+        "card_expiry_placeholder": "میعاد ختم ہونے کی تاریخ (MM / YY)",
+        "card_verification_value_label": "سیکیورٹی کوڈ",
+        "card_verification_value_placeholder": "سیکیورٹی کوڈ",
+        "card_start_label": "اجرا کی تاریخ (ماہ / سال)",
+        "card_start_placeholder": "اجرا کی تاریخ (ماہ / سال)",
+        "tooltip": {
+          "tooltip_accessibility_label": "مزید معلومات",
+          "card_verification_value_explanation_amex": "آپ کے کارڈ کے سامنے کی جانب 4 ہندسوں کا سیکیورٹی کوڈ",
+          "card_verification_value_explanation_other": "آپ کے کارڈ کی پشت پر 3 ہندسوں کا سیکیورٹی کوڈ",
+          "card_verification_value_explanation": "3 ہندسوں والا سیکیورٹی کوڈ عام طور پر آپ کے کارڈ کی پچھلی جانب ہوتا ہے۔ امریکن ایکسپریس کارڈز پر 4 ہندسوں کا کوڈ سامنے کی جانب ہوتا ہے۔",
+          "card_security_notice": "تمام لین دین محفوظ اور خفیہ (اینکرپٹڈ) ہیں۔"
+        },
+        "field_errors": {
+          "credit_card_name_invalid": "اپنا نام بالکل ویسا ہی لکھیں جیسا کہ آپ کے کارڈ پر لکھا ہے۔",
+          "credit_card_number_invalid": "درست کارڈ نمبر درج کریں۔",
+          "credit_card_expiry_invalid": "ایک درست کارڈ کی میعاد ختم ہونے کی تاریخ درج کریں۔",
+          "credit_card_verification_value_blank": "اپنے کارڈ پر CVV یا سیکیورٹی کوڈ درج کریں"
+        },
+        "unavailable": {
+          "text": "کریڈٹ اور ڈیبٹ کارڈ کی ادائیگی اس وقت دستیاب نہیں ہے۔",
+          "link_text": "یہ صفحہ ریفریش کریں۔",
+          "suffix": "یا بعد میں دوبارہ کوشش کریں۔"
+        }
+      },
+      "payment_delete": {
+        "title": "طریقہ ادائیگی ڈیلیٹ کریں",
+        "description_without_replacement": "یہ ادائیگی کا طریقہ آئندہ خریداریوں کے لیے دستیاب نہیں ہوگا۔",
+        "description_with_replacement": "اس ادائیگی کے طریقے کو حذف کرنے سے پیشگی مجاز ادائیگیوں پر اثر پڑے گا۔ آنے والے آرڈرز کو وصول کرنا جاری رکھنے کے لیے آپ اسے کسی دوسرے ادائیگی کے طریقے سے بدل سکتے ہیں۔",
+        "warning_message_with_replacement": {
+          "with_pending_orders_and_subscriptions": "اس ادائیگی کے طریقہ کار کو حذف کرنے سے پہلے سے مجاز ادائیگیوں پر اثر پڑے گا۔ جب تک آپ متبادل ادائیگی کا طریقہ منتخب نہیں کرتے ہیں، اس ادائیگی کے طریقے سے موجودہ آرڈرز پر کوئی بھی بقایا رقم وصول کی جائے گی۔ متبادل ادائیگی کا طریقہ منتخب کرنے سے آپ بغیر کسی رکاوٹ کے آنے والے سبسکرپشن آرڈرز وصول کر سکیں گے۔",
+          "with_pending_orders": "اس ادائیگی کے طریقے کو حذف کرنے سے یہ آپ کے اکاؤنٹ سے ہٹ جائے گا اور مستقبل کی خریداریوں کے لیے دستیاب نہیں رہے گا۔ جب تک آپ متبادل ادائیگی کا طریقہ منتخب نہیں کرتے، موجودہ آرڈرز پر واجب الادا بقایا جات کے لیے اس سے پھر بھی چارج کیا جائے گا۔",
+          "with_subscriptions": "اس ادائیگی کے طریقے کو حذف کرنے سے پہلے سے اجازت یافتہ ادائیگیاں متاثر ہوں گی۔ آئندہ آرڈرز کی وصولی جاری رکھنے کے لیے اسے کسی متبادل ادائیگی کے طریقے سے تبدیل کریں۔"
+        },
+        "warning_message_without_replacement": {
+          "with_pending_orders_and_subscriptions": "اس ادائیگی کے طریقہ کار کو حذف کرنے سے پہلے سے مجاز ادائیگیوں پر اثر پڑے گا۔ اس ادائیگی کے طریقہ کار سے موجودہ آرڈرز پر کسی بھی بقایا رقم کی وصولی اب بھی کی جائے گی، لیکن آپ کو آئندہ کی سبسکرپشن آرڈرز موصول نہیں ہوں گی۔ سبسکرپشن آرڈرز موصول کرنا جاری رکھنے کے لیے کوئی متبادل ادائیگی کا طریقہ شامل کریں۔",
+          "with_pending_orders": "اس ادائیگی کے طریقے کو حذف کرنے سے یہ آپ کے اکاؤنٹ سے ہٹ جائے گا اور مستقبل کی خریداریوں کے لیے دستیاب نہیں رہے گا۔ تاہم، موجودہ آرڈرز پر واجب الادا بقایا جات کے لیے پھر بھی اس پر چارج کیا جائے گا۔",
+          "with_subscriptions": "اس ادائیگی کے طریقے کو حذف کرنے سے پہلے سے اجازت یافتہ ادائیگیاں متاثر ہوں گی۔ آنے والے آرڈرز کی وصولی جاری رکھنے کے لیے ادائیگی کا متبادل طریقہ شامل کریں۔"
+        },
+        "payment_method_selector_placeholder": "متبادل ادائیگی کا طریقہ منتخب کریں (اختیاری)",
+        "payment_method_selector_no_alternative_payment": "کوئی متبادل طریقہ نہیں۔",
+        "replace_method_with_new_method_description": "آپ کا {{currentPaymentMethodName}} حذف کر دیا جائے گا اور اس کی جگہ آپ کا {{newPaymentMethodName}} لے لے گا۔",
+        "error_when_deleting": "ہم معذرت خواہ ہیں لیکن کچھ غلط ہو گیا ہے اور ہم ادائیگی کا یہ طریقہ حذف نہیں کر سکے۔ براہ کرم بعد میں دوبارہ کوشش کریں یا صفحہ کو ریفریش کریں۔",
+        "delete_and_replace_button": "حذف کریں اور تبدیل کریں۔",
+        "delete_and_replace_button_accessibility_label": "{{currentPaymentMethodName}} کو حذف کریں اور اس کی جگہ {{newPaymentMethodName}} استعمال کریں۔",
+        "deleted_successfully": "ادائیگی کا طریقہ کامیابی سے حذف کر دیا گیا ہے۔",
+        "loading_available_payment_methods_accessibility_label": "دستیاب ادائیگی کے طریقے لوڈ ہو رہے ہیں"
+      },
+      "add_payment_method": {
+        "title": "ادائیگی کا طریقہ شامل کریں",
+        "button_title": "شامل کریں",
+        "payment_method_added_confirmation": "ادائیگی کا طریقہ شامل کر دیا گیا",
+        "missing_customer_error": "کچھ گڑبڑ ہوگئی ہے۔ براہ کرم دوبارہ کوشش کریں یا سپورٹ سے رابطہ کریں۔",
+        "replace_mode_warning": "اس ادائیگی کے طریقے کو حذف کرنے سے سبسکرپشنز یا پری آرڈرز متاثر ہوں گے۔ آئندہ آرڈرز موصول کرنے کے لیے اسے کسی متبادل ادائیگی کے طریقے سے تبدیل کریں۔",
+        "choose_from_list": "فہرست میں سے انتخاب کریں",
+        "add_new_button": "نئی چیزیں شامل کریں۔",
+        "billing_address": {
+          "title": "بلنگ کا پتہ",
+          "add_billing_address_button": "نئی چیزیں شامل کریں۔",
+          "add_billing_address_button_accessibility_label": "نیا بلنگ ایڈریس شامل کریں",
+          "choose_billing_address_from_list_button": "فہرست میں سے انتخاب کریں",
+          "choose_billing_address_from_list_button_accessibility_label": "فہرست میں سے بلنگ ایڈریس منتخب کریں۔",
+          "missing_billing_address_error_message": "براہ کرم بلنگ ایڈریس بتائیں",
+          "default_checkbox": "بطور ڈیفالٹ ادائیگی کا طریقہ سیٹ کریں"
+        },
+        "subscription_contracts": {
+          "title": "تکراری آرڈرز کے لیے ادائیگی کا طریقہ استعمال کریں۔",
+          "more_items": {
+            "one": "{{count}} مزید پروڈکٹ",
+            "other": "{{count}} مزید مصنوعات"
+          },
+          "product_count": {
+            "one": "{{count}} پروڈکٹ",
+            "other": "{{count}} مصنوعات"
+          },
+          "product_details": "مصنوعات کی تفصیلات",
+          "load_more": "مزید دکھائیں"
+        },
+        "updating_contracts": {
+          "one": "{{count}} سبسکرپشن معاہدے کو اپ ڈیٹ کیا جا رہا ہے...",
+          "other": "{{count}} سبسکرپشن کنٹریکٹس اپ ڈیٹ ہو رہے ہیں..."
+        },
+        "contracts_updated": {
+          "one": "{{count}} سبسکرپشن کنٹریکٹ کامیابی سے اپ ڈیٹ ہو گیا۔",
+          "other": "<p> نے {{count}} سبسکرپشن معاہدوں کو کامیابی سے اپ ڈیٹ کر دیا</p>"
+        },
+        "contracts_update_failed": "کچھ سبسکرپشن معاہدوں کو اپ ڈیٹ کرنے میں ناکامی",
+        "subscription_contracts_updated": "{{total}} میں سے {{succeeded}} سبسکرپشنز اپ ڈیٹ ہو گئیں",
+        "invalid_wallet_type_error": "غلط والیٹ کی قسم۔"
+      },
+      "three_d_secure": {
+        "title": "تھری ڈی سیکیور",
+        "verification_failed": "آپ کی ادائیگی کی تصدیق نہیں ہو سکی۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔"
       }
     },
     "orders": {
@@ -1988,7 +2118,13 @@
       "przelewy24": "پریزیلیوی 24",
       "swish": "سوئش",
       "twint": "ٹوینٹ",
-      "usdc": "کرپٹو: USDC"
+      "usdc": "کرپٹو: USDC",
+      "visa": "ویزا",
+      "mastercard": "ماسٹر کارڈ",
+      "americanexpress": "امریکن ایکسپریس",
+      "discover": "دریافت کریں۔",
+      "dinersclub": "ڈائنرز کلب",
+      "jcb": "جے سی بی"
     },
     "privacy_banner": {
       "cookie_preferences_link": "کوکی کی ترجیحات"
