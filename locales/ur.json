@@ -3209,8 +3209,21 @@
       "store_credit_accessibility_label": "{{formattedBalance}} سٹور کریڈٹ",
       "store_credit_balances_list_accessibility_label": "اسٹور کریڈٹ بیلنس",
       "store_credit_multi_currency_accessibility_label": {
-        "one": "{{formattedBalance}} اور {{count}} مزید کرنسی اسٹور کریڈٹ"
-      }
+        "one": "{{formattedBalance}} اور {{count}} مزید کرنسی اسٹور کریڈٹ",
+        "other": "{{formattedBalance}} اور {{count}} مزید کرنسیوں کا اسٹور کریڈٹ"
+      },
+      "settings_link": "ترتیبات",
+      "country_switcher_toast_message": "ملک کو {{countryName}} پر تبدیل کر دیا گیا۔",
+      "switch_country": "ملک تبدیل کریں",
+      "no_countries_found": "کوئی ملک نہیں ملا",
+      "location_switcher_toast_message": "مقام تبدیل کر دیا گیا {{locationName}}",
+      "switch_location": "مقام تبدیل کریں",
+      "no_locations_found": "کوئی مقام نہیں ملا",
+      "try_new_search": "نئی تلاش آزمائیں",
+      "view_details": "تفصیلات دیکھیں",
+      "company_location": "کمپنی کا مقام",
+      "search": "تلاش کریں",
+      "skip_to_content": "مواد پر جائیں"
     },
     "payment_methods": {
       "expires_soon": "یہ کارڈ جلد ہی میعاد ختم ہونے والا ہے",
@@ -3805,7 +3818,28 @@
         },
         "show_order_actions_accessibility_label": "آرڈر {{name}} کے لیے آرڈر کے اقدامات دکھائیں",
         "view_order": "آرڈر دیکھیں",
-        "view_order_accessibility_label": "آرڈر دیکھیں {{orderName}}"
+        "view_order_accessibility_label": "آرڈر دیکھیں {{orderName}}",
+        "column_headers": {
+          "order": "آرڈر",
+          "total": "مجموعی",
+          "actions_accessibility_label": "کارروائیاں",
+          "products_accessibility_label": "مصنوعات"
+        },
+        "delivered": "ڈیلیور کیا گیا {{date}}",
+        "empty_state_order_source_description": "{{email}} کے ذریعے دیے گئے آرڈرز ہی یہاں دکھائے جائیں گے۔",
+        "empty_state_redesign_cta": "ابھی خریداری کریں",
+        "empty_state_redesign_subtitle": "خریداری کے لیے تیار ہیں؟",
+        "empty_state_redesign_welcome": "خوش آمدید",
+        "empty_state_redesign_welcome_with_name": "خوش آمدید، {{firstName}}",
+        "empty_state_title": "ابھی تک کوئی آرڈر نہیں ملا",
+        "empty_state_with_location_title": "{{locationName}} کے لیے کوئی آرڈر نہیں ہے۔",
+        "empty_state_title_for_pending_orders": "کوئی زیر التوا آرڈر نہیں",
+        "no_order_banner": "آرڈر اسٹیٹس کے صفحے پر اپنی ایکسٹینشن کو جانچنے کے لیے، ایک آرڈر بنائیں۔",
+        "estimated_shortform": "قیام {{date}}",
+        "estimated_delivery": "توقع ہے {{date}}",
+        "one_images_accessibility_label": "آرڈر میں شامل ہے {{lineItemName1}}",
+        "two_images_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}} شامل ہیں",
+        "three_images_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}}، {{lineItemName3}} شامل ہیں"
       },
       "status_mark_as_delivered": "ڈلیور شدہ کے طور پر نشان زد کریں۔",
       "fulfillment_status_title": "Fulfillment status: {{status}}",
@@ -3814,7 +3848,13 @@
       "manage": "انتظام کریں",
       "manage_accessiblity_label": "آرڈر کا انتظام کریں {{orderId}}",
       "group_title_label": "حصہ: {{groupTitle}}",
-      "group_title_label_with_parent": "اس کے لیے: {{groupTitle}}"
+      "group_title_label_with_parent": "اس کے لیے: {{groupTitle}}",
+      "list_layout_accessibility_label": "لے آؤٹ کے اختیارات",
+      "list_title": "آرڈرز",
+      "list_title_confirmed_orders_accessibility_label": "آرڈرز: تصدیق شدہ",
+      "list_title_pending_orders_accessibility_label": "آرڈرز: زیر التوا",
+      "switch_order_type_pending_orders_accessibility_label": "آرڈر کی قسم تبدیل کریں، فی الحال زیر التوا آرڈرز دیکھے جا رہے ہیں",
+      "switch_order_type_confirmed_orders_accessibility_label": "آرڈر کی قسم تبدیل کریں، فی الحال تصدیق شدہ آرڈرز دیکھ رہے ہیں"
     },
     "payment_method_brands": {
       "elo": "ایلو",
@@ -4317,6 +4357,92 @@
         "sign_in_with_email": "ای میل کے ذریعے سائن ان کریں۔",
         "sign_in": "سائن اِن کریں۔"
       }
+    },
+    "announcement_bar": {
+      "expand_label": "اعلان کی پٹی کو وسعت دیں۔",
+      "collapse_label": "اعلان بار سکیڑیں",
+      "close_label": "اعلان کی پٹی بند کریں۔"
+    },
+    "account_information": {
+      "loading_accessibility_message": "اکاؤنٹ کی معلومات لوڈ ہو رہی ہے",
+      "loading_finished_accessibility_message": "اکاؤنٹ کی معلومات لوڈ ہو گئی ہیں۔",
+      "profile_card": {
+        "cancel": "منسوخ کریں",
+        "cancel_accessibility_label": "پروفائل میں ترمیم منسوخ کریں",
+        "edit": "ترمیم کریں",
+        "edit_accessibility_label": "پروفائل میں ترمیم کریں",
+        "email_help_text": "ای میل میں ترمیم نہیں کی جا سکتی ہے۔",
+        "editable_email_help_text": "یہ ای میل سائن اِن اور آرڈر کی تازہ ترین معلومات کے لیے استعمال کی جاتی ہے۔",
+        "first_name": "پہلا نام",
+        "last_name": "آخری نام",
+        "email": "ای میل",
+        "no_name_provided_accessibility_label": "کوئی نام شامل نہیں کیا گیا۔",
+        "phone_number_help_text": "فون نمبر میں ترمیم نہیں کی جا سکتی ہے۔",
+        "save": "محفوظ کریں۔",
+        "save_accessibility_label": "پروفائل محفوظ کریں",
+        "title": "پروفائل",
+        "errors": {
+          "name_too_long": "{{fieldName}} بہت طویل ہے (زیادہ سے زیادہ 255 حروف)",
+          "name_cannot_contain_url": "{{fieldName}} یو آر ایل پر مشتمل نہیں ہو سکتا ہے",
+          "name_cannot_contain_html_tags": "{{fieldName}} میں HTML ٹیگز شامل نہیں ہو سکتے",
+          "email_cant_be_blank": "ای میل خالی نہیں ہو سکتی",
+          "invalid_email_format": "ایک درست ای میل درج کریں"
+        }
+      },
+      "verify_current_email_modal": {
+        "cancel_button": "منسوخ کریں",
+        "cancel_button_accessibility_label": "پروفائل میں ترمیم منسوخ کریں",
+        "description": "اپنے اصل ای میل پر بھیجا گیا 6 ہندسوں کا کوڈ درج کریں:",
+        "email_resend_button_accessibility_label": "تصدیقی کوڈ دوبارہ بھیجیں۔",
+        "title": "تصدیق کریں کہ یہ آپ ہی ہیں۔",
+        "verify_button": "اگلا",
+        "verify_button_accessibility_label": "اپنے موجودہ ای میل کی تصدیق کریں"
+      },
+      "verify_new_email_modal": {
+        "title": "اپنی نئی ای میل کی تصدیق کریں۔",
+        "description": "اب اپنے نئے ای میل پر بھیجا گیا 6 ہندسوں کا کوڈ درج کریں:",
+        "one_time_password_label": "6 ہندسوں کا کوڈ",
+        "email_resend_button": "کوڈ دوبارہ بھیجیں",
+        "email_resend_button_accessibility_label": "تصدیقی کوڈ دوبارہ بھیجیں۔",
+        "verify_button": "تصدیق کریں",
+        "verify_button_accessibility_label": "ون ٹائم پاس ورڈ کی تصدیق کریں",
+        "cancel_button": "منسوخ کریں",
+        "cancel_button_accessibility_label": "پروفائل میں ترمیم منسوخ کریں",
+        "email_resend_button_success_toast_message": "تصدیقی کوڈ بھیجا گیا",
+        "email_resend_button_failure_banner_message": "تصدیقی کوڈ نہیں بھیجا جا سکا"
+      },
+      "marketing_preferences": {
+        "email_label": "ای میل",
+        "pending_confirmation": "تصدیق کے لیے اپنی ای میل میں موجود لنک پر کلک کریں۔",
+        "resend_email": "ای میل دوبارہ بھیجیں",
+        "resend_email_success": "لنک بھیج دیا گیا ہے۔",
+        "title": "مارکیٹنگ کی ترجیحات",
+        "unsubscribe_confirmation": {
+          "cancel": "منسوخ کریں",
+          "description": "آپ کو اب {{shopName}} سے ای میل مارکیٹنگ موصول نہیں ہوگی۔",
+          "title": "ای میلز کو ان سبسکرائب کریں؟",
+          "unsubscribe": "سبسکرپشن ختم کریں۔"
+        },
+        "update_error": {
+          "description": "آپ کی مارکیٹنگ کی ترجیحات کو اپ ڈیٹ کرنے میں ایک مسئلہ پیش آیا۔ اس صفحہ کو ریفریش کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔"
+        },
+        "update_success": "مارکیٹنگ کی ترجیحات اپ ڈیٹ کر دی گئیں"
+      },
+      "email_update_success_modal": {
+        "title": "ای میل کی تصدیق کریں",
+        "description": "ای میل کامیابی سے اپ ڈیٹ ہو گئی۔ لاگ اِن کی طرف ری ڈائریکٹ کیا جا رہا ہے۔"
+      },
+      "profile_update_confirmation_message": "پروفائل اپ ڈیٹ ہو گئی",
+      "email_update_confirmation_message": "ای میل کو {{email}} پر اپ ڈیٹ کر دیا گیا ہے۔",
+      "title": "پروفائل",
+      "people": {
+        "pagination": {
+          "load_more": "مزید دکھائیں",
+          "load_more_accessibility_label": "مزید لوگ دکھائیں۔",
+          "loading_accessibility_label": "لوگوں کو لادنا"
+        }
+      },
+      "add_button": "شامل کریں"
     }
   },
   "products": {
