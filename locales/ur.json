@@ -128,6 +128,80 @@
             "local_pickup_delivery_line_detail_changed": "جاری رکھنے کے لیے موجودہ مقامی پک اپ ڈیلیوری کی حکمت عملی کو تبدیل کیا جانا چاہیے۔",
             "selected_pickup_option_no_longer_available": "پہلے سے منتخب کردہ پک اپ کا آپشن اب دستیاب نہیں ہے۔"
           }
+        },
+        "submit_order_button_label": "آرڈر جمع کروائیں",
+        "submit_for_review_button_label": "نظرثانی کے لیے پیش کریں۔",
+        "submit_for_review_notice_label": "آپ کے آرڈر کا جائزہ لینے تک ادائیگی واجب الادا نہیں ہوگی",
+        "continue_to_payment_plans_button_label": "ادائیگی کے منصوبوں پر جاری رکھیں",
+        "back_button_label": "واپس کریں۔",
+        "choose_delivery_strategy": "ترسیل کا طریقہ منتخب کریں۔",
+        "autocomplete_zero_item": "کوئی آئٹم دستیاب نہیں",
+        "autocomplete_powered_by_google": "<span dir=\"rtl\">\n    {{brandName}} کے ذریعہ تقویت یافتہ\n</span>",
+        "submit": "جمع کرائیں۔",
+        "processing": "پروسیسنگ ہو رہی ہے…",
+        "stepper": {
+          "increase": "{{type}} میں اضافہ کریں۔",
+          "decrease": "کم {{type}} کریں",
+          "minimum_reached": "{{value}} کی کم از کم حد تک پہنچ گیا",
+          "maximum_reached": "حد سے زیادہ {{value}} ہو گئی"
+        },
+        "remove_chip": "آئٹم ہٹا دیں",
+        "remove_item": "%s کو ہٹائیں",
+        "remove_tag": "ٹیگ ہٹا دیں",
+        "dates": {
+          "weekdays": {
+            "monday": "پیر",
+            "tuesday": "منگل",
+            "wednesday": "بدھ",
+            "thursday": "جمعرات",
+            "friday": "جمعہ",
+            "saturday": "ہفتہ",
+            "sunday": "اتوار"
+          },
+          "weekdays_abbreviation": {
+            "monday": "مو",
+            "tuesday": "آپ",
+            "wednesday": "ہم",
+            "thursday": "تھ",
+            "friday": "جمعہ",
+            "saturday": "ثاقب",
+            "sunday": "جمعہ"
+          },
+          "months": {
+            "january": "جنوری",
+            "february": "فروری",
+            "march": "مارچ",
+            "april": "اپریل",
+            "may": "مئی",
+            "june": "جون",
+            "july": "جولائی",
+            "august": "اگست",
+            "september": "ستمبر",
+            "october": "اکتوبر",
+            "november": "نومبر",
+            "december": "دسمبر"
+          }
+        },
+        "datepicker": {
+          "show_previous_month": "پچھلا مہینہ دکھائیں، {{month}} {{year}}",
+          "show_next_month": "اگلا مہینہ دکھائیں، {{month}} {{year}}",
+          "range_start": "رینج کا آغاز",
+          "in_range": "دائرہ کار میں",
+          "range_end": "رینج اینڈ"
+        },
+        "map": {
+          "cluster_title": {
+            "one": "<p>Cluster of {{number}} marker</p>",
+            "other": "مارکروں کا کلسٹر"
+          }
+        },
+        "sheet": {
+          "expand": "پھیلاؤ"
+        },
+        "dropzone": {
+          "add_file": "فائل شامل کریں",
+          "invalid_file_type": "فائل کی قسم معاون نہیں ہے۔",
+          "dragged_over": "فائل اپ لوڈ کرنے کے لیے یہاں چھوڑیں۔"
         }
       },
       "shipping": {
@@ -1941,6 +2015,64 @@
       },
       "online_store_chat": {
         "title": "سوالات؟ ہم سے بات کریں۔"
+      },
+      "embed": {
+        "header": {
+          "review_order": "اپنے آرڈر کا جائزہ لیں۔"
+        },
+        "shipping": {
+          "shipping_options": "شپنگ کے تمام آپشنز دیکھیں"
+        },
+        "payment": {
+          "payment_options": "ادائیگی کے تمام طریقے دیکھیں"
+        }
+      },
+      "payment_collection": {
+        "cancelled": "اس ادائیگی کی مزید ضرورت نہیں ہے۔ تفصیلات کے لیے آرڈر پیج پر جائیں۔",
+        "paid": "یہ ادائیگی پہلے ہی جمع کر دی گئی ہے۔ تفصیلات کے لیے آرڈر کا صفحہ دیکھیں۔"
+      },
+      "contact": {
+        "title": "معلومات",
+        "address_title": "پتہ",
+        "shipping_used_as_billing_notice": "یہ اس آرڈر کے لیے آپ کا بلنگ ایڈریس بھی ہوگا۔",
+        "delivery_option_title": "ڈیلیوری کا طریقہ",
+        "contact_method_title": "رابطہ کریں۔",
+        "email_label": "ای میل",
+        "email_rollup_accessibility_label": "ای میل کے اختیارات",
+        "email_placeholder": "ای میل",
+        "email_or_phone_label": "ای میل یا موبائل فون نمبر",
+        "email_or_phone_placeholder": "ای میل یا موبائل فون نمبر",
+        "field_saved_label": "محفوظ ہو گیا",
+        "field_tooltip_helper_text": "آپ کے آرڈر کی تصدیق اور کارٹ ریمائنڈرز کے لیے استعمال کیا جاتا ہے۔",
+        "field_tooltip_accessibility_label": "آپ کے رابطے کی معلومات کا استعمال کیسے کیا جاتا ہے اس بارے میں مزید معلومات",
+        "stored_addresses_label": "محفوظ کردہ پتے",
+        "available_addresses_label": "دستیاب پتے",
+        "new_address_label": "نیا پتہ استعمال کریں۔",
+        "first_name_label": "پہلا نام",
+        "optional_first_name_label": "پہلا نام (اختیاری)",
+        "last_name_label": "آخری نام",
+        "company_label": "کمپنی",
+        "storefront_link": "تاجر کی ویب سائٹ",
+        "company_attention_label": "کمپنی/توجہ",
+        "optional_company_attention_label": "کمپنی/توجہ (اختیاری)",
+        "optional_company_label": "کمپنی (اختیاری)",
+        "address1_label": "پتہ",
+        "street_name_label": "گلی",
+        "optional_street_name_label": "گلی (اختیاری)",
+        "street_number_label": "عمارت کا نمبر",
+        "optional_street_number_label": "عمارت کا نمبر (اختیاری)",
+        "address2_label": "اپارٹمنٹ، سویٹ وغیرہ",
+        "optional_address2_label": "فلیٹ، سویٹ وغیرہ (اختیاری)",
+        "neighborhood_label": "محلہ",
+        "optional_neighborhood_label": "محلہ (اختیاری)",
+        "barangay_label": "بَرانگے",
+        "optional_barangay_label": "بستی (اختیاری)",
+        "colony_label": "کالونی",
+        "optional_colony_label": "کالونی (اختیاری)",
+        "commune_label": "کمون",
+        "optional_commune_label": "کمیون (اختیاری)",
+        "district_label": "ضلع",
+        "optional_district_label": "ضلع (اختیاری)"
       }
     },
     "errors": {
