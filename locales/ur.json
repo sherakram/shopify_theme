@@ -286,7 +286,161 @@
         "split_shipping_option_custom": "مرضی کے مطابق",
         "add_shipping_address": "شپنگ ایڈریس شامل کریں",
         "add_new_delivery_address": "ایک نیا ترسیل کا پتہ شامل کریں",
-        "choose_new_address": "ایک نیا پتا منتخب کریں"
+        "choose_new_address": "ایک نیا پتا منتخب کریں",
+        "shipping_method_first_shipment_group_title": {
+          "other": "پہلی کھیپ"
+        },
+        "shipping_method_subscription_group_title": "سبسکرپشن",
+        "shipping_method_recurring_shipments_group_title": {
+          "one": "بار بار بھیجی جانے والی کھیپ",
+          "other": "بار بار ہونے والی ترسیلات"
+        },
+        "subscription_shipping": "سبسکرپشن شپنگ",
+        "subscription_local_delivery": "سبسکرپشن لوکل ڈیلیوری",
+        "subscription_pickup": "سبسکرپشن پک اپ",
+        "waiting_on_rate_notice": "دستیاب شپنگ ریٹ حاصل کیے جا رہے ہیں...",
+        "waiting_on_pickup_location_notice": "دستیاب پک اپ مقامات حاصل کر رہے ہیں…",
+        "no_rates_for_cart_or_destination_notice": "آپ کی کارٹ یا پتے کے لیے کوئی ترسیل کا طریقہ دستیاب نہیں ہے۔",
+        "no_pickup_location_notice": "آپ کی کم از کم ایک پروڈکٹ پک اپ کے لیے دستیاب نہیں ہے۔",
+        "no_rates_for_country_notice": "اس پتے کے لیے شپنگ کی شرحیں نہیں ملیں۔",
+        "no_rates_contact_notice": "مزید معلومات کے لیے ہم سے رابطہ کریں۔",
+        "free_rate_label": "مفت",
+        "cheapest_rate_label": "سب سے سستا",
+        "estimated_delivery_date": {
+          "one": "%{count} کاروباری دن",
+          "other": "%{count} کاروباری دن"
+        },
+        "estimated_delivery_date_range": "% {minimum} سے % {maximum} کاروباری دن",
+        "delivery_date_range": "%{min_time}–%{max_time}",
+        "estimated_delivery_time": "تخمینی ترسیل %{time}",
+        "estimated_delivery_time_range": "تخمینی ترسیل %{min_time}–%{max_time}",
+        "delivery_today": "اسی دن ڈیلیوری %{time}",
+        "delivery_tomorrow": "اگلے دن ڈیلیوری %{time}",
+        "two_day_delivery": "2-روزہ ڈیلیوری %{time}",
+        "delivery": "ڈیلیوری %{time}",
+        "delivery_to": "ترسیل بھیجیں",
+        "arrives_time": "%{time} پر پہنچتا ہے",
+        "arrives_time_range": "%<min_time> اور %<max_time> کے درمیان پہنچے گا</max_time></min_time>",
+        "estimated_time": "تخمینہ شدہ %{time}",
+        "estimated_time_range": "تخمینہ %{min_time}–%{max_time}",
+        "default_description": "1 کاروباری دن میں بھیج دیا جائے گا۔",
+        "unbranded_default_description": "ترسیل کے لیے تیار",
+        "unbranded_description_same_day": "اسی کاروباری دن جہاز بھیج دیا جاتا ہے",
+        "unbranded_description_with_fulfillment_days": {
+          "one": "اگلے کاروباری دن روانہ ہو گا",
+          "other": "%{count} کاروباری دنوں میں بھیجا جائے گا"
+        },
+        "unbranded_description_with_fulfillment_weeks": {
+          "one": "%{count} ہفتے میں جہاز رانی",
+          "other": "%{count} ہفتوں میں جہاز روانہ ہوگا"
+        },
+        "shipping_line_phone_label": "موبائل فون نمبر (مطلوب)",
+        "shipping_line_phone": "آپ کا کورئیر آپ سے رابطہ کرنے کے لیے اس نمبر کا استعمال کر سکتا ہے۔",
+        "shipping_line_delivery_phone_label": "موبائل فون نمبر",
+        "shipping_line_delivery_phone": "آپ کو آپ کی ڈیلیوری کے متعلق اپ ڈیٹس کے ساتھ رابطہ کیا جا سکتا ہے۔",
+        "optional_shipping_line_delivery_instructions_label": "ڈیلیوری کی ہدایات (اختیاری)",
+        "shipping_line_delivery_instructions": "دروازے کے کوڈ یا چھوڑنے کی ہدایات جیسی ضروری معلومات درج کریں۔",
+        "other_method": {
+          "zero": "کوئی دوسرا طریقہ دستیاب نہیں ہے۔",
+          "one": "ایک اور طریقہ دستیاب ہے",
+          "other": "دیگر %{count} طریقے دستیاب ہیں، جن کی شروعات"
+        },
+        "shipping_rate_discounted_amount": "پہلے: %{original_amount}۔ اب: %{amount}",
+        "local_delivery": "مقامی ڈیلیوری",
+        "prime_not_available": {
+          "default": "پرائم ڈیلیوری آپ کے آرڈر کے لیے دستیاب نہیں ہے۔ آپ کے شپنگ کے اختیارات کو اپ ڈیٹ کر دیا گیا ہے۔"
+        },
+        "subscription_delivery_description": {
+          "free_shipping_cycles": {
+            "one": "مزید %{count} ڈیلیوری کے لیے مفت شپنگ",
+            "other": "مزید %{count} ڈیلیوریز کے لیے مفت شپنگ"
+          },
+          "free_shipping_cycles_delivery_not_included": {
+            "one": "%{count} ڈیلیوریز کے لیے مفت شپنگ",
+            "other": "%{count} ڈیلیوریز کے لیے مفت شپنگ"
+          },
+          "first_n_order_free_with_cycle": {
+            "one": "ایک اور ڈیلیوری کے لیے مفت شپنگ، پھر %{recurring_order_shipping_price}",
+            "other": "مزید %{count} ڈیلیوریز کے لیے مفت شپنگ، پھر %{recurring_order_shipping_price}"
+          },
+          "first_n_order_free_with_cycle_delivery_not_included": {
+            "one": "%{count} ڈیلیوریز کے لیے مفت شپنگ، پھر %{recurring_order_shipping_price}",
+            "other": "%{count} ڈیلیوریز کے لیے مفت شپنگ، پھر %{recurring_order_shipping_price}"
+          },
+          "max_cycles_base_shipping": {
+            "one": "%{shipping_price} میں %{count} مزید ڈیلیوری",
+            "other": "ہر ایک %{shipping_price} میں %{count} مزید ڈیلیوریز"
+          },
+          "max_cycles_base_shipping_delivery_not_included": {
+            "one": "%{count} ڈیلیوریز، %{shipping_price} میں",
+            "other": "ہر ایک %{shipping_price} میں %{count} مزید ڈیلیوریز"
+          },
+          "prepaid_free_shipping_with_cycles": {
+            "one": "پہلے %{cycle} کے لیے مفت شپنگ، اس کے بعد %{recurring_order_shipping_price}",
+            "other": "پہلے %{cycle} کے لیے مفت شپنگ، اس کے بعد %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_one_cycle": {
+            "one": "مزید %{count} ڈیلیوری کے لیے %{shipping_price}",
+            "other": "%{{count}} مزید ڈیلیوریز کے لیے %{{shipping_price}} (%{{per_delivery_cost}})"
+          },
+          "prepaid_order_one_cycle_delivery_not_included": {
+            "one": "%{count} ڈیلیوریز کے لیے %{shipping_price}",
+            "other": "%{count} ڈیلیوریز کے لیے %{shipping_price} (%{per_delivery_cost})"
+          },
+          "prepaid_order_no_cycle": {
+            "one": "%{count} مزید ڈیلیوری کے لیے %{shipping_price}، اس کے بعد %{recurring_order_shipping_price}",
+            "other": "%{count} مزید ڈیلیوریز کے لیے %{shipping_price} (فی ڈیلیوری لاگت %{per_delivery_cost})، جس کے بعد %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_no_cycle_delivery_not_included": {
+            "one": "%{count} ڈیلیوری کے لیے %{shipping_price}، اس کے بعد %{recurring_order_shipping_price}",
+            "other": "%[count] ڈیلیوریز کے لیے %[shipping_price] (%[per_delivery_cost] فی ڈیلیوری)، اس کے بعد %[recurring_order_shipping_price]"
+          },
+          "subscription_free_with_frequency_label": "مفت ترسیل %{delivery_frequency}",
+          "prepaid_delivery_frequency": {
+            "one": "%{count} ڈیلیوری کے لیے",
+            "other": "%{count} ڈیلیوریز کے لیے"
+          },
+          "subscription_delivery_frequency": {
+            "day": {
+              "one": "ہر دن",
+              "other": "ہر %{count} دن"
+            },
+            "week": {
+              "one": "ہر ہفتے",
+              "other": "ہر %{count} ہفتے"
+            },
+            "month": {
+              "one": "ہر مہینے",
+              "other": "ہر %{count} ماہ بعد"
+            },
+            "year": {
+              "one": "ہر سال",
+              "other": "ہر %{count} سال"
+            }
+          },
+          "multiple_subscriptions_shipping_price_label": "ہر ڈیلیوری کے لیے %{shipping_price}",
+          "prepaid_shipping_price_label": "فی ڈیلیوری ‏%{shipping_price} x ‏%{delivery_interval_count}",
+          "initial_order_discounted": "پہلا شپنگ خرچ %{discounted_shipping_cost}، پھر %{frequency_description}",
+          "prepaid_initial_order_discounted": "پہلی شپنگ لاگت %{discounted_shipping_price} %{prepaid_delivery_frequency}",
+          "prepaid_initial_order_discounted_with_per_delivery_price": "پہلی شپنگ لاگت %{discounted_shipping_price} %{prepaid_delivery_frequency} (%{discounted_cost_per_delivery})",
+          "prepaid_initial_order_discounted_with_renewal": "پہلا شپنگ خرچ %{discounted_shipping_price} %{prepaid_delivery_frequency}، پھر %{shipping_price} %{billing_cycle}",
+          "prepaid_initial_order_discounted_with_per_delivery_price_and_renewal": "پہلی شپنگ لاگت %{discounted_shipping_price} %{prepaid_delivery_frequency} (%{discounted_cost_per_delivery})، پھر %{shipping_price} %{billing_cycle}",
+          "shipping_price_included": "شامل",
+          "recurring_order_shipping_price": "جس کے بعد %{recurring_order_shipping_price}",
+          "first_order_shipping_price_included": "پہلا آرڈر شامل، اس کے بعد %{recurring_order_shipping_price}",
+          "first_order_different_shipping_price": "%{first_order_shipping_price} (فی ڈیلیوری %{per_delivery_price})، اس کے بعد %{recurring_order_shipping_price}",
+          "first_n_order_free": {
+            "one": "پہلا آرڈر مفت",
+            "other": "پہلے %{count} آرڈر مفت"
+          },
+          "free_for_first_n_order": {
+            "one": "پہلے آرڈر کے لیے",
+            "other": "پہلے %{count} آرڈرز کے لیے"
+          }
+        },
+        "one_time_purchase_shipping": "ایک بار شپنگ",
+        "duties_and_taxes_title": "ڈیوٹیز اور ٹیکسز",
+        "shipping_information_required_notice": "شپنگ کی معلومات درکار ہے۔ {{link}}."
       },
       "localized_fields": {
         "additional_information": {
