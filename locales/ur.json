@@ -1,0 +1,573 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "shopify": {
+    "sentence": {
+      "words_connector": "،",
+      "two_words_connector": "اور",
+      "last_word_connector": "، اور"
+    },
+    "checkout": {
+      "ucp": {
+        "standard_errors": {
+          "item_unavailable": "آئٹم خریدا نہیں جا سکتا ہے۔"
+        }
+      },
+      "general": {
+        "page_title": "چیک آؤٹ",
+        "error_page_title": "خرابی",
+        "skip_to_content": "مواد پر جائیں",
+        "breadcrumb": "بریڈکرمب",
+        "continue_button_label": "جاری رکھیں",
+        "complete_purchase_button_label": "آرڈر مکمل کریں",
+        "pay_now_button_label": "ابھی ادائیگی کریں",
+        "finalize_order_accessibility_label": "آرڈر کو حتمی شکل دیں",
+        "authenticate_purchase_button_label": "ادائیگی کی تصدیق کریں۔",
+        "edit_link_label": "ترمیم کریں",
+        "all_rights_reserved": "تمام حقوق محفوظ ہیں %{shop_name}",
+        "print_policies_link_label": "پرنٹ کریں",
+        "cart": "کارٹ",
+        "close_modal_label": "بند کریں",
+        "close_notice_label": "بند کریں",
+        "expand_notice_label": "مزید دیکھیں",
+        "continue_to_shipping_method": "شپنگ جاری رکھیں",
+        "continue_to_payment_method": "ادائیگی جاری رکھیں",
+        "continue_to_review": "آرڈر کا جائزہ لیں",
+        "back_to_cart": "کارٹ پر واپس جائیں",
+        "back_to_contact_information": "معلومات پر واپس جائیں",
+        "back_to_shipping_method": "شپنگ پر واپس جائیں",
+        "back_to_payment_method": "ادائیگی پر واپس جائیں",
+        "choose_shipping_method": "ترسیل کا طریقہ منتخب کریں۔",
+        "choose_payment_method": "ادائیگی کا طریقہ منتخب کریں۔",
+        "choose_billing_address": "بلنگ کا پتہ منتخب کریں۔",
+        "contact_us_html": "مزید معلومات کے لیے ہم سے رابطہ کریں۔",
+        "autocomplete_title": "تجاویز",
+        "autocomplete_single_item": "1 آئٹم دستیاب ہے",
+        "autocomplete_multi_item": "{{number}} آئٹمز دستیاب ہیں۔",
+        "autocomplete_close": "تجاویز بند کریں",
+        "forwarding_indicator": {
+          "new_window": "ایک نئی ونڈو میں کھلتا ہے۔",
+          "external": "بیرونی ویب سائٹ کھلتی ہے۔",
+          "external_and_new_window": "بیرونی ویب سائٹ کو نئی ونڈو میں کھولتا ہے۔"
+        },
+        "checkout_context": {
+          "step_one": "%{shop_name} - چیک آؤٹ"
+        },
+        "tooltip_accessibility_label": "مزید معلومات",
+        "qr_code": "کیو آر کوڈ",
+        "errors": {
+          "only_empty_terms_accepted": "یہ پالیسی صرف خالی شرائط قبول کرتی ہے۔",
+          "session_identifier_not_unique_error": "آپ کے آرڈر میں کچھ مسئلہ ہو گیا ہے، دوبارہ آرڈر کرنے کی کوشش کریں۔",
+          "line_item_limit_reached": "لائن آئٹمز کی زیادہ سے زیادہ تعداد پوری ہو گئی ہے۔",
+          "session_is_already_finished": "یہ چیک آؤٹ سیشن پہلے ہی حتمی شکل اختیار کر چکا ہے۔",
+          "merchandise": {
+            "only_value_constraint": "اجناس کے ان پٹ میں صرف درست اقدار کی اجازت ہے۔",
+            "merchandise_not_found": "پروڈکٹ نہیں ملی۔",
+            "merchandise_variant_not_found": "پروڈکٹ کا قسم نہیں ملا۔",
+            "merchandise_not_applicable": "پروڈکٹ کا یہ متبادل نہیں خریدا جا سکتا۔",
+            "mixed_currencies": "چیک آؤٹ میں مختلف کرنسیوں والی آئٹمز شامل ہیں۔",
+            "bundle_products_not_supported_for_b2b": "اس مقام کے لیے بنڈل شدہ اشیاء کو B2B آرڈرز میں شامل نہیں کیا جا سکتا۔",
+            "gift_card_quantity_mismatch": "گفٹ کارڈ کوڈز کی وضاحت کرتے وقت، لائن آئٹم کی مقدار اور گفٹ کارڈ کوڈز کی تعداد یکساں ہونی چاہیے۔",
+            "gift_card_not_supported": "اس چیک آؤٹ پر گفٹ کارڈز تعاون یافتہ نہیں ہیں۔",
+            "gift_card_not_unique": "{{code}} کوڈ والا گفٹ کارڈ اس چیک آؤٹ میں ایک سے زیادہ بار موجود ہے۔ کوڈز کا موازنہ کرنے سے پہلے فارمیٹ کیا جاتا ہے۔",
+            "gift_card_used": "Gift card code {{code}} پہلے ہی ایک گفٹ کارڈ کو تفویض کر دیا گیا ہے۔ کوڈز کا موازنہ کرنے سے پہلے فارمیٹ کیا جاتا ہے۔",
+            "gift_card_invalid": "گفٹ کارڈ کوڈ {{code}} غلط ہے۔",
+            "gift_card_code_changed": "گفٹ کارڈ کا کوڈ {{proposed_code}} کو فارمیٹنگ کے قواعد کے مطابق {{formatted_code}} میں تبدیل کر دیا گیا ہے۔",
+            "gift_card_with_attributes_not_supported": "اس چیک آؤٹ پر کسٹم اوصاف والے گفٹ کارڈز تعاون یافتہ نہیں ہیں۔",
+            "gift_card_with_components_not_supported": "اجزا والے گفٹ کارڈز اس چیک آؤٹ پر تعاون یافتہ نہیں ہیں۔",
+            "selling_plan_mismatch": "سبسکرپشن اپ ڈیٹ کر دی گئی ہے۔",
+            "selling_plan_not_supported": "سبسکرپشنز تعاون یافتہ نہیں ہیں۔",
+            "selling_plan_not_supported_b2b": "B2B چیک آؤٹ کے لیے سبسکرپشنز معاون نہیں ہیں۔",
+            "fixed_selling_plans_not_supported_for_draft_orders": "ڈرافٹ آرڈرز کے لیے یہ خریداری کا اختیار تعاون یافتہ نہیں ہے۔",
+            "price_mismatch": "اس سامان کی پہلے تجویز کردہ قیمت غلط تھی اور اسے اپ ڈیٹ کر دیا گیا ہے۔",
+            "inventory_not_found": "اس تجارتی مال کا کوئی ذخیرہ نہیں ملا۔",
+            "product_not_published": "پروڈکٹ شائع نہیں کی گئی ہے۔",
+            "product_not_published_in_buyer_location": "پروڈکٹ موجودہ خریدار کے مقام پر دستیاب نہیں ہے۔",
+            "duplicated_stable_id": "اس تجارتی لائن کا مستحکم آئی ڈی دوسری لائن جیسا ہی ہے۔",
+            "minimum_quantity_not_met": "کچھ اشیاء کی مقدار درکار کم از کم مقدار سے کم ہے۔",
+            "maximum_quantity_exceeded": "بعض اشیاء کی مقدار زیادہ سے زیادہ اجازت یافتہ حد سے تجاوز کر گئی ہے۔",
+            "quantity_increment_not_met": "کچھ اشیاء کی مقدار آرڈر کی حدوں پر پورا نہیں اترتی۔",
+            "quantity_rules_not_met": "کچھ اشیاء کی مقدار آرڈر کی حدوں پر پورا نہیں اترتی۔",
+            "bundle_requires_components": "اس بنڈل مرچنڈائز میں کوئی اجزا نہیں ہیں۔",
+            "combined_listing_parent_not_purchasable": "مرکب فہرست کے والدین کی مصنوعات براہ راست نہیں خریدی جا سکتیں۔",
+            "title_too_long": "تجارتی سامان کا عنوان بہت لمبا ہے۔",
+            "title_empty": "تجارتی سامان کا عنوان خالی ہے۔"
+          },
+          "buyer_identity": {
+            "business_customer_does_not_match_company": "کمپنی کے رابطہ کار کو کمپنی تک رسائی حاصل نہیں ہے۔",
+            "customer_account_required": "جاری رکھنے کے لیے آپ کو سائن ان کرنا ہوگا۔",
+            "company_location_required": "گاہک کو جاری رکھنے کے لیے کمپنی کا مقام منتخب کرنا ہوگا۔",
+            "company_purchase_permission_required": "گاہک کو کمپنی آرڈر دینے کی اجازت نہیں ہے۔",
+            "personal_order_not_allowed": "اس دکان میں ذاتی آرڈرز کی اجازت نہیں ہے۔",
+            "lost_access_to_company": "گاہک کی کسی بھی کمپنی تک رسائی ختم ہو گئی۔",
+            "contact_info_does_not_match_customer_account": "رابطے کی معلومات آپ کے سائن اِن کیے گئے اکاؤنٹ سے مماثل ہونی چاہیے۔",
+            "phone_number_does_not_match_expected_pattern": "متعین کردہ فون نمبر متوقع پیٹرن سے مماثل نہیں ہے۔",
+            "email_required": "جب کوئی شے سبسکرپشن کے ذریعے خریدی جاتی ہے تو ای میل درکار ہوتی ہے۔",
+            "email_domain_is_invalid": "یہ مخصوص ڈومین حل نہیں ہو سکتا۔",
+            "missing_contact_method": "رابطے کا ایک درست طریقہ غائب ہے۔",
+            "checkout_completion_target_is_missing": "چیک آؤٹ کی تکمیل کا ہدف موجود نہیں ہے۔",
+            "invalid_customer_profile": "ایک غلط صارف پروفائل فراہم کی گئی ہے۔",
+            "customer_profile_access_restricted": "چیک آؤٹ کو کسٹمر پروفائل تک رسائی کی اجازت نہیں ہے۔",
+            "checkout_completion_target_is_invalid_proc": "چیک آؤٹ مکمل کرنے کا ہدف غلط ہے۔",
+            "buyer_identity_presentment_currency_does_not_match": "آپ کے آرڈر پر کارروائی کرنے میں ایک مسئلہ پیش آیا۔ چند منٹ بعد دوبارہ کوشش کریں۔"
+          },
+          "delivery": {
+            "only_one_delivery_line_allowed": "کارٹ میں صرف ایک ڈیلیوری لائن ہونی چاہیے۔",
+            "wrong_number_of_delivery_lines": "ہر قسم کے سامان کے لیے ایک ڈیلیوری لائن کی وضاحت کی جانی چاہیے۔",
+            "external_delivery_promise_error": "ایک بیرونی ڈیلیوری پرومیس حاصل کرنے کی خرابی۔",
+            "options_instructions_invalid": "مخصوص ہدایات متوقع پیٹرن سے مماثل نہیں ہیں۔",
+            "destination_address_required": "جاری رکھنے کے لیے منزل کے پتے کی ضرورت ہے۔",
+            "pickup_points_unavailable": "پک اپ پوائنٹس فی الحال دستیاب نہیں ہیں۔",
+            "local_pickup_delivery_line_detail_changed": "جاری رکھنے کے لیے موجودہ مقامی پک اپ ڈیلیوری کی حکمت عملی کو تبدیل کیا جانا چاہیے۔",
+            "selected_pickup_option_no_longer_available": "پہلے سے منتخب کردہ پک اپ کا آپشن اب دستیاب نہیں ہے۔"
+          }
+        }
+      },
+      "shipping": {
+        "shipping_information_redirect_link": "اپنی معلومات یہاں درج کریں۔",
+        "loading_progressive_rates": "مزید نرخ تلاش کیے جا رہے ہیں...",
+        "no_other_methods_available": "کوئی دوسرا طریقہ دستیاب نہیں ہے۔",
+        "duties_and_taxes_options": {
+          "ddu_title": "ادائیگی وصولی پر",
+          "ddu_caption": "اضافی فیس لاگو ہو سکتی ہے۔",
+          "ddp_title": "ابھی ادائیگی کریں",
+          "ddp_caption": "ڈیلیوری پر کوئی اضافی فیس نہیں۔"
+        },
+        "shipping_method_combinations": {
+          "without_separator": "%{firstMethod}، %{secondMethod}",
+          "with_separator": "%{بقیہ}, %{موجودہ},",
+          "combination": "%{rest} اور %{current}"
+        },
+        "shipping_used_as_billing_notice": "یہ اس آرڈر کے لیے آپ کا بلنگ ایڈریس بھی ہوگا۔",
+        "address_update": "پتہ اپ ڈیٹ کریں",
+        "shipping_address_title": "جہاز سے بھیجیں",
+        "shipping_address_rollup_accessibility_label": "جہاز رانی کے پتہ کے اختیارات",
+        "third_party_address_timeout": "پتے لوڈ نہیں ہو سکے۔ دوبارہ کوشش کریں یا کوئی دوسرا پتہ استعمال کریں۔",
+        "third_party_address_error": "پتہ منتخب کرتے وقت ایک خرابی پیش آ گئی۔ اپنا پتہ ذیل میں دستی طور پر درج کریں۔",
+        "third_party_payment_timeout": "ادائیگی کے طریقے لوڈ کرنے سے قاصر ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔",
+        "third_party_payment_error": "ادائیگی کے انتخاب کو لوڈ کرتے وقت ایک خرابی پیش آئی۔ ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "add_address": "کوئی اور پتہ استعمال کریں",
+        "add_delivery_instructions": "ڈیلیوری کی ہدایات شامل کریں",
+        "edit": "ترمیم کریں",
+        "delete": "حذف کریں",
+        "back": "واپس",
+        "address_more": "اس پتے کے لیے مزید کارروائیاں",
+        "address_edit": "پتہ میں ترمیم کریں",
+        "address_delete": "ایڈریس ڈیلیٹ کریں",
+        "address_confirm": "کیا آپ واقعی اس پتے کو اپنے اکاؤنٹ سے حذف کرنا چاہتے ہیں؟",
+        "address_default": "بطور ڈیفالٹ سیٹ کریں",
+        "address_form": {
+          "add_address": "پتہ شامل کریں",
+          "save": "محفوظ کریں۔",
+          "cancel": "منسوخ کریں",
+          "edit": "پتہ میں ترمیم کریں",
+          "update": "تبدیلیاں محفوظ کریں۔",
+          "generic_error": "آپ کا پتہ محفوظ کرنے میں مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں۔",
+          "one_time_address_subtitle": "اس آرڈر کے لیے ایک دفعہ استعمال ہونے والا پتہ استعمال کریں۔"
+        },
+        "different_shipping_method_summary": "دستیاب شپنگ کے طریقے دیکھنے کے لیے ایک مختلف شپنگ پتہ درج کریں",
+        "invalid_shipping_method_summary": "دستیاب شپنگ کے طریقے دیکھنے کے لیے ایک درست شپنگ ایڈریس درج کریں۔",
+        "invalid_shipping_method_summary_selected": "دستیاب ترسیل کے طریقے دیکھنے کے لیے ایک مختلف شپنگ ایڈریس منتخب کریں۔",
+        "method_summary": {
+          "incomplete_address_entered": "دستیاب شپنگ کے طریقے دیکھنے کے لیے مکمل شپنگ ایڈریس درج کریں۔",
+          "incomplete_address_selected": "دستیاب شپنگ کے طریقے دیکھنے کے لیے ایک مکمل شپنگ ایڈریس منتخب کریں۔"
+        },
+        "local_pickup": {
+          "search_address": "پتہ تلاش کریں۔",
+          "rollup_title": "پک اپ کا مقام",
+          "rollup_accessibility_label": "پک اپ لوکیشن کے اختیارات"
+        },
+        "missing_shipping_address": "شپنگ ایڈریس غائب ہے",
+        "split_shipping_merchandise_quantity_label_standard": "%{quantity} اشیاء",
+        "split_shipping_merchandise_quantity_label_additional": "مزید %{quantity}",
+        "split_shipping_merchandise_shipment_number": "کھیپ %{total} میں سے %{number}",
+        "pre_order_ships_now": "جہاز اب",
+        "pre_order_ships_later": "جہاز بعد میں",
+        "pre_order_ships_date": "جہاز بھیجیں %{date}",
+        "split_shipping_shipped_by_shop": "%{shop_name} کے ذریعے بھیجا گیا",
+        "split_shipping_multiple_shipment_label": "متعدد ترسیلات",
+        "split_shipping_shipping_label": "طریقہ",
+        "split_shipping_shipment_notice": "آپ کا آرڈر %{quantity_shipments} میں پہنچ جائے گا۔",
+        "split_shipping_first_shipment_notice": "آپ کا پہلا آرڈر %{quantity_shipments} میں پہنچ جائے گا",
+        "split_shipping_multiple_shipment_quantity_label": "%{quantity} کھیپ",
+        "split_shipping_multiple_shipment_notice": "آپ کا آرڈر متعدد کھیپوں میں پہنچے گا۔",
+        "split_shipping_multiple_shipment_notice_one_time_purchase": "آپ کا آرڈر %{quantity} کھیپوں میں پہنچے گا۔",
+        "split_shipping_shipment_count_notice_one_time_purchase": {
+          "one": "آپ کا آرڈر %{count} کھیپ میں پہنچ جائے گا۔",
+          "other": "آپ کا آرڈر %{count} کھیپوں میں پہنچے گا۔"
+        },
+        "split_shipping_more_shipping_options": "مزید شپنگ کے اختیارات",
+        "split_shipping_shipment_number": "کھیپ %{number}",
+        "split_shipping_option_free": "مفت ترسیل",
+        "split_shipping_option_lowest_price": "سب سے کم قیمت",
+        "split_shipping_option_fastest": "تیز ترین",
+        "split_shipping_option_recommended": "تجویز کردہ",
+        "split_shipping_option_custom": "مرضی کے مطابق",
+        "add_shipping_address": "شپنگ ایڈریس شامل کریں",
+        "add_new_delivery_address": "ایک نیا ترسیل کا پتہ شامل کریں",
+        "choose_new_address": "ایک نیا پتا منتخب کریں"
+      },
+      "localized_fields": {
+        "additional_information": {
+          "title": "اضافی معلومات",
+          "tax_credential_br": "سی پی ایف/سی این پی جے",
+          "shipping_credential_br": "سی پی ایف/سی این پی جے",
+          "shipping_credential_kr": "ذاتی کسٹمز کوڈ",
+          "shipping_credential_cn": "رہائشی شناختی نمبر",
+          "tax_credential_it": "کوڈیس فسکالے (اختیاری)",
+          "tax_email_it": "پی ای سی (اختیاری)",
+          "tax_credential_cl": "روٹ",
+          "shipping_credential_cl": "روٹ",
+          "tax_credential_co": "شناختی کارڈ/IVA",
+          "tax_credential_type_co": "شناخت نامے کی قسم",
+          "shipping_credential_co": "شناختی کارڈ/IVA",
+          "shipping_credential_type_co": "شناخت نامے کی قسم",
+          "tax_credential_cr": "شناختی نمبر/آر یو ٹی",
+          "shipping_credential_cr": "شناختی نمبر/آر یو ٹی",
+          "tax_credential_ec": "سی آئی/آر یو سی/آئی وی اے",
+          "shipping_credential_ec": "سی آئی/آر یو سی/آئی وی اے",
+          "tax_credential_gt": "NIT/IVA",
+          "shipping_credential_gt": "NIT/IVA",
+          "tax_credential_id": "این پی ڈبلیو پی",
+          "shipping_credential_id": "این پی ڈبلیو پی",
+          "tax_credential_my": "ٹیکس/رجسٹریشن نمبر",
+          "shipping_credential_my": "ٹیکس/رجسٹریشن نمبر",
+          "shipping_credential_mx": "آر ایف سی",
+          "tax_credential_mx": "آر ایف سی",
+          "tax_credential_type_mx": "مالیاتی نظام",
+          "tax_credential_use_mx": "سی ایف ڈی آئی کا استعمال",
+          "tax_credential_py": "سی آئی/آر یو سی/آئی وی اے",
+          "shipping_credential_py": "سی آئی/آر یو سی/آئی وی اے",
+          "tax_credential_pe": "ڈی این آئی/ آر یو سی/ سی ای"
+        }
+      },
+      "local_pickup": {
+        "location_information": {
+          "one": "آپ کے قریب %{count} اسٹاک کے ساتھ ایک مقام ہے۔",
+          "other": "آپ کے قریب اسٹاک کے ساتھ %{count} مقامات ہیں۔"
+        },
+        "location_information_far_away": {
+          "one": "آپ کی شے کے ساتھ %{count} مقام موجود ہے۔",
+          "other": "آپ کے آئٹم کے ساتھ %{count} جگہیں ہیں۔"
+        },
+        "location_information_far_away_one_item": {
+          "one": "آپ کی شے کے ساتھ %{count} مقام موجود ہے۔",
+          "other": "آپ کے آئٹم کے ساتھ %{count} جگہیں ہیں۔"
+        },
+        "location_information_far_away_other_items": {
+          "one": "آپ کی اشیاء کے ساتھ %{count} مقام موجود ہے۔",
+          "other": "آپ کی اشیاء کے ساتھ %{count} مقامات ہیں۔"
+        },
+        "location_nearby": {
+          "one": "آپ کی شے کے ساتھ ایک قریبی مقام موجود ہے۔",
+          "other": "آپ کے آئٹم والی %{count} قریبی جگہیں موجود ہیں۔"
+        },
+        "location_nearby_one_item": {
+          "one": "آپ کی شے کے ساتھ ایک قریبی مقام موجود ہے۔",
+          "other": "آپ کے آئٹم والی %{count} قریبی جگہیں موجود ہیں۔"
+        },
+        "location_nearby_other_items": {
+          "one": "آپ کی اشیاء کے ساتھ %{count} قریبی مقام ہے۔",
+          "other": "آپ کی چیزوں کے ساتھ %{count} قریبی مقامات ہیں۔"
+        },
+        "location_nearby_short": {
+          "one": "آپ کی آئٹم کے ساتھ %{count} قریبی مقام",
+          "other": "آپ کی چیز کے ساتھ %{count} قریبی مقامات"
+        },
+        "location_nearby_short_one_item": {
+          "one": "آپ کی آئٹم کے ساتھ %{count} قریبی مقام",
+          "other": "آپ کی چیز کے ساتھ %{count} قریبی مقامات"
+        },
+        "location_nearby_short_other_items": {
+          "one": "آپ کی اشیاء کے ساتھ %{count} قریبی مقام",
+          "other": "آپ کے آئٹمز کے ساتھ %{count} قریبی مقامات"
+        },
+        "location_far_away": {
+          "one": "آپ کے آئٹم کے ساتھ %{count} لوکیشن",
+          "other": "آپ کی چیز کے ساتھ %{count} مقامات"
+        },
+        "location_far_away_one_item": {
+          "one": "آپ کے آئٹم کے ساتھ %{count} لوکیشن",
+          "other": "آپ کی چیز کے ساتھ %{count} مقامات"
+        },
+        "location_far_away_other_items": {
+          "one": "آپ کی چیزوں کے ساتھ %{count} مقام",
+          "other": "آپ کی اشیاء کے ساتھ %{count} مقامات"
+        },
+        "toggle_location": "مقام تبدیل کریں",
+        "toggle_more_locations": {
+          "one": "ایک اور جگہ",
+          "other": "مزید %{count} مقامات"
+        },
+        "toggle_multiple_locations": "مزید %{count}+ مقامات",
+        "pick_up_location": "پک اپ کا مقام",
+        "or": "یا",
+        "cancel": "منسوخ کریں",
+        "your_location": "آپ کا مقام",
+        "search_button": "اسٹورز تلاش کریں",
+        "no_stores_found": "کوئی اسٹور نہیں ملا",
+        "all_stores_far_away": {
+          "title": "قریب ترین جگہیں %{distance} سے زیادہ دور ہیں۔",
+          "title_with_item": {
+            "one": "آپ کی چیز کے ساتھ قریب ترین مقام %{location} سے %{distance} سے زیادہ دور ہے۔",
+            "other": "آپ کے آئٹمز کے ساتھ قریب ترین مقام %{location} سے %{distance} سے زیادہ دور ہے۔"
+          },
+          "title_with_location": "قریب ترین جگہ %{location} سے %{distance} سے زیادہ دور ہے۔",
+          "title_with_specific_location": "آپ کی مطلوبہ چیز کی قریبی ترین جگہ %{location} سے %{distance} سے زیادہ دور ہے۔",
+          "description": "ایک مقام منتخب کریں یا %{ship_to_address_link}",
+          "description_with_location": "%{change_location_link} یا %{ship_to_address_link}",
+          "ship_to_address_link": "پتہ پر بھیجیں",
+          "change_location_link": "اپنی لوکیشن تبدیل کریں۔"
+        },
+        "selected_pickup_option_no_longer_available": {
+          "title": "آپ کا پہلے سے منتخب کردہ مقام اب دستیاب نہیں ہے۔",
+          "description": "ہم نے آپ کی اشیاء کے ساتھ قریبی مقام کا انتخاب کر لیا ہے۔"
+        },
+        "could_not_resolve_address": "آپ کا پتہ تلاش نہیں ہو سکا۔ دوبارہ کوشش کریں یا کوئی دوسرا پتہ استعمال کریں۔",
+        "paginator": {
+          "accessibility_label": "مقامی پک اپ کے صفحات",
+          "previous": "پچھلا صفحہ",
+          "next": "اگلا صفحہ",
+          "label": {
+            "one": "%{count} اسٹورز میں سے %{first} - %{last}",
+            "other": "% {first} - % {last} از % {count} اسٹورز"
+          }
+        },
+        "reveal_more_label": {
+          "one": "مزید %{count} مقام دکھائیں",
+          "other": "مزید %{count} مقامات دکھائیں"
+        },
+        "no_pickup_locations_found": "کوئی پک اپ لوکیشن نہیں ملی",
+        "pickup_unavailable_banner_title": {
+          "one": "آپ کی چیز کے ساتھ کوئی مقام نہیں ہے۔",
+          "other": "آپ کے آئٹمز کے ساتھ کوئی مقام نہیں ہے۔"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "one": "آپ کے آئٹم کے ساتھ %{country} میں کوئی مقام نہیں ملا",
+          "other": "آپ کے آئٹمز کے ساتھ %{country} میں کوئی مقام نہیں ملا"
+        },
+        "pickup_unavailable_banner_body": {
+          "try_different_location": "کوئی دوسری جگہ آزمائیں۔",
+          "ship_to_address": "پتہ پر بھیجیں",
+          "there_are_no_stores": "آپ کے پتے کے قریب کوئی اسٹور نہیں ہے، یا آپ کی اشیاء پک اَپ کے لیے دستیاب نہیں ہیں۔",
+          "ship_items": "اپنی چیزیں بھیجیں",
+          "search_elsewhere": "کہیں اور تلاش کریں۔",
+          "search_elsewhere_standalone": "کہیں اور تلاش کریں",
+          "ship_items_or_search_elsewhere": "%{ship_items} یا %{search_elsewhere}"
+        },
+        "geolocation": {
+          "permission_not_allowed": "مقام کا اشتراک کرنے کی اجازت دیں یا اس کے بجائے تلاش کریں۔"
+        }
+      },
+      "split_delivery": {
+        "accessibility": {
+          "status": {
+            "ship_separately": "%{items} الگ سے بھیجے جائیں گے۔",
+            "pickup_in_store": "%{items} اسٹور میں اٹھا لیے جائیں گے۔",
+            "remove_items": "%{items} کارٹ سے ہٹا دیئے گئے ہیں۔"
+          }
+        },
+        "pickup_all_items": "تمام اشیاء اٹھا لیں",
+        "items_for_pickup": "اٹھانے والی اشیاء",
+        "items_for_shipping": "اشیاء برائے شپنگ",
+        "items_moved_to_shipping_toast": "جو اشیاء پک اپ نہیں کی جا سکتیں انہیں شپنگ کے لیے بھیج دیا گیا ہے۔",
+        "delivery_method": "ترسیل کا تقسیم شدہ طریقہ",
+        "delivery_method_menu": "سپلٹ ڈیلیوری طریقہ کار مینو",
+        "inventory_issue_banner": {
+          "heading": {
+            "cannot_be_picked_up": {
+              "one": "%{count} آئٹم اٹھایا نہیں جا سکتا",
+              "other": "%اردو کاؤنٹ اشیاء کو نہیں اٹھایا جا سکتا ہے"
+            },
+            "cannot_be_shipped": {
+              "one": "%{count} آئٹم بھیجا نہیں جا سکتا ہے",
+              "other": "%{count} آئٹمز بھیجے نہیں جا سکتے"
+            }
+          },
+          "remove_item": {
+            "one": "آئٹم ہٹائیں",
+            "other": "آئٹمز ہٹائیں"
+          },
+          "remove_item_only": {
+            "one": "آئٹم ہٹا دیں",
+            "other": "اشیاء کو ہٹا دیں"
+          },
+          "ship_separately": {
+            "one": "اسے الگ سے بھیج دیں۔",
+            "other": "انہیں الگ سے بھیج دیں"
+          },
+          "pick_them_up_in_store": {
+            "one": "اسے اسٹور سے اٹھا لیں۔",
+            "other": "انہیں اسٹور سے حاصل کر لیں۔"
+          },
+          "remove_items_or_ship": "%{ship_separately_link} یا %{remove_items_link}",
+          "remove_items_or_pickup": "%{pickup_in_store_link} یا %{remove_items_link}",
+          "merchandise_line_with_quantity": "%{title} (×%{quantity})"
+        },
+        "cross_border": {
+          "modal": {
+            "heading": "ملک تبدیل کریں؟",
+            "content": "آپ کے پک اپ اور شپنگ کے مقامات ایک ہی ملک میں ہونے چاہئیں۔ ملک تبدیل کرنے سے تمام آئٹمز دوبارہ شپنگ میں چلے جائیں گے۔",
+            "country_changed_heading": "ملک بدل گیا",
+            "change_country": "ملک تبدیل کریں"
+          },
+          "banner": "آپ کے ڈیلیوری کے طریقے کو اپ ڈیٹ کر دیا گیا ہے۔"
+        }
+      },
+      "captcha": {
+        "title": "جاری رکھنے کے لیے CAPTCHA مکمل کریں۔",
+        "errors": {
+          "not_solved": "جاری رکھنے کے لیے CAPTCHA مکمل کریں۔"
+        }
+      },
+      "clipboard": {
+        "copied": "کاپی کیا گیا۔"
+      }
+    }
+  },
+  "customer_accounts": {
+    "B2B": {
+      "locations": {
+        "net_payment_terms_description": "{{name}}: ادائیگی {{numberOfDays}} دن کے اندر واجب الادا ہے",
+        "deposit_percentage": "{{percentage}} ڈپازٹ",
+        "own_role_contact_name": "آپ",
+        "pagination": {
+          "load_more": "مزید دکھائیں",
+          "load_more_accessibility_label": "مزید جگہیں دکھائیں۔"
+        },
+        "payment_details_title": "ادائیگی کی تفصیلات",
+        "payment_terms": "ادائیگی کی شرائط",
+        "permissions_label": "آپ کی اجازتیں",
+        "permissions_title": "اجازتیں",
+        "section_title": "مقام",
+        "shipping_address_required": "آرڈر دینا شروع کرنے کے لیے اس مقام میں شپنگ ایڈریس شامل کریں۔",
+        "staff_and_permissions_title": "عملہ اور اجازتیں",
+        "tax_details_title": "ٹیکس کی تفصیلات",
+        "tax_id": "ٹیکس شناختی نمبر",
+        "tax_exemptions": "ٹیکس چھوٹ",
+        "multiple_tax_exemptions": "{{taxExemptionsCount}} مزید",
+        "multiple_tax_exemptions_and": "اور",
+        "tax_exemptions_modal_close": "بند کریں",
+        "taxes_none": "کوئی نہیں۔",
+        "tax_exemption_not_applicable": "دستیاب نہیں ہے۔",
+        "tax_exemptions_modal_button_accessibility_label": "تمام ٹیکس چھوٹ دیکھیں"
+      },
+      "location_selection": {
+        "continue_to_store": "ذخیرہ کرتے رہیں",
+        "description": "اگر آپ کی کارٹ میں پہلے سے اشیاء موجود ہیں، تو مقام تبدیل کرنے سے کارٹ کی قیمتوں اور مقداروں پر اثر پڑ سکتا ہے۔",
+        "description_switch_later": "آپ بعد میں کسی بھی وقت تبدیل کر سکتے ہیں۔",
+        "error_loading_locations": "لوکیشنز لوڈ کرنے میں ایک مسئلہ پیش آیا ہے۔ اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔",
+        "list_accessibility_label": "مقامات کی فہرست",
+        "list_item_without_address_accessibility_label": "{{name}}: کوئی پتہ نہیں",
+        "list_loading_accessibility_message": "مقامات کی فہرست لوڈ ہو رہی ہے",
+        "list_loading_address_accessibility_message": "{{locationName}} کے لیے لوڈنگ ایڈریس",
+        "list_loading_finished_accessibility_message": "مقامات کی فہرست لوڈ ہو گئی ہے۔",
+        "loading_store_accessibility_message": "دکان جا رہا ہوں۔",
+        "no_location_title": "صرف ذاتی آرڈرز",
+        "no_location_description": "<p>آپ کے پاس اب {{company}} کے لیے آرڈر دینے کی اجازت نہیں ہے۔ آپ اب بھی ذاتی آرڈرز دے سکتے ہیں۔</p>",
+        "no_locations_found": "کوئی مقام نہیں ملا",
+        "search": "مقامات تلاش کریں۔",
+        "search_location_title": "مقام کا انتخاب کریں",
+        "selection_cancel_button": "منسوخ کریں",
+        "selection_confirmation_button": "مقام کا انتخاب کریں",
+        "selection_continue_button": "جاری رکھیں",
+        "title": "آپ کس جگہ کے لیے خرید رہے ہیں؟",
+        "title_choose_location": "ایک جگہ کا انتخاب کریں۔",
+        "clear_search": "تلاش صاف کریں",
+        "try_new_search": "نئی تلاش آزمائیں"
+      },
+      "addresses": {
+        "add_billing_address_button": "بلنگ ایڈریس شامل کریں۔",
+        "add_billing_address_section_accessibility_label": "بلنگ ایڈریس شامل کریں۔",
+        "add_shipping_address_button": "شپنگ ایڈریس شامل کریں",
+        "add_shipping_address_section_accessibility_label": "شپنگ ایڈریس شامل کریں",
+        "billing_address_card_title": "بلنگ کا پتہ",
+        "no_billing_address_banner": "کوئی بلنگ ایڈریس نہیں شامل کیا گیا ہے۔",
+        "cancel_adding_billing_address_accessibility_label": "بلنگ ایڈریس شامل کرنا منسوخ کریں۔",
+        "cancel_adding_shipping_address_accessibility_label": "شپنگ ایڈریس شامل کرنا منسوخ کریں",
+        "save_new_billing_address_accessibility_label": "بلنگ ایڈریس محفوظ کریں۔",
+        "save_new_shipping_address_accessibility_label": "شپنگ ایڈریس محفوظ کریں",
+        "shipping_address_card_title": "بھیجنے کا پتہ"
+      },
+      "orders": {
+        "draft_order_list": {
+          "hide_all": "سب کو چھپائیں",
+          "show_all": "سب دکھائیں",
+          "hide_all_accessibility_label": "جائزے کے تحت تمام آرڈرز چھپائیں۔",
+          "show_all_accessibility_label": "زیر جائزہ تمام آرڈرز دکھائیں۔",
+          "show_all_orders_in_review": "زیر جائزہ تمام آرڈرز دکھائیں۔",
+          "show_less_orders_in_review": "جائزے میں کم آرڈرز دکھائیں",
+          "title": "زیر التوا",
+          "pending_tab_accessibility_label": {
+            "no_pending_orders": "آپ کے کوئی زیر التواء آرڈرز نہیں ہیں۔",
+            "pending_orders": {
+              "one": "آپ کے {{count}} زیر التواء آرڈر ہیں",
+              "other": "آپ کے {{count}} زیر التواء آرڈرز ہیں"
+            },
+            "more_than_pagination_length": "آپ کے {{count}} سے زیادہ آرڈرز زیر التواء ہیں"
+          },
+          "pending_orders_count_more_than_pagination_length": "{{count}}+",
+          "pagination": {
+            "nav_accessibility_label": "زیرِ جائزہ آرڈرز کے نیویگیشن بٹن"
+          }
+        },
+        "order_list_column_headers_location": "مقام",
+        "order_list_column_headers_contact": "رابطہ کریں۔",
+        "order_list_column_headers_status": "سٹیٹس",
+        "removed_company_contact_tooltip": "کمپنی سے ہٹا دیا گیا۔"
+      },
+      "draft_order_details": {
+        "draft_order_subtitle": "آرڈر {{draftOrderName}} سے {{date}} کو تصدیق کی گئی",
+        "loading": "آرڈر کی تفصیلات لوڈ ہو رہی ہیں",
+        "loading_finished_accessibility_message": "آرڈر کی تفصیلات لوڈ کر دی گئی ہیں۔",
+        "payment_status": {
+          "pending": {
+            "banner_overdue": {
+              "one": "آپ کی ادائیگی کو {{count}} دن تاخیر ہو چکی ہے",
+              "other": "آپ کی ادائیگی کو {{count}} دن ہو چکے ہیں۔"
+            },
+            "banner_due": {
+              "one": "آپ کی ادائیگی {{count}} دن میں واجب الادا ہے",
+              "other": "آپ کی ادائیگی {{count}} دنوں میں واجب الادا ہے"
+            },
+            "banner_due_today": "آپ کی ادائیگی آج واجب الادا ہے۔",
+            "banner_due_today_for_multiple_fulfillments": "آج {{count}} تکمیلوں کے لیے ادائیگی واجب الادا ہے",
+            "banner_overdue_for_multiple_fulfillments": "{{count}} تکمیلوں کی ادائیگی واجب الادا ہے۔",
+            "title": "ادائیگی واجب الادا",
+            "title_with_date": "ادائیگی کی تاریخ {{date}}",
+            "title_due_on_receipt": "ادائیگی ابھی واجب الادا نہیں ہے",
+            "title_due_on_fulfillment": "تکمیل پر ادائیگی واجب الادا",
+            "description_overdue": "آپ کی ادائیگی دیر سے ہے۔",
+            "description_partially_paid": "اس آرڈر کی جزوی ادائیگی ہو چکی ہے۔ آپ کا بقایا بیلنس ہے۔",
+            "description_authorized": "آپ کی ادائیگی کا طریقہ مقررہ تاریخ پر چارج کیا جائے گا، یا آپ ابھی ادائیگی کر سکتے ہیں۔",
+            "description_waiting_for_manual_payment": "اس آرڈر کی ادائیگی زیر التوا ہے۔ ادائیگی موصول ہونے پر بیلنس اپ ڈیٹ ہو جائے گا۔",
+            "description_due_on_receipt": "جب ادائیگی کی تاریخ ہوگی تو آپ کو انوائس موصول ہو جائے گا۔",
+            "description_due_on_receipt_partially_paid": "اس آرڈر کی جزوی ادائیگی کی گئی تھی۔ آپ کا بقایا بیلنس ہے۔ ادائیگی کی تاریخ پر آپ کو انوائس موصول ہو گی۔",
+            "description_due_on_fulfillment": "ادائیگی تب واجب الادا ہوگی جب اس آرڈر میں موجود تمام اشیاء پوری ہو جائیں گی۔",
+            "description_due_on_fulfillment_partially_paid": "اس آرڈر کی جزوی ادائیگی کی گئی تھی۔ آپ کا بقایا بیلنس ہے۔ اس آرڈر میں تمام اشیاء کی تکمیل کے بعد ادائیگی واجب الادا ہو گی۔",
+            "description_due_on_fulfillment_partially_paid_next": "اس آرڈر کی جزوی ادائیگی ہو چکی ہے۔ آپ کا بقایا بیلنس ہے۔"
+          },
+          "draft": {
+            "description": "آرڈر کی تصدیق ہونے پر ادائیگی کی تفصیلات طے کی جاتی ہیں۔",
+            "title": "ادائیگی ابھی واجب الادا نہیں ہے۔",
+            "in_review": {
+              "description": "آرڈر کی تصدیق ہونے پر ادائیگی کی تفصیلات طے کی جاتی ہیں۔",
+              "title": "ادائیگی ابھی واجب الادا نہیں ہے۔"
+            },
+            "submitted": {
+              "description": "اس آرڈر کی تصدیق کے لیے ادائیگی جمع کروائیں۔",
+              "title": "تصدیق کے لیے ادائیگی کریں۔"
+            }
+          }
+        }
+      }
+    }
+  }
+}
