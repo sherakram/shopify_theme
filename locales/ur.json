@@ -1302,6 +1302,136 @@
       "store_credit_multi_currency_accessibility_label": {
         "one": "{{formattedBalance}} اور {{count}} مزید کرنسی اسٹور کریڈٹ"
       }
+    },
+    "payment_methods": {
+      "expires_soon": "یہ کارڈ جلد ہی میعاد ختم ہونے والا ہے",
+      "expired": "یہ کارڈ میعاد سے باہر ہو چکا ہے",
+      "expired_badge_label": "میعاد ختم ہو گئی",
+      "expiring_badge_label": "میعاد ختم ہو رہی ہے",
+      "card_update_consent": "یہ ادائیگی کا طریقہ مستقبل کی خریداریوں کے لیے محفوظ کر لیا جائے گا۔",
+      "card_update_consent_subscriptions": "ادائیگی کا یہ طریقہ آئندہ خریداریوں کے لیے محفوظ کیا جائے گا اور اسے کسی بھی بار بار ہونے والی یا مؤخر کردہ خریداری کے لیے استعمال کیا جا سکتا ہے۔",
+      "digital_wallet_title": "ڈیجیٹل والیٹ",
+      "credit_or_debit_card_title": "کریڈٹ یا ڈیبٹ کارڈ",
+      "credit_card_title": "کریڈٹ کارڈ",
+      "additional_payment_methods": "ادائیگی کے اضافی طریقے",
+      "or": "یا",
+      "google_pay": {
+        "iframe_title_accessibility_label": "Google Pay ادائیگی کا طریقہ شامل کریں۔",
+        "loading_accessibility_message": "Google Pay لوڈ ہو رہا ہے",
+        "loading": "Google Pay لوڈ ہو رہا ہے",
+        "errors": {
+          "generic": "گوگل پے میں کوئی مسئلہ تھا۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+          "missing_billing_address": "گوگل پے کو بلنگ ایڈریس درکار ہے۔ براہ کرم اپنے اکاؤنٹ میں ایک شامل کریں۔"
+        }
+      },
+      "pay_pal": {
+        "iframe_title_accessibility_label": "پے پال ادائیگی کا طریقہ شامل کریں۔",
+        "loading_accessibility_message": "PayPal لوڈ ہو رہا ہے",
+        "errors": {
+          "generic": "پے پال میں ایک مسئلہ پیش آیا تھا۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔"
+        }
+      },
+      "apple_pay": {
+        "loading": "ایپل پے لوڈ ہو رہا ہے",
+        "errors": {
+          "generic": "ایپل پے میں کوئی مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔",
+          "not_available": "ایپل پے اس ڈیوائس پر دستیاب نہیں ہے۔",
+          "missing_billing_address": "Apple Pay کے لیے بلنگ ایڈریس درکار ہے۔ براہ کرم اسے اپنے اکاؤنٹ میں شامل کریں۔"
+        }
+      },
+      "store_credit": {
+        "label": "اسٹور کریڈٹ",
+        "accessibility_label": "اسٹور کریڈٹ - {{formattedBalance}}",
+        "expirable_amounts_button": "قابل میعاد ختم ہونے والی رقمیں دیکھیں",
+        "expirable_amounts_label": "میعاد ختم ہونے والی رقم",
+        "details_modal": {
+          "load_error": "اسٹور کریڈٹ لوڈ نہیں ہو سکا۔",
+          "title": "قابل میعاد اسٹور کریڈٹ",
+          "balance_label": "توازن",
+          "expiration_date_label": "تاریخ اِختتام",
+          "amount_label": "رقم",
+          "date_label": "تاریخ",
+          "event_label": "تقریب",
+          "events": {
+            "adjustment": "ترمیم",
+            "order_payment": "آرڈر کی ادائیگی",
+            "order_refund": "آرڈر رقم کی واپسی",
+            "payment_failure": "ادائیگی ناکام",
+            "payment_returned": "ادائیگی واپس کر دی گئی۔",
+            "order_cancellation": "آرڈر منسوخی",
+            "tax_finalization": "ٹیکس کی حتمی رپورٹ"
+          },
+          "expirable_balance_info": "آپ کے بیلنس کا کچھ حصہ مستقبل کی تاریخ پر ختم ہو جائے گا۔",
+          "expirable_amount_label": "قابلِ میعاد کل رقم",
+          "expirable_amounts_info": "جلد ختم ہونے والی رقم پہلے چیک آؤٹ پر لاگو کی جاتی ہے۔",
+          "expirable_amounts_button": "دیکھیں",
+          "expired_amounts_button": "میعاد ختم شدہ رقمیں دیکھیں",
+          "pagination": {
+            "expirable_transactions_loading": "زائد المعیاد رقوم لوڈ ہو رہی ہیں",
+            "transactions_loading": "مزید لین دین لوڈ کر رہا ہے",
+            "load_more_label": "مزید دکھائیں",
+            "load_more_accessibility_label": "مزید میعاد ختم ہونے والی رقوم دکھائیں",
+            "load_more_transactions_accessibility_label": "مزید ٹرانزیکشنز دکھائیں۔",
+            "expirable_transactions_loaded": "زیادہ جلد ختم ہونے والی مقداریں لوڈ کی گئیں۔",
+            "transactions_loaded": "مزید ٹرانزیکشنز لوڈ کی گئیں۔"
+          },
+          "expirable_indicator": "{{formattedAmount}} کی میعاد ختم ہو جائے گی",
+          "expirable_indicator_accessibility_label": "{{formattedAmount}} کی میعاد ختم ہو جائے گی۔ میعاد ختم ہونے والی رقومات دیکھیں۔",
+          "expirable_indicator_with_date_accessibility_label": "{{formattedAmount}} کی میعاد {{date}} کو ختم ہوگی۔ قابل میعاد رقمیں دیکھیں۔",
+          "expires_at": "میعاد {{date}} کو ختم ہوگی",
+          "expirable_transactions_list_accessibility_label": "ایکسپائر ہونے والے اسٹور کریڈٹ کے لین دین",
+          "loading_accessibility_message": "اسٹور کریڈٹ کی تفصیلات لوڈ کر رہا ہے۔",
+          "transactions_list_accessibility_label": "اسٹور کریڈٹ کی ٹرانزیکشنز",
+          "transaction_types": {
+            "credit": "شامل کر دیا گیا",
+            "debit": "خرچ کیے",
+            "debit_revert": "واپس کر دیا گیا۔",
+            "expiration": "میعاد ختم ہو گئی"
+          }
+        }
+      },
+      "payment_details": {
+        "title": "ادائیگی کے طریقے کی تفصیلات",
+        "credit_card_details_accessibility_label": "جس کا اختتام {{lastDigits}} پر ہوتا ہے",
+        "billing_title": "بلنگ کا پتہ",
+        "card_info_title": "کارڈ کی معلومات",
+        "payment_method_expiring_on": "{{expiryDate}} کو میعاد ختم ہو رہی ہے",
+        "payment_method_expired_on": "{{expiryDate}} کو میعاد ختم ہو گئی",
+        "preauthorized_payments": "قبل از اجازت ادائیگیاں",
+        "close_payment_modal": "بند کریں",
+        "close_payment_modal_accessibility_label": "ادائیگی کے طریقے کی تفصیلات کا ماڈل بند کریں۔",
+        "payment_method_not_found_error": "ادائیگی کا طریقہ تلاش کرنے سے قاصر ہے۔",
+        "payment_details_loading": "ادائیگی کے طریقے کی تفصیلات لوڈ کر رہا ہے",
+        "pre_authorized_payments": "قبل از اختیار ادائیگیوں",
+        "total_amount_of_subscription_line_items_left": "اور {{total}} مزید",
+        "total_amount_of_subscription_line_items_left_accessibility_label": "{{totalItems}} کل اشیاء، {{totalItemsToDisplay}} اشیاء دکھائی جا رہی ہیں۔",
+        "next_payment_due": "اگلی ادائیگی کی تاریخ {{dueDateInMonthDayYear}}",
+        "edit_payment_method_button": "ترمیم کریں",
+        "edit_payment_method_button_accessibility_label": "ادائیگی کے طریقے میں ترمیم کریں جو {{lastDigits}} پر ختم ہو رہا ہے",
+        "loading_shop_pay": "شاپ پے لوڈ ہو رہا ہے",
+        "invalid_payment_method": "غلط ادائیگی کا طریقہ",
+        "invalid_payment_method_message": "آئندہ آرڈرز کی وصولی جاری رکھنے کے لیے ایک نیا کریڈٹ کارڈ استعمال کریں۔",
+        "replace_payment_method": "ادائیگی کا طریقہ بدلیں",
+        "checkout_card_banner": "ادائیگی کا یہ طریقہ صرف پہلے سے منظور شدہ ادائیگیوں کے لیے استعمال کیا جا سکتا ہے۔ اگر آپ اس اسٹور میں سائن ان ہیں تو یہ چیک آؤٹ پر ظاہر نہیں ہوگا۔",
+        "default_checkbox": "بطور ڈیفالٹ سیٹ کریں",
+        "default_checkbox_accessibility_label": "اس ادائیگی کے طریقے کو ڈیفالٹ کے طور پر سیٹ کریں۔",
+        "replace_payment_method_button": "تبدیل کریں"
+      },
+      "edit_payment_method": {
+        "title": "ادائیگی کا طریقہ تبدیل کریں",
+        "save_payment_method_button": "محفوظ کریں۔",
+        "cancel_edit_payment_method_button": "منسوخ کریں",
+        "payment_method_updated_toast": "ادائیگی کا طریقہ اپ ڈیٹ کر دیا گیا ہے۔",
+        "billing_address": "بلنگ کا پتہ",
+        "billing_address_add_new": "نئی چیزیں شامل کریں۔",
+        "billing_address_choose_from_list": "فہرست میں سے انتخاب کریں",
+        "future_purchases_notice": "یہ ادائیگی کا طریقہ مستقبل کی خریداریوں کے لیے محفوظ کر لیا جائے گا۔",
+        "generic_error": "اپ ڈیٹ کرنے میں مسئلہ پیش آیا۔ براہ کرم دوبارہ کوشش کریں۔"
+      },
+      "update_payment_method": {
+        "title": "ادائیگی کا طریقہ اپ ڈیٹ کریں",
+        "button_title": "تازہ کاری"
+      }
     }
   }
 }
