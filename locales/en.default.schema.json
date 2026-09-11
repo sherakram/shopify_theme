@@ -87,7 +87,16 @@
       "top": "Top",
       "bottom": "Bottom",
       "left": "Left",
-      "right": "Right"
+      "right": "Right",
+      "country_selector": "Country/region selector",
+      "language_selector": "Language selector",
+      "follow_on_shop": "Follow on Shop"
+    },
+    "informative_content": {
+      "country_selector_info": "[Manage countries/regions](/admin/settings/markets)",
+      "language_selector_info": "[Manage languages](/admin/settings/languages)",
+      "follow_on_shop_info": "Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)",
+      "policy_links_info": "[Manage policies](/admin/settings/legal)"
     },
     "options": {
       "email_label": "Email",

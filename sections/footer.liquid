@@ -1,90 +1,5 @@
 {{ 'footer.css' | asset_url | stylesheet_tag }}
 
-{% comment %}
-  <footer class="footer">
-    <div class="footer_top-content page-width">
-      <div class="footer__links">
-        {% for link in section.settings.menu.links %}
-          {{ link.title | link_to: link.url }}
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="footer_content-bottom page-width">
-      <div class="footer__copyright">
-        &copy;
-        {{ 'now' | date: '%Y' }}
-        {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-      </div>
-    </div>
-
-    <div class="footer_content-bottom page-width">
-      <div class="footer__payment">
-        {% if section.settings.show_payment_icons %}
-          {% for type in shop.enabled_payment_types %}
-            {{ type | payment_type_svg_tag }}
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  </footer>
-{% endcomment %}
-
-{% comment %}
-  {% schema %}
-  {
-    "name": "t:general.footer",
-    "settings": [
-      {
-        "type": "link_list",
-        "id": "menu",
-        "label": "t:labels.menu"
-      },
-      {
-        "type": "header",
-        "content": "t:content.footer_utilities"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_payment_icons",
-        "label": "t:labels.show_payment_icons",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "t:content.section_settings"
-      },
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.color_scheme",
-        "default": "scheme-1"
-      },
-      {
-        "type": "range",
-        "id": "padding_top",
-        "label": "t:sections.all.padding.padding_top",
-        "min": 0,
-        "max": 100,
-        "step": 10,
-        "unit": "px",
-        "default": 40
-      },
-      {
-        "type": "range",
-        "id": "padding_bottom",
-        "label": "t:sections.all.padding.padding_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 10,
-        "unit": "px",
-        "default": 40
-      }
-    ]
-  }
-  {% endschema %}
-{% endcomment %}
-
 {%- liquid
   assign current_year = 'now' | date: '%Y'
   assign has_newsletter = section.settings.newsletter_enable
@@ -260,56 +175,73 @@
   <div class="footer__bottom">
     <div class="page-width footer__bottom-inner">
       <div class="footer__copyright">
-        <small>
+        <small class="copyright__content">
           &copy; {{ current_year }}
           {{ shop.name | link_to: routes.root_url }}
           {%- if section.settings.copyright_text != blank %} &mdash; {{ section.settings.copyright_text }}{% endif -%}
         </small>
+        {%- if section.settings.show_policy -%}
+          <ul class="policies list-unstyled">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <small class="copyright__content">
+                    <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+                  </small>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
 
       {%- if has_locale_form -%}
         <div class="footer__localization">
           {%- form 'localization', id: 'FooterLocalizationForm' -%}
-            {%- if localization.available_countries.size > 1 -%}
-              <div class="footer__locale-field">
-                <label class="visually-hidden" for="FooterCountry">
-                  {{- 'localization.country_label' | t: default: 'Country/region' -}}
-                </label>
-                <select name="country_code" id="FooterCountry" class="footer__locale-select" data-locale-form-submit>
-                  {%- for country in localization.available_countries -%}
-                    <option
-                      value="{{ country.iso_code }}"
-                      {% if country.iso_code == localization.country.iso_code %}
-                        selected
-                      {% endif %}
-                    >
-                      {{ country.name }} ({{ country.currency.iso_code }}
-                      {{ country.currency.symbol }})
-                    </option>
-                  {%- endfor -%}
-                </select>
-              </div>
-            {%- endif -%}
+            {% if section.settings.enable_country_selector %}
+              {%- if localization.available_countries.size > 1 -%}
+                <div class="footer__locale-field">
+                  <label class="visually-hidden" for="FooterCountry">
+                    {{- 'localization.country_label' | t: default: 'Country/region' -}}
+                  </label>
+                  <select name="country_code" id="FooterCountry" class="footer__locale-select" data-locale-form-submit>
+                    {%- for country in localization.available_countries -%}
+                      <option
+                        value="{{ country.iso_code }}"
+                        {% if country.iso_code == localization.country.iso_code %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ country.name }} ({{ country.currency.iso_code }}
+                        {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endif -%}
+            {% endif %}
 
-            {%- if localization.available_languages.size > 1 -%}
-              <div class="footer__locale-field">
-                <label class="visually-hidden" for="FooterLanguage">
-                  {{- 'localization.language_label' | t: default: 'Language' -}}
-                </label>
-                <select name="locale_code" id="FooterLanguage" class="footer__locale-select" data-locale-form-submit>
-                  {%- for language in localization.available_languages -%}
-                    <option
-                      value="{{ language.iso_code }}"
-                      {% if language.iso_code == localization.language.iso_code %}
-                        selected
-                      {% endif %}
-                    >
-                      {{ language.endonym_name | capitalize }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-              </div>
-            {%- endif -%}
+            {% if section.settings.enable_language_selector %}
+              {%- if localization.available_languages.size > 1 -%}
+                <div class="footer__locale-field">
+                  <label class="visually-hidden" for="FooterLanguage">
+                    {{- 'localization.language_label' | t: default: 'Language' -}}
+                  </label>
+                  <select name="locale_code" id="FooterLanguage" class="footer__locale-select" data-locale-form-submit>
+                    {%- for language in localization.available_languages -%}
+                      <option
+                        value="{{ language.iso_code }}"
+                        {% if language.iso_code == localization.language.iso_code %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endif -%}
+            {% endif %}
 
             <noscript>
               <button type="submit" class="btn footer__locale-submit">
@@ -370,15 +302,43 @@
     },
     {
       "type": "checkbox",
+      "id": "enable_follow_on_shop",
+      "label": "t:blocks.labels.follow_on_shop",
+      "default": true,
+      "info": "t:blocks.informative_content.follow_on_shop_info"
+    },
+    {
+      "type": "checkbox",
       "id": "show_social_icons",
-      "label": "Show social media icons",
+      "label": "social media icons",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "Show payment icons",
+      "label": "payment icons",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "t:blocks.labels.country_selector",
+      "default": true,
+      "info": "t:blocks.informative_content.country_selector_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "label": "t:blocks.labels.language_selector",
+      "default": true,
+      "info": "t:blocks.informative_content.language_selector_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "label": "Policy links",
+      "default": true,
+      "info": "t:blocks.informative_content.policy_links_info"
     },
     {
       "type": "header",

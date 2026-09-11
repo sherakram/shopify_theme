@@ -321,6 +321,32 @@
   text-decoration: underline;
 }
 
+.policies {
+  display: inline;
+}
+
+.policies li {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.policies li::before {
+  content: '\00B7';
+  padding: 0 0.6rem;
+}
+
+/* .policies li a {
+  padding: 0.6rem 0;
+  display: block;
+} */
+
+@media screen and (min-width: 750px) {
+  .policies li a {
+    padding: 0;
+  }
+}
+
 /* Localization selectors */
 .footer__localization {
   order: 2;
@@ -365,7 +391,7 @@
 @media (max-width: 699px) {
   .footer__bottom-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .footer__localization,
