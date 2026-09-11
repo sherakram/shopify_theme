@@ -1521,7 +1521,159 @@
         "vault_for_payment_later": {
           "pay_button_label": "آرڈر دیں",
           "notice": "آپ سے ابھی چارج نہیں کیا جائے گا۔ اپنی ادائیگی کے ساتھ جاری رکھ کر، آپ اس بات سے اتفاق کرتے ہیں کہ جب آپ کے آرڈر پر کارروائی کی جائے گی تو آپ کے ادائیگی کے طریقے سے چارج کیا جائے گا۔"
-        }
+        },
+        "lpm": {
+          "multibanco": {
+            "voucher": {
+              "number": "حوالہ",
+              "steps": {
+                "pay_at_atm_or_online": "ذیل میں دی گئی تفصیلات کا استعمال کرتے ہوئے، کسی ملٹی بینکو اے ٹی ایم پر یا اپنی آن لائن بینکنگ کے ذریعے ادائیگی کریں۔"
+              }
+            }
+          }
+        },
+        "pending_payment": {
+          "apple_wallet": {
+            "badge_alt": "ایپل والیٹ میں شامل کریں",
+            "pass": {
+              "description": "%{shop_name} ادائیگی واؤچر",
+              "logo_text": "ادائیگی واؤچر",
+              "store_label": "دکان",
+              "expiry_date_label": "تاریخ میعاد",
+              "payment_due_label": "ادائیگی واجب الادا",
+              "reference_number_label": "حوالہ نمبر",
+              "ordered_on_label": "پر آرڈر کیا گیا۔"
+            }
+          },
+          "due_notice": "آپ کی %{amount_due} کی ادائیگی %{due_date} کو واجب الادا ہے۔",
+          "multibanco": {
+            "buyer_action_info": "آپ کی %{amount_due} کی ادائیگی واجب الادا ہے۔",
+            "instruction_html": "اپنی ادائیگی نیچے دی گئی تفصیلات استعمال کرتے ہوئے Multibanco پر یا آن لائن کریں۔ سوالات پوچھنے یا ادائیگی کی تفصیلات اپ ڈیٹ کرنے کے لیے، %{contact_us}۔",
+            "entity": "ہستی",
+            "reference": "حوالہ",
+            "amount": "رقم",
+            "find_nearest_atm": "قریب ترین اے ٹی ایم تلاش کریں۔"
+          },
+          "oxxo": {
+            "reference_number": "حوالہ نمبر:",
+            "pay": "%{amount} ادا کریں",
+            "expiry_date_time": "%date کو %time پر"
+          }
+        },
+        "update_payment_method": "ادائیگی کا طریقہ اپ ڈیٹ کریں",
+        "order_covered_by_store_credit_notice": "آپ کا آرڈر آپ کے اسٹور کریڈٹ میں شامل ہے۔",
+        "order_covered_by_redeemables_notice": "آپ کا آرڈر شامل ہے۔",
+        "store_credit": {
+          "label": "اسٹور کریڈٹ",
+          "apply_label": "اسٹور کریڈٹ لگائیں",
+          "add_label": "اسٹور کریڈٹ شامل کریں",
+          "manage_label": "اسٹور کریڈٹ کا انتظام کریں",
+          "buying_gift_card": "آپ گفٹ کارڈ خریدنے کے لیے اسٹور کریڈٹ استعمال نہیں کر سکتے۔",
+          "no_fixed_selling_plans": "آپ تاخیر شدہ خریداری کے اختیارات کے ساتھ اسٹور کریڈٹ استعمال نہیں کر سکتے۔"
+        },
+        "clear": "صاف",
+        "billing_must_match_shipping_notice": "آپ کے ادائیگی کے طریقے کا بلنگ ایڈریس شپنگ ایڈریس سے مماثل ہونا چاہیے۔",
+        "same_billing_address_checkbox_label": "شپنگ ایڈریس کو بلنگ ایڈریس کے طور پر استعمال کریں۔",
+        "location_billing_address_label": "مقام کا بلنگ ایڈریس",
+        "fact_billing_address_label": "بلنگ کا پتہ",
+        "location_shipping_address_label": "ترسیل کا پتہ",
+        "use_order_billing_address_label": "آرڈر کا بلنگ ایڈریس استعمال کریں",
+        "use_location_billing_address_label": "صارف کی بلنگ ایڈریس استعمال کریں",
+        "use_location_shipping_address_label": "مقام کی ترسیل کا پتہ استعمال کریں",
+        "no_working_method_error": "یہ سٹور اس وقت ادائیگیاں قبول نہیں کر سکتا۔ اس صفحے کو ریفریش کریں یا بعد میں واپس آئیں۔",
+        "brand_not_available": "یہ اسٹور {{brand}} قبول نہیں کرتا ہے۔ ادائیگی کے لیے کوئی دوسرا کارڈ استعمال کریں۔",
+        "shipping_rate_updated": "دستیاب شپنگ کے طریقے اپ ڈیٹ کر دیے گئے ہیں۔ چیک آؤٹ کرنے سے پہلے اپنے انتخاب کی تصدیق کریں۔",
+        "billing_address_invalid_phone": "{{label}} {{last_digits}} کے بلنگ ایڈریس میں اپنا فون نمبر اپ ڈیٹ کریں تاکہ جاری رکھ سکیں۔",
+        "billing_address_invalid_phone_no_card": "جاری رکھنے کے لیے بلنگ ایڈریس میں اپنا فون نمبر اپ ڈیٹ کریں۔",
+        "preview_not_available": {
+          "title": "پیش منظر دستیاب نہیں ہے۔",
+          "content": "پریشان نہ ہوں، یہ ایکسپریس چیک آؤٹ آپ کے صارفین کے لیے کارآمد ہے۔",
+          "button": "ٹھیک ہے۔"
+        },
+        "card_fields": {
+          "errors": {
+            "required": {
+              "issue_date": "ایک درست تاریخ اجرا درج کریں",
+              "issue_number": "درست ایشو نمبر درج کریں۔"
+            },
+            "invalid": {
+              "verification_value": "ایک درست CVV یا سیکیورٹی کوڈ درج کریں"
+            }
+          }
+        },
+        "simulated_checkout": "جھلک جلد آرہی ہے۔",
+        "simulated_express_checkout": "آپ کے علاقے یا براؤزر کی وجہ سے ایڈیٹر کے پیش منظر میں والیٹس دستیاب نہیں ہیں۔",
+        "vaulting_agreement_label": "تیز رفتار چیک آؤٹ کے لیے میری ادائیگی کی معلومات %{company} کے ساتھ محفوظ کریں۔",
+        "business_customer_vaulting_payment_label": "اس ادائیگی کے طریقے کو چیک آؤٹ پر محفوظ کریں اور %{company} کو اس مقام کے لیے مستقبل کی خریداریوں کی خاطر اسے چارج کرنے کا اختیار دیں۔ اس مقام پر تفویض کردہ تمام رابطے ادائیگی کا طریقہ استعمال کر سکتے ہیں۔",
+        "business_customer_with_bank_account_vaulting_payment_label": "چیک آؤٹ پر ادائیگی کے اس طریقے کو محفوظ کریں اور %{company} کو اس مقام کے لیے مستقبل کی خریداریوں کے لیے آپ کے اکاؤنٹ سے رقم کاٹنے کی اجازت دیں، جب تک کہ آپ منسوخ نہ کریں۔ اس مقام کے لیے تفویض کردہ تمام رابطے ادائیگی کا طریقہ استعمال کر سکتے ہیں۔",
+        "purchase_options_and_vaulting_agreement_label": "آپ کے کارٹ میں ایک یا زیادہ آئٹمز مؤخر یا سبسکرپشن کی خریداری ہیں۔ ادائیگی جاری رکھنے سے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ کی ادائیگی کا طریقہ خود بخود اس قیمت اور تعدد پر چارج کیا جائے گا جو اس صفحہ پر درج ہے جب تک کہ یہ ختم نہ ہو جائے یا آپ اسے منسوخ نہ کر دیں۔ تمام منسوخیاں %{cancellation_policy_label} سے مشروط ہیں۔",
+        "purchase_options_cancellation_policy_label": "منسوخی کی پالیسی",
+        "use_different_credit_card_label": "کوئی دوسرا کارڈ استعمال کریں",
+        "saved_credit_card": "آپ کا محفوظ کردہ کریڈٹ کارڈ",
+        "saved_credit_card_info": "آخری چار ہندسے",
+        "saved_credit_card_cvv_verification": "تصدیق کے مقاصد کے لیے، اپنے کارڈ کا سیکیورٹی کوڈ درج کریں۔",
+        "saved_credit_card_actions": {
+          "edit": "ترمیم کریں",
+          "delete": "حذف کریں"
+        },
+        "saved_credit_cards_modal": {
+          "view_all_label": "تمام محفوظ کردہ کارڈز دیکھیں",
+          "done": "ہو گیا",
+          "cancel": "منسوخ کریں"
+        },
+        "add_credit_card_modal": {
+          "title": "کارڈ شامل کریں۔",
+          "save": "محفوظ کریں۔",
+          "cancel": "منسوخ کریں"
+        },
+        "delete_credit_card_modal": {
+          "title": "کارڈ حذف کریں",
+          "confirmation": "کیا آپ واقعی {{lastDigits}} پر ختم ہونے والے {{brandName}} کو حذف کرنا چاہتے ہیں؟",
+          "cancel": "منسوخ کریں",
+          "delete": "حذف کریں"
+        },
+        "edit_credit_card_modal": {
+          "title": "کارڈ میں ترمیم کریں",
+          "done": "ہو گیا",
+          "cancel": "منسوخ کریں",
+          "description": "آپ صرف اپنے کارڈ کے بلنگ ایڈریس میں ترمیم کر سکتے ہیں۔",
+          "fields": {
+            "default": "بطور ڈیفالٹ سیٹ کریں",
+            "card_number": "کارڈ نمبر",
+            "expiry": "تاریخ اِختتام",
+            "security_code": "سیکیورٹی کوڈ",
+            "name": "کارڈ پر نام",
+            "billing": "بل بنام"
+          }
+        },
+        "expired_cards_info": {
+          "one": "ایک میعاد ختم شدہ کارڈ ہے، جسے آپ اپنے اکاؤنٹ میں دیکھ اور ترمیم کر سکتے ہیں۔",
+          "other": "آپ کے اکاؤنٹ میں %{count} میعاد ختم شدہ کارڈز موجود ہیں، جنہیں آپ دیکھ اور ترمیم کر سکتے ہیں۔"
+        },
+        "local_payment_method_receiver_notice": "آرڈر دینے کے بعد، آپ کو ادائیگی کی تفصیلات موصول ہوں گی۔ {{dueDays}} دن کے اندر اے ٹی ایم یا آن لائن کے ذریعے ادائیگی کریں۔",
+        "order_edit_banner_title": "{{amount_owed}} کی ادائیگی درکار ہے",
+        "order_edit_banner_subtitle": "آپ کا آرڈر {{order_number}} اپ ڈیٹ کر دیا گیا ہے۔ ان تبدیلیوں کا جائزہ لیں، پھر اپنے آرڈر کی تصدیق کے لیے ادائیگی کریں۔",
+        "order_edit_banner_items_added": {
+          "one": "شامل کر دیا گیا",
+          "other": "%{count} شامل کیے گئے۔"
+        },
+        "order_edit_banner_items_removed": {
+          "in_full": "ہٹایا گیا",
+          "with_quantities": "{{quantity}} میں سے {{delta}} ہٹا دیا گیا"
+        },
+        "order_edit_banner_items_returned": {
+          "in_full": "واپس کیا گیا۔ {{quantity}}",
+          "with_quantities": "{{quantity}} میں سے {{delta}} واپس کیے گئے۔"
+        },
+        "order_edit_banner_items_return_line_item_removed": {
+          "in_full": "ریٹرن سے ہٹا دیا گیا",
+          "with_quantities": "{{delta}} کو واپسی سے ہٹا دیا گیا۔"
+        },
+        "order_edit_banner_single_item_added": "شامل کر دیا گیا",
+        "order_edit_banner_multiple_items_added": "شامل کیا گیا {{amount}}",
+        "order_edit_banner_single_item_removed": "ہٹایا گیا",
+        "order_edit_banner_multiple_items_removed": "<span dir=\"rtl\">ہٹا دیا گیا {{amount}}</span>",
+        "order_edit_banner_single_item_returned": "واپس کیا گیا"
       },
       "billing": {
         "billing_address_title": "بل بنام",
