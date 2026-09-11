@@ -3839,7 +3839,133 @@
       "subject": "مضمون",
       "subject_placeholder": "ہم کیسے مدد کر سکتے ہیں؟",
       "message": "پیغام",
-      "message_placeholder": "ہمیں کچھ مزید بتائیں..."
+      "message_placeholder": "ہمیں کچھ مزید بتائیں...",
+      "send": "بھیجیں",
+      "post_success": "ہم سے رابطہ کرنے کا شکریہ۔ ہم جلد از جلد آپ سے رابطہ کریں گے۔",
+      "error_heading": "برائے مہربانی درج ذیل کو درست کریں:",
+      "find_us": "ہمیں یہاں تلاش کریں۔"
     }
+  },
+  "404": {
+    "not_found": "صفحہ نہیں ملا۔",
+    "back_to_shopping": "دوبارہ خریداری کریں",
+    "quick_links": "مشہور صفحات"
+  },
+  "mobile_menu": {
+    "menu": "فہرستِ طعام"
+  },
+  "accessibility": {
+    "skip_to_text": "مواد پر جائیں",
+    "skip_to_product_info": "مصنوعات کی معلومات پر جائیں",
+    "close": "بند کریں",
+    "unit_price_separator": "فی",
+    "vendor": "فروخت کنندہ:",
+    "error": "خرابی",
+    "refresh_page": "کسی انتخاب کا نتیجہ صفحہ کو مکمل طور پر ریفریش کر دے گا۔",
+    "link_messages": {
+      "new_window": "ایک نئی ونڈو میں کھلتا ہے۔",
+      "external": "بیرونی ویب سائٹ کھلتی ہے۔"
+    },
+    "loading": "لوڈ ہو رہا ہے...",
+    "total_reviews": "کل جائزے",
+    "star_reviews_info": "{{ rating_max }} میں سے {{ rating_value }} ستارے",
+    "collapsible_content_title": "سمیٹنا ممکنہ مواد",
+    "complementary_products": "تکمیلی مصنوعات",
+    "pagination_label": "صفحہ بندی"
+  },
+  "blog": {
+    "featured": "نمایاں",
+    "all": "تمام",
+    "no_articles_found": "کوئی مضامین نہیں ملے",
+    "article_comments": "تبصرے",
+    "comment_form_body": "تبصرہ",
+    "comment_form_email": "ای میل",
+    "comment_form_name": "نام",
+    "comment_form_submit": "تبصرہ کریں",
+    "comment_form_title": "تبصرہ شامل کریں"
+  },
+  "article": {
+    "read_min": "کم سے کم پڑھنے کا وقت",
+    "previous": "پچھلا",
+    "next": "اگلا"
+  },
+  "cart": {
+    "checkout": "آگے بڑھ کر آرڈر مکمل کریں",
+    "title": "کارٹ کا کُل بل",
+    "bag_title": "خریداری کا تھیلا",
+    "update": "کارٹ کو اپ ڈیٹ کریں",
+    "remove": "ہٹائیں",
+    "image": "تصویر",
+    "product": "پروڈکٹ",
+    "price": "قیمت",
+    "quantity": "مقدار",
+    "total": "مجموعی",
+    "subtotal": "ذیلی کل",
+    "order_summary": "آرڈر کا خلاصہ",
+    "shipping": "شپنگ",
+    "calculated_at_checkout": "ادائیگی کے وقت حساب کیا جائے گا",
+    "taxes_include": "ٹیکس شامل ہیں",
+    "taxes_calculated_at-checkout": "ٹیکس کا حساب چیک آؤٹ پر لگایا جائے گا",
+    "summary_total": "مجموعی",
+    "secure_checkout": "محفوظ ادائیگی",
+    "encrypted_pay": "خفیہ ادائیگی",
+    "easy_returns": "آسان واپسی"
+  },
+  "customers": {
+    "login": {
+      "email": "ای میل",
+      "password": "پاس ورڈ",
+      "submit": "سائن اِن کریں۔",
+      "title": "لاگ ان"
+    }
+  },
+  "collections": {
+    "title": "مجموعات",
+    "general": {
+      "no_matches": "کوئی پراڈکٹ نہیں ملی",
+      "collection_product_count": "پروڈکٹ",
+      "filters_and_sorting": "فلٹرز اور ترتیب",
+      "filter_products": "مصنوعات فلٹر کریں",
+      "items_per_page": "فی صفحہ اشیاء",
+      "items": "اشیاء",
+      "apply": "درخواست دیں",
+      "filters": "فلٹرز",
+      "no_filters": "اس مجموعے کے لیے کوئی فلٹر فعال نہیں ہے۔",
+      "from": "از",
+      "to": "کو",
+      "min_price": "کم از کم قیمت",
+      "max_price": "زیادہ سے زیادہ قیمت",
+      "clear_filter": "فلٹر صاف کریں",
+      "clear_all": "سب مٹاؤ",
+      "clear": "صاف"
+    },
+    "sorting": {
+      "title": "ترتیب دیں"
+    }
+  },
+  "gift_card": {
+    "title": "یہ ہے آپ کا {{ value }} گفٹ کارڈ بیلنس {{ shop }} کے لیے!",
+    "subtext": "آپ کا گفٹ کارڈ",
+    "gift_card": "گفٹ کارڈ",
+    "add_to_apple_wallet": "ایپل والیٹ میں شامل کریں",
+    "active": "فعال",
+    "remaining_balance": "بقیہ بیلنس",
+    "original_value": "اصل قدر",
+    "valid_thru": "جاری ہے",
+    "redeem_code": "گفٹ کارڈ کا کوڈ آن لائن یا اسٹور میں QR کوڈ استعمال کریں",
+    "expired": "یہ گفٹ کارڈ میعاد سے گزر چکا ہے",
+    "used": "استعمال شدہ",
+    "expires_on": "Expires on {{ expires_on }}",
+    "disabled": "معذور",
+    "copy_code": "کوڈ کاپی کریں۔",
+    "copy": "کاپی کریں",
+    "copied": "نقل کیا گیا!",
+    "recipient": "کے لیے تحفہ",
+    "send_on": "تاریخ بھیجیں۔",
+    "message": "ذاتی پیغام",
+    "scan_qr": "اسکین کرکے حاصل کریں",
+    "print": "پرنٹ کریں",
+    "shop_link": "اسٹور ملاحظہ کریں۔",
+    "use_at_checkout": "چیک آؤٹ پر یہ گفٹ کارڈ استعمال کریں۔"
   }
 }
