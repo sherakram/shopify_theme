@@ -364,7 +364,14 @@
         },
         "geolocation": {
           "permission_not_allowed": "مقام کا اشتراک کرنے کی اجازت دیں یا اس کے بجائے تلاش کریں۔"
-        }
+        },
+        "title": "مقام",
+        "location_address_search_label": "پتہ",
+        "location_address_search_placeholder": "%{postal_code_label} یا پتہ",
+        "location_closest": "آپ کے آئٹم کے ساتھ قریب ترین مقام",
+        "location_closest_one_item": "آپ کے آئٹم کے ساتھ قریب ترین مقام",
+        "location_closest_other_items": "آپ کی اشیاء کے ساتھ قریب ترین مقام",
+        "location_selected": "آپ کا منتخب کردہ مقام"
       },
       "split_delivery": {
         "accessibility": {
@@ -1053,7 +1060,28 @@
         "must_use_available_shipping_rate": "شپنگ کی شرح کو دستیاب شپنگ کی شرحوں میں سے منتخب کرنا ہوگا۔",
         "split_by_delivery_method_not_allowed": "ڈیلیوری طریقہ کے لحاظ سے تقسیم کرنا اس سیشن یا دکان کے لیے ممنوع ہے۔",
         "split_by_delivery_method_requires_merchandise_from_single_location": "ڈیلیوری کے طریقہ کار کے مطابق تقسیم کے لیے ضروری ہے کہ انفرادی تجارتی اشیاء کو ایک ہی جگہ سے پورا کیا جائے۔",
-        "split_by_delivery_method_unsupported_method_type": "غیر تعاون یافتہ ترسیل کے طریقے کی قسم کے ساتھ کوشش کردہ ترسیل کے طریقے سے تقسیم کریں۔"
+        "split_by_delivery_method_unsupported_method_type": "غیر تعاون یافتہ ترسیل کے طریقے کی قسم کے ساتھ کوشش کردہ ترسیل کے طریقے سے تقسیم کریں۔",
+        "handle_phone_invalid": "ایک درست فون نمبر درج کریں۔",
+        "handle_email_invalid": "ایک درست ای میل درج کریں",
+        "email_invalid": "ایک درست ای میل درج کریں",
+        "email_or_phone_blank": "ای میل یا فون نمبر درج کریں",
+        "email_or_phone_invalid": "ایک درست ای میل یا موبائل فون نمبر درج کریں۔",
+        "address_first_name_blank": "پہلا نام درج کریں",
+        "address_first_name_too_long": "پہلا نام بہت لمبا ہے (زیادہ سے زیادہ 255 حروف)",
+        "address_first_name_contains_emojis": "پہلے نام میں ایموجیز شامل نہیں ہو سکتے",
+        "address_first_name_contains_html_tags": "پہلے نام میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_first_name_contains_url": "پہلے نام میں یو آر ایل شامل نہیں ہو سکتا",
+        "address_first_name_contains_mathematical_symbols": "پہلے نام میں حسابی علامتیں نہیں ہو سکتیں۔",
+        "address_last_name_blank": "آخری نام درج کریں۔",
+        "address_last_name_too_long": "آخری نام بہت طویل ہے (زیادہ سے زیادہ 255 حروف ہیں)",
+        "address_last_name_contains_emojis": "آخری نام میں ایموجیز شامل نہیں ہو سکتے",
+        "address_last_name_contains_html_tags": "آخری نام میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_last_name_contains_url": "آخری نام میں یو آر ایل شامل نہیں ہو سکتا",
+        "address_last_name_contains_mathematical_symbols": "آخری نام میں ریاضی کی علامتیں شامل نہیں ہو سکتیں",
+        "address_address1_blank": "پتہ درج کریں۔",
+        "address_address1_too_long": "پتے کی پہلی لائن بہت لمبی ہے (زیادہ سے زیادہ 255 حروف ہو سکتے ہیں)",
+        "address_address1_contains_emojis": "ایڈریس 1 میں ایموجی شامل نہیں ہو سکتے",
+        "address_address1_contains_html_tags": "پتہ 1 میں HTML ٹیگز شامل نہیں ہو سکتے۔"
       },
       "vaulted": {
         "change_button": "تبدیلی",
@@ -1242,7 +1270,40 @@
         "shipping_must_match_billing": "بلنگ ایڈریس شپنگ ایڈریس سے ملنا چاہیے۔ ادائیگی کا دوسرا طریقہ استعمال کریں۔",
         "shipping_company_required_error": "{{shopName}} کو شپنگ ایڈریس کے لیے کمپنی کا نام درکار ہے۔",
         "decision_rule_block": "آپ کی ادائیگی پر کارروائی کرنے میں ایک مسئلہ پیش آیا ہے۔ براہ کرم دکان کے مالک سے رابطہ کریں۔",
-        "cancelled_payment": "آپ کی ادائیگی منسوخ کر دی گئی ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔"
+        "cancelled_payment": "آپ کی ادائیگی منسوخ کر دی گئی ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "pick_up_card": "آپ کا کارڈ مسترد کر دیا گیا ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔",
+        "cannot_verify": "آپ کی ادائیگی کی تفصیلات کی تصدیق نہیں ہو سکی۔ اپنے کارڈ کی تفصیلات چیک کریں اور دوبارہ کوشش کریں۔",
+        "invalid_number": "درست کارڈ نمبر درج کریں۔",
+        "invalid_expiry_date": "ایک درست میعاد ختم ہونے کی تاریخ درج کریں۔",
+        "invalid_cvc": "درست سیکیورٹی کوڈ درج کریں",
+        "missing_cvc": "سیکیورٹی کوڈ درج کریں۔",
+        "expired_card": "آپ کے کارڈ کی مدت ختم ہو چکی ہے۔ ادائیگی کا دوسرا طریقہ استعمال کریں۔",
+        "payment_method_not_applicable": "یہ ادائیگی کا طریقہ قابلِ اطلاق نہیں ہے۔ ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "card_declined": "آپ کا کارڈ مسترد کر دیا گیا ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔",
+        "processing_error": "آپ کی ادائیگی پر کارروائی میں ایک مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "processing_error_checkout_as_guest": "آپ کی ادائیگی کی کارروائی میں ایک مسئلہ پیش آیا ہے۔ کسی دوسرے ادائیگی کے طریقے سے دوبارہ کوشش کریں یا {{checkout_as_guest_link}}۔",
+        "selected_payment_method": "آپ کے منتخب کردہ ادائیگی کے طریقے میں ایک مسئلہ تھا اور آپ سے چارج نہیں لیا گیا ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔",
+        "payment_method_billing_address": "آپ کے منتخب کردہ ادائیگی کے طریقے کے بلنگ ایڈریس میں کوئی مسئلہ تھا۔ ایڈریس چیک کریں اور دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "call_issuer": "آپ کا کارڈ مسترد کر دیا گیا ہے۔ ادائیگی کا کوئی دوسرا طریقہ استعمال کریں یا مزید معلومات کے لیے اپنے بینک سے رابطہ کریں۔",
+        "test_mode_live_card": "یہ اسٹور اصلی آرڈرز یا حقیقی ادائیگیاں قبول نہیں کر سکتا۔",
+        "test_mode_enabled_only_test_cards": "ٹیسٹ موڈ فعال ہے، صرف ٹیسٹ کریڈٹ کارڈز شامل کیے جا سکتے ہیں۔",
+        "transient_error": "آپ کی ادائیگی پر کارروائی میں ایک مسئلہ پیش آیا۔ اس صفحے کو دوبارہ لوڈ کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔",
+        "missing_shipping_address": "آپ کی ادائیگی پر کارروائی نہیں ہو سکی کیونکہ آپ کا شپنگ ایڈریس موجود نہیں ہے۔ براہ کرم شپنگ ایڈریس شامل کریں اور دوبارہ کوشش کریں۔",
+        "invalid_shipping_address": "آپ کی ادائیگی پر کارروائی نہیں ہو سکی کیونکہ ہمیں آپ کا شپنگ ایڈریس نہیں مل سکا۔ براہ کرم اپنا شپنگ ایڈریس چیک کریں اور دوبارہ کوشش کریں۔",
+        "successful_offsite_with_gift_card_error": "آپ کے گفٹ کارڈ کی ادائیگی کو پروسیس کرنے میں ایک مسئلہ پیش آیا۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "development_store_order_limit_reached": "آپ اس ادائیگی فراہم کنندہ کے ساتھ ڈیولپمنٹ اسٹور کے آرڈرز کی حد تک پہنچ گئے ہیں۔ کوئی اور آرڈر دینے کے لیے، آپ کو ایک ٹیسٹ ادائیگی گیٹ وے استعمال کرنا ہوگا۔ %{development_store_order_testing_docs_link} کے بارے میں مزید جانیں۔",
+        "development_store_with_order_limit": "ٹیسٹ آرڈر دینے کے لیے، آپ کو ایک ٹیسٹ پیمنٹ گیٹ وے استعمال کرنے کی ضرورت ہوگی۔ %{development_store_order_testing_docs_link} پر مزید جانیں۔",
+        "development_store_order_testing_docs_link": "ڈیولپمنٹ اسٹورز میں آرڈرز کی جانچ کرنا",
+        "payment_above_threshold": "ادائیگی کی رقم اس علاقے کی مالی حد سے زیادہ ہے۔ کل رقم کم کریں اور دوبارہ کوشش کریں",
+        "risky": "آپ کی ادائیگی پر کارروائی میں ایک مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "expired_buyer_action": "ادائیگی کا طریقہ کار ٹائم آؤٹ ہو گیا۔ دوبارہ کوشش کریں۔",
+        "name_mismatch": "اپنے کارڈ کی تفصیلات چیک کریں۔ آپ کے کارڈ پر موجود نام اور بلنگ ایڈریس مماثل نہیں ہیں۔",
+        "shop_pay_wallet_not_available": "شاپ پے اس چیک آؤٹ کے لیے دستیاب نہیں ہے۔",
+        "market_manager_blocks_wallet_payments": "آپ کے ملک میں ادائیگی کا طریقہ معاون نہیں ہے۔",
+        "paypal_over_capture": "آپ کے آرڈر کا مجموعی بل اپ ڈیٹ کر دیا گیا ہے۔ اپنا آرڈر مکمل کرنے کے لیے {{walletName}} سے ادائیگی کریں۔",
+        "captcha_required": "اپنی خریداری مکمل کرنے کے لیے ادائیگی کی معلومات درج کریں اور کیپچا حل کریں۔",
+        "captcha_required_without_payment_information": "اپنی خریداری مکمل کرنے کے لیے کیپچا حل کریں۔",
+        "payment_credential_delegation_error": "آپ کی ادائیگی پر کارروائی کرنے میں ایک مسئلہ پیش آیا ہے۔ ادائیگی کا نیا طریقہ منتخب کریں۔"
       },
       "remote_merchandise_only": {
         "checkout_on_shop_label": "%{shop_name} پر دیکھیں۔",
@@ -1387,6 +1448,347 @@
           },
           "label": "کوئی ڈیلیوری نہیں"
         }
+      },
+      "payment": {
+        "order_edit_banner_multiple_items_returned": "واپس کیا گیا {{amount}}",
+        "order_edit_banner_single_item_return_line_item_removed": "ریٹرن سے ہٹا دیا گیا",
+        "order_edit_banner_multiple_items_return_line_item_removed": "{{amount}} واپسی سے ہٹا دیا گیا۔",
+        "order_edit_banner_single_item_updated": "اپ ڈیٹ کر دیا گیا",
+        "order_edit_banner_updated_order_label": "تازہ ترین آرڈر",
+        "order_edit_banner_previous_taxes_label": "پچھلے ٹیکس:",
+        "order_edit_banner_new_taxes_label": "نئے ٹیکس:",
+        "order_edit_banner_no_taxes_label": "کوئی نہیں۔",
+        "gift_card_wrapper": {
+          "heading": "گفٹ کارڈ",
+          "apply_gift_card_label": "گفٹ کارڈ استعمال کریں۔",
+          "apply_another_gift_card_label": "ایک اور گفٹ کارڈ لگائیں",
+          "gift_card_label": "گفٹ کارڈ %{identifier}",
+          "payment_tag": "گفٹ کارڈ",
+          "add_label": "گفٹ کارڈ شامل کریں",
+          "manage_label": "گفٹ کارڈز کا انتظام کریں"
+        },
+        "gift_card_store_credit": {
+          "add_label": "گفٹ کارڈ یا سٹور کریڈٹ شامل کریں",
+          "manage_label": "گفٹ کارڈز یا اسٹور کریڈٹ کا انتظام کریں"
+        },
+        "gift_card_checkbox_label": "گفٹ کارڈ کا اطلاق کریں",
+        "custom_onsite_payment_method_modal": {
+          "title": "اپنی مرضی کے مطابق سائٹ پر ادائیگی کی تصدیق"
+        },
+        "markets_pro_disclaimer_label": "اپنا آرڈر دے کر آپ گلوبل-ای سے ریکارڈ کے مرچنٹ کے طور پر خریداری کرنے پر رضامند ہیں، جو گلوبل-ای کے %{markets_pro_terms} اور %{privacy_policy} کے تابع ہے، اور آپ اپنی معلومات %{shop_name} کے ساتھ شیئر کرنے پر بھی رضامند ہیں۔",
+        "markets_pro_disclaimer_terms_and_conditions": "شرائط و ضوابط",
+        "markets_pro_disclaimer_privacy_policy": "رازداری کی پالیسی",
+        "markets_pro_disclaimer_terms_and_conditions_title": "مرچنٹ آف ریکارڈ شرائط و ضوابط",
+        "markets_pro_disclaimer_privacy_policy_title": "مرچنٹ آف ریکارڈ کی پرائیویسی پالیسی",
+        "purchase_order_number": {
+          "title": "پی او نمبر",
+          "label": "PO نمبر (اختیاری)"
+        },
+        "alternative_payment_currency_total_notice": "نوٹ: آپ سے %{amount_due} وصول کیے جائیں گے۔",
+        "alternative_payment_currency_total_manual_payment_notice": "نوٹ: تبدیل شدہ کل %{amount_due} ہے۔",
+        "waiting_on_taxes_message": "اگر اگلے چند سیکنڈ میں آپ کے ٹیکس کا حساب نہیں ہوتا ہے تو صفحہ کو ریفریش کریں۔",
+        "waiting_on_taxes_notice": "ٹیکس کا حساب لگانا",
+        "payment_method": "ادائیگی کا طریقہ",
+        "payment_method_rollup_accessibility_label": "ادائیگی کے طریقے کے اختیارات",
+        "expired_payment_method": "منتخب کردہ ادائیگی کا طریقہ کار میعاد سے تجاوز کر گیا ہے۔",
+        "payment_method_update_failed": "ادائیگی کا طریقہ کار اپ ڈیٹ نہیں ہو سکا۔",
+        "payment_method_incompatible_with_payment_terms": "ادائیگی کا طریقہ ادائیگی کی شرائط سے مطابقت نہیں رکھتا۔",
+        "proposed_gateway_unavailable": "مجوزہ ادائیگی کا گیٹ وے دستیاب نہیں ہے۔",
+        "pay_in_installments_split_pay_short": "4 اقساط %{amount} کی",
+        "gift_cards_unavailable": "آپ کا گفٹ کارڈ اب اس آرڈر پر لاگو نہیں کیا جا سکتا اور اسے ہٹا دیا گیا ہے۔",
+        "payment_flexibility_terms_id_mismatch": "ادائیگی کی لچک کی شرائط کی شناخت میں تضاد",
+        "payment_option": {
+          "accessibility_label": "ادائیگی کا ایک طریقہ منتخب کریں"
+        },
+        "bank_account_type": {
+          "checking": "جانچ پڑتال",
+          "savings": "بچت"
+        },
+        "new_bank_account_disclaimer": "اپنا آرڈر مکمل کرنے پر، آپ %{shop_name} کو اس اکاؤنٹ سے نیچے دکھائے گئے وقت پر اور رقم کے مطابق ACH کے ذریعے ڈیبٹ کرنے کی اجازت دیتے ہیں۔",
+        "bank_account_disclaimer": "ACH کی ادائیگیوں پر کارروائی میں 4 کاروباری دن لگ سکتے ہیں۔",
+        "bank_account_choose": "اپنی خریداری کو محفوظ طریقے سے مکمل کرنے کے لیے ایک اکاؤنٹ کا انتخاب کریں۔",
+        "bank_account_connect_another": "کوئی دوسرا بینک اکاؤنٹ منسلک کریں۔",
+        "bank_account_connect": "بینک اکاؤنٹ سے مربوط کریں",
+        "bank_account_missing": "بینک اکاؤنٹ منسلک ہونا ضروری ہے۔",
+        "bank_account_generic_error": "بینک اکاؤنٹ شامل نہیں کیا جا سکا۔ بعد میں دوبارہ کوشش کریں۔",
+        "separate_payments_label": "آپ کے آئٹمز ایک سے زیادہ اسٹورز سے ہیں۔ آپ سے %{separate_payments_link} میں چارج کیا جائے گا۔",
+        "separate_payments_text": "علیحدہ ادائیگیاں",
+        "payments": "ادائیگیوں",
+        "add_payment_method": "ادائیگی کا طریقہ شامل کریں",
+        "add_new_payment_method": "ادائیگی کا ایک نیا طریقہ شامل کریں۔",
+        "choose_new_payment_method": "ادائیگی کا ایک نیا طریقہ منتخب کریں۔",
+        "multiple_primary_payment_not_allowed": "غلط ادائیگی کے طریقے",
+        "vault_for_payment_later": {
+          "pay_button_label": "آرڈر دیں",
+          "notice": "آپ سے ابھی چارج نہیں کیا جائے گا۔ اپنی ادائیگی کے ساتھ جاری رکھ کر، آپ اس بات سے اتفاق کرتے ہیں کہ جب آپ کے آرڈر پر کارروائی کی جائے گی تو آپ کے ادائیگی کے طریقے سے چارج کیا جائے گا۔"
+        }
+      },
+      "billing": {
+        "billing_address_title": "بل بنام",
+        "billing_address_rollup_accessibility_label": "آپشنز کا بل",
+        "same_as_shipping": "وہی جو شپنگ ایڈریس ہے۔",
+        "add_address": "کوئی اور پتہ استعمال کریں",
+        "edit": "ترمیم کریں",
+        "delete": "حذف کریں",
+        "address_more": "اس پتے کے لیے مزید کارروائیاں",
+        "address_edit": "پتہ میں ترمیم کریں",
+        "address_delete": "ایڈریس ڈیلیٹ کریں",
+        "address_confirm": "کیا آپ واقعی اس پتے کو اپنے اکاؤنٹ سے حذف کرنا چاہتے ہیں؟",
+        "address_form": {
+          "add_address": "پتہ شامل کریں",
+          "save": "محفوظ کریں۔",
+          "cancel": "منسوخ کریں"
+        }
+      },
+      "company_location": {
+        "location_title": "کمپنی کا مقام",
+        "location_rollup_accessibility_label": "کمپنی کے محل وقوع کے اختیارات"
+      },
+      "payment_summary": {
+        "gift_card_current_balance_notice": "موجودہ بیلنس %{amount}",
+        "credit_card_expires_on_notice": "%{month}/%{year} کو میعاد ختم ہو رہی ہے۔",
+        "express_payment_gateway_label": "اظہار کریں",
+        "manual_payment_gateway_label": "دستی کتابچہ",
+        "billing_address_title": "بلنگ کا پتہ",
+        "free_label": "مفت"
+      },
+      "shipping_errors": {
+        "shipping_method": "آپ کے آرڈر کے لیے شپنگ کے اختیارات تبدیل کر دیے گئے ہیں۔ اپنے انتخاب کا جائزہ لیں۔",
+        "shipping_method_not_available": "آپ کی کارٹ کو اپ ڈیٹ کر دیا گیا ہے اور جو آئٹمز آپ نے شامل کیے ہیں وہ آپ کے پتے پر نہیں بھیجے جا سکتے۔ اپنا آرڈر مکمل کرنے کے لیے آئٹمز کو ہٹائیں۔",
+        "shipping_method_not_available_generic": {
+          "one": "آپ کا آرڈر منتخب کردہ پتے پر بھیجا نہیں جا سکتا۔ اپنے پتے کا جائزہ لیں تاکہ یہ یقینی بنایا جا سکے کہ یہ درست ہے اور دوبارہ کوشش کریں، یا کوئی دوسرا پتہ منتخب کریں۔",
+          "other": "آپ کی کارٹ میں موجود کچھ اشیاء آپ کے درج کردہ پتے پر بھیجی نہیں جا سکتیں۔ یہ یقینی بنانے کے لیے کہ آپ کا پتہ درست ہے، اسے دوبارہ چیک کریں اور دوبارہ کوشش کریں، یا کوئی دوسرا پتہ منتخب کریں۔"
+        },
+        "shipping_method_not_available_due_to_unsatisfied_conditions": "کارٹ میں موجود اشیاء شپنگ کے لیے قیمت یا وزن کی شرائط پوری نہیں کرتی ہیں۔ براہ کرم اپنی کارٹ کو اپ ڈیٹ کریں اور دوبارہ کوشش کریں۔",
+        "shipping_method_not_available_updated": {
+          "one": "آپ کی شامل کردہ چیز آپ کے مقام پر نہیں بھیجی جا سکتی۔ چیک آؤٹ کرنے کے لیے اسے ہٹائیں، یا اسٹور سے رابطہ کریں۔",
+          "other": "آپ کی شامل کردہ ایک یا ایک سے زیادہ اشیاء آپ کے مقام پر شپ نہیں ہو سکتیں۔ چیک آؤٹ کرنے کے لیے انہیں ہٹائیں، یا اسٹور سے رابطہ کریں۔"
+        },
+        "payment_method_not_supported": "آپ اس ادائیگی کا طریقہ %{country} کے لیے استعمال نہیں کر سکتے۔ اس ملک میں بھیجنے کے لیے ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "empty_state": "دستیاب شپنگ کے طریقے دیکھنے کے لیے اپنا شپنگ ایڈریس درج کریں۔",
+        "title": "شپنگ دستیاب نہیں ہے۔",
+        "invalid_selected_address": "منتخب کردہ شپنگ ایڈریس درست نہیں ہے۔",
+        "invalid_selected_address_with_update_link": "منتخب کردہ شپنگ ایڈریس درست نہیں ہے۔ %{update_address_link} یا کوئی دوسرا ایڈریس منتخب کریں",
+        "unavailable_addresses_only_countries": "آپ کا آرڈر صرف {{countriesList}} کو بھیجا جا سکتا ہے۔ جاری رکھنے کے لیے ایک نیا پتہ شامل کریں۔",
+        "unavailable_address_country": "آپ کے منتخب کردہ ملک میں شپنگ دستیاب نہیں ہے۔ جاری رکھنے کے لیے کوئی دوسرا پتہ استعمال کریں۔",
+        "unavailable_selected_address": "منتخب کردہ ایڈریس کے لیے شپنگ دستیاب نہیں ہے۔",
+        "unavailable_selected_address_for_region": "{{region}} کے لیے شپنگ دستیاب نہیں ہے۔ جاری رکھنے کے لیے کوئی دوسرا پتہ منتخب کریں۔"
+      },
+      "alternative_payment_method_banner": {
+        "express_checkout": "فوری خریداری",
+        "or": "یا",
+        "or_pay_another_way": "یا کسی اور طریقے سے ادائیگی کریں",
+        "or_check_out_another_way": "یا کوئی اور طریقہ دیکھیں",
+        "or_pay_with_credit_card": "یا کریڈٹ کارڈ سے ادائیگی کریں",
+        "show_more_options": "مزید اختیارات دکھائیں",
+        "hide_more_options": "مزید اختیارات چھپائیں۔"
+      },
+      "post_purchase": {
+        "page_title": "خریداری کے بعد",
+        "title": "خریداری کے بعد",
+        "escape_confirmation": "آپ نے اپنے آرڈر کی ادائیگی کر دی ہے۔",
+        "escape_action": "آرڈر کی تصدیق دیکھیں ›",
+        "components": {
+          "close": "بند کریں",
+          "expand": "مزید دیکھیں",
+          "processing": "پروسیسنگ ہو رہی ہے…",
+          "submit": "جمع کرائیں۔"
+        }
+      },
+      "processing": {
+        "redirecting_page_title": "ری ڈائریکٹ کر رہا ہے…",
+        "redirecting_title": "ری ڈائریکٹ کر رہا ہے…",
+        "redirecting_notice": "انتظار کریں جب تک ہم آپ کو ری ڈائریکٹ کرتے ہیں۔",
+        "redirecting_to_bank": "<p>ری ڈائریکٹ کیا جا رہا ہے {{bank}}</p>",
+        "complete_your_purchase_title": "اپنی خریداری مکمل کریں",
+        "continue_to_payment_gateway_notice": "اپنی ادائیگی کی معلومات شامل کرنے کے لیے ادائیگی پر جاری رکھیں۔",
+        "continue_to_payment_gateway_button_label": "ادائیگی جاری رکھیں",
+        "complete_your_purchase_title_error": "اپنی ادائیگی کی معلومات درست کریں۔",
+        "continue_to_payment_gateway_notice_error": "آپ کی ادائیگی کی معلومات کی تصدیق نہیں ہو سکی۔",
+        "continue_to_payment_gateway_button_label_error": "ادائیگی کی معلومات کو اپ ڈیٹ کریں۔",
+        "page_title": "آرڈر پر کارروائی ہو رہی ہے۔",
+        "title": "آرڈر پر کارروائی ہو رہی ہے۔",
+        "your_order_has_been_received_title": "آپ کے آرڈر کا شکریہ",
+        "you_will_receive_confirmation": "ہمیں فی الحال بہت سے آرڈر مل رہے ہیں۔ آپ کو جلد ہی ای میل یا ٹیکسٹ کے ذریعے تصدیق موصول ہو جائے گی۔ اگر آپ کو اگلے ایک گھنٹے میں یہ موصول نہ ہو تو ہمیں آگاہ کریں۔",
+        "you_will_not_be_charged": "آپ سے ابھی کوئی چارجز وصول نہیں کیے جائیں گے۔",
+        "wait": {
+          "short": "آپ کا آرڈر زیرِ کارروائی ہے۔",
+          "medium": {
+            "one": "آپ کا آرڈر زیرِ کارروائی ہے۔ متوقع انتظار کا وقت %{count} منٹ ہے۔",
+            "other": "آپ کا آرڈر زیرِ کارروائی ہے۔ متوقع انتظار کا وقت %{count} منٹ ہے۔"
+          },
+          "long": "آپ کو جیسے ہی آپ کا آرڈر پراسیس ہوگا ای میل موصول ہو جائے گی۔ فی الحال آرڈرز کی تعداد بہت زیادہ ہے۔",
+          "no_auto_refresh_html": "اگر آپ خود بخود ری ڈائریکٹ نہیں ہوتے ہیں تو، %{link}۔",
+          "refresh_this_page": "اس صفحہ کو ریفریش کریں"
+        },
+        "remote_shops_payments_processing": "ادائیگیاں پراسیس کرنا",
+        "action_required": "کارروائی درکار ہے",
+        "modal_notice": "ہم {{paymentMethod}} سے رابطہ کر رہے ہیں",
+        "remote_checkout_count": "%کل میں سے %حال"
+      },
+      "payment_challenge_modal": {
+        "instructions": "اپنی خریداری اپنے {{paymentMethod}} کوڈ کا استعمال کرتے ہوئے مکمل کریں",
+        "timer_message": "آپ کے پاس {{timeLeft}} ادائیگی کے لیے باقی ہیں",
+        "copy_text": "{{paymentMethod}} کوڈ کاپی کریں",
+        "open_app_text": "{{paymentMethod}} ایپ کھولیں",
+        "header": "{{paymentMethod}} سے ادائیگی کریں",
+        "qr_code": {
+          "instructions": "اپنی خریداری اپنے {{paymentMethod}} کوڈ کا استعمال کرتے ہوئے مکمل کریں",
+          "wechat_instructions": "اپنی خریداری مکمل کرنے کے لیے اپنے فون پر وی چیٹ (WeChat) ایپ سے اس کیو آر کوڈ کو اسکین کریں۔",
+          "wechat_instructions_mobile": "اپنی خریداری مکمل کرنے کے لیے اس QR کوڈ کو کسی اور ڈیوائس پر WeChat ایپ کے ساتھ اسکین کریں۔"
+        },
+        "external": {
+          "instructions": "اس خریداری کو مکمل کرنے کے لیے اپنی ایپ پر ادائیگی کی تصدیق کریں۔"
+        },
+        "close": "چیلنج بند کریں"
+      },
+      "failed_payment": {
+        "page_title": "ادائیگی پروسیس نہیں ہو سکی"
+      },
+      "pickup_point": {
+        "location_is_currently_closed": "بند ہے",
+        "business_hours": "اوقات کار",
+        "no_business_hours": "کھلنے کے اوقات دستیاب نہیں",
+        "open_twenty_four_hours": "24/7 کھلا رہتا ہے",
+        "title": "پک اپ پوائنٹ",
+        "or": "یا",
+        "search_button": "تلاش کریں",
+        "address_label": "پتہ",
+        "selector_tabs": "پِک اَپ پوائنٹ سلیکٹر",
+        "selector_tab_map": "نقشہ",
+        "selector_tab_list": "فہرست",
+        "could_not_resolve_address": "آپ کا پتہ تلاش نہیں ہو سکا۔ دوبارہ کوشش کریں یا کوئی دوسرا پتہ استعمال کریں۔",
+        "no_pickup_points_near_you": "منتخب کردہ پتے کے قریب کوئی پک اپ پوائنٹس نہیں ملے۔",
+        "no_pickup_points_near_location": "آپ کے مقام کے قریب کوئی پک اپ پوائنٹس نہیں ملے۔",
+        "pickup_unavailable_banner_title": {
+          "one": "آپ کے آئٹم کے لیے کوئی پک اپ پوائنٹس دستیاب نہیں ہیں۔",
+          "other": "آپ کی آئٹمز کے لیے کوئی پک اپ پوائنٹس دستیاب نہیں ہیں۔"
+        },
+        "no_pickup_points_found": "کوئی پک اپ پوائنٹس نہیں ملے۔",
+        "paginator": {
+          "next_accessibility_label": "اگلا صفحہ",
+          "previous_accessibility_label": "پچھلا صفحہ",
+          "header": {
+            "one": "%{count} میں سے %{first} - %{last} پوائنٹ دکھا رہا ہے",
+            "other": "%{count} پوائنٹس میں سے %{first} - %{last} دکھا رہا ہے"
+          },
+          "selected_pickup_point_label": {
+            "one": "%{count} میں سے %{pickup_point_index} پوائنٹ",
+            "other": "%{count} پوائنٹس میں سے %{pickup_point_index}"
+          },
+          "selected_page": {
+            "one": "%{first} - %{last} / %{count} پوائنٹ",
+            "other": "%{first} - %{last} از %{count} پوائنٹس"
+          }
+        },
+        "number_of_pickup_points_near_location": {
+          "one": "آپ کے مقام کے قریب %{count} پک اپ پوائنٹ",
+          "other": "آپ کے مقام کے قریب %{count} پک اپ پوائنٹس"
+        },
+        "change": "مقام تبدیل کریں",
+        "waiting_on_pickup_point_location_notice": "پک اپ پوائنٹس تلاش کیے جا رہے ہیں...",
+        "geolocation": {
+          "shared_location_button": "میری لوکیشن استعمال کریں",
+          "errors": {
+            "unsuported_by_browser": "آپ کا براؤزر جغرافیائی محل وقوع کی حمایت نہیں کرتا ہے۔ دوبارہ کوشش کریں یا کوئی دوسرا براؤزر استعمال کریں۔",
+            "permission_not_allowed": "اپنا مقام شیئر کرنے کی اجازت دیں۔",
+            "permission_denied": "آپ کا مقام حاصل نہیں ہو سکا۔ دوبارہ کوشش کریں۔"
+          }
+        }
+      },
+      "error_page": {
+        "terminal": {
+          "title": "ہمارے چیک آؤٹ میں ایک مسئلہ تھا۔",
+          "message": "اس صفحہ کو ریفریش کریں یا چند منٹوں میں دوبارہ کوشش کریں",
+          "action": {
+            "cta": "صفحہ ریفریش کریں"
+          },
+          "request_id": "درخواست کی شناخت: {{requestId}}"
+        },
+        "embed_errors": {
+          "storefront_password_required": "یہ دکان پاس ورڈ سے محفوظ ہے۔",
+          "customer_account_required": "چیک آؤٹ مکمل کرنے کے لیے گاہک کے اکاؤنٹ کی ضرورت ہے۔",
+          "cart_completed": "یہ چیک آؤٹ پہلے ہی مکمل ہو چکا ہے۔",
+          "invalid_cart": "کارٹ اب درست نہیں ہے۔",
+          "not_authorized": "چیک آؤٹ تصدیق ناکام ہو گئی۔ اپنی ایپلیکیشن کی اسناد کی تصدیق کریں۔",
+          "killswitch_enabled": "چیک آؤٹ عارضی طور پر دستیاب نہیں ہے۔",
+          "policy_violation": "پالیسی کی ترتیب کی پابندیوں کی وجہ سے چیک آؤٹ مکمل کرنے سے قاصر ہیں۔",
+          "unrecoverable_failure": "چیک آؤٹ لوڈ نہیں ہو سکا۔ دوبارہ کوشش کریں۔"
+        }
+      },
+      "notice_banner": {
+        "return_to_cart_link_text": "کارٹ پر واپس جائیں",
+        "return_to_cart_to_update_quantities": "مقداروں کو اپ ڈیٹ کرنے کے لیے %{return_to_cart_link_text}",
+        "subscription_changed": "آپ کی ایک رکنیت میں تبدیلی آئی ہے۔",
+        "company_location_changed": "آپ کا کارٹ اپ ڈیٹ ہو گیا ہے۔ اسے جمع کرانے سے پہلے اپنے آرڈر کا جائزہ لیں۔",
+        "company_location_changed_product_removed": "آپ کا کارٹ اپ ڈیٹ کر دیا گیا ہے کیونکہ کچھ مصنوعات اس مقام پر دستیاب نہیں ہیں۔ آرڈر جمع کرانے سے پہلے اس کا جائزہ لیں۔",
+        "violations_title": "{{violation}} غائب یا غلط ہے",
+        "individual_violations_title": {
+          "DeliveryViolations": "بھیجنے کا پتہ",
+          "PaymentViolations": "بلنگ کا پتہ",
+          "OtherViolations": "آرڈر کی معلومات",
+          "UnhandledViolations": "آرڈر کی معلومات"
+        },
+        "all_violations_content": "اس معلومات کو اپ ڈیٹ کرنے اور اپنا آرڈر مکمل کرنے کے لیے ہمیں کال کریں یا {{emailLink}} کریں۔",
+        "all_violations_email_link": "ای میل",
+        "editable_shipping_address_violations_message_title": "اپنے آرڈر کو مکمل کرنے کے لیے اس معلومات کا اضافہ کریں:",
+        "editable_shipping_address_violations_message_footer": "اس مقام کا پتہ مستقل طور پر اپ ڈیٹ کرنے کے لیے، {{emailLink}}۔",
+        "editable_shipping_address_violations_email_link": "ہم سے رابطہ کریں۔",
+        "delivery_address_validation_errors_banner": {
+          "title": "شپنگ کا پتہ غلط ہے",
+          "text_html": "اپنے پتے میں ترمیم کرنے کے لیے ہم سے رابطہ کریں۔",
+          "contact_us": "ہم سے رابطہ کریں",
+          "use_different_address": "کوئی دوسرا شپنگ ایڈریس استعمال کریں"
+        },
+        "shipping_address_incomplete_title": "جہاز رانی کا پتہ نامکمل ہے۔",
+        "calculating_shipping": "شپنگ کا حساب ابھی بھی لگایا جا رہا ہے۔ چند سیکنڈ میں دوبارہ کوشش کریں۔ آپ سے کوئی چارج نہیں لیا گیا ہے۔",
+        "calculating_taxes": "ٹیکسز کا حساب ابھی لگایا جا رہا ہے۔ کچھ سیکنڈز بعد دوبارہ کوشش کریں۔ آپ کو چارج نہیں کیا گیا ہے۔",
+        "generic_processing_error": {
+          "title": "آپ کا آرڈر پراسیس کرنے میں ایک مسئلہ پیش آیا۔",
+          "body": "آپ سے چارج نہیں لیا گیا۔ دوبارہ کوشش کریں یا کوئی دوسرا ادائیگی کا طریقہ استعمال کریں۔"
+        },
+        "payment_method_not_available_with_payment_terms": "آپ نے جو ادائیگی کا طریقہ منتخب کیا ہے وہ اب دستیاب نہیں ہے کیونکہ اس آرڈر کی ادائیگی اب {{paymentTerms}} شرائط پر ہے",
+        "payment_method_not_available_with_fulfillment_terms": "آپ نے جو ادائیگی کا طریقہ منتخب کیا ہے وہ اب دستیاب نہیں ہے کیونکہ اس آرڈر کی ادائیگی اب تکمیل پر واجب الادا ہے۔",
+        "payment_method_not_available_with_fixed_terms": "آپ کی منتخب کردہ ادائیگی کا طریقہ اب دستیاب نہیں ہے کیونکہ اس آرڈر کی ادائیگی بعد میں واجب الادا ہے",
+        "payment_method_not_available_with_review_requirement": "آپ کی منتخب کردہ ادائیگی کا طریقہ اب دستیاب نہیں ہے کیونکہ آپ کا آرڈر کنفرم ہونے پر ادائیگی واجب الادا ہوگی۔",
+        "contact_information": {
+          "title": "رابطے کی معلومات غلط ہے۔",
+          "header": "اپنی معلومات اپ ڈیٹ کرنے کے لیے، {{emailLink}}۔",
+          "email_link": "ہم سے رابطہ کریں۔"
+        },
+        "validation_errors_banner": {
+          "heading": {
+            "one": "{{count}} غلطی ہے:",
+            "other": "{{count}} غلطیاں ہیں:"
+          },
+          "section_label": {
+            "delivery": "ڈیلیوری",
+            "contact": "رابطہ کریں۔",
+            "payment": "ادائیگی",
+            "billing": "بلنگ"
+          }
+        }
+      },
+      "review_address_modal": {
+        "title": "پتہ کا جائزہ لیں۔",
+        "subtitle": {
+          "one": "یہ آرڈر {{merchant}} کی طرف سے فراہم کردہ پتے پر بھیجا جائے گا۔",
+          "other": "یہ آرڈر {{merchant}} کی طرف سے فراہم کردہ پتے پر بھیجا جائے گا۔ براہ کرم شپنگ کا پتہ منتخب کریں۔"
+        },
+        "subtitle_no_match": "یہ پتہ آپ کے محفوظ کردہ پتے سے نہیں ملتا۔",
+        "subtitle_must_use": "آپ کا آرڈر اس پتے پر بھیجا جائے گا۔",
+        "continue": "اس پتہ کے ساتھ جاری رکھیں",
+        "use_saved_address": "کوئی اور پتہ استعمال کریں",
+        "return_to_cart": "کارٹ پر واپس جائیں"
+      },
+      "marketplaces": {
+        "legal_notice": {
+          "legal_text": "جائزہ",
+          "link_label": "{{partnerDisplayName}} شرائط و ضوابط"
+        }
+      },
+      "online_store_chat": {
+        "title": "سوالات؟ ہم سے بات کریں۔"
       }
     },
     "errors": {
