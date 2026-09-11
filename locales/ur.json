@@ -319,7 +319,15 @@
           "tax_credential_use_mx": "سی ایف ڈی آئی کا استعمال",
           "tax_credential_py": "سی آئی/آر یو سی/آئی وی اے",
           "shipping_credential_py": "سی آئی/آر یو سی/آئی وی اے",
-          "tax_credential_pe": "ڈی این آئی/ آر یو سی/ سی ای"
+          "tax_credential_pe": "ڈی این آئی/ آر یو سی/ سی ای",
+          "shipping_credential_pe": "ڈی این آئی/ آر یو سی/ سی ای",
+          "tax_credential_pt": "NIF/IVA",
+          "shipping_credential_pt": "NIF/IVA",
+          "tax_credential_es": "ڈی این آئی/ این آئی ایف",
+          "shipping_credential_es": "ڈی این آئی/ این آئی ایف",
+          "shipping_credential_tw": "قومی شناختی نمبر/VAT",
+          "tax_credential_tr": "جمہوریہ ترکیہ شناختی نمبر/VAT",
+          "shipping_credential_tr": "جمہوریہ ترکیہ شناختی نمبر/VAT"
         }
       },
       "local_pickup": {
@@ -1827,7 +1835,117 @@
         "order_edit_banner_multiple_items_added": "شامل کیا گیا {{amount}}",
         "order_edit_banner_single_item_removed": "ہٹایا گیا",
         "order_edit_banner_multiple_items_removed": "<span dir=\"rtl\">ہٹا دیا گیا {{amount}}</span>",
-        "order_edit_banner_single_item_returned": "واپس کیا گیا"
+        "order_edit_banner_single_item_returned": "واپس کیا گیا",
+        "network_card_payment_options": "کارڈ نیٹ ورک منتخب کریں۔",
+        "network_card_persistence_description": "منتخب کردہ نیٹ ورک کو آپ کی ادائیگی کے طریقے کے ساتھ مستقبل کے لین دین کے لیے محفوظ کر لیا جائے گا۔",
+        "amazon_payments_label": "ایمازون پے",
+        "amazon_payments_login_hint": "آپ سے ایمیزون کے ساتھ سائن ان کرنے کو کہا جائے گا۔",
+        "amazon_payments_logout": "ایمیزون پے سے سائن آؤٹ کریں",
+        "amazon_payments_failed_mfa_challenge": "منتخب کردہ ادائیگی کا طریقہ استعمال نہیں ہو سکا۔ کوئی دوسرا طریقہ منتخب کریں یا اپنے بینک یا کارڈ جاری کنندہ سے رابطہ کریں۔",
+        "amazon_payments_abandoned_mfa_challenge": "آپ کی ادائیگی مکمل نہیں ہو سکی۔ ادائیگی کا کوئی دوسرا طریقہ آزمائیں یا اپنے بینک یا کارڈ جاری کنندہ سے رابطہ کریں۔",
+        "amazon_payments_could_not_enqueue_authorize": "آپ کی ادائیگی پر کارروائی میں ایک مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔",
+        "title": "ادائیگی",
+        "amount_left_to_pay_label": "ادائیگی واجب الادا:",
+        "discount_button_action_label": "ڈسکاؤنٹ کوڈ لگائیں",
+        "discount_codes_removed_summary": {
+          "one": "%{count} ڈسکاؤنٹ کوڈ ہٹا دیا گیا",
+          "other": "%{count} ڈسکاؤنٹ کوڈز ہٹا دیے گئے ہیں۔"
+        },
+        "discount_codes_modified_summary": {
+          "one": "%{count} ڈسکاؤنٹ کوڈ میں ترمیم کی گئی۔",
+          "other": "%{count} ڈسکاؤنٹ کوڈز میں ترمیم کی گئی۔"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "one": "%{count} رعایت کوڈ ہٹا دیا گیا یا تبدیل کر دیا گیا",
+          "other": "%{count} ڈسکاؤنٹ کوڈز ہٹا دیے گئے یا ان میں ترمیم کر دی گئی"
+        },
+        "discount_show_more_warnings": {
+          "one": "مزید %{count} دکھائیں",
+          "other": "مزید %{count} دکھائیں"
+        },
+        "gift_card_code_label": "گفٹ کارڈ کوڈ",
+        "apply_gift_card_button_label": "درخواست دیں",
+        "gift_card_balance_label": "بقیہ رقم:",
+        "supported_card_brands_more_label": "اور مزید…",
+        "detected_card_brand": "پتہ لگایا گیا کارڈ برانڈ: {brand}",
+        "credit_card_vaulting_sign_in_banner_title": "اپنے کریڈٹ کارڈ کو محفوظ کریں۔",
+        "credit_card_vaulting_sign_in_banner_info": "مستقبل کی خریداریوں کے لیے اپنے کریڈٹ کارڈ کو محفوظ کرنے کے لیے لاگ اِن کریں یا اکاؤنٹ بنائیں۔",
+        "credit_card_vaulting_sign_in_banner_button_label": "لاگ ان کریں",
+        "ftd_vault_credit_card_label": "اس کریڈٹ کارڈ کو تیز چیک آؤٹ کے لیے میرے اکاؤنٹ میں محفوظ کریں۔",
+        "card_number_label": "کارڈ نمبر",
+        "card_number_placeholder": "کارڈ نمبر",
+        "bogus_test_checkout": {
+          "title": "ٹیسٹنگ کی ہدایت",
+          "intro": "اپنا چیک آؤٹ ٹیسٹ کرنے کے لیے اِن ویلیوز کا استعمال کریں:",
+          "approved_transaction": "{{card_number}} کو منظور شدہ لین دین کی نقل کرنے کے لیے",
+          "declined_transaction": "{{card_number}} کو مسترد شدہ ٹرانزیکشن کی نقالی کے لیے",
+          "gateway_failure": "{{card_number}} کو گیٹ وے کی ناکامی کی نقل کرنے کے لیے",
+          "additional_instructions": "کوئی بھی مستقبل کی میعاد ختم ہونے کی تاریخ اور کوئی بھی 3 ہندسوں کا سیکیورٹی کوڈ استعمال کریں۔",
+          "support_link": "مدد حاصل کریں"
+        },
+        "card_pay_with": "ادائیگی کا طریقہ:",
+        "card_security_notice": "تمام لین دین محفوظ اور خفیہ (اینکرپٹڈ) ہیں۔",
+        "card_security_vault_notice": "ہمیں آپ کی تفصیلات آئندہ ادائیگیوں کے لیے درکار ہیں۔ تمام لین دین محفوظ اور خفیہ ہیں۔",
+        "card_information_notice": "تمام لین دین محفوظ اور انکرپٹڈ ہیں۔ کریڈٹ کارڈ کی معلومات کبھی محفوظ نہیں کی جاتی ہیں۔",
+        "name_on_card_label": "کارڈ پر نام",
+        "name_on_card_placeholder": "کارڈ پر نام",
+        "card_nickname_label": "عرفی نام (اختیاری)",
+        "card_expired": "میعاد ختم ہو گئی",
+        "card_expiry_label": "میعاد ختم ہونے کی تاریخ (MM / YY)",
+        "card_expiry_placeholder": "میعاد ختم ہونے کی تاریخ (MM / YY)",
+        "credit_card_start_month": "شروع کا مہینہ",
+        "credit_card_start_year": "آغاز سال",
+        "delete_customer_mandate_modal_title": "کیا آپ یہ ادائیگی کارڈ ہٹانا چاہتے ہیں؟",
+        "delete_customer_mandate_modal_body": "اگر آپ یہ کارڈ ہٹاتے ہیں، تو اسے ادائیگیوں کے لیے استعمال کرنے سے پہلے آپ کو اسے دوبارہ شامل کرنا ہوگا۔",
+        "delete_customer_mandate_modal_confirm": "کارڈ ہٹائیں",
+        "delete_customer_mandate_modal_cancel": "منسوخ کریں",
+        "card_verification_value_label": "سیکیورٹی کوڈ",
+        "card_verification_value_placeholder": "سیکیورٹی کوڈ",
+        "card_verification_confirm": "تصدیق کے مقاصد کے لیے، اپنے کارڈ کا سیکیورٹی کوڈ درج کریں۔",
+        "card_expiry_date_explanation": "کارڈ کی میعاد ختم ہونے کی تاریخ اس فارمیٹ میں: مہینہ، مہینہ، سال، سال",
+        "card_expiration_month_label": "میعاد ختم ہونے کا مہینہ",
+        "card_expiration_year_label": "میعاد ختم ہونے کا سال",
+        "card_verification_value_explanation": "3 ہندسوں والا سیکیورٹی کوڈ عام طور پر آپ کے کارڈ کی پچھلی جانب ہوتا ہے۔ امریکن ایکسپریس کارڈز پر 4 ہندسوں کا کوڈ سامنے کی جانب ہوتا ہے۔",
+        "card_verification_value_explanation_amex": "آپ کے کارڈ کے سامنے کی جانب 4 ہندسوں کا سیکیورٹی کوڈ",
+        "card_verification_value_explanation_other": "آپ کے کارڈ کی پشت پر 3 ہندسوں کا سیکیورٹی کوڈ",
+        "card_start_label": "اجرا کی تاریخ (ماہ / سال)",
+        "card_start_placeholder": "اجرا کی تاریخ (ماہ / سال)",
+        "card_issue_number_label": "اشو نمبر",
+        "card_issue_number_placeholder": "اشو نمبر",
+        "card_change_label": "تبدیلی",
+        "card_update_label": "کارڈ اپ ڈیٹ کریں",
+        "paypal_disconnect": "منقطع کریں",
+        "ends_with_label": "جس کا اختتام %{last_digits} پر ہوتا ہے",
+        "masked_digits_label": "•••• %{last_digits}",
+        "payment_method_saved": "ادائیگی کا طریقہ محفوظ کر لیا گیا",
+        "card_vaulted_company_location": "کارڈ اس مقام کے لیے محفوظ کر لیا گیا ہے۔",
+        "bank_account_vaulted_company_location": "اس مقام کے لیے بینک اکاؤنٹ محفوظ ہو گیا ہے۔",
+        "expiry_long": "(%{month}/%{year} کو میعاد ختم ہو رہی ہے)",
+        "expiry_short": "(ایکس پی %{month}/%{year})",
+        "crypto_payment_method": {
+          "description": "اپنے والیٹ کو باحفاظت منسلک کریں۔ آپ کا بیلنس اور پتہ شیئر نہیں کیا جائے گا۔",
+          "tooltip": "آپ کا وائلٹ بیلنس اور پتہ شیئر نہیں کیا جائے گا اور صرف مطلوبہ رقم ہی منہا کی جا سکتی ہے۔",
+          "cashback_descriptor": {
+            "one": "آپ کو اپنا کیش بیک %{count} دن کے بعد موصول ہوگا۔",
+            "other": "آپ کو اپنا کیش بیک %{count} دنوں کے بعد ملے گا"
+          }
+        },
+        "crypto_modal": {
+          "header": "%{shop_name} کو %{total_price} USDC ادا کریں",
+          "error": {
+            "refresh": "ریفریش کریں۔",
+            "close": "بند کر دیں۔",
+            "sandbox_error": "کچھ غلط ہو گیا",
+            "web_component_error": "اس صفحے کو لوڈ کرنے میں مسئلہ پیش آیا"
+          }
+        },
+        "saved_by_payment_method": "%{payment_method} کے ذریعے محفوظ کی گئی",
+        "pay_with_payment_method": "%{payment_method} سے ادائیگی کریں",
+        "pay_with_credit_card": "کریڈٹ کارڈ سے ادائیگی کریں",
+        "pay_with_debit_card": "ڈیبٹ کارڈ سے ادائیگی کریں",
+        "different_credit_card_label": "کوئی اور کریڈٹ کارڈ استعمال کریں۔",
+        "same_billing_address_label": "وہی جو شپنگ ایڈریس ہے۔",
+        "different_billing_address_label": "بلنگ کا دوسرا پتہ استعمال کریں۔"
       },
       "billing": {
         "billing_address_title": "بل بنام",
