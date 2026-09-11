@@ -2708,7 +2708,15 @@
         "tax_exemptions_modal_close": "بند کریں",
         "taxes_none": "کوئی نہیں۔",
         "tax_exemption_not_applicable": "دستیاب نہیں ہے۔",
-        "tax_exemptions_modal_button_accessibility_label": "تمام ٹیکس چھوٹ دیکھیں"
+        "tax_exemptions_modal_button_accessibility_label": "تمام ٹیکس چھوٹ دیکھیں",
+        "contact_contact": "رابطہ کریں۔",
+        "contact_email": "ای میل",
+        "contact_list_title": "لوگ",
+        "contact_name": "نام",
+        "contact_permissions": "اجازتیں",
+        "contact_phone_number": "فون نمبر",
+        "location_picker_label": "جگہ کا نام",
+        "location_picker_accessibility_label": "Location name: {{locationName}}"
       },
       "location_selection": {
         "continue_to_store": "ذخیرہ کرتے رہیں",
@@ -2885,6 +2893,10 @@
         "modal_po_number_input_max_length_error": "PO نمبروں کی زیادہ سے زیادہ {{maxLength}} حروف کی گنجائش ہے۔",
         "save": "محفوظ کریں۔",
         "title": "PO #{{poNumber}}"
+      },
+      "account_information": {
+        "company_card_name_label": "کمپنی کا نام",
+        "company_card_section_accessibility_label": "کمپنی"
       }
     },
     "callback": {
@@ -3934,6 +3946,120 @@
         "transactions": {
           "show_all": "سب دکھائیں"
         }
+      },
+      "fees": {
+        "restocking_fee": "ری اسٹاکنگ فیس",
+        "return_shipping_fee": "واپسی کی شپنگ"
+      },
+      "vat_invoices": {
+        "label": "ویٹ"
+      },
+      "link_sent": "لنک بھیج دیا گیا ہے۔",
+      "cash_rounding": "نقد راؤنڈنگ",
+      "adjusted_payment": "ترمیم شدہ ادائیگی",
+      "adjusted_total": "مجموعی ایڈجسٹ کردہ",
+      "due_on_date": "بمطابق {{date}}",
+      "due_on_fulfillment": "تکمیل پر واجب الادا",
+      "due_on_receipt": "وصول ہونے پر واجب الادا"
+    },
+    "addresses": {
+      "add_button": "پتہ شامل کریں",
+      "add_button_text": "شامل کریں",
+      "add_button_accessibility_label": "پتہ شامل کریں",
+      "back_button": "واپس",
+      "back_button_accessibility_label": "Back to editing address {{address}}",
+      "add_address_banner": "چیک آؤٹ پر استعمال کرنے کے لیے پتے شامل کریں۔",
+      "no_addresses_banner": "کوئی پتے شامل نہیں کیے گئے۔",
+      "address_deleted_notification": "پتہ حذف کر دیا گیا۔",
+      "cancel_adding_address_accessibility_label": "پتا شامل کرنا منسوخ کریں",
+      "cancel_deletion_button": "منسوخ کریں",
+      "cancel_deletion_button_accessibility_label": "{{address}} کو حذف کرنا منسوخ کریں",
+      "default_address": {
+        "badge_label": "پہلے سے طے شدہ",
+        "title": "پہلے سے طے شدہ پتہ",
+        "title_accessibility_label": "پہلے سے طے شدہ پتہ: {{address}}"
+      },
+      "delete_button": "حذف کریں",
+      "delete_button_accessibility_label": "{{address}} کو حذف کریں",
+      "delete_confirmation_button": "ایڈریس ڈیلیٹ کریں",
+      "delete_confirmation_button_accessibility_label": "{{address}} کو حذف کریں",
+      "delete_confirmation_message": "پتہ حذف کریں؟ موجودہ آرڈرز متاثر نہیں ہوں گے۔",
+      "delete_confirmation_title": "پتہ حذف کریں؟",
+      "delete_confirmation_description": "موجودہ آرڈرز متاثر نہیں ہوں گے۔",
+      "edit_button": "ترمیم کریں",
+      "edit_button_accessibility_label": "{{address}} میں ترمیم کریں",
+      "edit_section_accessibility_label": "{{address}} میں ترمیم کریں",
+      "edit_modal_title": {
+        "default": "پتہ میں ترمیم کریں",
+        "billing": "بلنگ ایڈریس میں ترمیم کریں",
+        "shipping": "شپنگ ایڈریس میں ترمیم کریں"
+      },
+      "loading_accessibility_message": "لوڈنگ ایڈریس",
+      "loading_addresses_accessibility_message": "پتوں کو لوڈ کیا جا رہا ہے۔",
+      "loading_billing_accessibility_message": "بلنگ ایڈریس لوڈ ہو رہا ہے",
+      "loading_finished_accessibility_message": "پتوں کا نیا صفحہ لوڈ ہو گیا ہے۔",
+      "loading_shipping_accessibility_message": "شپنگ ایڈریس لوڈ ہو رہا ہے۔",
+      "pagination": {
+        "load_more": "مزید دکھائیں",
+        "load_more_accessibility_label": "مزید پتے دکھائیں"
+      },
+      "save_new_address_accessibility_label": "پتہ محفوظ کریں",
+      "title": "پتے",
+      "billing_address_dropdown_placeholder": "بلنگ کا پتہ"
+    },
+    "address_form": {
+      "attention": "توجہ فرمائیں",
+      "attention_company": "کمپنی/توجہ",
+      "attention_help_text": "شخص یا شعبے کا نام",
+      "auto_complete_close_accessibility_label": "تجاویز بند کریں",
+      "auto_complete_title": "تجاویز",
+      "billing_address": "بطور بلنگ ایڈریس استعمال کریں",
+      "cancel": "منسوخ کریں",
+      "cancel_accessibility_label": "پتے میں ترمیم منسوخ کریں {{address}}",
+      "creation_success_notification": "پتہ شامل کر دیا گیا",
+      "default_address": "یہ میرا ڈیفالٹ ایڈریس ہے",
+      "default_address_creation_success_notification": "ڈیفالٹ ایڈریس شامل کر دیا گیا ہے۔",
+      "default_address_update_success_notification": "ڈیفالٹ پتہ اپ ڈیٹ ہو گیا",
+      "loading_add_form_accessibility_message": "نیا پتہ فارم لوڈ ہو رہا ہے",
+      "loading_edit_form_accessibility_message": "پتہ تدوین کا فارم لوڈ کر رہا ہے",
+      "loading_form_accessibility_message": "ایڈریس فارم لوڈ ہو رہا ہے",
+      "loading_finished_accessibility_message": "ایڈریس فارم لوڈ ہو گیا ہے۔",
+      "save": "محفوظ کریں۔",
+      "save_accessibility_label": "ایڈریس محفوظ کریں {{address}}",
+      "section_title_accessibility_label": "پتہ شامل کریں",
+      "update_success_notification": "پتہ اپ ڈیٹ کر دیا گیا۔"
+    },
+    "account_menu": {
+      "signed_out_state": {
+        "sheet_title": "سائن ان کریں یا اکاؤنٹ بنائیں",
+        "section_divider": "سائن ان کرنے کے مزید طریقے",
+        "alternate_divider": "یا",
+        "use_email_button": "اس کی بجائے ای میل استعمال کریں۔",
+        "email_field_label": "ای میل",
+        "orders_button": "آرڈرز",
+        "profile_button": "پروفائل",
+        "shop_login_button": "شاپ کے ساتھ سائن اِن کریں",
+        "continue_with_google": "گوگل کے ساتھ جاری رکھیں",
+        "continue_with_facebook": "فیس بک کے ساتھ جاری رکھیں"
+      },
+      "signed_in_state": {
+        "greeting_with_name": "ہیلو، {{first_name}}",
+        "greeting_without_name": "کھاتہ",
+        "orders_button": "آرڈرز",
+        "profile_button": "پروفائل"
+      },
+      "location_picker": {
+        "sheet_title": "مقامات",
+        "search_field_placeholder": "تلاش کریں"
+      },
+      "aria_labels": {
+        "close_menu": "مینو بند کریں",
+        "back_to_main_menu": "Back to main menu from {{title}}",
+        "open_submenu": "{{title}}، سب مینو کھولتا ہے",
+        "loading_menu": "مینو لوڈ ہو رہا ہے۔",
+        "account": "کھاتہ",
+        "sign_in_with_email": "ای میل کے ذریعے سائن ان کریں۔",
+        "sign_in": "سائن اِن کریں۔"
       }
     }
   },
