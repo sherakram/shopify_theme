@@ -564,7 +564,15 @@
         "vat_invoices": {
           "title": "VAT انوائسز"
         },
-        "verify_shop_account_title": "اپنے شاپ اکاؤنٹ کی توثیق کریں"
+        "verify_shop_account_title": "اپنے شاپ اکاؤنٹ کی توثیق کریں",
+        "verify_shop_account_message": "آپ کی معلومات شاپ میں محفوظ کر لی گئی ہے، لاکھوں اسٹورز پر اسے خودکار طریقے سے استعمال کرنے کے لیے اپنے اکاؤنٹ کی تصدیق کریں۔",
+        "verify_shop_account_cta": "اپنے اکاؤنٹ کی توثیق کریں",
+        "verify_shop_account_confirmation": "کیش آؤٹ کی تفصیلات محفوظ ہو گئیں",
+        "announcement": {
+          "close": "بند کریں",
+          "expand": "پھیلاؤ",
+          "collapse": "ڈھے جانا"
+        }
       },
       "order_summary": {
         "shopping_cart_label": "خریداری کی ٹوکری",
@@ -683,7 +691,13 @@
         "duties_included_label": "کل رقم میں ٹیکس اور ڈیوٹیز شامل ہیں۔ ترسیل پر کوئی اضافی چارجز نہیں ہیں۔"
       },
       "change_currency": {
-        "currency_not_supported_by_shop": "آپ کی منتخب کردہ کرنسی اب دستیاب نہیں ہے۔ تمام قیمتیں اب %{currency_code} میں ہیں۔"
+        "currency_not_supported_by_shop": "آپ کی منتخب کردہ کرنسی اب دستیاب نہیں ہے۔ تمام قیمتیں اب %{currency_code} میں ہیں۔",
+        "currency_button_label": "%{currency} (%{currency_symbol})",
+        "credit_card_will_be_charged_html": "آپ کے کریڈٹ کارڈ سے %{amount} وصول کیے جائیں گے۔",
+        "payment_total_label": "ادائیگی کا کل",
+        "conversion_rate": "1 %{from_currency_code} = %{rate} %{to_currency_code}",
+        "change_currency_link": "تبدیل کریں %{currency_name} میں",
+        "card_provider_fx_charges_warning": "آپ کا کارڈ فراہم کنندہ %{currency_code} لین دین پر فیس وصول کر سکتا ہے۔"
       },
       "change_country": {
         "cart_updated_based_on_country": "آپ کی شپنگ کے ملک کے مطابق آپ کی کارٹ اپ ڈیٹ کر دی گئی ہے۔",
@@ -861,6 +875,238 @@
       },
       "artifact_errors": {
         "artifact_dissatisfaction_without_violation": "آپ کے آرڈر پر کارروائی کرنے میں ایک مسئلہ پیش آیا۔ چند منٹ بعد دوبارہ کوشش کریں۔"
+      },
+      "field_errors": {
+        "address_address1_contains_mathematical_symbols": "پتہ کی پہلی سطر میں ریاضی کی علامتیں استعمال نہیں کی جا سکتیں۔",
+        "address_street_name_blank": "گلی کا نام درج کریں",
+        "address_street_name_too_long": "<span dir=\"rtl\">گلی بہت لمبی ہے (زیادہ سے زیادہ {{count}} حروف)</span>",
+        "address_street_name_contains_emojis": "سڑک میں ایموجیز شامل نہیں ہو سکتے",
+        "address_street_name_contains_html_tags": "گلی میں HTML ٹیگز نہیں ہو سکتے۔",
+        "address_street_name_contains_mathematical_symbols": "گلی میں ریاضی کی علامتیں نہیں ہونی چاہیئں",
+        "address_street_number_blank": "عمارت کا نمبر درج کریں",
+        "address_street_number_too_long": "بلڈنگ نمبر بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_street_number_contains_emojis": "بلڈنگ نمبر میں ایموجی شامل نہیں ہوسکتے",
+        "address_street_number_contains_html_tags": "عمارت کے نمبر میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_street_number_contains_mathematical_symbols": "بلڈنگ نمبر میں ریاضیاتی علامتیں شامل نہیں ہو سکتیں",
+        "address_line2_blank": "داخل ہو جائیے",
+        "address_line2_too_long": "دوسری ایڈریس لائن بہت لمبی ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_line2_contains_emojis": "دوسری ایڈریس لائن میں ایموجیز شامل نہیں ہو سکتے",
+        "address_line2_contains_html_tags": "پتہ کی دوسری سطر میں HTML ٹیگز شامل نہیں ہوسکتے۔",
+        "address_line2_contains_mathematical_symbols": "دوسری ایڈریس لائن میں ریاضیاتی علامتیں شامل نہیں ہو سکتیں",
+        "address_address2_blank": "داخل ہو جائیے",
+        "address_address2_too_long": "پتے کی دوسری لائن بہت طویل ہے (زیادہ سے زیادہ 255 حروف)",
+        "address_address2_contains_emojis": "پتہ 2 میں ایموجیز شامل نہیں ہو سکتے",
+        "address_address2_contains_html_tags": "ایڈریس 2 میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_address2_contains_mathematical_symbols": "دوسری ایڈریس لائن میں ریاضیاتی علامتیں شامل نہیں ہو سکتیں",
+        "address_neighborhood_blank": "محلے میں داخل ہوں۔",
+        "address_neighborhood_too_long": "پڑوس بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_neighborhood_contains_emojis": "پڑوس میں ایموجیز شامل نہیں ہو سکتیں۔",
+        "address_neighborhood_contains_html_tags": "Neighborhood میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_neighborhood_contains_mathematical_symbols": "محلے میں حسابی علامات شامل نہیں ہو سکتیں۔",
+        "address_barangay_blank": "ایک بَرنگے درج کریں۔",
+        "address_barangay_too_long": "Barangay بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_barangay_contains_emojis": "بارنگے میں ایموجی شامل نہیں ہو سکتے",
+        "address_barangay_contains_html_tags": "بارنگے میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_barangay_contains_mathematical_symbols": "برانگے ریاضیاتی علامتوں پر مشتمل نہیں ہو سکتا",
+        "address_colony_blank": "کالونی میں داخل ہوں۔",
+        "address_colony_too_long": "کالونی بہت لمبی ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_colony_contains_emojis": "کالونی میں ایموجیز شامل نہیں ہو سکتے",
+        "address_colony_contains_html_tags": "کالونی میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_colony_contains_mathematical_symbols": "کالونی میں ریاضیاتی علامتیں شامل نہیں ہو سکتیں۔",
+        "address_commune_blank": "ایک کمیون میں داخل ہوں",
+        "address_commune_too_long": "<p>کمیون بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)</p>",
+        "address_commune_contains_emojis": "کمیون میں ایموجیز شامل نہیں ہو سکتے",
+        "address_commune_contains_html_tags": "Commune میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_commune_contains_mathematical_symbols": "کمیون میں ریاضی کی علامتیں نہیں ہونی چاہئیں",
+        "address_district_blank": "ضلع درج کریں",
+        "address_district_too_long": "ضلع بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف ہو سکتے ہیں)",
+        "address_district_contains_emojis": "ضلع میں ایموجی شامل نہیں ہو سکتے",
+        "address_district_contains_html_tags": "ضلع میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_district_contains_mathematical_symbols": "ضلع میں ریاضیاتی علامات شامل نہیں ہونی چاہئیں",
+        "address_subdistrict_blank": "ذیلی ضلع درج کریں",
+        "address_subdistrict_too_long": "ذیلی ضلع کا نام بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_subdistrict_contains_emojis": "ذیلی ضلع میں ایموجیز شامل نہیں ہو سکتے",
+        "address_subdistrict_contains_html_tags": "ذیلی ضلع میں ایچ ٹی ایم ایل ٹیگز شامل نہیں ہو سکتے۔",
+        "address_subdistrict_contains_mathematical_symbols": "ذیلی ضلع میں ریاضی کی علامات شامل نہیں ہو سکتیں",
+        "address_ward_blank": "وارڈ میں داخل ہوں۔",
+        "address_ward_too_long": "وارڈ بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_ward_contains_emojis": "وارڈ میں ایموجیز شامل نہیں ہو سکتے",
+        "address_ward_contains_html_tags": "وارڈ میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_ward_contains_mathematical_symbols": "وارڈ میں ریاضی کی علامات شامل نہیں ہونی چاہئیں",
+        "address_block_blank": "ایک بلاک میں داخل ہوں",
+        "address_block_too_long": "بلاک بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_block_contains_emojis": "بلاک میں ایموجیز شامل نہیں ہو سکتے",
+        "address_block_contains_html_tags": "بلاک میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_block_contains_mathematical_symbols": "بلاک میں ریاضیاتی علامتیں نہیں ہو سکتیں",
+        "address_area_blank": "ایک علاقہ درج کریں۔",
+        "address_area_too_long": "رقبہ بہت لمبا ہے (زیادہ سے زیادہ {{count}} حروف)",
+        "address_area_contains_emojis": "رقبے میں ایموجیز شامل نہیں ہو سکتے",
+        "address_area_contains_html_tags": "رقبے میں HTML ٹیگز شامل نہیں ہو سکتے۔",
+        "address_area_contains_mathematical_symbols": "رقبہ حسابی علامتیں شامل نہیں کر سکتا",
+        "address_city_blank": "شہر کا نام درج کریں",
+        "address_city_too_long": "شہر بہت لمبا ہے (زیادہ سے زیادہ 255 حروف ہیں)",
+        "address_city_contains_emojis": "شہر میں ایموجیز نہیں ہوسکتے",
+        "address_city_contains_html_tags": "شہر HTML ٹیگز پر مشتمل نہیں ہو سکتا۔",
+        "address_city_contains_mathematical_symbols": "شہر میں ریاضی کی علامتیں نہیں ہو سکتیں",
+        "address_country_blank": "کوئی ملک/خطہ منتخب کریں",
+        "address_country_not_supported": "ہم اس ملک یا علاقے میں ترسیل نہیں کرتے۔ ایک نیا شپنگ ایڈریس درج کریں اور دوبارہ کوشش کریں۔",
+        "address_province_blank": "صوبہ/ریاست منتخب کریں",
+        "address_province_invalid": "ایک درست ریاست / صوبہ منتخب کریں۔",
+        "address_company_blank": "کمپنی کا نام درج کریں",
+        "address_company_too_long": "کمپنی کا نام بہت لمبا ہے (زیادہ سے زیادہ 255 حروف ہیں)",
+        "address_company_contains_emojis": "کمپنی میں ایموجیز شامل نہیں ہوسکتے۔",
+        "address_company_contains_html_tags": "کمپنی HTML ٹیگز کو شامل نہیں کر سکتی۔",
+        "address_company_contains_mathematical_symbols": "کمپنی میں ریاضی کی علامتیں شامل نہیں ہو سکتیں",
+        "address_phone_blank": "ایک درست فون نمبر درج کریں۔",
+        "address_phone_contains_emojis": "فون نمبر میں ایموجیز شامل نہیں ہو سکتے",
+        "address_phone_invalid": "ایک درست فون نمبر درج کریں۔",
+        "address_zip_blank": "زِپ / پوسٹل کوڈ درج کریں",
+        "address_zip_blocked_address": "یہ مقام معاونت یافتہ نہیں ہے۔",
+        "address_zip_too_long": "زِپ / پوسٹل کوڈ بہت لمبا ہے (زیادہ سے زیادہ 255 حروف ہو سکتے ہیں)",
+        "address_zip_not_supported": "یہ مقام معاونت یافتہ نہیں ہے۔",
+        "address_zip_invalid_for_country": "%{country} کے لیے درست زِپ / پوسٹل کوڈ درج کریں۔",
+        "address_zip_invalid_for_province": "%{province} کے لیے درست زِپ / پوسٹل کوڈ درج کریں",
+        "address_zip_invalid_for_country_and_province": "%{country} کے لیے %{province} کا درست ZIP/پوسٹل کوڈ درج کریں",
+        "address_zip_contains_emojis": "زِپ / پوسٹل کوڈ میں ایموجی شامل نہیں ہو سکتے",
+        "address_zip_contains_mathematical_symbols": "زِپ/پوسٹل کوڈ میں ریاضیاتی علامتیں شامل نہیں ہو سکتیں",
+        "address_generic_blank": "مطلوبہ خانہ",
+        "address_generic_invalid": "غلط اندراج",
+        "address_generic_error": "فیلڈ کی خرابی",
+        "credit_card_name_blank": "اپنا نام بالکل ویسا ہی درج کریں جیسا کہ آپ کے کارڈ پر لکھا ہے۔",
+        "credit_card_name_invalid": "اپنا نام بالکل ویسا ہی درج کریں جیسا کہ آپ کے کارڈ پر لکھا ہے۔",
+        "credit_card_name_billing_invalid": "بلنگ ایڈریس پر اپنا نام پہلے درج کریں۔",
+        "credit_card_number_invalid": "درست کارڈ نمبر درج کریں۔",
+        "credit_card_expiry_invalid": "ایک درست میعاد ختم ہونے کی تاریخ درج کریں۔"
+      },
+      "vaulted": {
+        "change_button": "تبدیلی",
+        "loading_section": "لوڈ ہو رہا ہے {{section}}…"
+      },
+      "review": {
+        "title": "جائزہ",
+        "review_title": "اپنا آرڈر مکمل کریں۔",
+        "review_and_confirm_title": "دوبارہ جائزہ لیں اور تصدیق کریں۔",
+        "checkout_as_guest": "مہمان کے طور پر چیک آؤٹ کریں۔",
+        "account_more_actions": "اس اکاؤنٹ کے لیے مزید کارروائیاں",
+        "checkout_a_different_way": "ایک مختلف طریقہ دیکھیں۔",
+        "blocks": {
+          "contact_method_title": "رابطہ کریں۔",
+          "billing_address_title": "بلنگ",
+          "shipping_address_title": "جہاز سے بھیجیں",
+          "shipping_method_title": "شپنگ کا طریقہ",
+          "payment_method_title": "ادائیگی کا طریقہ",
+          "change_link_label": "تبدیلی",
+          "change_contact_method_link_label": "رابطہ کی معلومات تبدیل کریں۔",
+          "change_billing_address_link_label": "بلنگ کا پتہ تبدیل کریں۔",
+          "change_company_location_link_label": "کمپنی کا مقام تبدیل کریں۔",
+          "change_shipping_address_link_label": "شپنگ ایڈریس تبدیل کریں۔",
+          "change_shipping_method_link_label": "شپنگ کا طریقہ تبدیل کریں۔",
+          "change_payment_method_link_label": "ادائیگی کا طریقہ تبدیل کریں",
+          "pick_up_in_store_shipping_method_html": "اسٹور سے پک اپ کریں · %{location_name}",
+          "purchase_order_number_title": "پی او نمبر",
+          "change_purchase_order_number_label": "پی او نمبر تبدیل کریں۔",
+          "change_delivery_method_link_label": "ترسیل کا طریقہ تبدیل کریں",
+          "no_address": "(کوئی پتہ نہیں)",
+          "no_purchase_order_number": "(پی او نمبر نہیں ہے)",
+          "no_purchase_order_number_long": "کوئی آرڈر نمبر نہیں",
+          "due_after_order_reviewed_html": "آرڈر کا جائزہ لینے کے بعد واجب الادا ہے۔",
+          "review_title_free_order": "اپنے آرڈر کا جائزہ لیں اور اسے مکمل کریں۔",
+          "payment_method_saved_company_location": "اس لوکیشن کے لیے کارڈ محفوظ کریں",
+          "company_location": "کمپنی کا مقام",
+          "pickup_items_at": {
+            "one": "%{count} چیز اٹھائیں",
+            "other": "پر %{count} اشیاء اٹھا لیں۔"
+          },
+          "ship_items_to": {
+            "one": "%{count} آئٹم کو بھیجیں",
+            "other": "%{count} اشیاء بھیجیں"
+          }
+        },
+        "block_title": "اپنی معلومات کا جائزہ لیں",
+        "item_header": {
+          "change_value": "قدر بدلیں",
+          "section": "دفعہ",
+          "value": "قدر"
+        }
+      },
+      "marketing": {
+        "accept_marketing_checkbox_label": "خبروں اور پیشکشوں کے ساتھ مجھے ای میل کریں۔",
+        "post_accept_marketing_checkbox_label": "آپ ای میل پر خبریں اور پیشکشیں وصول کرنے کے لیے سبسکرائب کر چکے ہیں۔",
+        "pending_accept_marketing_checkbox_label": "خبروں اور پیشکشوں کے لیے اپنی سبسکرپشن کی تصدیق کرنے کی خاطر اپنی ای میل چیک کریں۔",
+        "accept_sms_checkbox_label": "خبروں اور پیشکشوں کے ساتھ مجھے ٹیکسٹ کریں۔",
+        "accept_whatsapp_marketing_checkbox_label": "خبریوں اور آفرز کے لیے مجھے واٹس ایپ پر پیغام بھیجیں۔",
+        "disclaimer": {
+          "privacy_policy": "رازداری کی پالیسی",
+          "terms_of_service": "سروس کی شرائط"
+        },
+        "sms": {
+          "disclaimer": {
+            "privacy_policy": "رازداری کی پالیسی",
+            "terms_of_service": "سروس کی شرائط",
+            "description_html": "ٹیکسٹ کے ذریعے سائن اپ کر کے، آپ رضامند ہیں کہ آپ کے فراہم کردہ فون نمبر پر خودکار مارکیٹنگ پیغامات، بشمول کارٹ ریمائنڈرز، موصول ہوں۔ رضامندی خریداری کی شرط نہیں ہے۔ ان سبسکرائب کرنے کے لیے STOP کا جواب دیں۔ مدد کے لیے HELP کا جواب دیں۔ پیغامات کی تعداد مختلف ہو سکتی ہے۔ میسج اور ڈیٹا ریٹس لاگو ہو سکتے ہیں۔ ہماری %{privacy_policy_link} اور %{terms_of_service_link} دیکھیں۔",
+            "description_transactional_html": "آپ کو آرڈر کی تصدیق اور شپنگ اپ ڈیٹس سے متعلق ٹیکسٹ پیغامات موصول ہو سکتے ہیں۔ ان سبسکرائب کرنے کے لیے STOP بھیجیں۔ مدد کے لیے HELP بھیجیں۔ پیغامات کی تعدد مختلف ہو سکتی ہے۔ میسج اور ڈیٹا ریٹ لاگو ہو سکتے ہیں۔ ہماری %{privacy_policy_modal_link} اور %{terms_of_service_modal_link} دیکھیں۔"
+          },
+          "mobile_phone_number": "موبائل فون نمبر",
+          "get_offers_by_text": "ٹیکسٹ کے ذریعے آفرز حاصل کریں"
+        },
+        "whatsapp": {
+          "disclaimer": {
+            "description_html": "WhatsApp کے ذریعے سائن اپ کر کے، آپ فراہم کردہ فون نمبر پر WhatsApp مارکیٹنگ پیغامات موصول کرنے سے اتفاق کرتے ہیں۔ رضامندی خریداری کی شرط نہیں ہے۔ ان سبسکرائب کرنے کے لیے STOP کا جواب دیں۔ پیغامات کی تعدد مختلف ہو سکتی ہے۔ پیغامات اور ڈیٹا کی شرحیں لاگو ہو سکتی ہیں۔ ہماری %{privacy_policy_link} اور %{terms_of_service_link} دیکھیں۔"
+          }
+        },
+        "unsubscribe": {
+          "title": "آپ نے رکنیت ختم کر دی ہے۔",
+          "description": "ہماری جانب سے آپ کو کارٹ کی کوئی مزید یاد دہانی موصول نہیں ہوگی۔"
+        },
+        "accept_shop_pay_marketing_checkbox_label": "مجھے اس اسٹور سے خبروں اور پیشکشوں کے لیے سائن اپ کریں۔"
+      },
+      "shop_policies": {
+        "policy_label": "پالیسی",
+        "policies_label": "پالیسیاں",
+        "select_policy_label": "ایک پالیسی منتخب کریں۔",
+        "refund_policy": "ریفنڈ پالیسی",
+        "privacy_policy": "رازداری کی پالیسی",
+        "terms_of_service": "سروس کی شرائط",
+        "legal_notice": "قانونی نوٹس",
+        "shipping_policy": "شپنگ",
+        "terms_of_sale": "شرائط فروخت",
+        "subscription_policy": "منسوخیاں",
+        "purchase_options_policy": "خریداری کے اختیارات کی پالیسی",
+        "contact_information": "رابطہ کریں۔",
+        "purchase_options_cancellation_policy": "منسوخیاں",
+        "cookie_preferences": "کوکیز",
+        "terms_and_policies": "شرائط و ضوابط"
+      },
+      "remote_policies": {
+        "unavailable_policy": "اس اسٹور کے لیے کوئی %{policy_name} فراہم نہیں کی گئی ہے۔ مزید معلومات کے لیے براہ راست %{shop_name} سے رابطہ کریں۔"
+      },
+      "mor_policies": {
+        "terms_and_conditions": "مرچنٹ آف ریکارڈ شرائط و ضوابط",
+        "privacy_policy": "مرچنٹ آف ریکارڈ کی پرائیویسی پالیسی"
+      },
+      "markets": {
+        "invalid_market_manager_error": "ادائیگی مکمل کرنے سے پہلے اپنی رابطہ معلومات کا جائزہ لیں۔"
+      },
+      "notifications": {
+        "title": "اطلاعات"
+      },
+      "order_payment_collection": {
+        "custom_line_item_description": "آرڈر %{order_name} کے لیے ادا کی جانے والی رقم",
+        "changes_summary": {
+          "added": {
+            "one": "شامل کر دیا گیا",
+            "other": "%{count} شامل کیے گئے۔"
+          },
+          "removed": "ہٹایا گیا",
+          "subtracted": "%{count} کو ہٹا دیا گیا ہے۔",
+          "returned": "واپس کیا گیا %{count}",
+          "return_line_item_removed": "ریٹرن سے %{count} ہٹایا گیا۔"
+        },
+        "additional_payment_requested": "%{total_outstanding} کی ادائیگی درکار ہے",
+        "checkout_review_and_pay": "آپ کے آرڈر %{order_name} کو اپ ڈیٹ کر دیا گیا ہے۔ ان تبدیلیوں کا جائزہ لیں، پھر اپنے آرڈر کی تصدیق کے لیے ادائیگی کریں۔",
+        "order_updated_on": "آپ کا آرڈر %{last_edited_at} کو اپ ڈیٹ کیا گیا تھا۔",
+        "order_review_and_pay": "آپ کے آرڈر کو اپ ڈیٹ کر دیا گیا ہے۔ اپنے آرڈر کی تصدیق کے لیے جائزہ لیں اور ادائیگی کریں۔",
+        "pay_now": "ابھی ادائیگی کریں"
       }
     },
     "errors": {
