@@ -2578,10 +2578,77 @@
             },
             "submitted": {
               "description": "اس آرڈر کی تصدیق کے لیے ادائیگی جمع کروائیں۔",
-              "title": "تصدیق کے لیے ادائیگی کریں۔"
+              "title": "تصدیق کے لیے ادائیگی کریں۔",
+              "deposit": {
+                "title": "ادائیگی واجب الادا ہے۔",
+                "due_later": "بقیہ {{translatedName}} کی شرائط پر ہے اور {{dueDate}} پر واجب الادا ہے۔",
+                "due_on_fulfillment": "ایک بار جب اس آرڈر میں موجود تمام اشیاء پوری ہو جائیں تو باقی رقم واجب الادا ہوگی۔",
+                "due_on_receipt": "آپ کو بقایا رقم کا انوائس موصول ہوگا۔",
+                "due_on_date": "بقایا رقم {{dueDate}} کو واجب الادا ہے۔"
+              }
+            },
+            "deposit": {
+              "due_later": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ باقی رقم {{translatedName}} کی شرائط پر ہوگی۔",
+              "due_on_fulfillment": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ باقی رقم آرڈر مکمل ہونے پر واجب الادا ہوگی۔",
+              "due_on_receipt": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ بقیہ رقم بعد میں واجب الادا ہوگی۔",
+              "due_on_date": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ بقیہ رقم {{dueDate}} کو واجب الادا ہوگی۔"
             }
-          }
+          },
+          "paid": {
+            "title": "ادا کیا گیا۔",
+            "title_with_date": "ادائیگی کی گئی {{date}}",
+            "description": "آپ کا آرڈر مکمل طور پر ادا کر دیا گیا ہے۔"
+          },
+          "refund": {
+            "title": "واپس کر دیا گیا۔",
+            "title_with_date": "رقم واپس کر دی گئی {{date}}",
+            "description_full_refund": "آپ کو اس آرڈر کے لیے مکمل رقم کی واپسی موصول ہوئی ہے۔",
+            "description_single_refund": "آپ کو اس آرڈر کے لیے جزوی رقم کی واپسی موصول ہوئی ہے۔",
+            "description_multiple_refunds": "آپ کو اس آرڈر کے لیے جزوی رقم کی واپسی موصول ہوئی ہے۔"
+          },
+          "canceled": {
+            "title": "ادائیگی منسوخ کر دی گئی۔",
+            "description": "آپ سے کوئی چارج نہیں لیا گیا۔"
+          },
+          "due_date": "بمطابق {{date}}",
+          "total_balance": "کل بیلنس",
+          "pay_now": "ابھی ادائیگی کریں",
+          "pay_now_accessibility_label": "<p>آرڈر کے لیے ابھی ادائیگی کریں {{orderName}}</p>",
+          "title": "ادائیگی کی حیثیت"
+        },
+        "order_timeline": {
+          "expand_events_label": "تفصیلات دکھائیں۔",
+          "expand_events_accessibility_label": "ڈرافٹ آرڈر کی تفصیلات دکھائیں",
+          "hide_events_label": "تفصیلات چھپائیں",
+          "hide_events_accessibility_label": "ڈرافٹ آرڈر کی تفصیلات چھپائیں"
+        },
+        "subtitle": "جمع کرایا گیا {{date}}",
+        "title": "آرڈر {{name}}"
+      },
+      "payment_methods": {
+        "payment_delete": {
+          "description_without_replacement": "ادائیگی کا یہ طریقہ اب اس جگہ سے آئندہ خریداریوں کے لیے دستیاب نہیں ہوگا۔",
+          "description_with_replacement": "اس ادائیگی کا طریقہ حذف کرنے سے اس مقام کے لیے پہلے سے مجاز ادائیگیوں پر اثر پڑے گا۔ آئندہ آرڈرز موصول کرنا جاری رکھنے کے لیے اسے کسی متبادل ادائیگی کے طریقے سے تبدیل کریں۔"
+        },
+        "payment_details": {
+          "order_label": "آرڈر {{name}}",
+          "draft_label": "ڈرافٹ آرڈر {{name}}"
         }
+      },
+      "purchase_order_number": {
+        "add_accessibility_label": "پی او نمبر شامل کریں",
+        "add_modal_title": "پی او نمبر شامل کریں",
+        "cancel": "منسوخ کریں",
+        "close_modal_accessibility_label": "پی او نمبر ماڈل بند کریں۔",
+        "discard": "مسترد کریں",
+        "discard_changes_modal_title": "تبدیلیاں مسترد کریں؟",
+        "edit_accessibility_label": "پی او نمبر میں ترمیم کریں",
+        "edit_modal_title": "پی او نمبر میں ترمیم کریں",
+        "empty_state": "کوئی پی او نمبر نہیں۔",
+        "modal_po_number_input_label": "پی او نمبر",
+        "modal_po_number_input_max_length_error": "PO نمبروں کی زیادہ سے زیادہ {{maxLength}} حروف کی گنجائش ہے۔",
+        "save": "محفوظ کریں۔",
+        "title": "PO #{{poNumber}}"
       }
     },
     "callback": {
@@ -2899,7 +2966,30 @@
       "three_d_secure": {
         "title": "تھری ڈی سیکیور",
         "verification_failed": "آپ کی ادائیگی کی تصدیق نہیں ہو سکی۔ دوبارہ کوشش کریں یا ادائیگی کا کوئی دوسرا طریقہ استعمال کریں۔"
-      }
+      },
+      "replacement_payment_method_title": "متبادل ادائیگی کا طریقہ",
+      "title": "ادائیگی کے طریقے",
+      "add_payment_method_button": "ادائیگی کا طریقہ شامل کریں",
+      "add_payment_method_dropdown": {
+        "bank_account_consent": "ادائیگی کا طریقہ شامل کرنے سے، آپ اپنے کارڈ سے رقم وصول کرنے یا بینک اکاؤنٹ سے رقم ڈیبٹ کرنے کی اجازت دیتے ہیں جس کا اطلاق آپ کی مستقبل میں منظور کردہ خریداریوں پر ہوگا جب تک کہ آپ اسے منسوخ نہ کردیں۔"
+      },
+      "bank_account": {
+        "loading_accessibility_message": "بینک اکاؤنٹ کا بٹن لوڈ ہو رہا ہے",
+        "iframe_title_accessibility_label": "بینک اکاؤنٹ کا قیام",
+        "display_name": "بینک اکاؤنٹ",
+        "generic_error": "بینک اکاؤنٹ شامل نہیں کیا جا سکا۔ بعد میں دوبارہ کوشش کریں۔"
+      },
+      "add_payment_method_banner": "تیز چیک آؤٹ یا قبل از اجازت خدمات کے لیے ادائیگی کا طریقہ شامل کریں۔",
+      "no_payment_methods_banner": "کوئی ادائیگی کا طریقہ شامل نہیں کیا گیا۔",
+      "edit_payment_method_button_accessibility_label": "{{paymentMethodName}} میں ختم ہونے والے کو {{lastDigits}} ترمیم کریں",
+      "edit_payment_method_brand_button_accessibility_label": "{{paymentMethodName}} میں ترمیم کریں",
+      "delete_payment_method_button": "حذف کریں",
+      "delete_payment_method_button_accessibility_label": "حذف کریں {{paymentMethodName}}",
+      "back_button": "واپس",
+      "back_button_accessibility_label": "{{paymentMethodStepTitle}} پر واپس جائیں",
+      "default": "پہلے سے طے شدہ",
+      "generic_card": "کارڈ",
+      "expiration_warning_button_accessibility_label": "{{paymentMethodName}} کے لیے میعاد ختم ہونے کی وارننگ دکھائیں جو {{lastDigits}} پر ختم ہو رہا ہے۔"
     },
     "orders": {
       "order_status": {
@@ -3302,6 +3392,78 @@
       "edit": "ترمیم کریں",
       "exit_preview": "پیش منظر سے باہر نکلیں",
       "hide_bar_action": "بار چھپائیں۔"
+    },
+    "errors": {
+      "address_deletion_error": {
+        "description": "اس پتے کو حذف کرنے میں کوئی مسئلہ تھا۔ دوبارہ کوشش کریں یا صفحہ کو ریفریش کریں۔"
+      },
+      "addresses_loading_issue": {
+        "description": "کنکشن کی خرابی۔ اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔"
+      },
+      "banner_title": {
+        "one": "<p>ایک خرابی ہے</p>",
+        "other": "{{count}} غلطیاں ہیں۔"
+      },
+      "failed_address_creation": {
+        "description": "آپ کا پتہ بنانے میں کوئی مسئلہ پیش آیا ہے۔ اس صفحہ کو دوبارہ لوڈ کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔"
+      },
+      "failed_address_update": {
+        "description": "آپ کا پتہ اپ ڈیٹ کرنے میں ایک مسئلہ پیش آیا ہے۔ اس صفحہ کو ریفریش کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔"
+      },
+      "load_address_form_error": {
+        "title": "پتہ فارم لوڈ کرنے سے قاصر ہے۔",
+        "description": "ایڈریس فارم لوڈ نہیں ہو سکا۔",
+        "refresh_button": "صفحہ تازہ کریں۔"
+      },
+      "load_orders_error": {
+        "title": "آرڈرز لوڈ نہیں ہو سکے۔",
+        "description": "دوبارہ کوشش کریں یا بعد میں آئیں۔",
+        "retry_button": "دوبارہ کوشش کریں"
+      },
+      "load_paypal_error": {
+        "description": "پے پال لوڈ ہونے میں ایک مسئلہ ہے۔ براہ کرم دوبارہ کوشش کریں۔"
+      },
+      "logout_everywhere": {
+        "description": "سائن آؤٹ کے دوران کچھ خرابی پیش آئی ہے۔ براہ کرم دوبارہ کوشش کریں۔"
+      },
+      "no_access_to_locations": {
+        "description": "آپ کو کسی لوکیشن تک رسائی حاصل نہیں ہے۔"
+      },
+      "not_found": {
+        "description": "یو آر ایل کو چیک کریں یا چند منٹوں میں دوبارہ کوشش کریں۔",
+        "title": "اس صفحہ کو لوڈ کرنے میں کوئی مسئلہ درپیش ہے"
+      },
+      "order_not_found": {
+        "description": "یہ آرڈر موجود نہیں ہے یا آپ کو اسے دیکھنے کی اجازت نہیں ہے۔",
+        "title": "آرڈر نہیں ملا"
+      },
+      "profile_update_error": {
+        "description": "آپ کے پروفائل کو اپ ڈیٹ کرنے میں مسئلہ پیش آیا ہے۔ اس صفحہ کو ریفریش کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔"
+      },
+      "profile_name_update_error": {
+        "description": "آپ کا نام اپ ڈیٹ کرنے میں ایک مسئلہ پیش آیا ہے۔ اس صفحہ کو ریفریش کرنے کی کوشش کریں یا اپنا انٹرنیٹ کنکشن چیک کریں۔"
+      },
+      "retry_action_label": "دوبارہ کوشش کریں",
+      "resend_link": {
+        "too_many_requests": "بہت زیادہ درخواستیں ہیں۔ بعد میں دوبارہ کوشش کریں۔",
+        "generic": "درخواست ناکام ہو گئی"
+      },
+      "load_extension_error": {
+        "title": "خرابی",
+        "description": "اس صفحہ کو ریفریش کریں یا چند منٹ میں دوبارہ کوشش کریں۔",
+        "refresh_button": "صفحہ تازہ کریں۔"
+      },
+      "already_upgraded": "صارفین کے اکاؤنٹس پہلے ہی اپ گریڈ ہو چکے ہیں۔",
+      "failed_to_upgrade": "گاہک کے اکاؤنٹ کی ترتیبات کو اپ گریڈ کرنے میں ناکامی۔",
+      "not_upgraded": "گاہک اکاؤنٹس کو اپ گریڈ نہیں کیا جاتا ہے۔",
+      "failed_to_revert": "گاہک کے اکاؤنٹ کی ترتیبات کو بحال کرنے میں ناکام رہے۔",
+      "revert_window_expired": "واپس لانے کا وقت ختم ہو چکا ہے۔"
+    },
+    "throttle": {
+      "too_many_attempts": {
+        "message": "بہت زیادہ کوششیں",
+        "description": "براہ کرم چند منٹ میں دوبارہ کوشش کریں۔"
+      }
     }
   }
 }
