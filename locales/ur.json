@@ -653,6 +653,86 @@
           "close": "بند کریں",
           "expand": "پھیلاؤ",
           "collapse": "ڈھے جانا"
+        },
+        "title": "آپ کی خریداری کے لیے شکریہ!",
+        "confirmation_email_sent_text": "ایک تصدیقی ای میل %{email} پر بھیج دی گئی ہے۔",
+        "return_to_store_link_label": "خریداری جاری رکھیں",
+        "print_link_label": "رسید پرنٹ کریں۔",
+        "payment_information_title": "ادائیگی کی معلومات",
+        "shipping_information_title": "ترسیل کی معلومات",
+        "page_title": "شکریہ، %{display_name}!",
+        "page_title_no_name": "شکریہ!",
+        "purchase_order_number_title": "PO نمبر #%{purchase_order_number}",
+        "cancelled_page_title": "آرڈر منسوخ کر دیا گیا",
+        "failed_pending_payment_page_title": "آپ کی ادائیگی میں مسئلہ ہے",
+        "customer_information_title": "آرڈر کی تفصیلات",
+        "contact_information_title": "رابطے کی معلومات",
+        "billing_address_title": "بلنگ کا پتہ",
+        "cashback_notice": "آپ کو اپنا کیش بیک 30 دن بعد موصول ہو جائے گا۔",
+        "company_location_title": "مقام",
+        "shipping_address_title": "بھیجنے کا پتہ",
+        "shipping_address_map_title": "گوگل میپ شپنگ پتے کا پِن پوائنٹ دکھا رہا ہے: %{address}",
+        "payment_method_title": "ادائیگی کا طریقہ",
+        "payment_method_not_charged": "چارج نہیں کیا گیا",
+        "shipping_method_title": "شپنگ کا طریقہ",
+        "tracking_number": "ٹریکنگ نمبر:",
+        "company_tracking_number": "%{company} ٹریکنگ نمبر:",
+        "estimated_arrival": "تخمینہ شدہ ترسیل کی تاریخ:",
+        "estimated_delivery": "موجودہ ڈیلیوری کا تخمینہ: ",
+        "re-order": "وہی اشیاء دوبارہ ترتیب دیں",
+        "confirmed": "تصدیق ہو گئی",
+        "confirmed_items_count": "%{total_count} اشیاء میں سے %{confirmed_count} کی تصدیق ہو گئی ہے",
+        "items_fulfilled_by_store": {
+          "one": "آپ کی خریدی ہوئی اشیاء %{remote_shop_name} سے آئیں گی۔",
+          "other": "وہ اشیاء جو آپ نے خریدی ہیں، وہ دیگر اسٹورز سے آئیں گی۔"
+        },
+        "gift_card_confirmation_by_text": "اگر آپ کو یہ موصول نہیں ہوا تو پیغام دوبارہ بھیجیں یا ہم سے رابطہ کریں۔",
+        "gift_card_confirmation_by_email": "اگر آپ کو یہ نہیں ملا ہے تو ای میل دوبارہ بھیجیں یا ہم سے رابطہ کریں۔",
+        "gift_card_title": "گفٹ کارڈز",
+        "resend_gift_cards": "گفٹ کارڈز دوبارہ بھیجیں",
+        "thank_you_title": "آپ کا آرڈر کنفرم ہو گیا ہے۔",
+        "thank_you_title_payment": "آپ کی ادائیگی کی تصدیق ہو گئی ہے۔",
+        "thank_you_title_review": "آپ کا آرڈر جائزے کے لیے جمع کر دیا گیا ہے۔",
+        "thank_you_title_payments_app_pending_default": "آپ کی ادائیگی پر کارروائی ہو رہی ہے",
+        "thank_you_title_payments_app_pending_buyer_action_required": "آپ کا آرڈر موصول ہو گیا ہے۔",
+        "thank_you_title_payments_app_failed_pending_payment": "آپ کی ادائیگی پر کارروائی نہیں ہو سکی",
+        "thank_you_confirmed_with_email_description": {
+          "single_store": "آپ کو جلد ہی ایک تصدیقی ای میل موصول ہو جائے گی۔",
+          "multi_store": "آپ کو جلد ہی ہر اسٹور سے علیحدہ تصدیقی ای میلز موصول ہوں گی۔"
+        },
+        "thank_you_confirmed_with_phone_description": {
+          "single_store": "آپ کو جلد ہی ایک تصدیقی پیغام موصول ہوگا۔",
+          "multi_store": "آپ کو جلد ہی ہر اسٹور سے علیحدہ تصدیقی ایس ایم ایس موصول ہوں گے۔"
+        },
+        "thank_you_confirmed_with_email_and_phone_description": {
+          "single_store": "آپ کو جلد ہی ایک تصدیقی ای میل موصول ہو جائے گی۔",
+          "multi_store": "آپ کو جلد ہی ہر اسٹور سے علیحدہ تصدیقی ای میلز موصول ہوں گی۔"
+        },
+        "thank_you_confirmed_order_with_email": "آپ کو جلد ہی آپ کے آرڈر نمبر کے ساتھ ایک تصدیقی ای میل موصول ہوگی۔",
+        "thank_you_confirmed_order_with_phone": "آپ کو جلد ہی آپ کے آرڈر نمبر کے ساتھ ایک تصدیقی پیغام موصول ہو جائے گا۔",
+        "thank_you_confirmed_order_with_email_and_phone": "آپ کو جلد ہی آپ کے آرڈر نمبر کے ساتھ ایک تصدیقی ای میل موصول ہوگی۔",
+        "thank_you_confirmed_orders_with_email": "جلد ہی آپ کو اپنے آرڈر نمبرز کے ساتھ الگ سے تصدیقی ای میلز موصول ہو جائیں گی۔",
+        "thank_you_confirmed_orders_with_phone": "آپ کو جلد ہی آپ کے آرڈر نمبرز کے ساتھ الگ تصدیقی پیغامات موصول ہوں گے۔",
+        "thank_you_confirmed_orders_with_email_and_phone": "جلد ہی آپ کو اپنے آرڈر نمبرز کے ساتھ الگ سے تصدیقی ای میلز موصول ہو جائیں گی۔",
+        "thank_you_confirmed_order_with_email_payment": "آپ نے اپنے آرڈر پر %{date} کو ادائیگی کی ہے۔",
+        "thank_you_confirmed_order_with_phone_payment": "آپ نے اپنے آرڈر پر %{date} کو ادائیگی کی ہے۔",
+        "thank_you_confirmed_order_with_email_and_phone_payment": "آپ نے اپنے آرڈر پر %{date} کو ادائیگی کی ہے۔",
+        "thank_you_confirmed_order_with_email_pick_up": "جب آپ کا آرڈر پک اپ کے لیے تیار ہو جائے گا تو آپ کو ایک ای میل موصول ہو جائے گی۔",
+        "thank_you_confirmed_order_with_phone_pick_up": "جب آپ کا آرڈر پک اپ کے لیے تیار ہو گا تو آپ کو ایک میسج موصول ہو گا۔",
+        "thank_you_confirmed_order_with_email_and_phone_pick_up": "جب آپ کا آرڈر پک اپ کے لیے تیار ہو جائے گا تو آپ کو ایک ای میل موصول ہو جائے گی۔",
+        "thank_you_confirmed_order_with_missing": "آرڈر کی تصدیق حاصل کرنے کے لیے ای میل یا فون کے ذریعے ہم سے رابطہ کریں۔",
+        "thank_you_confirmed_order_with_missing_payment": "آرڈر کی تصدیق حاصل کرنے کے لیے ای میل یا فون کے ذریعے ہم سے رابطہ کریں۔",
+        "thank_you_confirmed_order_with_missing_pick_up": "آرڈر کی تصدیق حاصل کرنے کے لیے ای میل یا فون کے ذریعے ہم سے رابطہ کریں۔",
+        "thank_you_confirmed_order_with_draft": "اگر ہمیں مزید معلومات درکار ہوں یا جب آپ کا آرڈر کنفرم ہو جائے تو ہم آپ کو بتائیں گے۔",
+        "thank_you_confirmed_order_with_draft_payment": "اگر ہمیں مزید معلومات درکار ہوں یا جب آپ کا آرڈر کنفرم ہو جائے تو ہم آپ کو بتائیں گے۔",
+        "thank_you_confirmed_order_with_draft_pick_up": "اگر ہمیں مزید معلومات درکار ہوں یا جب آپ کا آرڈر کنفرم ہو جائے تو ہم آپ کو بتائیں گے۔",
+        "thank_you_unconfirmed_items_heading": {
+          "one": "1 آئٹم کی تصدیق نہیں ہوئی ہے۔",
+          "other": "کچھ آئٹمز کی تصدیق نہیں ہوئی ہے"
+        },
+        "thank_you_unconfirmed_items_description": {
+          "one": "آپ کو اس کے پیسے نہیں لگے",
+          "other": "آپ سے ان کے لیے چارج نہیں کیا گیا ہے۔"
         }
       },
       "order_summary": {
@@ -1869,7 +1949,11 @@
         "close": "چیلنج بند کریں"
       },
       "failed_payment": {
-        "page_title": "ادائیگی پروسیس نہیں ہو سکی"
+        "page_title": "ادائیگی پروسیس نہیں ہو سکی",
+        "title": "ادائیگی پروسیس نہیں ہو سکی",
+        "payment_not_processed_title": "آپ کی ادائیگی پر کارروائی نہیں ہو سکی",
+        "payment_not_processed_text": "آپ سے کوئی چارجز نہیں لیے گئے۔ خریداری مکمل کرنے کے لیے اپنی کارٹ پر واپس جائیں۔",
+        "return_to_cart_button_label": "کارٹ پر واپس جائیں"
       },
       "pickup_point": {
         "location_is_currently_closed": "بند ہے",
@@ -2073,6 +2157,40 @@
         "optional_commune_label": "کمیون (اختیاری)",
         "district_label": "ضلع",
         "optional_district_label": "ضلع (اختیاری)"
+      },
+      "payment_gateway": {
+        "credit_card_label": "کریڈٹ کارڈ",
+        "bogus_label": "ٹیسٹ پیمنٹ گیٹ وے",
+        "bank_deposit_label": "بینک ڈپازٹ",
+        "bank_account_label": "بینک اکاؤنٹ",
+        "cash_on_delivery_label": "کیش آن ڈیلیوری (COD)",
+        "money_order_label": "منی آرڈر",
+        "debit_card_label": "ڈیبٹ کارڈ",
+        "credit_or_debit_card_label": "کریڈٹ/ڈیبٹ",
+        "deferred_payment_label": "ادائیگی کا طریقہ بعد میں منتخب کریں۔",
+        "fixed_payment_label": "آپ کی ادائیگی {{dueDate}} کو واجب الادا ہوگی۔",
+        "generic_payment_terms": "آپ {{translatedName}} کی شرائط پر ہیں۔ آپ کی ادائیگی {{dueDate}} کو واجب الادا ہوگی۔",
+        "login_prompt": {
+          "no_access": {
+            "message": "{{logIn}} اس لوکیشن تک رسائی والے اکاؤنٹ میں محفوظ کردہ ادائیگی کے طریقے شامل کرنے یا استعمال کرنے کے لیے۔",
+            "link": "لاگ ان کریں"
+          }
+        },
+        "direct_payment_terms": "آپ {{translatedName}} کی شرائط پر ہیں۔ آپ کے کارڈ سے {{dueDate}} کو رقم وصول کی جائے گی۔",
+        "fixed_direct_payment_terms": "آپ کے کارڈ سے {{dueDate}} کو چارج کیا جائے گا۔",
+        "order_due_on_fulfillment_choose_later": "آپ کی ادائیگی اُس وقت واجب الادا ہو گی جب آپ کا آرڈر مکمل ہو جائے گا۔",
+        "order_due_on_fulfillment_payment": "آپ کے آرڈر کی تکمیل کے بعد آپ کے کارڈ سے رقم وصول کی جائے گی۔",
+        "order_due_on_receipt_choose_later": "آپ کی ادائیگی رسید پر واجب الادا ہوگی۔",
+        "order_deposit_due_now": "{{depositAmount}} آج واجب الادا ہیں۔ بقیہ {{translatedName}} کی شرائط پر ہے اور {{dueDate}} کو واجب الادا ہے۔",
+        "order_deposit_due_on_fulfillment": "{{depositAmount}} آج واجب الادا ہے۔ باقی رقم آپ کا آرڈر پورا ہونے پر واجب الادا ہوگی۔",
+        "order_deposit_due_on_receipt": "{{depositAmount}} آج واجب الادا ہے۔ بقیہ رقم بعد میں واجب الادا ہوگی۔",
+        "order_deposit_due_on_fixed_date": "{{depositAmount}} آج واجب الادا ہے۔ بقیہ رقم {{dueDate}} کو واجب الادا ہوگی۔",
+        "draft_order_payment_due_later_no_terms": "آرڈر کی تصدیق ہونے کے بعد آپ کی ادائیگی واجب الادا ہوگی۔",
+        "draft_order_payment_due_later_no_terms_payment_selected": "آرڈر کی تصدیق ہونے کے بعد آپ کے کارڈ سے رقم کاٹ لی جائے گی۔",
+        "draft_order_payment_due_later_terms": "{{translatedName}} کی شرائط پر ہوں گے جب آپ کا آرڈر کنفرم ہو جائے گا۔",
+        "draft_order_payment_due_on_fulfillment": "آپ کی ادائیگی اس وقت واجب الادا ہوگی جب آپ کا آرڈر کنفرم اور پورا ہو جائے گا۔",
+        "draft_order_deposit_due_later": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ باقی رقم {{translatedName}} کی شرائط پر ہوگی۔",
+        "draft_order_deposit_due_on_fulfillment": "{{depositAmount}} آپ کا آرڈر کنفرم ہونے پر واجب الادا ہوگا۔ باقی رقم آپ کا آرڈر پورا ہونے پر ادا کی جائے گی۔"
       }
     },
     "errors": {
