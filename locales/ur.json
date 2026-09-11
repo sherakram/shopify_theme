@@ -1820,7 +1820,147 @@
               "claim_shop_cash_description": "آپ اپنی شاپ کیش شاپ ایپ میں آئندہ خریداریوں پر استعمال کر سکتے ہیں۔"
             }
           }
-        }
+        },
+        "fulfillment_tracking": {
+          "delivery_progress_heading": "ڈیلیوری کی پیشرفت",
+          "status": {
+            "attempted_delivery": "ڈیلیوری کی کوشش کی گئی",
+            "buyer_action_required": "کارروائی درکار ہے",
+            "carrier_picked_up": "کیرئیر نے سامان اٹھا لیا",
+            "confirmed": "تصدیق ہو گئی",
+            "delayed": "تاخیر سے",
+            "delivered": "فراہم کردہ",
+            "exception": "ترسیل کا مسئلہ",
+            "failure": "ترسیل کا مسئلہ",
+            "in_transit": "راستے میں",
+            "label_printed": "لیبل پرنٹ کیا گیا۔",
+            "label_purchased": "لیبل خریدا گیا۔",
+            "out_for_delivery": "ترسیل کے لیے روانہ کر دیا گیا ہے",
+            "picked_up": "اُٹھایا گیا۔",
+            "ready_for_pickup": "پک اپ کے لیے تیار ہیں؟",
+            "ready_for_recipient_pickup": "پک اپ کے لیے تیار ہیں؟",
+            "returning_to_sender": "واپس بھیجنے والے کو بھیجا جا رہا ہے"
+          }
+        },
+        "attempted_delivery_label": "ڈیلیوری کی کوشش کی گئی",
+        "attempted_to_deliver_label": "ڈیلیور کرنے کی کوشش کی گئی۔",
+        "preparing_for_shipping_label": "ترسیل کی تیاری ہو رہی ہے",
+        "ready_for_pickup_label": "پک اپ کے لیے تیار ہیں؟"
+      },
+      "order_list": {
+        "four_images_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}}، {{lineItemName3}}، {{lineItemName4}} شامل ہے",
+        "more_than_three_products_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}}، اور {{numberOfAdditionalProducts}} مزید پروڈکٹس شامل ہیں۔",
+        "more_than_four_products_accessibility_label": "آرڈر میں {{lineItemName1}}، {{lineItemName2}}، {{lineItemName3}}، اور مزید {{numberOfAdditionalProducts}} مصنوعات شامل ہیں۔",
+        "plus_more": "+{{numberOfAdditionalProducts}}",
+        "plus_more_products": "+{{numberOfAdditionalProducts}} مزید مصنوعات",
+        "carousel": {
+          "one_products_accessibility_label": "آرڈر میں {{lineItemName1}} مقدار {{lineItemQuantity1}} شامل ہے۔",
+          "two_products_accessibility_label": "آرڈر میں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}} شامل ہے۔",
+          "three_products_accessibility_label": "آرڈر میں شامل ہے {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}",
+          "four_products_accessibility_label": "آرڈر میں شامل ہیں: {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}",
+          "five_products_accessibility_label": "آرڈر میں شامل ہیں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}}",
+          "six_products_accessibility_label": "آرڈر میں شامل ہیں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}}، {{lineItemName6}} مقدار {{lineItemQuantity6}}",
+          "six_and_more_products_accessibility_label": "آرڈر میں شامل ہیں {{lineItemName1}} مقدار {{lineItemQuantity1}}، {{lineItemName2}} مقدار {{lineItemQuantity2}}، {{lineItemName3}} مقدار {{lineItemQuantity3}}، {{lineItemName4}} مقدار {{lineItemQuantity4}}، {{lineItemName5}} مقدار {{lineItemQuantity5}}، {{lineItemName6}} مقدار {{lineItemQuantity6}} اور مزید",
+          "view_order_details": "آرڈر کی تفصیلات دیکھیں",
+          "previous": "پچھلا",
+          "next": "اگلا"
+        },
+        "items": {
+          "one": "{{count}} آئٹم",
+          "other": "{{count}} آئٹمز"
+        },
+        "no_filtered_results_description": "اپنے آرڈرز دیکھنے کے لیے فلٹرز کو ہٹا دیں یا ان کی ترتیبات تبدیل کریں۔",
+        "no_filtered_results_title": "کوئی فلٹر شدہ نتائج نہیں",
+        "order_link": "آرڈر دیکھیں {{name}}",
+        "order_number": "آرڈر {{name}}",
+        "orders_title": "تصدیق ہو گئی",
+        "pagination": {
+          "nav_accessibility_label": "آرڈرز نیویگیشن بٹن",
+          "next": "اگلا",
+          "next_accessibility_label": "اگلے احکامات",
+          "previous": "گزشتہ",
+          "previous_accessibility_label": "پچھلے آرڈرز",
+          "load_more": "مزید دکھائیں",
+          "load_more_accessibility_label": "مزید آرڈرز دکھائیں"
+        },
+        "order_status_message": {
+          "list_view": {
+            "view_order_for_details": "تفصیلات کے لیے آرڈر دیکھیں۔",
+            "estimated_delivery": "توقع ہے {{date}}",
+            "last_updated": "آخری اپڈیٹ {{date}}"
+          },
+          "table_view": {
+            "estimated_delivery": "تخمینی ترسیل {{date}}"
+          }
+        },
+        "payment_status": {
+          "gallery_view": {
+            "overdue": "ادائیگی واجب الادا ہے۔",
+            "due": "ادائیگی کی تاریخ {{date}}",
+            "due_today": "ادائیگی آج واجب الادا ہے۔",
+            "due_without_date": "ادائیگی واجب الادا",
+            "due_on_fulfillment": "تکمیل پر ادائیگی واجب الادا",
+            "pay_to_confirm": "تصدیق کے لیے ادائیگی کریں۔",
+            "payment_not_due": "ادائیگی ابھی واجب الادا نہیں ہے۔"
+          },
+          "list_view": {
+            "overdue": "زائد المیعاد",
+            "due": "بمطابق {{date}}",
+            "due_today": "آج واجب الادا",
+            "paid": "ادا کیا گیا۔",
+            "due_without_date": "واجب",
+            "due_on_fulfillment": "تکمیل پر واجب الادا",
+            "pay_to_confirm": "تصدیق کے لیے ادائیگی کریں۔",
+            "payment_not_due": "ابھی وقت نہیں ہوا۔"
+          }
+        },
+        "sort_by": "ترتیب دیں: {{option}}",
+        "sort_options_accessibility_label": "تصدیق شدہ آرڈرز کے لیے چھانٹنے کے آپشنز",
+        "sort_hide_options_accessibility_label": "تصدیق شدہ آرڈرز کے لیے ترتیب کے اختیارات چھپائیں۔",
+        "sort_show_options_accessibility_label": "تصدیق شدہ آرڈرز کے لیے ترتیب کے اختیارات دکھائیں۔",
+        "sort_currently_sorted_by_accessibility_label": "Currently sorted by: {{option}}",
+        "sort": {
+          "date": {
+            "newest": "نئے سے پرانے",
+            "oldest": "قدیم ترین سے جدید ترین"
+          },
+          "location": {
+            "ascending": "مقام (الف-ی)",
+            "descending": "مقام (زیڈ-اے)"
+          },
+          "order_number": {
+            "ascending": "آرڈر نمبر (کم سے زیادہ)",
+            "descending": "آرڈر نمبر (بڑھتے سے گھٹتے ہوئے)"
+          },
+          "order_total": {
+            "ascending": "آرڈر کا کل (کم سے زیادہ)",
+            "descending": "آرڈر کی کل رقم (زیادہ سے کم)"
+          }
+        },
+        "location_filter_picker": {
+          "all_location": "تمام مقامات",
+          "current_location": "موجودہ مقام",
+          "switch_view": "نظارہ تبدیل کریں"
+        },
+        "filter": {
+          "clear_section": "سیکشن صاف کریں",
+          "apply": "درخواست دیں",
+          "date_section_accessibility_label": "<span dir=\"rtl\">\nفلٹر کریں بہ {{sectionTitle}}\n</span>",
+          "date": {
+            "start_date": "آغاز کی تاریخ",
+            "end_date": "تاریخ اختتام",
+            "title": "آرڈر کی تاریخ",
+            "today": "آج",
+            "last_7_days": "گزشتہ 7 دن",
+            "last_30_days": "گزشتہ 30 دن",
+            "last_90_days": "پچھلے 90 دن",
+            "last_365_days": "گزشتہ 12 مہینوں میں",
+            "custom": "مرضی کے مطابق"
+          }
+        },
+        "show_order_actions_accessibility_label": "آرڈر {{name}} کے لیے آرڈر کے اقدامات دکھائیں",
+        "view_order": "آرڈر دیکھیں",
+        "view_order_accessibility_label": "آرڈر دیکھیں {{orderName}}"
       }
     },
     "payment_method_brands": {
