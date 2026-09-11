@@ -681,6 +681,186 @@
         "payment_due_label": "ادائیگی واجب الادا",
         "vat_label_html": "ٹیکسوں میں %{amount} شامل ہیں",
         "duties_included_label": "کل رقم میں ٹیکس اور ڈیوٹیز شامل ہیں۔ ترسیل پر کوئی اضافی چارجز نہیں ہیں۔"
+      },
+      "change_currency": {
+        "currency_not_supported_by_shop": "آپ کی منتخب کردہ کرنسی اب دستیاب نہیں ہے۔ تمام قیمتیں اب %{currency_code} میں ہیں۔"
+      },
+      "change_country": {
+        "cart_updated_based_on_country": "آپ کی شپنگ کے ملک کے مطابق آپ کی کارٹ اپ ڈیٹ کر دی گئی ہے۔",
+        "cart_and_currency_updated_based_on_country": "آپ کے کارٹ اور کرنسی کو آپ کے شپنگ ملک کی بنیاد پر اپ ڈیٹ کر دیا گیا ہے۔",
+        "currency_updated_for_country": "%{country} کے لیے کرنسی اپ ڈیٹ کر دی گئی ہے۔"
+      },
+      "change_cart_localization": {
+        "verify_shipping_address": "آپ کے ملک/علاقے کو اپ ڈیٹ کر دیا گیا ہے۔ خریداری جاری رکھنے کے لیے اپنا شپنگ ایڈریس درج کریں۔"
+      },
+      "tips": {
+        "title": "ٹپ شامل کریں۔",
+        "description": "%{shop_name} پر ٹیم کے لیے اپنی حمایت کا مظاہرہ کریں۔",
+        "presets_description": "ٹپ کا فیصد منتخب کریں۔",
+        "custom_label": "اپنی مرضی کی ٹپ",
+        "add_tip": "ٹپ شامل کریں۔",
+        "update_tip": "تجاویز کو اپ ڈیٹ کریں۔",
+        "message": "شکریہ، ہم اس کی تعریف کرتے ہیں۔",
+        "preset_label": "%{tip_percent}٪",
+        "no_tip_label": "کوئی نہیں۔",
+        "not_available_with_spi": "شاپ پے کی اقساط کے ساتھ دستیاب نہیں"
+      },
+      "open_graph_meta_tag": {
+        "title_with_products": {
+          "zero": "%{product_name} خریدیں",
+          "one": "خریدیں %{product_name} اور %{count} دیگر اشیاء",
+          "other": "%{product_name} اور %{count} دیگر اشیاء خریدیں"
+        }
+      },
+      "subscriptions": {
+        "recurring_total_intervals": {
+          "day": {
+            "one": "دن",
+            "other": "%{count} دن"
+          },
+          "week": {
+            "one": "ہفتہ",
+            "other": "%{count} ہفتے"
+          },
+          "month": {
+            "one": "مہینہ",
+            "other": "%{count} مہینے"
+          },
+          "year": {
+            "one": "سال",
+            "other": "%{count} سال"
+          }
+        },
+        "recurring_totals": "ہر %{interval} بعد %{total_price}",
+        "recurring_totals_with_initial_order_shipping_discount": "پہلی قسط %{total_price_with_discount}، اس کے بعد %{recurring_total}",
+        "recurring_totals_with_policies": {
+          "first_cycles": {
+            "one": "پہلی ادائیگی %{total_price}",
+            "other": "پہلی %{count} ادائیگیاں، ہر ایک %{total_price}"
+          },
+          "following_cycles": "، پھر %{interval} بعد %{total_price}"
+        },
+        "recurring_totals_with_initial_order_shipping_discount_with_policies": {
+          "first_cycles": {
+            "one": "، پھر %{total_price} پر %{count} ادائیگی",
+            "other": "، پھر %{total_price} فی ادائیگی کے ساتھ %{count} ادائیگیاں"
+          }
+        }
+      },
+      "customer_payment_methods": {
+        "page_title": "ادائیگی کے طریقے",
+        "title": "ادائیگی کے طریقے",
+        "update_card_button_label": "کارڈ اپ ڈیٹ کریں",
+        "delete_customer_mandate": {
+          "generic_error": "آپ کی درخواست پر کارروائی کرنے میں ایک مسئلہ پیش آیا۔",
+          "success_message": "آپ کی ادائیگی کا طریقہ کامیابی سے حذف کر دیا گیا ہے۔"
+        }
+      },
+      "throttle": {
+        "too_many_attempts": {
+          "message": "بہت زیادہ کوششیں",
+          "description": "چند منٹ میں دوبارہ کوشش کریں۔"
+        },
+        "line_to_check_out": "آپ ادائیگی کے لیے قطار میں ہیں",
+        "cart_summary_heading": "آپ کا کارٹ",
+        "merchandise": {
+          "available": "دستیاب",
+          "sold_out": "فروخت ہو چکا ہے۔"
+        },
+        "inventory": {
+          "partial_inventory_banner": "آپ کی کارٹ کا کچھ حصہ فروخت ہو چکا ہے اور چیک آؤٹ کے وقت خریداری کے لیے دستیاب نہیں ہوگا۔",
+          "sold_out": {
+            "heading": "آپ کی کارٹ فروخت ہو گئی ہے۔",
+            "storefront_body": "خریداری جاری رکھنے کے لیے اسٹور پر واپس جائیں",
+            "no_storefront_body": "بدقسمتی سے آپ جو چیز خریدنا چاہتے ہیں وہ اب دستیاب نہیں ہے۔",
+            "link": "دوبارہ اسٹور پر جائیں"
+          }
+        },
+        "title": "قطار",
+        "time_to_checkout_title": "وقت ہے چیک آؤٹ کا - {{shopName}}",
+        "estimated_wait_time": {
+          "calculating": "متوقع انتظار کا وقت شمار کیا جا رہا ہے۔",
+          "less_than_one": "تخمینی انتظار کا وقت: ایک منٹ سے بھی کم",
+          "one": "تخمینہ شدہ انتظار کا وقت: {{count}} منٹ",
+          "other": "تخمینہ شدہ انتظار کا وقت: {{count}} منٹ"
+        },
+        "last_checked": "(آخری بار جائزہ لیا گیا: {{time}})",
+        "footer": {
+          "heading": "اس صفحہ کو ریفریش نہ کریں، یہ خود بخود اپ ڈیٹ ہو جائے گا۔",
+          "body": "آپ کی کارٹ میں موجود اشیاء اُس وقت تک محفوظ نہیں کی جائیں گی جب تک آپ چیک آؤٹ مکمل نہیں کر لیتے۔"
+        }
+      },
+      "cart_checkout_validation": {
+        "runtime_error": "آپ کی درخواست پر کارروائی میں ایک مسئلہ پیش آیا ہے۔ اسٹور کے مالک سے رابطہ کریں۔"
+      },
+      "no_address_location": {
+        "title": "ایسا مقام جس کا کوئی پتہ نہ ہو",
+        "header": "آپ کے پاس اس مقام کے لیے کوئی شپنگ پتہ نہیں ہے۔",
+        "alt_header": "شپنگ ایڈریس غائب ہے",
+        "message": "چیک آؤٹ مکمل کرنے کے لیے اس مقام کا پتہ شامل کرنے کے لیے ہم سے رابطہ کریں۔",
+        "email_us_button_label": "ہمیں ایک ای میل بھیجیں"
+      },
+      "shop_wallet": {
+        "title": "شاپ پے والٹ",
+        "description": "منتخب کریں کہ آپ اس خریداری کے لیے کیا استعمال کرنا چاہتے ہیں۔",
+        "loading": "آپ کا شاپ پے والیٹ لوڈ ہو رہا ہے…",
+        "ready_status": "آپ کا شاپ پے والیٹ تیار ہے۔ ادائیگی کا طریقہ منتخب کریں۔",
+        "cancel": "منسوخ کریں",
+        "retry": "دوبارہ کوشش کریں",
+        "return_to_hatch": "ہیچ پر واپس جائیں",
+        "choose_again": "دوبارہ انتخاب کریں",
+        "payment_method": {
+          "heading": "ادائیگی کا طریقہ",
+          "expiry": "میعاد ختم ہو رہی ہے {{expiry}}"
+        },
+        "shipping_address": {
+          "heading": "بھیجنے کا پتہ"
+        },
+        "confirm": {
+          "label": "انتخاب کی تصدیق کریں۔",
+          "success_title": "انتخاب کی تصدیق ہو گئی۔",
+          "success_message": "منتخب کردہ والیٹ کی تفصیلات تیار ہیں۔ یہ پروٹوٹائپ انہیں ابھی تک پارٹنر ایپ کو واپس نہیں بھیجتا۔",
+          "retryable_error_title": "انتخاب شیئر نہیں کیا گیا۔",
+          "retryable_error_message": "دوبارہ اپنے والیٹ کے انتخاب کی تصدیق کرنے کی کوشش کریں۔",
+          "terminal_error_title": "والیٹ کنکشن ختم ہو گیا",
+          "terminal_error_message": "واپس جائیں اور شاپ پے دوبارہ کھولیں۔"
+        },
+        "cancelled": {
+          "title": "انتخاب منسوخ کر دیا گیا۔",
+          "message": "والیٹ کی کوئی تفصیلات شیئر نہیں کی گئیں اور نہ ہی کوئی خریداری کی گئی۔"
+        },
+        "empty": {
+          "title": "کوئی کارڈ محفوظ نہیں ہے۔",
+          "message": "اس شاپ پے والٹ میں کوئی کارڈ محفوظ نہیں ہے۔"
+        },
+        "ineligible": {
+          "title": "کوئی اہل کارڈز نہیں",
+          "message": "کوئی بھی محفوظ کردہ کارڈ اس خریداری کے لیے استعمال نہیں کیا جا سکتا۔"
+        },
+        "expired": {
+          "title": "اس والیٹ سیشن کی میعاد ختم ہو گئی ہے۔",
+          "message": "پارٹنر ایپ پر واپس جائیں اور خریداری دوبارہ شروع کریں۔"
+        },
+        "revoked": {
+          "title": "شاپ پے اب منسلک نہیں ہے۔",
+          "message": "جاری رکھنے سے پہلے پارٹنر ایپ میں شاپ پے کو دوبارہ منسلک کریں۔"
+        },
+        "error": {
+          "title": "آپ کا شاپ پے والیٹ لوڈ نہیں ہو سکا۔",
+          "message": "ہیچ پر واپس جائیں اور دوبارہ شاپ پے کھولنے کی کوشش کریں۔"
+        }
+      },
+      "order_errors": {
+        "creation_failure": "آپ کا آرڈر بنانے میں ایک مسئلہ پیش آیا۔ دوبارہ کوشش کریں، یا مزید تفصیلات کے لیے ہم سے رابطہ کریں۔",
+        "network_failure": "آپ کا آرڈر نیٹ ورک کی خرابی کی وجہ سے جمع نہیں کیا جا سکا۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔",
+        "inventory_reservation_failure": "کچھ اشیاء اب دستیاب نہیں ہیں۔"
+      },
+      "session_errors": {
+        "session_not_unique": "آپ کے آرڈر پر کارروائی میں مسئلہ پیش آیا۔ اسٹور پر واپس جانے کے لیے اس صفحے کو ریفریش کریں۔",
+        "session_already_finished": "یہ آرڈر پہلے ہی جمع ہو چکا ہے۔ نیا آرڈر شروع کرنے کے لیے آپ اسٹور پر واپس جا سکتے ہیں۔"
+      },
+      "artifact_errors": {
+        "artifact_dissatisfaction_without_violation": "آپ کے آرڈر پر کارروائی کرنے میں ایک مسئلہ پیش آیا۔ چند منٹ بعد دوبارہ کوشش کریں۔"
       }
     },
     "errors": {
@@ -826,8 +1006,107 @@
         "preview": "آپ دیکھ رہے ہیں کہ جب گاہک اَن سبسکرائب کریں گے تو انہیں کیا نظر آئے گا۔"
       },
       "sms_unsubscribe_confirm": {
-        "message": "کیا آپ واقعی SMS مارکیٹنگ سے ان سبسکرائب کرنا چاہتے ہیں؟"
+        "message": "کیا آپ واقعی SMS مارکیٹنگ سے ان سبسکرائب کرنا چاہتے ہیں؟",
+        "button": "سبسکرپشن ختم کریں۔"
+      },
+      "open_tracking": {
+        "opt_in": {
+          "opted_in_html": "<b>آپ نے ای میل اوپن ٹریکنگ کا انتخاب کیا ہے۔</b>",
+          "visibility": "ای میل کھلنے کی شرح گمنام طور پر رپورٹ کی جائے گی۔ ہمیں صرف یہ معلوم ہو گا کہ آیا آپ نے مجموعی ای میل کھلنے کی شرح کے حصے کے طور پر کوئی ای میل کھولی ہے۔",
+          "opt_out_html": "اگر آپ یہ معلومات شیئر نہیں کرنا چاہتے ہیں تو آپ ای میل اوپن ٹریکنگ سے <a style=\"text-decoration:underline;\" href=\"%{link}\">آپٹ آؤٹ</a> کر سکتے ہیں۔",
+          "preview_bar": "آپ جائزہ لے رہے ہیں کہ جب گاہک ای میل اوپن ٹریکنگ کا انتخاب کریں گے تو انہیں کیا نظر آئے گا۔"
+        },
+        "opt_out": {
+          "opted_out_html": "<b>آپ نے ای میل اوپن ٹریکنگ سے آپٹ آؤٹ کر دیا ہے۔</b>",
+          "visibility": "ہم یہ نہیں دیکھ پائیں گے کہ آیا آپ نے ہماری ای میلز کھولی ہیں یا نہیں۔",
+          "opt_in_html": "<a style=\"text-decoration:underline;\" href=\"%{link}\">ای میل اوپن ٹریکنگ</a> سے آپٹ اِن کریں۔",
+          "preview_bar": "آپ دیکھ رہے ہیں کہ جب گاہک ای میل اوپن ٹریکنگ سے آپٹ آؤٹ کریں گے تو انہیں کیا نظر آئے گا۔"
+        },
+        "no_longer_track": {
+          "status_html": "<b>ہم اب ای میل کھولے جانے کو ٹریک نہیں کرتے ہیں۔</b>",
+          "privacy_policy": "اس ای میل کے بھیجے جانے کے بعد، ہم نے اپنی پرائیویسی پالیسی کو اپ ڈیٹ کر دیا ہے اور اب ہم اوپن ٹریک نہیں کرتے ہیں۔"
+        },
+        "track": {
+          "status_html": "<b>ای میل کھلنے سے باخبر رہنے کی اطلاع دی جاتی ہے۔</b>",
+          "visibility": "ہم صرف یہ دیکھیں گے کہ آیا آپ نے ای میل کھولی ہے، جو ای میل کے کُل اوپن ریٹ کا حصہ ہے۔"
+        },
+        "updated_policy": {
+          "status_html": "<b>ای میل کھلنے سے باخبر رہنے کی اطلاع دی جاتی ہے۔</b>",
+          "visibility": "ہم نے اپنی پالیسی کو اپ ڈیٹ کر دیا ہے، اور اب ای میل کے کھلنے کو ٹریک کرتے ہیں۔ ای میل اوپن ریٹس گمنام طور پر رپورٹ کیے جائیں گے۔ ہم صرف یہ دیکھیں گے کہ آیا آپ نے کل ای میل اوپن ریٹ کے حصے کے طور پر ای میل کھولی ہے۔",
+          "opt_out_html": "اگر آپ یہ معلومات شیئر نہیں کرنا چاہتے تو آپ <a style=\"text-decoration:underline;\" href=\"%{link}\">ان سبسکرائب</a> کر سکتے ہیں۔"
+        }
       }
+    },
+    "filters": {
+      "availability": {
+        "value": {
+          "in_stock": "اسٹاک میں",
+          "out_of_stock": "اسٹاک میں نہیں"
+        }
+      },
+      "boolean": {
+        "true_label": "جی ہاں",
+        "false_label": "نہیں"
+      }
+    },
+    "search": {
+      "error": "آپ کے تلاش کے نتائج لوڈ ہونے میں کوئی مسئلہ پیش آیا ہے۔ براہ کرم صفحہ کو دوبارہ لوڈ کریں یا بعد میں کوشش کریں۔",
+      "sorting": {
+        "relevance": "مطابقت",
+        "price_ascending": "قیمت، کم سے زیادہ",
+        "price_descending": "قیمت، زیادہ سے کم"
+      }
+    },
+    "page_titles": {
+      "blog_or_article_with_error": "خرابی - %{title}",
+      "products": "مصنوعات",
+      "shopping_cart": "آپ کی خریداری کی ٹوکری",
+      "account": "کھاتہ",
+      "create_account": "اکاؤنٹ بنائیں۔",
+      "reset_account": "اکاؤنٹ دوبارہ سیٹ کریں",
+      "addresses": "پتے",
+      "order": "آرڈر %{name}",
+      "search": "تلاش کریں",
+      "search_results": {
+        "one": "تلاش: \"%{terms}\" کے لیے %{count} نتیجہ ملا",
+        "other": "تلاش: \"%{terms}\" کے لیے %{count} نتائج ملے"
+      },
+      "collections": "مجموعات",
+      "not_found": "404 نہیں ملا",
+      "challenge": "چیلنج",
+      "checkpoint": "چیک پوائنٹ"
+    },
+    "cart": {
+      "discounts_with_count": "%{count} رعایتیں لاگو کی گئی ہیں۔"
+    },
+    "challenge": {
+      "message": "جاری رکھنے کے لیے، ہمیں بتائیں کہ آپ روبوٹ نہیں ہیں۔",
+      "error": "آپ کا جواب درست نہیں تھا، براہ کرم دوبارہ کوشش کریں۔",
+      "submit_button_text": "جمع کرائیں۔"
+    },
+    "checkpoint": {
+      "message": "جاری رکھنے کے لیے کیپچا حل کریں۔",
+      "error": "کیپچا کی تصدیق ناکام ہو گئی",
+      "submit_button_text": "جمع کرائیں۔"
+    },
+    "store_availability": {
+      "pick_up_time": {
+        "one_hour": "عام طور پر 1 گھنٹے میں تیار ہو جاتا ہے۔",
+        "two_hours": "عام طور پر 2 گھنٹوں میں تیار ہو جاتا ہے",
+        "four_hours": "عموماً 4 گھنٹوں میں تیار ہو جاتا ہے",
+        "twenty_four_hours": "عام طور پر 24 گھنٹے میں تیار ہو جاتا ہے۔",
+        "two_to_four_days": "عموماً 2-4 دنوں میں تیار ہو جاتا ہے",
+        "five_or_more_days": "عموماً 5+ دنوں میں تیار ہوتا ہے۔",
+        "zero_to_two_hours": "عام طور پر 2 گھنٹوں میں تیار ہو جاتا ہے",
+        "two_to_four_hours": "عموماً 4 گھنٹوں میں تیار ہو جاتا ہے",
+        "immediately": "اب اٹھانے کے لیے تیار ہے",
+        "next_day": "اگلے دن پک اَپ کے لیے تیار"
+      }
+    },
+    "subscriptions": {
+      "buyer_consent_product": "یہ آئٹم ایک بار بار ہونے والی یا مؤخر شدہ خریداری ہے۔ جاری رکھنے کا مطلب ہے کہ میں %{cancellationPolicyLink} سے اتفاق کرتا ہوں اور آپ کو اختیار دیتا ہوں کہ جب تک میرا آرڈر مکمل نہیں ہو جاتا یا اگر اجازت ہو تو میں منسوخ نہیں کر دیتا، تب تک میرے ادائیگی کے طریقے سے ان قیمتوں، تعدد اور تاریخوں پر چارج کریں جو اس صفحے پر درج ہیں۔",
+      "buyer_consent_cart": "آپ کے کارٹ میں موجود ایک یا ایک سے زیادہ آئٹمز بار بار خریدی جانے والی یا مؤخر کردہ (deferred) خریداری کی ہیں۔ جاری رکھنے سے، میں %{cancellationPolicyLink} سے اتفاق کرتا/کرتی ہوں اور آپ کو اجازت دیتا/دیتی ہوں کہ آپ میرے ادائگی کے طریقے سے ان قیمتوں، تعدد اور تاریخوں پر رقم وصول کریں جو اس صفحہ پر درج ہیں، جب تک کہ میرا آرڈر پورا نہیں ہو جاتا یا میں منسوخ نہیں کر دیتا/دیتی، اگر اجازت ہو۔",
+      "cancellation_policy": "منسوخی کی پالیسی"
     }
   },
   "customer_accounts": {
@@ -965,6 +1244,63 @@
             }
           }
         }
+      }
+    },
+    "callback": {
+      "try_again": "دوبارہ کوشش کریں"
+    },
+    "date": {
+      "humanize": {
+        "lessThanOneHourAgo": {
+          "one": "{{count}} منٹ پہلے",
+          "other": "{{count}} منٹ پہلے"
+        },
+        "lessThanOneMinuteAgo": "ابھی ابھی",
+        "yesterday": "کل {{time}} بجے",
+        "today": "Today at {{time}}",
+        "tomorrow": "کل {{time}} بجے"
+      }
+    },
+    "enable_javascript": "اپنا اکاؤنٹ دیکھنے کے لیے، اپنے براؤزر کی سیٹنگز میں JavaScript فعال کریں یا کسی اور براؤزر سے سائن ان کریں۔",
+    "navigation_and_structure": {
+      "account_menu": {
+        "hide_accessibility_label": "اکاؤنٹ مینو کو چھپائیں",
+        "show_accessibility_label": "اکاؤنٹ کا مینیو دکھائیں",
+        "nav_accessibility_label": "اکاؤنٹ نیویگیشن",
+        "open_menu_accessibility_label": "اکاؤنٹ کھولیں نیویگیشن",
+        "close_menu_accessibility_label": "اکاؤنٹ بند کرنے کی نیویگیشن",
+        "label": "کھاتہ",
+        "loading_message": "اکاؤنٹ نیویگیشن لوڈ ہو رہا ہے"
+      },
+      "action_menu_accessibility_label": "مزید کارروائیاں",
+      "back_button_accessibility_label": "واپس",
+      "go_to_store_link": "دکان جاؤ",
+      "orders_link_label": "آرڈرز",
+      "subscriptions_link_label": "سبسکرپشنز",
+      "close_menu_accessibility_label": "مین نیویگیشن بند کریں۔",
+      "contact_email_subject": "<p>آن لائن اسٹور {{shopName}} سے رابطہ</p>",
+      "contact_link": "رابطے کی معلومات",
+      "delete_confirmation": {
+        "cancel": "منسوخ کریں",
+        "delete": "حذف کریں"
+      },
+      "dismiss_toast": "برطرف کریں",
+      "document_title": "{{sectionName}} - {{shopName}} - اکاؤنٹ",
+      "loading_message": "لوڈ ہو رہا ہے۔",
+      "loading_policy_content_accessibility_label": "پالیسی مواد لوڈ ہو رہا ہے",
+      "loading_section_accessibility_label": "لوڈنگ {{sectionName}}",
+      "policy_load_error": "{{policyName}} لوڈ نہیں کیا جا سکا",
+      "policy_try_again": "دوبارہ کوشش کریں",
+      "log_out_link": "سائن آؤٹ کریں۔",
+      "logout_overlay_label": "سائن آؤٹ ہو رہا ہے...",
+      "nav_label_accessibility_label": "مرکزی نیویگیشن",
+      "navigation_accessibility_message": "آپ نے {{sectionName}} پر نیویگیٹ کیا",
+      "open_menu_accessibility_label": "مرکزی نیویگیشن کھولیں",
+      "shop_logo_accessibility_label": "{{shopName}} لوگو",
+      "store_credit_accessibility_label": "{{formattedBalance}} سٹور کریڈٹ",
+      "store_credit_balances_list_accessibility_label": "اسٹور کریڈٹ بیلنس",
+      "store_credit_multi_currency_accessibility_label": {
+        "one": "{{formattedBalance}} اور {{count}} مزید کرنسی اسٹور کریڈٹ"
       }
     }
   }
