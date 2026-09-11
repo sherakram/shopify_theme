@@ -429,6 +429,288 @@
       },
       "clipboard": {
         "copied": "کاپی کیا گیا۔"
+      },
+      "thank_you": {
+        "no_tracking_number": "اس آرڈر کے لیے کوئی ٹریکنگ نمبر نہیں ہے۔",
+        "out_for_delivery": "ترسیل کے لیے روانہ کر دیا گیا ہے",
+        "out_for_delivery_title": "آپ کا آرڈر ڈیلیوری کے لیے روانہ کر دیا گیا ہے۔",
+        "out_for_delivery_description_html": "آپ کا آرڈر راستے میں ہے اور آج ہی پہنچ جانا چاہیے۔ اگر یہ اگلے 2 دنوں میں ڈیلیور نہیں ہوتا ہے، تو %{contact_us}۔",
+        "out_for_delivery_local_title": "آپ کا آرڈر ڈیلیوری کے لیے روانہ کر دیا گیا ہے۔",
+        "out_for_delivery_local_description_html": "آپ کا آرڈر جلد ہی پہنچ جائے گا۔",
+        "attempted_delivery": "ڈیلیوری کی کوشش کی گئی",
+        "attempted_delivery_title": "آپ کے آرڈر کو ڈیلیور کرنے کی کوشش کی گئی ہے۔",
+        "attempted_delivery_description_html": "آپ کے آرڈر کو ڈیلیور کرنے کی کوشش کی گئی تھی لیکن وہ ناکام رہی۔ دوبارہ ڈیلیوری کی کوشش کا انتظام کرنے کے لیے %{contact_us}۔",
+        "attempted_delivery_local_title": "ناکام ڈیلیوری",
+        "attempted_delivery_local_description_html": "ہم آپ کا آرڈر ڈیلیور نہیں کر سکے۔ دوسری ڈیلیوری شیڈول کرنے کے لیے، %{contact_us}۔",
+        "delivered": "فراہم کردہ",
+        "delivered_title": "آپ کا آرڈر پہنچا دیا گیا ہے۔",
+        "delivered_description_html": "آپ کا آرڈر آپ کے دیے گئے پتے پر پہنچا دیا گیا ہے۔ اگر آپ کو یہ موصول نہیں ہوا، یا اگر آپ کو کوئی اور مسئلہ ہے، تو %{contact_us}۔",
+        "delivered_local_title": "آپ کا آرڈر پہنچا دیا گیا ہے۔",
+        "delivered_local_description_html": "کیا آپ کو آپ کا آرڈر نہیں ملا؟ %{let_us_know}۔",
+        "choose_payment_method_later": "ادائیگی کا طریقہ بعد میں منتخب کریں۔",
+        "picked_up_title": "آپ کا آرڈر اٹھا لیا گیا ہے۔",
+        "picked_up_description_html": "آپ کا آرڈر %{date} کو %{location_name} پر اٹھا لیا گیا تھا۔",
+        "contact_us": "ہم سے رابطہ کریں",
+        "contact_us_lowercase": "ہم سے رابطہ کریں۔",
+        "contact_us_html": "مدد چاہیے؟ %{contact_us}",
+        "updated_time": "%{time_ago} پہلے اپ ڈیٹ کیا گیا",
+        "failure": "ڈیلیور نہیں ہوا",
+        "failed_title": "آپ کا آرڈر ڈیلیور نہیں ہو سکا",
+        "failed_contact_merchant": "ترسیل کا انتظام کرنے کے لیے %{company} سے رابطہ کریں۔",
+        "failed_contact_merchant_no_company": "ترسیل کا انتظام کرنے کے لیے ہم سے رابطہ کریں۔",
+        "non_shippable_title": "آپ کا آرڈر مکمل ہو گیا ہے۔",
+        "let_us_know": "ہمیں بتائیں",
+        "login_title": "تمام آرڈر کی تفصیلات دیکھنے کے لیے سائن ان کریں۔",
+        "login_description": "آپ کو اپنے ای میل میں موصول ہونے والی رسید پر آپ کا آرڈر نمبر مل جائے گا۔",
+        "login_description_phone": "آپ اپنا آرڈر نمبر اس رسید میں دیکھ سکتے ہیں جو آپ کو ٹیکسٹ میسج کے ذریعے موصول ہوئی ہے۔",
+        "login_not_customer_html": "کیا آپ %{name} نہیں ہیں؟ آپ %{link} کر سکتے ہیں۔",
+        "login_reorder_link_text": {
+          "one": "اس پروڈکٹ کو بھی خریدیں۔",
+          "other": "یہ مصنوعات بھی خریدیں۔"
+        },
+        "customer_information_hidden_fields_message": "تمام کسٹمر کی معلومات دیکھنے کے لیے سائن اِن کریں۔",
+        "cancelled_title": "آپ کا آرڈر منسوخ کر دیا گیا ہے",
+        "cancelled_description": "آپ کا آرڈر %{date} کو منسوخ کر دیا گیا ہے۔ اگر آپ کے کوئی سوالات ہیں تو ہم سے رابطہ کریں۔",
+        "order_number_label": "آرڈر نمبر",
+        "customer_validation_error": "ایک درست ای میل یا آرڈر نمبر درج کریں۔",
+        "customer_validation_error_phone": "درست فون یا آرڈر نمبر درج کریں۔",
+        "login": "سائن اِن کریں۔",
+        "unfulfilled_items_title": "ترسیل کی تیاری ہو رہی ہے",
+        "unfulfilled_items_description": "ہم فی الحال یہ اشیاء شپنگ کے لیے تیار کر رہے ہیں۔",
+        "marker": {
+          "current": "موجودہ کھیپ کا مقام",
+          "shipping": "بھیجنے کا پتہ"
+        },
+        "pick_up_in_store_marker": {
+          "current": "موجودہ کھیپ کا مقام",
+          "shipping": "پک اپ کا مقام"
+        },
+        "fulfillment": {
+          "fulfilled_table_title": "اس کھیپ میں شامل اشیاء",
+          "unfulfilled_table_title": "اشیاء شپنگ کے لیے تیار کی جا رہی ہیں۔",
+          "product_image_label": "پروڈکٹ کی تصویر",
+          "description_label": "تفصیل",
+          "quantity_label": "مقدار"
+        },
+        "order_updates_description_missing": "آپ کو شپنگ سے متعلق اپ ڈیٹس موصول نہیں ہو رہی ہیں۔",
+        "order_updates_subscribe_to_email_notifications": "ای میل کے ذریعے شپنگ اپ ڈیٹس حاصل کریں",
+        "order_updates_subscribe_to_email_or_phone_notifications": "ای میل یا ٹیکسٹ کے ذریعے شپنگ اپ ڈیٹس حاصل کریں۔",
+        "order_updates_subscribe_to_phone_notifications": "ٹیکسٹ کے ذریعے شپنگ اپ ڈیٹس حاصل کریں",
+        "order_updates_submit_subscription": "جمع کرائیں۔",
+        "track_shipment": "کھیپ کو ٹریک کریں۔",
+        "other_options": "دیگر آپشنز",
+        "delivery_information_label": "ترسیل کی معلومات:",
+        "gift_card_sent_confirmation": "تحفے کے کارڈز بھیجے گئے",
+        "qr_code": {
+          "send_link_to_phone": "یا اپنے فون پر ایک لنک بھیجیں۔",
+          "title": "اپنے فون پر ٹریک کریں۔"
+        },
+        "shop_qr_with_sms_upsell": {
+          "qr_code": {
+            "title": "اپنے فون سے اسکین کریں"
+          },
+          "sms": {
+            "title": "یا اپنے فون پر ایک لنک بھیجیں۔"
+          }
+        },
+        "view_business_customer_account": "اکاؤنٹ دیکھیں",
+        "breadcrumbs_submitted": "جمع کرایا گیا۔",
+        "breadcrumbs_in_review": "زیر نظر",
+        "breadcrumbs_confirmed": "تصدیق ہو گئی",
+        "missing_shipping_address_banner": {
+          "title": "آرڈر کا شپنگ ایڈریس موجود نہیں ہے۔",
+          "text_html": "اپنا پتہ شامل کرنے کے لیے %{contact_us}",
+          "contact_us": "ہم سے رابطہ کریں"
+        },
+        "first_payment_complete": "پہلی ادائیگی مکمل ہو گئی۔",
+        "in_store_purchase": "اسٹور سے خریداری",
+        "company_location_section_title": "کمپنی اور مقام",
+        "thank_you_ready_for_picked_up": "آپ کا آرڈر %{address} سے اٹھا لیا گیا ہے۔",
+        "ready_for_delivery": "ترسیل کے لیے تیار",
+        "order_updates_subscribe_to_email_notifications_failed": "ہم اس ای میل کو اپ ڈیٹس کے لیے ذخیرہ نہیں کر سکتے۔ دوبارہ کوشش کریں یا کوئی دوسرا ای میل استعمال کریں۔",
+        "order_updates_subscribe_to_email_notifications_email_already_exists": "آپ نے جو ای میل ایڈریس داخل کیا ہے وہ پہلے سے موجود ہے۔",
+        "subscriptions_management": {
+          "title": "سبسکرپشن",
+          "description": "اپنی سبسکرپشنز دیکھنے اور ان کا انتظام کرنے کے لیے اپنے اکاؤنٹ میں لاگ ان کریں۔",
+          "button_label": "اپنی رکنیت کا انتظام کریں"
+        },
+        "manage_order_label": "اپنے آرڈر کا نظم کریں",
+        "gift_card_confirmation_by_text_typ": {
+          "one": "آپ کو چند منٹوں میں اپنے گفٹ کارڈ کے ساتھ ایک ٹیکسٹ موصول ہوگا۔",
+          "other": "آپ کو چند منٹوں میں اپنے گفٹ کارڈز کے ساتھ ایک پیغام موصول ہوگا۔"
+        },
+        "gift_card_confirmation_by_email_typ": {
+          "one": "آپ کو چند منٹ میں اپنی گفٹ کارڈ والی ای میل موصول ہو جائے گی۔",
+          "other": "آپ کو چند منٹوں میں آپ کے گفٹ کارڈز کی ایک ای میل موصول ہو جائے گی۔"
+        },
+        "gift_card_email_title": {
+          "one": "گفٹ کارڈ ای میل کے ذریعے بھیجا گیا تھا۔",
+          "other": "گفٹ کارڈز ای میل کے ذریعے بھیجے گئے تھے۔"
+        },
+        "gift_card_text_title": {
+          "one": "گفٹ کارڈ بذریعہ ٹیکسٹ میسج بھیجا گیا تھا",
+          "other": "تحفے کے کارڈ ٹیکسٹ میسج کے ذریعے بھیجے گئے تھے۔"
+        },
+        "resend_gift_cards_by_email": "ای میل دوبارہ بھیجیں",
+        "resend_gift_cards_by_text": "ٹیکسٹ میسج دوبارہ بھیجیں",
+        "gift_card_resent_confirmation": {
+          "one": "گفٹ کارڈ دوبارہ بھیج دیا گیا ہے۔",
+          "other": "گفٹ کارڈز دوبارہ بھیج دیے گئے تھے۔"
+        },
+        "gift_card_resend_failure": {
+          "one": "آپ کے گفٹ کارڈ کو دوبارہ بھیجنے میں ایک مسئلہ پیش آیا۔ دوبارہ کوشش کریں یا ہم سے رابطہ کریں۔",
+          "other": "آپ کے گفٹ کارڈز کو دوبارہ بھیجنے میں ایک مسئلہ پیش آیا ہے۔ دوبارہ کوشش کریں یا ہم سے رابطہ کریں۔"
+        },
+        "vat_invoices": {
+          "title": "VAT انوائسز"
+        },
+        "verify_shop_account_title": "اپنے شاپ اکاؤنٹ کی توثیق کریں"
+      }
+    },
+    "errors": {
+      "shop_404": {
+        "ctas": {
+          "editions": {
+            "link_text": "تازہ ترین ایڈیشنز دیکھیں"
+          },
+          "store_owner": {
+            "header": "کیا آپ اسٹور کے مالک ہیں؟",
+            "caption": "کیا آپ کو اپنے اسٹور میں لاگ ان ہونے میں دشواری ہو رہی ہے؟ %{forgot_your_store_link} خصوصیت آزمائیں۔ اگر آپ اپنا اسٹور دوبارہ فعال کرنا چاہتے ہیں تو %{shopify_support_link} سے رابطہ کریں۔",
+            "shopify_support_link_text": "شاپفائی سپورٹ"
+          }
+        }
+      }
+    },
+    "notices": {
+      "customer": {
+        "password_reset_error": "پاس ورڈ دوبارہ ترتیب دینے میں خرابی",
+        "subscribe_error": "سبسکرائب کرنے میں خرابی",
+        "unsubscribe_error": "ان سبسکرائب میں خرابی",
+        "open_tracking_error": "اوپن ٹریکنگ کی خرابی",
+        "no_account_found": "اس ای میل کے ساتھ کوئی اکاؤنٹ نہیں ملا۔",
+        "invalid_credentials": "ای میل یا پاس ورڈ غلط ہے۔",
+        "denylisted_reset_password": "آپ کے اکاؤنٹ تک رسائی ممکن نہیں ہے کیونکہ موجودہ پاس ورڈ محفوظ نہیں ہے۔ آپ کو اپنا پاس ورڈ اپ ڈیٹ کرنے کے لیے ایک ای میل موصول ہوگی۔",
+        "signup_disabled": "گاہک کا اکاؤنٹ بنانا غیر فعال کر دیا گیا ہے۔"
+      },
+      "address": {
+        "updated": "پتہ کامیابی کے ساتھ اپ ڈیٹ کر دیا گیا ہے۔",
+        "error_updating": "پتہ اپ ڈیٹ کرنے میں خرابی",
+        "created": "پتہ کامیابی سے بنا دیا گیا ہے۔",
+        "error_creating": "ایڈریس بنانے میں خرابی۔",
+        "deleted": "ایڈریس کامیابی سے حذف کر دیا گیا۔",
+        "error_deleting": "پتہ حذف کرنے میں خرابی۔"
+      },
+      "line_item": {
+        "item_status": {
+          "add_variant": "%{delta} شامل کیا گیا۔",
+          "increment_item": "%{delta} شامل کیا گیا۔",
+          "decrement_item": "%{total} میں سے %{delta} ہٹا دیا گیا",
+          "decrement_fulfilled_line_item": "%{total} میں سے %{delta} واپس کیے گئے۔",
+          "decrement_return_line_item": "ریٹرن سے %{delta} ہٹایا گیا۔"
+        }
+      },
+      "order": {
+        "not_available": "یہ آرڈر دستیاب نہیں ہے۔",
+        "financial_status": {
+          "authorized": "مجاز",
+          "pending": "زیر التوا",
+          "paid": "ادا کیا گیا۔",
+          "unpaid": "بلا معاوضہ",
+          "voided": "کالعدم",
+          "partially_paid": "جزوی طور پر ادا کیا گیا",
+          "partially_refunded": "جزوی طور پر رقم واپس کر دی گئی۔",
+          "refunded": "واپس کر دیا گیا۔",
+          "expired": "میعاد ختم ہو گئی"
+        },
+        "fulfillment_status": {
+          "fulfilled": "پورا کر دیا گیا۔",
+          "complete": "مکمل کریں",
+          "partial": "جزوی",
+          "unfulfilled": "ناآسودہ",
+          "restocked": "دوبارہ ذخیرہ کیا گیا۔"
+        },
+        "transaction_status": {
+          "success": "کامیابی",
+          "pending": "زیر التوا",
+          "failure": "ناکام",
+          "error": "خرابی"
+        },
+        "cancel_reason": {
+          "declined": "ادائیگی مسترد کر دی گئی",
+          "inventory": "اشیاء دستیاب نہیں",
+          "fraud": "دھوکہ دہی کا آرڈر",
+          "customer": "صارف نے آرڈر تبدیل/منسوخ کر دیا",
+          "staff": "عملے کی غلطی",
+          "other": "دیگر"
+        },
+        "cash_on_delivery": "کیش آن ڈیلیوری (COD)"
+      },
+      "cart": {
+        "not_found": "کارٹ نہیں ملا",
+        "only_n_items_available": "آپ کارٹ میں صرف %{count} %{name} شامل کر سکتے ہیں۔",
+        "too_many_items_in_cart": "آپ مزید %{name} کو کارٹ میں شامل نہیں کر سکتے۔",
+        "only_one_added_to_cart": "دستیابی کی وجہ سے آپ کے کارٹ میں صرف 1 آئٹم شامل کیا گیا ہے۔",
+        "only_n_added_to_cart": "دستیابی کی وجہ سے آپ کی کارٹ میں صرف %{quantity} آئٹمز شامل کیے گئے ہیں۔",
+        "maximum_available_quantity_reached": "اس آئٹم کی زیادہ سے زیادہ مقدار پہلے ہی آپ کے کارٹ میں موجود ہے۔",
+        "less_than_minimum": "اس شے کی کم از کم تعداد %{min} ہے۔",
+        "more_than_maximum": "اس آئٹم کی زیادہ سے زیادہ حد %{max} ہے۔",
+        "not_respect_step": "آپ اس آئٹم کو صرف %{step} کے اضافہ میں شامل کر سکتے ہیں۔",
+        "all_items_in_cart": "آپ کی کارٹ میں تمام %{count} %{name} شامل ہیں۔",
+        "empty_update": "خالی کارٹ کو اپ ڈیٹ نہیں کر سکتے",
+        "missing_parameters": "کوئی درست ID یا لائن پیرامیٹر نہیں ہے۔",
+        "generic_error": "کارٹ میں خرابی",
+        "invalid_input": "% {parameter} پیرامیٹر غلط ہے۔",
+        "product_not_available": "پروڈکٹ دستیاب نہیں ہے۔",
+        "too_many_line_items_error": "آپ کی کارٹ میں %{max} سے زیادہ آئٹمز شامل نہیں ہو سکتے۔",
+        "link_expired": "لنک کی میعاد ختم ہو گئی ہے۔",
+        "link_no_longer_exists": "ربط موجود نہیں ہے۔",
+        "stock_problems_html": "ایک یا زیادہ آئٹمز اب دستیاب نہیں ہیں۔ ہم نے ایک <a href=\"%{link}\">اپڈیٹ شدہ کارٹ</a> فراہم کر دی ہے۔",
+        "changed": "کارٹ تبدیل ہو گیا۔",
+        "items_changed": "ایک یا ایک سے زیادہ آئٹمز تبدیل ہو گئے ہیں۔",
+        "product_sold_out": "پروڈکٹ '%{name}' پہلے ہی بک چکی ہے۔",
+        "variant_not_found": "متغیر نہیں مل سکا",
+        "variant_requires_selling_plan": "ویرینٹ کو صرف سیلنگ پلان کے ساتھ خریدا جا سکتا ہے۔",
+        "selling_plan_not_available_for_company_locations": "B2B آرڈرز کے لیے صرف ایک بار کی خریداری دستیاب ہے۔",
+        "digital_product_not_available_for_company_locations": "اس آئٹم کو B2B آرڈر میں شامل نہیں کیا جا سکتا",
+        "buyer_cannot_purchase_for_company_locations": "آپ اس مقام کے لیے خریداری نہیں کر سکتے",
+        "selling_plan_not_applicable": "سیلنگ پلان کو ویرینٹ پر لاگو نہیں کیا جا سکتا",
+        "shipping_address_not_required": "اس کارٹ کو شپنگ کی ضرورت نہیں ہے۔",
+        "shipping_address_invalid": "آپ کے شپنگ ریٹس کا حساب لگانے میں کوئی مسئلہ پیش آیا ہے۔ اپنا آرڈر مکمل کرنے سے پہلے شپنگ ریٹ منتخب کرنے کے لیے چیک آؤٹ پر جاری رکھیں۔",
+        "bundle_requires_components": "بنڈل پروڈکٹ '%{name}' کارٹ میں نہیں ڈالی جا سکتی۔",
+        "gift_card_with_components_not_supported": "بنڈل پروڈکٹ '%{name}' کارٹ میں نہیں ڈالی جا سکتی۔",
+        "gift_card_price_must_be_greater_than_zero": "بنڈل پروڈکٹ '%{name}' کارٹ میں نہیں ڈالی جا سکتی۔",
+        "gift_card_recipient_validation_error": "مخصوص گفٹ کارڈ وصول کنندہ غلط ہے",
+        "view_lines_limit_reached": "لائنیں %{limit} سے کم یا اس کے برابر ہونی چاہئیں",
+        "cart_too_large": "کارٹ بہت بڑا ہے۔",
+        "cart_attributes_error": "کارٹ کی خصوصیات میں غلط ڈیٹا موجود ہے۔",
+        "merchandise_line_transformers": {
+          "run_error": "آپ کے کارٹ میں ایک خرابی پیش آئی ہے۔"
+        },
+        "merchandise_not_applicable": "آئٹم کو ترتیب کے مطابق نہیں خریدا جا سکتا۔"
+      },
+      "storefront": {
+        "invalid_password": "پاس ورڈ غلط ہے، براہ کرم دوبارہ کوشش کریں۔"
+      },
+      "tags": {
+        "add_articles": "تلاش کو ان مضامین تک محدود کریں جن میں %{tag} ٹیگ بھی ہو۔",
+        "add_products": "انتخاب کو %{tag} ٹیگ سے مماثل مصنوعات تک محدود کریں۔",
+        "remove_articles": "تلاش کو اُن مضامین تک وسیع کریں جنہیں %{tag} کے ساتھ ٹیگ نہیں کیا گیا ہے۔",
+        "remove_products": "ٹیگ %{tag} کو ہٹا دیں"
+      }
+    },
+    "email_marketing": {
+      "subscribed": {
+        "confirmation": "ہماری میلنگ لسٹ کو سبسکرائب کرنے کے لیے آپ کا شکریہ۔",
+        "disclaimer": "آپ کسی بھی وقت ان سبسکرائب کر سکتے ہیں۔",
+        "unsubscribe": "سبسکرپشن ختم کریں۔"
+      },
+      "unsubscribed": {
+        "confirmation": "آپ ہماری میلنگ لسٹ سے ان سبسکرائب ہو گئے ہیں۔",
+        "disclaimer": "آپ کو ہماری طرف سے مزید کوئی مارکیٹنگ اپڈیٹس موصول نہیں ہوں گی۔ آپ کسی بھی وقت دوبارہ سبسکرائب کر سکتے ہیں۔",
+        "preview": "آپ دیکھ رہے ہیں کہ جب گاہک اَن سبسکرائب کریں گے تو انہیں کیا نظر آئے گا۔"
+      },
+      "sms_unsubscribe_confirm": {
+        "message": "کیا آپ واقعی SMS مارکیٹنگ سے ان سبسکرائب کرنا چاہتے ہیں؟"
       }
     }
   },
