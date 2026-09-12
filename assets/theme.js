@@ -29,3 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// localization (country/language)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-locale-form-submit]').forEach((select) => {
+    select.addEventListener('change', (event) => {
+      const form = event.target.closest('form');
+      if (form) form.submit();
+    });
+  });
+});

@@ -102,15 +102,15 @@
   color: #1a7f37;
 }
 
-/* Main grid */
+/* Main grid — CSS Grid, auto-fits any number of blocks the merchant adds */
 .footer__main {
   padding-top: var(--footer-padding-top, 48px);
   padding-bottom: calc(var(--footer-padding-bottom, 32px) * 0.6);
 }
 
 .footer__grid {
-  display: flexbox;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 32px;
 }
 
@@ -118,19 +118,35 @@
   min-width: 0;
 }
 
-@media (min-width: 699px) {
+/* Small tablets: 2 columns */
+@media (min-width: 480px) {
   .footer__grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 40px;
-  }
-
-  .footer__block {
-    flex: 1 1 200px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 24px;
   }
 
   .footer__block--brand {
-    flex: 1.4 1 260px;
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tablet / small desktop: brand + up to 4 columns */
+@media (min-width: 699px) {
+  .footer__grid {
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 32px 24px;
+  }
+
+  .footer__block--brand {
+    grid-column: auto;
+    grid-row: 1 / span 2;
+  }
+}
+
+/* Large desktop: more breathing room */
+@media (min-width: 1200px) {
+  .footer__grid {
+    gap: 40px 32px;
   }
 }
 
@@ -171,7 +187,7 @@
   margin-bottom: 0;
 }
 
-/* Social icons */
+/* Social icons (brand column + dedicated social block) */
 .footer__social {
   display: flex;
   align-items: center;
@@ -179,7 +195,33 @@
   margin-top: 4px;
 }
 
-/* Menu / text columns */
+.footer__social--block {
+  margin-top: 12px;
+}
+
+/* Trust / certification badge */
+.footer__trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.footer__trust-badge-label {
+  font-family: var(--font-subheading--family);
+  font-weight: var(--font-subheading--weight);
+  font-size: 0.8125rem;
+  text-transform: var(--font-subheading--text-case);
+  opacity: 0.75;
+}
+
+.footer__trust-badge-image {
+  max-width: 100%;
+  opacity: 0.9;
+}
+
+/* Menu / text / social columns */
 .footer__disclosure {
   width: 100%;
 }
@@ -202,6 +244,7 @@
   font-weight: var(--font-subheading--weight);
   font-size: calc(1rem * var(--font-subheading--scale));
   text-transform: var(--font-subheading--text-case);
+  letter-spacing: var(--font-subheading--letter-spacing);
   margin: 0;
 }
 
@@ -279,10 +322,10 @@
   margin: 0 0 8px;
 }
 
-/* Mobile: accordion behaviour (native <details>/<summary>) */
 @media (max-width: 699px) {
   .footer__block--menu,
-  .footer__block--text {
+  .footer__block--text,
+  .footer__block--social {
     border-top: 1px solid var(--color-border);
     padding-block: 14px;
   }
@@ -292,7 +335,6 @@
   }
 }
 
-/* Desktop: force all columns open, hide the toggle affordance */
 @media (min-width: 700px) {
   .footer__heading {
     cursor: default;
@@ -303,9 +345,14 @@
     display: none;
   }
 
-  /* Reveal <details> content regardless of the open attribute */
   .footer__disclosure > *:not(summary) {
     display: block !important;
+  }
+
+  .footer__disclosure::details-content {
+    height: auto !important;
+    overflow: visible !important;
+    content-visibility: visible !important;
   }
 }
 
@@ -341,7 +388,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-   font-size: inherit;
+  font-size: inherit;
 }
 
 .policies li::before {
@@ -401,19 +448,39 @@
   border-radius: 4px;
 }
 
+/* Address line */
+.footer__address {
+  order: 4;
+  width: 100%;
+}
+
+.footer__address-text {
+  color: var(--color-foreground);
+  opacity: 0.7;
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 700px) {
+  .footer__address {
+    width: auto;
+    margin-left: auto;
+  }
+}
+
 @media (max-width: 699px) {
   .footer__bottom-inner {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
   .footer__localization,
   .footer__payment-list,
-  .footer__copyright {
+  .footer__copyright,
+  .footer__address {
     order: initial;
   }
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   .footer__disclosure-icon::before,
