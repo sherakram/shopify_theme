@@ -1,11 +1,53 @@
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image_height": 60,
+        "content_position": "center",
+        "overlay_opacity": 30,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your Brand Headline Here",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A short, benefit-driven subheading that supports the H1.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"]
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "heading_size": "h2",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "1 / 1",
+        "show_view_all": true,
+        "color_scheme": "scheme-2"
+      }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "featured_collection"
   ]
 }
