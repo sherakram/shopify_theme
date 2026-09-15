@@ -66,16 +66,6 @@
             {%- endfor -%}
           </ul>
 
-          {%- if section.settings.show_button and fc_collection != blank -%}
-            <a href="{{ fc_collection.url }}" class="btn btn--secondary featured-collection__button featured-collection__button--mobile">
-              <span>{{ section.settings.button_label | default: 'View all' }}</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-          {%- endif -%}
-
         {%- else -%}
           <ul class="featured-collection__grid featured-collection__grid--placeholder" role="list" aria-hidden="true">
             {%- for i in (1..4) -%}
@@ -172,12 +162,6 @@
     outline-offset: 2px;
   }
 
-  .featured-collection__button--mobile {
-    width: 100%;
-    justify-content: center;
-    margin-top: 1.5rem;
-  }
-
   .featured-collection__grid {
     display: grid;
     grid-template-columns: repeat(var(--fc-columns-mobile, 1), minmax(0, 1fr));
@@ -261,10 +245,6 @@
 
     .featured-collection__grid--placeholder {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .featured-collection__button--mobile {
-      display: none;
     }
   }
 {% endstylesheet %}
@@ -353,7 +333,7 @@
       "id": "columns_desktop",
       "label": "Columns on desktop",
       "min": 2,
-      "max": 5,
+      "max": 4,
       "step": 1,
       "default": 3
     },

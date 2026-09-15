@@ -1,10 +1,11 @@
 {
   "sections": {
     "hero": {
-      "type": "hero",
+      "type": "hero-banner",
       "settings": {
         "image_height": 60,
         "content_position": "center",
+        "overlay_color": "#000000",
         "overlay_opacity": 30,
         "color_scheme": "scheme-1"
       },
@@ -35,14 +36,14 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Best Sellers",
-        "heading_size": "h2",
+        "subheading": "Shop the edit",
+        "heading": "Featured collection",
+        "description": "<p>A short line about this collection — what makes it worth a look.</p>",
         "products_to_show": 8,
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "columns_mobile": "2",
-        "image_ratio": "1 / 1",
-        "show_view_all": true,
-        "color_scheme": "scheme-2"
+        "show_button": true,
+        "color_scheme": "scheme-1"
       }
     }
   },
