@@ -918,14 +918,14 @@
     "name": "t:names.product_card",
     "settings": [
       {
+        "type": "header",
+        "content": "t:labels.media"
+      },
+      {
         "type": "checkbox",
         "id": "show_vendor",
         "label": "t:labels.show_vendor",
         "default": false
-      },
-      {
-        "type": "header",
-        "content": "t:labels.media"
       },
       {
         "type": "checkbox",

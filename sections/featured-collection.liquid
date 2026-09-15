@@ -60,13 +60,7 @@
               <li class="featured-collection__item">
                 {%- render 'product-card',
                   product: product,
-                  lazy: forloop.index,
-                  show_vendor: section.settings.show_vendor,
-                  show_reviews: section.settings.show_reviews,
-                  show_quick_add: section.settings.show_quick_add,
-                  show_secondary_image: section.settings.show_secondary_image,
-                  quick_add_hover_only: section.settings.quick_add_hover_only,
-                  quick_multiple_options: section.settings.quick_multiple_options
+                  lazy: forloop.index
                 -%}
               </li>
             {%- endfor -%}
@@ -91,7 +85,8 @@
             {%- endfor -%}
           </ul>
           <p class="featured-collection__empty-note">
-            {{ 'sections.featured_collection.no_collection' }}
+            Select a collection to display products here.
+            {% comment %} {{ 'sections.featured_collection.no_collection' | t: default: 'Select a collection to display products here.' }} {% endcomment %}
           </p>
         {%- endif -%}
       </div>
@@ -114,7 +109,6 @@
     gap: 2rem;
   }
 
-  /* ── Header column ── */
   .featured-collection__header {
     display: flex;
     flex-direction: column;
@@ -178,14 +172,12 @@
     outline-offset: 2px;
   }
 
-  /* Desktop button lives in the header column; mobile gets its own full-width one below the grid */
   .featured-collection__button--mobile {
     width: 100%;
     justify-content: center;
     margin-top: 1.5rem;
   }
 
-  /* ── Product grid ── */
   .featured-collection__grid {
     display: grid;
     grid-template-columns: repeat(var(--fc-columns-mobile, 1), minmax(0, 1fr));
@@ -199,7 +191,6 @@
     min-width: 0;
   }
 
-  /* Staggered reveal — progressive enhancement, no layout impact if JS/observer unsupported */
   .featured-collection__item {
     opacity: 1;
     transform: none;
@@ -225,7 +216,6 @@
     }
   }
 
-  /* ── Placeholder / empty state (merchant onboarding) ── */
   .featured-collection__grid--placeholder {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -244,7 +234,6 @@
     font-size: 0.9375rem;
   }
 
-  /* ── Tablet ── */
   @media (min-width: 750px) {
     .featured-collection__grid,
     .featured-collection__grid--placeholder {
@@ -253,7 +242,6 @@
     }
   }
 
-  /* ── Desktop: editorial split kicks in ── */
   @media (min-width: 990px) {
     .featured-collection__layout {
       grid-template-columns: minmax(240px, 320px) 1fr;
@@ -374,51 +362,16 @@
       "id": "columns_mobile",
       "label": "Columns on mobile",
       "options": [
-        { "value": "1", "label": "1 column" },
-        { "value": "2", "label": "2 columns" }
+        { 
+          "value": "1", 
+          "label": "1 column" 
+        },
+        { 
+          "value": "2", 
+          "label": "2 columns" 
+        }
       ],
       "default": "1"
-    },
-    {
-      "type": "header",
-      "content": "Product card"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "label": "Show vendor",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_reviews",
-      "label": "Show product reviews",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_secondary_image",
-      "label": "Show second image on hover",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_quick_add",
-      "label": "Enable quick add (single-variant products)",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "quick_multiple_options",
-      "label": "Enable quick add for multi-variant products",
-      "info": "Links to the product page to select options.",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "quick_add_hover_only",
-      "label": "Only show quick add on hover (desktop)",
-      "default": true
     },
     {
       "type": "header",
