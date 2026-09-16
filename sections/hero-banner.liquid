@@ -47,7 +47,6 @@
       aria-label="{{ section.settings.heading_fallback_label | default: 'View more' | escape }}"
     {% endif %}
   >
-
     <div class="hero-banner__media">
       {%- if hb_has_image -%}
         <picture class="hero-banner__picture">
@@ -86,10 +85,9 @@
       <div class="hero-banner__content hero-banner__content--{{ section.settings.content_width }}">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
-
             {%- when 'subheading' -%}
               <p class="subheading hero-banner__subheading" {{ block.shopify_attributes }}>
-                {{ block.settings.sub_texttext | escape }}
+                {{ block.settings.sub_text | escape }}
               </p>
 
             {%- when 'heading' -%}
@@ -106,25 +104,39 @@
               <div class="hero-banner__text" {{ block.shopify_attributes }}>
                 {{ block.settings.text }}
               </div>
+          {%- endcase -%}
+        {%- endfor -%}
 
-            {%- when 'button' -%}
-              {%- if block.settings.label != blank -%}
+        {%- assign hb_has_buttons = false -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'button' and block.settings.label != blank -%}
+            {%- assign hb_has_buttons = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if hb_has_buttons -%}
+          <div class="hero-banner__buttons">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'button' and block.settings.label != blank -%}
                 <div class="hero-banner__button-wrap" {{ block.shopify_attributes }}>
                   <a
                     href="{{ block.settings.link | default: '#' }}"
                     class="btn {% if block.settings.style == 'secondary' %}btn--secondary{% elsif block.settings.style == 'link' %}hero-banner__link{% else %}btn--primary{% endif %} hero-banner__button"
-                    {% if block.settings.link == blank %}aria-disabled="true" tabindex="-1"{% endif %}
+                    {% if block.settings.link == blank %}
+                      aria-disabled="true" tabindex="-1"
+                    {% endif %}
                   >
                     {{ block.settings.label | escape }}
                   </a>
                 </div>
               {%- endif -%}
-
-          {%- endcase -%}
-        {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
-
   </{{ hb_wrapper_tag }}>
 </div>
 
@@ -148,43 +160,43 @@
     color: inherit;
   }
 
-  .hero-banner[data-height-mobile="small"] .hero-banner__wrapper { 
-    min-height: 40vh; 
+  .hero-banner[data-height-mobile='small'] .hero-banner__wrapper {
+    min-height: 40vh;
   }
-  .hero-banner[data-height-mobile="medium"] .hero-banner__wrapper { 
-    min-height: 55vh; 
+  .hero-banner[data-height-mobile='medium'] .hero-banner__wrapper {
+    min-height: 55vh;
   }
-  .hero-banner[data-height-mobile="large"] .hero-banner__wrapper { 
-    min-height: 70vh; 
+  .hero-banner[data-height-mobile='large'] .hero-banner__wrapper {
+    min-height: 70vh;
   }
-  .hero-banner[data-height-mobile="fullscreen"] .hero-banner__wrapper { 
-    min-height: 100svh; 
+  .hero-banner[data-height-mobile='fullscreen'] .hero-banner__wrapper {
+    min-height: 100svh;
   }
-  .hero-banner[data-height-mobile="adapt"] .hero-banner__wrapper { 
-    min-height: 0; 
-    aspect-ratio: var(--hb-mobile-aspect-ratio); 
+  .hero-banner[data-height-mobile='adapt'] .hero-banner__wrapper {
+    min-height: 0;
+    aspect-ratio: var(--hb-mobile-aspect-ratio);
   }
 
   @media (min-width: 750px) {
-    .hero-banner[data-height="small"] .hero-banner__wrapper { 
-      min-height: 45vh; 
-      aspect-ratio: auto; 
+    .hero-banner[data-height='small'] .hero-banner__wrapper {
+      min-height: 45vh;
+      aspect-ratio: auto;
     }
-    .hero-banner[data-height="medium"] .hero-banner__wrapper { 
-      min-height: 60vh; 
-      aspect-ratio: auto; 
+    .hero-banner[data-height='medium'] .hero-banner__wrapper {
+      min-height: 60vh;
+      aspect-ratio: auto;
     }
-    .hero-banner[data-height="large"] .hero-banner__wrapper { 
-      min-height: 80vh; 
-      aspect-ratio: auto; 
+    .hero-banner[data-height='large'] .hero-banner__wrapper {
+      min-height: 80vh;
+      aspect-ratio: auto;
     }
-    .hero-banner[data-height="fullscreen"] .hero-banner__wrapper { 
-      min-height: 100svh; 
-      aspect-ratio: auto; 
+    .hero-banner[data-height='fullscreen'] .hero-banner__wrapper {
+      min-height: 100svh;
+      aspect-ratio: auto;
     }
-    .hero-banner[data-height="adapt"] .hero-banner__wrapper { 
-      min-height: 0; 
-      aspect-ratio: var(--hb-desktop-aspect-ratio); 
+    .hero-banner[data-height='adapt'] .hero-banner__wrapper {
+      min-height: 0;
+      aspect-ratio: var(--hb-desktop-aspect-ratio);
     }
   }
 
@@ -280,27 +292,27 @@
     max-width: 100%;
   }
 
-  .hero-banner__content--narrow { 
-    max-width: 26rem; 
+  .hero-banner__content--narrow {
+    max-width: 26rem;
   }
-  .hero-banner__content--medium { 
-    max-width: 36rem; 
+  .hero-banner__content--medium {
+    max-width: 36rem;
   }
-  .hero-banner__content--wide { 
-    max-width: 48rem; 
+  .hero-banner__content--wide {
+    max-width: 48rem;
   }
 
-  .hero-banner__wrapper--align-left .hero-banner__content { 
-    align-items: flex-start; 
-    text-align: left; 
+  .hero-banner__wrapper--align-left .hero-banner__content {
+    align-items: flex-start;
+    text-align: left;
   }
-  .hero-banner__wrapper--align-center .hero-banner__content { 
-    align-items: center; 
-    text-align: center; 
+  .hero-banner__wrapper--align-center .hero-banner__content {
+    align-items: center;
+    text-align: center;
   }
-  .hero-banner__wrapper--align-right .hero-banner__content { 
-    align-items: flex-end; 
-    text-align: right; 
+  .hero-banner__wrapper--align-right .hero-banner__content {
+    align-items: flex-end;
+    text-align: right;
   }
 
   .hero-banner__subheading {
@@ -330,6 +342,13 @@
 
   .hero-banner__button-wrap {
     display: inline-flex;
+  }
+
+  .hero-banner__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .hero-banner__button {
@@ -385,12 +404,6 @@
 
   .hero-banner__content {
     --hb-buttons-row: flex-start;
-  }
-
-  @media (min-width: 480px) {
-    .hero-banner__content > .hero-banner__button-wrap {
-      display: inline-flex;
-    }
   }
 {% endstylesheet %}
 
@@ -450,25 +463,25 @@
       "id": "desktop_height",
       "label": "Desktop height",
       "options": [
-        { 
-          "value": "adapt", 
-          "label": "Adapt to image" 
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
         },
-        { 
-          "value": "small", 
-          "label": "Small" 
+        {
+          "value": "small",
+          "label": "Small"
         },
-        { 
-          "value": "medium", 
-          "label": "Medium" 
+        {
+          "value": "medium",
+          "label": "Medium"
         },
-        { 
-          "value": "large", 
-          "label": "Large" 
+        {
+          "value": "large",
+          "label": "Large"
         },
-        { 
-          "value": "fullscreen", 
-          "label": "Full screen" 
+        {
+          "value": "fullscreen",
+          "label": "Full screen"
         }
       ],
       "default": "medium"
@@ -478,25 +491,25 @@
       "id": "mobile_height",
       "label": "Mobile height",
       "options": [
-        { 
-          "value": "adapt", 
-          "label": "Adapt to image" 
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
         },
-        { 
-          "value": "small", 
-          "label": "Small" 
+        {
+          "value": "small",
+          "label": "Small"
         },
-        { 
-          "value": "medium", 
-          "label": "Medium" 
+        {
+          "value": "medium",
+          "label": "Medium"
         },
-        { 
-          "value": "large", 
-          "label": "Large" 
+        {
+          "value": "large",
+          "label": "Large"
         },
-        { 
-          "value": "fullscreen", 
-          "label": "Full screen" 
+        {
+          "value": "fullscreen",
+          "label": "Full screen"
         }
       ],
       "default": "adapt"
@@ -506,41 +519,41 @@
       "id": "content_position",
       "label": "Content position",
       "options": [
-        { 
-          "value": "top-left", 
-          "label": "Top left" 
+        {
+          "value": "top-left",
+          "label": "Top left"
         },
-        { 
-          "value": "top-center", 
-          "label": "Top center" 
+        {
+          "value": "top-center",
+          "label": "Top center"
         },
-        { 
-          "value": "top-right", 
-          "label": "Top right" 
+        {
+          "value": "top-right",
+          "label": "Top right"
         },
-        { 
-          "value": "middle-left", 
-          "label": "Middle left" 
+        {
+          "value": "middle-left",
+          "label": "Middle left"
         },
-        { 
-          "value": "middle-center", 
-          "label": "Middle center" 
+        {
+          "value": "middle-center",
+          "label": "Middle center"
         },
-        { 
-          "value": "middle-right", 
-          "label": "Middle right" 
+        {
+          "value": "middle-right",
+          "label": "Middle right"
         },
-        { 
-          "value": "bottom-left", 
-          "label": "Bottom left" 
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
         },
-        { 
-          "value": "bottom-center", 
-          "label": "Bottom center" 
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
         },
-        { 
-          "value": "bottom-right", 
-          "label": "Bottom right" 
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
         }
       ],
       "default": "middle-center"
@@ -550,17 +563,17 @@
       "id": "content_alignment",
       "label": "Text alignment",
       "options": [
-        { 
-          "value": "left", 
-          "label": "Left" 
+        {
+          "value": "left",
+          "label": "Left"
         },
-        { 
-          "value": "center", 
-          "label": "Center" 
+        {
+          "value": "center",
+          "label": "Center"
         },
-        { 
-          "value": "right", 
-          "label": "Right" 
+        {
+          "value": "right",
+          "label": "Right"
         }
       ],
       "default": "center"
@@ -570,17 +583,17 @@
       "id": "content_width",
       "label": "Content width",
       "options": [
-        { 
-          "value": "narrow", 
-          "label": "Narrow" 
+        {
+          "value": "narrow",
+          "label": "Narrow"
         },
-        { 
-          "value": "medium", 
-          "label": "Medium" 
+        {
+          "value": "medium",
+          "label": "Medium"
         },
-        { 
-          "value": "wide", 
-          "label": "Wide" 
+        {
+          "value": "wide",
+          "label": "Wide"
         }
       ],
       "default": "medium"
@@ -655,9 +668,18 @@
           "label": "Heading tag",
           "info": "Use Heading 1 only once per page, typically on your homepage hero.",
           "options": [
-            { "value": "h1", "label": "H1" },
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" }
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
           ],
           "default": "h2"
         }
@@ -678,6 +700,7 @@
     {
       "type": "button",
       "name": "Button",
+      "limit": 2,
       "settings": [
         {
           "type": "text",
@@ -695,17 +718,17 @@
           "id": "style",
           "label": "Style",
           "options": [
-            { 
-              "value": "primary", 
-              "label": "Primary" 
+            {
+              "value": "primary",
+              "label": "Primary"
             },
-            { 
-              "value": "secondary", 
-              "label": "Secondary" 
+            {
+              "value": "secondary",
+              "label": "Secondary"
             },
-            { 
-              "value": "link", 
-              "label": "Text link" 
+            {
+              "value": "link",
+              "label": "Text link"
             }
           ],
           "default": "primary"
@@ -717,12 +740,7 @@
     {
       "name": "Hero banner",
       "category": "Banners",
-      "blocks": [
-        { "type": "subheading" },
-        { "type": "heading" },
-        { "type": "text" },
-        { "type": "button" }
-      ]
+      "blocks": [{ "type": "subheading" }, { "type": "heading" }, { "type": "text" }, { "type": "button" }]
     }
   ]
 }
