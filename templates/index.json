@@ -3,13 +3,24 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "image_height": 60,
-        "content_position": "center",
+        "content_position": "middle-center",
         "overlay_color": "#000000",
         "overlay_opacity": 30,
-        "color_scheme": "scheme-1"
+        "desktop_height": "medium",
+        "mobile_height": "adapt",
+        "content_alignment": "center",
+        "content_width": "medium",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
       },
       "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "sub_text": "New arrival"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
@@ -20,14 +31,15 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A short, benefit-driven subheading that supports the H1.</p>"
+            "text": "<p>Add a short supporting line here.</p>"
           }
         },
         "button": {
           "type": "button",
           "settings": {
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://collections/all",
+            "style": "primary"
           }
         }
       },

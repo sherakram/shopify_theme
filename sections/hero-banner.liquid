@@ -24,14 +24,19 @@
   endif
 -%}
 
-<section
-  class="hero-banner color-{{ section.settings.color_scheme }}"
-  style="
+{% style %}
+  .hero-{{ section.id }} {
     --hb-overlay-color: {{ section.settings.overlay_color }};
     --hb-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
     --hb-padding-top: {{ section.settings.padding_top }}px;
     --hb-padding-bottom: {{ section.settings.padding_bottom }}px;
-  "
+    --hb-mobile-aspect-ratio: {% if hb_mobile_image != blank %}{{ hb_mobile_image.aspect_ratio }}{% else %}1{% endif %};
+    --hb-desktop-aspect-ratio: {% if hb_image != blank %}{{ hb_image.aspect_ratio }}{% else %}1{% endif %};
+  }
+{% endstyle %}
+
+<div
+  class="hero-banner hero-{{ section.id }} color-{{ section.settings.color_scheme }}"
   data-height="{{ section.settings.desktop_height }}"
   data-height-mobile="{{ section.settings.mobile_height }}"
 >
@@ -43,10 +48,9 @@
     {% endif %}
   >
 
-    {%- comment -%} ── Media ── {%- endcomment -%}
     <div class="hero-banner__media">
       {%- if hb_has_image -%}
-        <picture>
+        <picture class="hero-banner__picture">
           {%- if section.settings.mobile_image != blank -%}
             <source
               media="(max-width: 749px)"
@@ -78,7 +82,6 @@
       <div class="hero-banner__overlay" aria-hidden="true"></div>
     </div>
 
-    {%- comment -%} ── Content ── {%- endcomment -%}
     <div class="hero-banner__content-wrap">
       <div class="hero-banner__content hero-banner__content--{{ section.settings.content_width }}">
         {%- for block in section.blocks -%}
@@ -86,7 +89,7 @@
 
             {%- when 'subheading' -%}
               <p class="subheading hero-banner__subheading" {{ block.shopify_attributes }}>
-                {{ block.settings.text | escape }}
+                {{ block.settings.sub_texttext | escape }}
               </p>
 
             {%- when 'heading' -%}
@@ -123,7 +126,7 @@
     </div>
 
   </{{ hb_wrapper_tag }}>
-</section>
+</div>
 
 {% stylesheet %}
   .hero-banner {
@@ -145,26 +148,57 @@
     color: inherit;
   }
 
-  /* ── Height presets (mobile-first defaults, overridden per data-height) ── */
-  .hero-banner[data-height-mobile="small"] .hero-banner__wrapper { min-height: 40vh; }
-  .hero-banner[data-height-mobile="medium"] .hero-banner__wrapper { min-height: 55vh; }
-  .hero-banner[data-height-mobile="large"] .hero-banner__wrapper { min-height: 70vh; }
-  .hero-banner[data-height-mobile="fullscreen"] .hero-banner__wrapper { min-height: 100svh; }
-  .hero-banner[data-height-mobile="adapt"] .hero-banner__wrapper { min-height: 0; aspect-ratio: 4 / 5; }
-
-  @media (min-width: 750px) {
-    .hero-banner[data-height="small"] .hero-banner__wrapper { min-height: 45vh; aspect-ratio: auto; }
-    .hero-banner[data-height="medium"] .hero-banner__wrapper { min-height: 60vh; aspect-ratio: auto; }
-    .hero-banner[data-height="large"] .hero-banner__wrapper { min-height: 80vh; aspect-ratio: auto; }
-    .hero-banner[data-height="fullscreen"] .hero-banner__wrapper { min-height: 100svh; aspect-ratio: auto; }
-    .hero-banner[data-height="adapt"] .hero-banner__wrapper { min-height: 0; aspect-ratio: 21 / 9; }
+  .hero-banner[data-height-mobile="small"] .hero-banner__wrapper { 
+    min-height: 40vh; 
+  }
+  .hero-banner[data-height-mobile="medium"] .hero-banner__wrapper { 
+    min-height: 55vh; 
+  }
+  .hero-banner[data-height-mobile="large"] .hero-banner__wrapper { 
+    min-height: 70vh; 
+  }
+  .hero-banner[data-height-mobile="fullscreen"] .hero-banner__wrapper { 
+    min-height: 100svh; 
+  }
+  .hero-banner[data-height-mobile="adapt"] .hero-banner__wrapper { 
+    min-height: 0; 
+    aspect-ratio: var(--hb-mobile-aspect-ratio); 
   }
 
-  /* ── Media ── */
+  @media (min-width: 750px) {
+    .hero-banner[data-height="small"] .hero-banner__wrapper { 
+      min-height: 45vh; 
+      aspect-ratio: auto; 
+    }
+    .hero-banner[data-height="medium"] .hero-banner__wrapper { 
+      min-height: 60vh; 
+      aspect-ratio: auto; 
+    }
+    .hero-banner[data-height="large"] .hero-banner__wrapper { 
+      min-height: 80vh; 
+      aspect-ratio: auto; 
+    }
+    .hero-banner[data-height="fullscreen"] .hero-banner__wrapper { 
+      min-height: 100svh; 
+      aspect-ratio: auto; 
+    }
+    .hero-banner[data-height="adapt"] .hero-banner__wrapper { 
+      min-height: 0; 
+      aspect-ratio: var(--hb-desktop-aspect-ratio); 
+    }
+  }
+
   .hero-banner__media {
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-banner__picture {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-banner__image {
@@ -194,7 +228,6 @@
     pointer-events: none;
   }
 
-  /* ── Content placement (9-point grid) ── */
   .hero-banner__content-wrap {
     position: relative;
     z-index: 1;
@@ -247,15 +280,29 @@
     max-width: 100%;
   }
 
-  .hero-banner__content--narrow { max-width: 26rem; }
-  .hero-banner__content--medium { max-width: 36rem; }
-  .hero-banner__content--wide { max-width: 48rem; }
+  .hero-banner__content--narrow { 
+    max-width: 26rem; 
+  }
+  .hero-banner__content--medium { 
+    max-width: 36rem; 
+  }
+  .hero-banner__content--wide { 
+    max-width: 48rem; 
+  }
 
-  .hero-banner__wrapper--align-left .hero-banner__content { align-items: flex-start; text-align: left; }
-  .hero-banner__wrapper--align-center .hero-banner__content { align-items: center; text-align: center; }
-  .hero-banner__wrapper--align-right .hero-banner__content { align-items: flex-end; text-align: right; }
+  .hero-banner__wrapper--align-left .hero-banner__content { 
+    align-items: flex-start; 
+    text-align: left; 
+  }
+  .hero-banner__wrapper--align-center .hero-banner__content { 
+    align-items: center; 
+    text-align: center; 
+  }
+  .hero-banner__wrapper--align-right .hero-banner__content { 
+    align-items: flex-end; 
+    text-align: right; 
+  }
 
-  /* ── Typography ── */
   .hero-banner__subheading {
     color: var(--color-primary);
     margin: 0;
@@ -276,7 +323,6 @@
     margin: 0;
   }
 
-  /* ── Buttons ── */
   .hero-banner__content-wrap ~ .hero-banner__content-wrap,
   .hero-banner__content {
     row-gap: 1rem;
@@ -337,7 +383,6 @@
     outline-offset: 2px;
   }
 
-  /* Multiple buttons sit side by side once there's room */
   .hero-banner__content {
     --hb-buttons-row: flex-start;
   }
@@ -405,11 +450,26 @@
       "id": "desktop_height",
       "label": "Desktop height",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" },
-        { "value": "fullscreen", "label": "Full screen" }
+        { 
+          "value": "adapt", 
+          "label": "Adapt to image" 
+        },
+        { 
+          "value": "small", 
+          "label": "Small" 
+        },
+        { 
+          "value": "medium", 
+          "label": "Medium" 
+        },
+        { 
+          "value": "large", 
+          "label": "Large" 
+        },
+        { 
+          "value": "fullscreen", 
+          "label": "Full screen" 
+        }
       ],
       "default": "medium"
     },
@@ -418,11 +478,26 @@
       "id": "mobile_height",
       "label": "Mobile height",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" },
-        { "value": "fullscreen", "label": "Full screen" }
+        { 
+          "value": "adapt", 
+          "label": "Adapt to image" 
+        },
+        { 
+          "value": "small", 
+          "label": "Small" 
+        },
+        { 
+          "value": "medium", 
+          "label": "Medium" 
+        },
+        { 
+          "value": "large", 
+          "label": "Large" 
+        },
+        { 
+          "value": "fullscreen", 
+          "label": "Full screen" 
+        }
       ],
       "default": "adapt"
     },
@@ -431,15 +506,42 @@
       "id": "content_position",
       "label": "Content position",
       "options": [
-        { "value": "top-left", "label": "Top left" },
-        { "value": "top-center", "label": "Top center" },
-        { "value": "top-right", "label": "Top right" },
-        { "value": "middle-left", "label": "Middle left" },
-        { "value": "middle-center", "label": "Middle center" },
-        { "value": "middle-right", "label": "Middle right" },
-        { "value": "bottom-left", "label": "Bottom left" },
-        { "value": "bottom-center", "label": "Bottom center" },
-        { "value": "bottom-right", "label": "Bottom right" }
+        { 
+          "value": "top-left", 
+          "label": "Top left" 
+        },
+        { 
+          "value": "top-center", 
+          "label": "Top center" 
+        },
+        { 
+          "value": "top-right", 
+          "label": "Top right" 
+        },
+        { 
+          "value": "middle-left", 
+          "label": "Middle left" 
+        },
+        { 
+          "value": "middle-center", 
+          "label": "Middle center" 
+        },
+        { 
+          "value": "middle-right", 
+          "label": "Middle right" 
+        },
+        { 
+          "value": "bottom-left", 
+          "label": "Bottom left" 
+        },
+        { 
+          "value": "bottom-center", 
+          "label": "Bottom center" 
+        },
+        { 
+          "value": "bottom-right", 
+          "label": "Bottom right" 
+        }
       ],
       "default": "middle-center"
     },
@@ -448,9 +550,18 @@
       "id": "content_alignment",
       "label": "Text alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
+        { 
+          "value": "left", 
+          "label": "Left" 
+        },
+        { 
+          "value": "center", 
+          "label": "Center" 
+        },
+        { 
+          "value": "right", 
+          "label": "Right" 
+        }
       ],
       "default": "center"
     },
@@ -459,9 +570,18 @@
       "id": "content_width",
       "label": "Content width",
       "options": [
-        { "value": "narrow", "label": "Narrow" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "wide", "label": "Wide" }
+        { 
+          "value": "narrow", 
+          "label": "Narrow" 
+        },
+        { 
+          "value": "medium", 
+          "label": "Medium" 
+        },
+        { 
+          "value": "wide", 
+          "label": "Wide" 
+        }
       ],
       "default": "medium"
     },
@@ -513,7 +633,7 @@
       "settings": [
         {
           "type": "text",
-          "id": "text",
+          "id": "sub_text",
           "label": "Text",
           "default": "New arrival"
         }
@@ -527,7 +647,7 @@
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Your headline here"
+          "default": "Your Brand Headline Here"
         },
         {
           "type": "select",
@@ -575,9 +695,18 @@
           "id": "style",
           "label": "Style",
           "options": [
-            { "value": "primary", "label": "Primary" },
-            { "value": "secondary", "label": "Secondary" },
-            { "value": "link", "label": "Text link" }
+            { 
+              "value": "primary", 
+              "label": "Primary" 
+            },
+            { 
+              "value": "secondary", 
+              "label": "Secondary" 
+            },
+            { 
+              "value": "link", 
+              "label": "Text link" 
+            }
           ],
           "default": "primary"
         }
@@ -587,6 +716,7 @@
   "presets": [
     {
       "name": "Hero banner",
+      "category": "Banners",
       "blocks": [
         { "type": "subheading" },
         { "type": "heading" },
