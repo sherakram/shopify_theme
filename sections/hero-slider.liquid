@@ -44,11 +44,11 @@
 {% endstylesheet %}
 
 {% javascript %}
-console.log('SLIDER JS LOADED');
+  console.log('SLIDER JS LOADED');
 
   class Slider {
     constructor(element) {
-     console.log('SLIDER CONSTRUCTOR', element);
+      console.log('SLIDER CONSTRUCTOR', element);
 
       this.element = element;
       this.track = element.querySelector('.slider__track');
@@ -56,6 +56,11 @@ console.log('SLIDER JS LOADED');
 
       this.visualIndex = 1;
       this.currentIndex = 0;
+      this.isAnimating = false;
+
+      if (this.slides.length < 2) {
+        return;
+      }
 
       this.createClones();
 
@@ -77,15 +82,17 @@ console.log('SLIDER JS LOADED');
         dot.addEventListener('click', () => {
           const index = Number(dot.dataset.sliderDot);
 
-          this.currentIndex = index;
-
-          this.goToVisualIndex(index + 1);
-          this.updatePagination();
+          this.goToSlide(index);
         });
       });
 
       this.track.addEventListener('transitionend', () => {
+        if (event.propertyName !== 'transform') {
+          return;
+        }
         this.handleTransitionEnd();
+
+        this.isAnimating = false;
       });
 
       this.goToVisualIndex(this.visualIndex, false);
@@ -110,25 +117,50 @@ console.log('SLIDER JS LOADED');
       }
     }
 
-    next() {
-      this.currentIndex =
-      (this.currentIndex + 1) % this.slides.length;
+    goToSlide(index, visualIndex = index + 1) {
+      if (this.isAnimating) {
+        return;
+      }
 
-      this.visualIndex += 1;
+      if (index < 0 || index >= this.slides.length) {
+        return;
+      }
+
+      if (index === this.currentIndex) {
+        return;
+      }
+
+      this.currentIndex = index;
+      this.visualIndex = visualIndex;
+      this.isAnimating = true;
 
       this.goToVisualIndex(this.visualIndex);
+
       this.updatePagination();
+    }
+    
+    next() {
+      if (this.isAnimating) {
+        return;
+      }
+
+      const nextIndex = (this.currentIndex + 1) % this.slides.length;
+
+      const nextVisualIndex = this.visualIndex + 1;
+
+      this.goToSlide(nextIndex, nextVisualIndex);
     }
 
     previous() {
-      this.currentIndex =
-      (this.currentIndex - 1 + this.slides.length) %
-      this.slides.length;
+      if (this.isAnimating) {
+        return;
+      }
 
-      this.visualIndex -= 1;
+      const previousIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
 
-      this.goToVisualIndex(this.visualIndex);
-      this.updatePagination();
+      const previousVisualIndex = this.visualIndex - 1;
+
+      this.goToSlide(previousIndex, previousVisualIndex);
     }
 
     createClones() {
@@ -141,6 +173,12 @@ console.log('SLIDER JS LOADED');
       firstClone.dataset.clone = 'true';
       lastClone.dataset.clone = 'true';
 
+      firstClone.setAttribute('aria-hidden', 'true');
+      lastClone.setAttribute('aria-hidden', 'true');
+
+      firstClone.inert = true;
+      lastClone.inert = true;
+
       this.track.appendChild(firstClone);
       this.track.insertBefore(lastClone, this.track.firstChild);
     }
@@ -149,18 +187,20 @@ console.log('SLIDER JS LOADED');
       const lastCloneIndex = this.slides.length + 1;
 
       if (this.visualIndex === lastCloneIndex) {
-        this.visualIndex = 1;
         this.currentIndex = 0;
 
-        this.goToVisualIndex(this.visualIndex, false);
+        this.goToVisualIndex(1, false);
+
         this.updatePagination();
+
+        return;
       }
 
       if (this.visualIndex === 0) {
-        this.visualIndex = this.slides.length;
         this.currentIndex = this.slides.length - 1;
 
-        this.goToVisualIndex(this.visualIndex, false);
+        this.goToVisualIndex(this.slides.length, false);
+
         this.updatePagination();
       }
     }
@@ -170,6 +210,12 @@ console.log('SLIDER JS LOADED');
         const isActive = index === this.currentIndex;
 
         dot.classList.toggle('is-active', isActive);
+
+        if (isActive) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
       });
     }
   }
