@@ -1,0 +1,216 @@
+<div class="hero-slider" data-slider>
+  <div class="slider__viewport">
+    <div class="slider__track">
+      {% for block in section.blocks %}
+        <div class="slider__slide" {{ block.shopify_attributes }}>
+          <h2>Slide {{ forloop.index }}</h2>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="slider__pagination" data-slider-pagination>
+      {% for block in section.blocks %}
+        <button
+          type="button"
+          data-slider-dot="{{ forloop.index0 }}"
+          aria-label="Go to slide {{ forloop.index }}"
+        ></button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <button type="button" data-slider-previous>Previous</button>
+
+  <button type="button" data-slider-next>Next</button>
+</div>
+
+{% stylesheet %}
+  .hero-slider {
+    width: 100%;
+  }
+
+  .slider__viewport {
+    overflow: hidden;
+  }
+
+  .slider__track {
+    display: flex;
+    transition: transform 400ms ease;
+  }
+
+  .slider__slide {
+    flex: 0 0 100%;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+console.log('SLIDER JS LOADED');
+
+  class Slider {
+    constructor(element) {
+     console.log('SLIDER CONSTRUCTOR', element);
+
+      this.element = element;
+      this.track = element.querySelector('.slider__track');
+      this.slides = [...element.querySelectorAll('.slider__slide')];
+
+      this.visualIndex = 1;
+      this.currentIndex = 0;
+
+      this.createClones();
+
+      this.previousButton = element.querySelector('[data-slider-previous]');
+      this.nextButton = element.querySelector('[data-slider-next]');
+
+      this.pagination = element.querySelector('[data-slider-pagination]');
+      this.dots = element.querySelectorAll('[data-slider-dot]');
+
+      this.previousButton.addEventListener('click', () => {
+        this.previous();
+      });
+
+      this.nextButton.addEventListener('click', () => {
+        this.next();
+      });
+
+      this.dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const index = Number(dot.dataset.sliderDot);
+
+          this.currentIndex = index;
+
+          this.goToVisualIndex(index + 1);
+          this.updatePagination();
+        });
+      });
+
+      this.track.addEventListener('transitionend', () => {
+        this.handleTransitionEnd();
+      });
+
+      this.goToVisualIndex(this.visualIndex, false);
+
+      this.updatePagination();
+    }
+
+    goToVisualIndex(index, animate = true) {
+      this.visualIndex = index;
+
+      const offset = index * -100;
+
+      if (!animate) {
+        this.track.style.transition = 'none';
+      }
+
+      this.track.style.transform = `translateX(${offset}%)`;
+
+      if (!animate) {
+        this.track.offsetHeight;
+        this.track.style.transition = '';
+      }
+    }
+
+    next() {
+      this.currentIndex =
+      (this.currentIndex + 1) % this.slides.length;
+
+      this.visualIndex += 1;
+
+      this.goToVisualIndex(this.visualIndex);
+      this.updatePagination();
+    }
+
+    previous() {
+      this.currentIndex =
+      (this.currentIndex - 1 + this.slides.length) %
+      this.slides.length;
+
+      this.visualIndex -= 1;
+
+      this.goToVisualIndex(this.visualIndex);
+      this.updatePagination();
+    }
+
+    createClones() {
+      const firstSlide = this.slides[0];
+      const lastSlide = this.slides[this.slides.length - 1];
+
+      const firstClone = firstSlide.cloneNode(true);
+      const lastClone = lastSlide.cloneNode(true);
+
+      firstClone.dataset.clone = 'true';
+      lastClone.dataset.clone = 'true';
+
+      this.track.appendChild(firstClone);
+      this.track.insertBefore(lastClone, this.track.firstChild);
+    }
+
+    handleTransitionEnd() {
+      const lastCloneIndex = this.slides.length + 1;
+
+      if (this.visualIndex === lastCloneIndex) {
+        this.visualIndex = 1;
+        this.currentIndex = 0;
+
+        this.goToVisualIndex(this.visualIndex, false);
+        this.updatePagination();
+      }
+
+      if (this.visualIndex === 0) {
+        this.visualIndex = this.slides.length;
+        this.currentIndex = this.slides.length - 1;
+
+        this.goToVisualIndex(this.visualIndex, false);
+        this.updatePagination();
+      }
+    }
+
+    updatePagination() {
+      this.dots.forEach((dot, index) => {
+        const isActive = index === this.currentIndex;
+
+        dot.classList.toggle('is-active', isActive);
+      });
+    }
+  }
+
+  const sliderElements = document.querySelectorAll('[data-slider]');
+
+  sliderElements.forEach((element) => {
+    const slider = new Slider(element);
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Hero Slideshow",
+  "tag": "section",
+  "class": "hero-slider-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color-scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slideshow",
+      "category": "Banners"
+    }
+  ]
+}
+{% endschema %}
