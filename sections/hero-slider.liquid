@@ -143,6 +143,26 @@
       });
 
       this.updateAutoplay();
+
+      this.isDragging = false;
+      this.startX = 0;
+      this.currentX = 0;
+
+      this.track.addEventListener('pointerdown', (event) => {
+        this.handlePointerDown(event);
+      });
+
+      this.track.addEventListener('pointermove', (event) => {
+        this.handlePointerMove(event);
+      });
+
+      this.track.addEventListener('pointerup', (event) => {
+        this.handlePointerUp(event);
+      });
+
+      this.track.addEventListener('pointercancel', () => {
+        this.resetDrag();
+      });
     }
 
     goToVisualIndex(index, animate = true) {
@@ -274,7 +294,7 @@
 
       this.startAutoplay();
     }
-    
+
     startAutoplay() {
       if (this.autoplayTimer) {
         return;
@@ -293,6 +313,52 @@
       clearInterval(this.autoplayTimer);
 
       this.autoplayTimer = null;
+    }
+
+    handlePointerDown(event) {
+      if (this.isAnimating) {
+        return;
+      }
+
+      this.isDragging = true;
+      this.startX = event.clientX;
+      this.currentX = event.clientX;
+
+      this.track.setPointerCapture(event.pointerId);
+    }
+
+    handlePointerMove(event) {
+      if (!this.isDragging) {
+        return;
+      }
+
+      this.currentX = event.clientX;
+    }
+
+    handlePointerUp(event) {
+      if (!this.isDragging) {
+        return;
+      }
+
+      const distance = this.currentX - this.startX;
+
+      this.resetDrag();
+
+      if (Math.abs(distance) < 50) {
+        return;
+      }
+
+      if (distance < 0) {
+        this.next();
+      } else {
+        this.previous();
+      }
+    }
+
+    resetDrag() {
+      this.isDragging = false;
+      this.startX = 0;
+      this.currentX = 0;
     }
   }
 
