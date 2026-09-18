@@ -59,6 +59,7 @@
       this.isAnimating = false;
 
       if (this.slides.length < 2) {
+        this.updatePagination();
         return;
       }
 
@@ -82,6 +83,10 @@
         dot.addEventListener('click', () => {
           const index = Number(dot.dataset.sliderDot);
 
+          if (index === this.currentIndex) {
+            return;
+          }
+
           this.goToSlide(index);
         });
       });
@@ -98,6 +103,46 @@
       this.goToVisualIndex(this.visualIndex, false);
 
       this.updatePagination();
+
+      this.autoplayTimer = null;
+
+      this.autoplayPaused = {
+        hover: false,
+        focus: false,
+        visibility: false,
+      };
+
+      this.element.addEventListener('mouseenter', () => {
+        this.autoplayPaused.hover = true;
+        this.updateAutoplay();
+      });
+
+      this.element.addEventListener('mouseleave', () => {
+        this.autoplayPaused.hover = false;
+        this.updateAutoplay();
+      });
+
+      this.element.addEventListener('focusin', () => {
+        this.autoplayPaused.focus = true;
+        this.updateAutoplay();
+      });
+
+      this.element.addEventListener('focusout', (event) => {
+        if (!this.element.contains(event.relatedTarget)) {
+          this.autoplayPaused.focus = false;
+          this.updateAutoplay();
+        }
+      });
+
+      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.addEventListener('visibilitychange', () => {
+        this.autoplayPaused.visibility = document.hidden;
+
+        this.updateAutoplay();
+      });
+
+      this.updateAutoplay();
     }
 
     goToVisualIndex(index, animate = true) {
@@ -126,10 +171,6 @@
         return;
       }
 
-      if (index === this.currentIndex) {
-        return;
-      }
-
       this.currentIndex = index;
       this.visualIndex = visualIndex;
       this.isAnimating = true;
@@ -138,7 +179,7 @@
 
       this.updatePagination();
     }
-    
+
     next() {
       if (this.isAnimating) {
         return;
@@ -217,6 +258,41 @@
           dot.removeAttribute('aria-current');
         }
       });
+    }
+
+    updateAutoplay() {
+      const shouldPause =
+        this.autoplayPaused.hover ||
+        this.autoplayPaused.focus ||
+        this.autoplayPaused.visibility ||
+        this.prefersReducedMotion;
+
+      if (shouldPause) {
+        this.stopAutoplay();
+        return;
+      }
+
+      this.startAutoplay();
+    }
+    
+    startAutoplay() {
+      if (this.autoplayTimer) {
+        return;
+      }
+
+      this.autoplayTimer = setInterval(() => {
+        this.next();
+      }, 5000);
+    }
+
+    stopAutoplay() {
+      if (!this.autoplayTimer) {
+        return;
+      }
+
+      clearInterval(this.autoplayTimer);
+
+      this.autoplayTimer = null;
     }
   }
 
