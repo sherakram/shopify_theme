@@ -9,6 +9,31 @@
           aria-label="Slide {{ forloop.index }} of {{ section.blocks.size }}"
           {{ block.shopify_attributes }}
         >
+          <div class="slider__media">
+            {% if block.settings.background_type == 'image' and block.settings.bg_image %}
+              {% if forloop.first %}
+                {{
+                  block.settings.bg_image
+                  | image_url: width: 1600
+                  | image_tag:
+                    widths: '400, 600, 800, 1200, 1600',
+                    sizes: '100vw',
+                    loading: 'eager',
+                    alt: block.settings.bg_image.alt
+                }}
+              {% else %}
+                {{
+                  block.settings.bg_image
+                  | image_url: width: 1600
+                  | image_tag:
+                    widths: '400, 600, 800, 1200, 1600',
+                    sizes: '100vw',
+                    loading: 'lazy',
+                    alt: block.settings.bg_image.alt
+                }}
+              {% endif %}
+            {% endif %}
+          </div>
           <h2>Slide {{ forloop.index }}</h2>
         </div>
       {% endfor %}
@@ -28,6 +53,13 @@
   <button type="button" data-slider-previous>Previous</button>
 
   <button type="button" data-slider-next>Next</button>
+
+  <div
+    class="visually-hidden slider__announcement"
+    data-slider-announcement
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
 </div>
 
 {% stylesheet %}
@@ -55,6 +87,25 @@
     flex: 0 0 100%;
     min-width: 0;
   }
+
+  .slider__media {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+
+  .slider__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slider__track {
+      transition: none;
+    }
+  }
 {% endstylesheet %}
 
 {% javascript %}
@@ -75,6 +126,8 @@
 
       this.pagination = element.querySelector('[data-slider-pagination]');
       this.dots = element.querySelectorAll('[data-slider-dot]');
+
+      this.announcement = element.querySelector('[data-slider-announcement]');
 
       this.currentIndex = 0;
       this.visualIndex = 1;
@@ -136,11 +189,13 @@
 
       const offset = index * -100;
 
-      this.setTransition(animate);
+      const shouldAnimate = animate && !this.prefersReducedMotion;
+
+      this.setTransition(shouldAnimate);
 
       this.track.style.transform = `translateX(${offset}%)`;
 
-      if (!animate) {
+      if (!shouldAnimate) {
         this.track.offsetHeight;
         this.setTransition(true);
       }
@@ -150,7 +205,15 @@
        NAVIGATION
     ---------------------------------------- */
 
-    goToSlide(index, visualIndex = index + 1) {
+    announceSlide() {
+      if (!this.announcement) {
+        return;
+      }
+
+      this.announcement.textContent = `Slide ${this.currentIndex + 1} of ${this.slides.length}`;
+    }
+
+    goToSlide(index, visualIndex = index + 1, announce = true) {
       if (this.isAnimating) {
         return;
       }
@@ -171,9 +234,12 @@
       this.updatePagination();
 
       this.updateSlideAccessibility();
+      if (announce) {
+        this.announceSlide();
+      }
     }
 
-    next() {
+    next(announce = true) {
       if (this.isAnimating) {
         return;
       }
@@ -182,10 +248,10 @@
 
       const nextVisualIndex = this.visualIndex + 1;
 
-      this.goToSlide(nextIndex, nextVisualIndex);
+      this.goToSlide(nextIndex, nextVisualIndex, announce);
     }
 
-    previous() {
+    previous(announce = true) {
       if (this.isAnimating) {
         return;
       }
@@ -194,7 +260,7 @@
 
       const previousVisualIndex = this.visualIndex - 1;
 
-      this.goToSlide(previousIndex, previousVisualIndex);
+      this.goToSlide(previousIndex, previousVisualIndex, announce);
     }
 
     /* ----------------------------------------
@@ -306,6 +372,8 @@
         const isActive = index === this.currentIndex;
 
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+
+        slide.inert = !isActive;
       });
     }
 
@@ -365,7 +433,7 @@
       }
 
       this.autoplayTimer = setInterval(() => {
-        this.next();
+        this.next(false);
       }, 5000);
     }
 
@@ -593,7 +661,35 @@
       "type": "slide",
       "name": "Slide",
       "limit": 5,
-      "settings": []
+      "settings": [
+        {
+          "type": "select",
+          "id": "background_type",
+          "label": "Background Type",
+          "options": [
+            {
+              "label": "Image",
+              "value": "image"
+            },
+            {
+              "label": "Video",
+              "value": "video"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background Image",
+          "visible_if": "{{ block.settings.background_type == 'image' }}"
+        },
+        {
+          "type": "video",
+          "id": "bg_video",
+          "label": "Background Video",
+          "visible_if": "{{ block.settings.background_type == 'video' }}"
+        }
+      ]
     }
   ],
   "presets": [
