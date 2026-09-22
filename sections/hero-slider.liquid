@@ -1,15 +1,18 @@
 <div
-  class="hero-slider hero-slider--height-{{ section.settings.desktop_height }}  hero-slider--mobile-height-{{ section.settings.mobile_height }}"
+  class="hero-slider hero-slider--height-{{ section.settings.desktop_height }} hero-slider--mobile-height-{{ section.settings.mobile_height }}"
   data-slider
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-delay="{{ section.settings.autoplay_delay | times: 1000 }}"
   role="region"
   aria-roledescription="carousel"
-  aria-label="Featured slides"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
 >
   <div class="slider__viewport">
     <div class="slider__track">
       {% for block in section.blocks %}
-        <div
+        <article
           class="slider__slide"
+          data-slide-index="{{ forloop.index0 }}"
           role="group"
           aria-roledescription="slide"
           aria-label="Slide {{ forloop.index }} of {{ section.blocks.size }}"
@@ -32,35 +35,99 @@
 
                 {{
                   block.settings.bg_image
-                  | image_url: width: 1600
+                  | image_url: width: 2000
                   | image_tag:
-                    widths: '400, 600, 800, 1200, 1600',
+                    widths: '400, 600, 800, 1000, 1200, 1600, 2000',
                     sizes: '100vw',
                     loading: 'lazy',
                     alt: block.settings.bg_image.alt
                 }}
               </picture>
+            {% elsif block.settings.background_type == 'video' and block.settings.bg_video %}
+              {{
+                block.settings.bg_video
+                | video_tag:
+                  class: 'slider__video',
+                  autoplay: false,
+                  loop: true,
+                  muted: true,
+                  controls: false,
+                  playsinline: true,
+                  preload: 'metadata'
+              }}
+            {% else %}
+              <div class="slider__media-placeholder" aria-hidden="true"></div>
             {% endif %}
           </div>
-          <h2>Slide {{ forloop.index }}</h2>
-        </div>
+
+          <div class="slider__content slider__content--{{ block.settings.content_position }}">
+            {% if block.settings.eyebrow != blank %}
+              <p class="slider__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+            {% endif %}
+
+            {% if block.settings.heading != blank %}
+              <h2 class="slider__heading">{{ block.settings.heading | escape }}</h2>
+            {% endif %}
+
+            {% if block.settings.description != blank %}
+              <div class="slider__description">
+                {{ block.settings.description }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.primary_button_label != blank or block.settings.secondary_button_label != blank %}
+              <div class="slider__actions">
+                {% if block.settings.primary_button_label != blank and block.settings.primary_button_link != blank %}
+                  <a class="slider__button slider__button--primary" href="{{ block.settings.primary_button_link }}">
+                    {{ block.settings.primary_button_label | escape }}
+                  </a>
+                {% endif %}
+
+                {% if block.settings.secondary_button_label != blank and block.settings.secondary_button_link != blank %}
+                  <a class="slider__button slider__button--secondary" href="{{ block.settings.secondary_button_link }}">
+                    {{ block.settings.secondary_button_label | escape }}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </article>
       {% endfor %}
     </div>
 
-    <div class="slider__pagination" data-slider-pagination>
-      {% for block in section.blocks %}
+    {% if section.blocks.size > 1 %}
+      <div class="slider__controls">
         <button
+          class="slider__arrow slider__arrow--previous"
           type="button"
-          data-slider-dot="{{ forloop.index0 }}"
-          aria-label="Go to slide {{ forloop.index }}"
-        ></button>
-      {% endfor %}
-    </div>
+          data-slider-previous
+          aria-label="Previous slide"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <div class="slider__pagination" data-slider-pagination>
+          {% for block in section.blocks %}
+            <button
+              class="slider__dot"
+              type="button"
+              data-slider-dot="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+            ></button>
+          {% endfor %}
+        </div>
+
+        <button
+          class="slider__arrow slider__arrow--next"
+          type="button"
+          data-slider-next
+          aria-label="Next slide"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+    {% endif %}
   </div>
-
-  <button type="button" data-slider-previous>Previous</button>
-
-  <button type="button" data-slider-next>Next</button>
 
   <div
     class="visually-hidden slider__announcement"
@@ -72,13 +139,43 @@
 
 {% stylesheet %}
   .hero-slider {
+    --slider-transition: 500ms;
+    --slider-content-width: 720px;
+    position: relative;
     width: 100%;
+    overflow: hidden;
   }
 
-  .hero-slider .slider__media {
+  .slider__viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .slider__track {
+    display: flex;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform var(--slider-transition) ease;
+    touch-action: pan-y;
+    user-select: none;
+    will-change: transform;
+  }
+
+  .slider__slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-width: 0;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .slider__media {
+    position: relative;
     width: 100%;
     height: 560px;
     overflow: hidden;
+    background: #111;
   }
 
   .hero-slider--height-small .slider__media {
@@ -93,6 +190,199 @@
     height: 700px;
   }
 
+  .slider__media picture,
+  .slider__media img,
+  .slider__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider__media img,
+  .slider__media video {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .slider__media-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f3f3f3;
+  }
+
+  .slider__content {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: min(var(--slider-content-width), calc(100% - 48px));
+    margin-inline: auto;
+    padding: 40px 24px;
+    pointer-events: none;
+  }
+
+  .slider__content--top-left,
+  .slider__content--center-left,
+  .slider__content--bottom-left {
+    margin-left: max(24px, calc((100% - var(--slider-content-width)) / 2));
+    margin-right: auto;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .slider__content--top-center,
+  .slider__content--center,
+  .slider__content--bottom-center {
+    text-align: center;
+    align-items: center;
+  }
+
+  .slider__content--top-right,
+  .slider__content--center-right,
+  .slider__content--bottom-right {
+    margin-left: auto;
+    margin-right: max(24px, calc((100% - var(--slider-content-width)) / 2));
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .slider__content--top-left,
+  .slider__content--top-center,
+  .slider__content--top-right {
+    justify-content: flex-start;
+    padding-top: 72px;
+  }
+
+  .slider__content--bottom-left,
+  .slider__content--bottom-center,
+  .slider__content--bottom-right {
+    justify-content: flex-end;
+    padding-bottom: 88px;
+  }
+
+  .slider__eyebrow,
+  .slider__heading,
+  .slider__description,
+  .slider__actions {
+    pointer-events: auto;
+  }
+
+  .slider__eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .slider__heading {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1.05;
+  }
+
+  .slider__description {
+    max-width: 620px;
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+
+  .slider__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .slider__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 22px;
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+
+  .slider__button--primary {
+    background: #111;
+    color: #fff;
+  }
+
+  .slider__button--secondary {
+    background: transparent;
+    color: inherit;
+    border-color: currentColor;
+  }
+
+  .slider__controls {
+    position: absolute;
+    z-index: 5;
+    right: 24px;
+    bottom: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    pointer-events: none;
+  }
+
+  .slider__arrow,
+  .slider__dot {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .slider__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 45%);
+    background: rgb(0 0 0 / 35%);
+    color: #fff;
+    font-size: 28px;
+    line-height: 1;
+    backdrop-filter: blur(8px);
+  }
+
+  .slider__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .slider__dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 55%);
+  }
+
+  .slider__dot.is-active {
+    width: 28px;
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  .slider__arrow:focus-visible,
+  .slider__dot:focus-visible,
+  .slider__button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
   @media screen and (max-width: 749px) {
     .hero-slider--mobile-height-small .slider__media {
       height: 320px;
@@ -105,34 +395,46 @@
     .hero-slider--mobile-height-large .slider__media {
       height: 520px;
     }
-  }
 
-  .slider__viewport {
-    overflow: hidden;
-  }
+    .slider__content {
+      width: calc(100% - 32px);
+      padding: 28px 16px 82px;
+    }
 
-  .slider__track {
-    display: flex;
-    transition: transform 400ms ease;
-    touch-action: pan-y;
-    user-select: none;
-    cursor: grab;
-  }
+    .slider__content--top-left,
+    .slider__content--center-left,
+    .slider__content--bottom-left {
+      margin-inline: auto;
+      text-align: left;
+      align-items: flex-start;
+    }
 
-  .slider__track:active {
-    cursor: grabbing;
-  }
+    .slider__content--top-right,
+    .slider__content--center-right,
+    .slider__content--bottom-right {
+      margin-inline: auto;
+      text-align: right;
+      align-items: flex-end;
+    }
 
-  .slider__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-  }
+    .slider__heading {
+      font-size: clamp(1.8rem, 9vw, 3rem);
+    }
 
-  .slider__media img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    .slider__actions {
+      gap: 10px;
+    }
+
+    .slider__button {
+      min-height: 44px;
+      padding-inline: 18px;
+    }
+
+    .slider__controls {
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -140,537 +442,543 @@
       transition: none;
     }
   }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
 {% endstylesheet %}
 
 {% javascript %}
-  console.log('SLIDER JS LOADED');
+  (() => {
+    class HeroSlider {
+      constructor(element) {
+        this.element = element;
+        this.track = element.querySelector('.slider__track');
+        this.viewport = element.querySelector('.slider__viewport');
+        this.slides = [...element.querySelectorAll('.slider__slide')];
+        this.dots = [...element.querySelectorAll('[data-slider-dot]')];
+        this.previousButton = element.querySelector('[data-slider-previous]');
+        this.nextButton = element.querySelector('[data-slider-next]');
+        this.announcement = element.querySelector('[data-slider-announcement]');
 
-  class Slider {
-    constructor(element) {
-      console.log('SLIDER CONSTRUCTOR', element);
+        this.currentIndex = 0;
+        this.visualIndex = this.slides.length > 1 ? 1 : 0;
+        this.isAnimating = false;
+        this.isDragging = false;
+        this.hasDragged = false;
+        this.dragAxis = null;
+        this.pointerId = null;
+        this.startX = 0;
+        this.currentX = 0;
+        this.startY = 0;
+        this.currentY = 0;
 
-      this.element = element;
+        this.autoplayTimer = null;
+        this.autoplayEnabled = element.dataset.autoplay === 'true';
+        this.autoplayDelay = Number(element.dataset.autoplayDelay) || 5000;
 
-      this.track = element.querySelector('.slider__track');
-      this.slides = [...element.querySelectorAll('.slider__slide')];
-      this.viewport = element.querySelector('.slider__viewport');
+        this.pause = {
+          hover: false,
+          focus: false,
+          visibility: document.hidden,
+          drag: false
+        };
 
-      this.previousButton = element.querySelector('[data-slider-previous]');
-      this.nextButton = element.querySelector('[data-slider-next]');
+        this.motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        this.prefersReducedMotion = this.motionQuery.matches;
 
-      this.pagination = element.querySelector('[data-slider-pagination]');
-      this.dots = element.querySelectorAll('[data-slider-dot]');
+        this.boundTransitionEnd = this.handleTransitionEnd.bind(this);
+        this.boundVisibilityChange = this.handleVisibilityChange.bind(this);
+        this.boundMotionChange = this.handleMotionChange.bind(this);
+        this.boundResize = this.handleResize.bind(this);
 
-      this.announcement = element.querySelector('[data-slider-announcement]');
+        if (!this.track || !this.viewport || !this.slides.length) return;
 
-      this.currentIndex = 0;
-      this.visualIndex = 1;
+        this.element.sliderInstance = this;
 
-      this.isAnimating = false;
-      this.isDragging = false;
-      this.hasDragged = false;
+        if (this.slides.length > 1) {
+          this.createClones();
+          this.setupNavigation();
+          this.setupKeyboard();
+          this.setupTransition();
+          this.setupDrag();
+          this.setupAutoplay();
+          this.setupVisibility();
+          this.setupMotionPreference();
+          this.setupResize();
 
-      this.startX = 0;
-      this.currentX = 0;
+          this.goToVisualIndex(1, false);
+        } else {
+          this.setupVisibility();
+          this.setupMotionPreference();
+          this.setupResize();
+          this.goToVisualIndex(0, false);
 
-      this.isHorizontalDrag = null;
-
-      this.autoplayTimer = null;
-
-      this.autoplayPaused = {
-        hover: false,
-        focus: false,
-        visibility: false,
-        drag: false,
-      };
-
-      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (!this.track || !this.viewport || this.slides.length === 0) {
-        return;
-      }
-
-      if (this.slides.length < 2) {
-        this.goToVisualIndex(0, false);
-        this.updatePagination();
-        return;
-      }
-
-      this.createClones();
-
-      this.setupNavigation();
-      this.setupTransition();
-      this.setupAutoplay();
-      this.setupDrag();
-
-      this.goToVisualIndex(this.visualIndex, false);
-
-      this.updatePagination();
-      this.updateSlideAccessibility();
-      this.updateAutoplay();
-    }
-
-    /* ----------------------------------------
-       TRANSITION
-    ---------------------------------------- */
-
-    setTransition(enabled) {
-      this.track.style.transition = enabled ? '' : 'none';
-    }
-
-    goToVisualIndex(index, animate = true) {
-      this.visualIndex = index;
-
-      const offset = index * -100;
-
-      const shouldAnimate = animate && !this.prefersReducedMotion;
-
-      this.setTransition(shouldAnimate);
-
-      this.track.style.transform = `translateX(${offset}%)`;
-
-      if (!shouldAnimate) {
-        this.track.offsetHeight;
-        this.setTransition(true);
-      }
-    }
-
-    /* ----------------------------------------
-       NAVIGATION
-    ---------------------------------------- */
-
-    announceSlide() {
-      if (!this.announcement) {
-        return;
-      }
-
-      this.announcement.textContent = `Slide ${this.currentIndex + 1} of ${this.slides.length}`;
-    }
-
-    goToSlide(index, visualIndex = index + 1, announce = true) {
-      if (this.isAnimating) {
-        return;
-      }
-
-      if (index < 0 || index >= this.slides.length) {
-        return;
-      }
-
-      this.currentIndex = index;
-      this.visualIndex = visualIndex;
-
-      this.isAnimating = true;
-
-      this.setTransition(true);
-
-      this.goToVisualIndex(this.visualIndex);
-
-      this.updatePagination();
-
-      this.updateSlideAccessibility();
-      if (announce) {
-        this.announceSlide();
-      }
-    }
-
-    next(announce = true) {
-      if (this.isAnimating) {
-        return;
-      }
-
-      const nextIndex = (this.currentIndex + 1) % this.slides.length;
-
-      const nextVisualIndex = this.visualIndex + 1;
-
-      this.goToSlide(nextIndex, nextVisualIndex, announce);
-    }
-
-    previous(announce = true) {
-      if (this.isAnimating) {
-        return;
-      }
-
-      const previousIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-
-      const previousVisualIndex = this.visualIndex - 1;
-
-      this.goToSlide(previousIndex, previousVisualIndex, announce);
-    }
-
-    /* ----------------------------------------
-       NAVIGATION EVENTS
-    ---------------------------------------- */
-
-    setupNavigation() {
-      this.previousButton?.addEventListener('click', () => {
-        this.previous();
-      });
-
-      this.nextButton?.addEventListener('click', () => {
-        this.next();
-      });
-
-      this.dots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-          const index = Number(dot.dataset.sliderDot);
-
-          if (index === this.currentIndex) {
-            return;
-          }
-
-          this.goToSlide(index);
-        });
-      });
-    }
-
-    /* ----------------------------------------
-       INFINITE LOOP
-    ---------------------------------------- */
-
-    createClones() {
-      const firstSlide = this.slides[0];
-      const lastSlide = this.slides[this.slides.length - 1];
-
-      const firstClone = firstSlide.cloneNode(true);
-      const lastClone = lastSlide.cloneNode(true);
-
-      firstClone.dataset.clone = 'true';
-      lastClone.dataset.clone = 'true';
-
-      firstClone.setAttribute('aria-hidden', 'true');
-      lastClone.setAttribute('aria-hidden', 'true');
-
-      firstClone.inert = true;
-      lastClone.inert = true;
-
-      this.track.appendChild(firstClone);
-      this.track.insertBefore(lastClone, this.track.firstChild);
-    }
-
-    setupTransition() {
-      this.track.addEventListener('transitionend', (event) => {
-        if (event.propertyName !== 'transform') {
-          return;
+          this.previousButton?.setAttribute('disabled', '');
+          this.nextButton?.setAttribute('disabled', '');
         }
 
-        this.handleTransitionEnd();
+        this.updatePagination();
+        this.updateAccessibility();
+        this.updateVideos();
+        this.updateAutoplay();
+      }
+
+      setTransition(enabled) {
+        this.track.style.transition = enabled ? '' : 'none';
+      }
+
+      goToVisualIndex(index, animate = true) {
+        this.visualIndex = index;
+
+        const offset = index * -100;
+        const shouldAnimate = animate && !this.prefersReducedMotion;
+
+        this.setTransition(shouldAnimate);
+        this.track.style.transform = `translate3d(${offset}%, 0, 0)`;
+
+        if (!shouldAnimate) {
+          void this.track.offsetWidth;
+          this.setTransition(true);
+        }
+      }
+
+      createClones() {
+        const first = this.slides[0];
+        const last = this.slides[this.slides.length - 1];
+
+        const firstClone = first.cloneNode(true);
+        const lastClone = last.cloneNode(true);
+
+        [firstClone, lastClone].forEach((clone) => {
+          clone.dataset.clone = 'true';
+          clone.setAttribute('aria-hidden', 'true');
+          clone.inert = true;
+
+          clone.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach((control) => {
+            control.setAttribute('tabindex', '-1');
+          });
+        });
+
+        this.track.append(lastClone);
+        this.track.insertBefore(firstClone, this.track.firstChild);
+      }
+
+      setupNavigation() {
+        this.previousButton?.addEventListener('click', () => this.previous());
+        this.nextButton?.addEventListener('click', () => this.next());
+
+        this.dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            const index = Number(dot.dataset.sliderDot);
+            if (!Number.isInteger(index) || index === this.currentIndex) return;
+            this.goToSlide(index);
+          });
+        });
+      }
+
+      setupKeyboard() {
+        this.element.addEventListener('keydown', (event) => {
+          if (!this.element.contains(document.activeElement)) return;
+
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            this.next();
+          }
+
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            this.previous();
+          }
+        });
+      }
+
+      setupTransition() {
+        this.track.addEventListener('transitionend', this.boundTransitionEnd);
+      }
+
+      handleTransitionEnd(event) {
+        if (event.target !== this.track || event.propertyName !== 'transform') return;
+
+        if (this.visualIndex === this.slides.length + 1) {
+          this.currentIndex = 0;
+          this.goToVisualIndex(1, false);
+        } else if (this.visualIndex === 0) {
+          this.currentIndex = this.slides.length - 1;
+          this.goToVisualIndex(this.slides.length, false);
+        }
 
         this.isAnimating = false;
-      });
-    }
-
-    handleTransitionEnd() {
-      const lastCloneIndex = this.slides.length + 1;
-
-      if (this.visualIndex === lastCloneIndex) {
-        this.currentIndex = 0;
-
-        this.goToVisualIndex(1, false);
-
         this.updatePagination();
-        this.updateSlideAccessibility();
-
-        return;
+        this.updateAccessibility();
+        this.updateVideos();
+        this.updateAutoplay();
       }
 
-      if (this.visualIndex === 0) {
-        this.currentIndex = this.slides.length - 1;
+      goToSlide(index, visualIndex = index + 1, announce = true) {
+        if (this.slides.length < 2 || this.isAnimating) return;
+        if (index < 0 || index >= this.slides.length) return;
 
-        this.goToVisualIndex(this.slides.length, false);
+        this.currentIndex = index;
+        this.visualIndex = visualIndex;
 
-        this.updatePagination();
-        this.updateSlideAccessibility();
-      }
-    }
-
-    /* ----------------------------------------
-       PAGINATION
-    ---------------------------------------- */
-
-    updatePagination() {
-      this.dots.forEach((dot, index) => {
-        const isActive = index === this.currentIndex;
-
-        dot.classList.toggle('is-active', isActive);
-
-        if (isActive) {
-          dot.setAttribute('aria-current', 'true');
+        if (this.prefersReducedMotion) {
+          this.goToVisualIndex(visualIndex, false);
+          this.isAnimating = false;
         } else {
-          dot.removeAttribute('aria-current');
+          this.isAnimating = true;
+          this.goToVisualIndex(visualIndex, true);
         }
-      });
-    }
 
-    updateSlideAccessibility() {
-      this.slides.forEach((slide, index) => {
-        const isActive = index === this.currentIndex;
+        this.updatePagination();
+        this.updateAccessibility();
+        this.updateVideos();
 
-        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-
-        slide.inert = !isActive;
-      });
-    }
-
-    /* ----------------------------------------
-       AUTOPLAY
-    ---------------------------------------- */
-
-    setupAutoplay() {
-      this.element.addEventListener('mouseenter', () => {
-        this.autoplayPaused.hover = true;
-        this.updateAutoplay();
-      });
-
-      this.element.addEventListener('mouseleave', () => {
-        this.autoplayPaused.hover = false;
-        this.updateAutoplay();
-      });
-
-      this.element.addEventListener('focusin', () => {
-        this.autoplayPaused.focus = true;
-        this.updateAutoplay();
-      });
-
-      this.element.addEventListener('focusout', (event) => {
-        if (!this.element.contains(event.relatedTarget)) {
-          this.autoplayPaused.focus = false;
-          this.updateAutoplay();
-        }
-      });
-
-      document.addEventListener('visibilitychange', () => {
-        this.autoplayPaused.visibility = document.hidden;
+        if (announce) this.announceSlide();
 
         this.updateAutoplay();
-      });
-    }
-
-    updateAutoplay() {
-      const shouldPause =
-        this.autoplayPaused.hover ||
-        this.autoplayPaused.focus ||
-        this.autoplayPaused.visibility ||
-        this.autoplayPaused.drag ||
-        this.prefersReducedMotion;
-
-      if (shouldPause) {
-        this.stopAutoplay();
-        return;
       }
 
-      this.startAutoplay();
-    }
+      next(announce = true) {
+        if (this.isAnimating || this.slides.length < 2) return;
 
-    startAutoplay() {
-      if (this.autoplayTimer) {
-        return;
+        const nextIndex = (this.currentIndex + 1) % this.slides.length;
+        this.goToSlide(nextIndex, this.visualIndex + 1, announce);
       }
 
-      this.autoplayTimer = setInterval(() => {
-        this.next(false);
-      }, 5000);
-    }
+      previous(announce = true) {
+        if (this.isAnimating || this.slides.length < 2) return;
 
-    stopAutoplay() {
-      if (!this.autoplayTimer) {
-        return;
+        const previousIndex =
+          (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+
+        this.goToSlide(previousIndex, this.visualIndex - 1, announce);
       }
 
-      clearInterval(this.autoplayTimer);
+      updatePagination() {
+        this.dots.forEach((dot, index) => {
+          const active = index === this.currentIndex;
+          dot.classList.toggle('is-active', active);
 
-      this.autoplayTimer = null;
-    }
+          if (active) dot.setAttribute('aria-current', 'true');
+          else dot.removeAttribute('aria-current');
+        });
+      }
 
-    /* ----------------------------------------
-       DRAG / SWIPE
-    ---------------------------------------- */
+      updateAccessibility() {
+        this.slides.forEach((slide, index) => {
+          const active = index === this.currentIndex;
 
-    setupDrag() {
-      this.track.addEventListener('pointerdown', (event) => {
-        this.handlePointerDown(event);
-      });
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+          slide.inert = !active;
+        });
+      }
 
-      this.track.addEventListener('pointermove', (event) => {
-        this.handlePointerMove(event);
-      });
+      announceSlide() {
+        if (!this.announcement) return;
+        this.announcement.textContent = `Slide ${this.currentIndex + 1} of ${this.slides.length}`;
+      }
 
-      this.track.addEventListener('pointerup', (event) => {
-        this.handlePointerUp(event);
-      });
+      updateVideos() {
+        const allVideos = [...this.element.querySelectorAll('video')];
 
-      this.track.addEventListener('pointercancel', (event) => {
-        this.handlePointerCancel(event);
-      });
+        allVideos.forEach((video) => {
+          const slide = video.closest('.slider__slide');
+          const active = slide && !slide.hasAttribute('data-clone') &&
+            Number(slide.dataset.slideIndex) === this.currentIndex;
 
-      this.track.addEventListener(
-        'click',
-        (event) => {
-          if (!this.hasDragged) {
-            return;
+          if (active && !this.prefersReducedMotion) {
+            const playPromise = video.play();
+            if (playPromise?.catch) playPromise.catch(() => {});
+          } else {
+            video.pause();
+            try {
+              video.currentTime = 0;
+            } catch (_) {}
           }
-
-          event.preventDefault();
-          event.stopPropagation();
-
-          this.hasDragged = false;
-        },
-        true
-      );
-    }
-
-    handlePointerDown(event) {
-      if (this.isAnimating) {
-        return;
+        });
       }
 
-      this.isDragging = true;
-      this.hasDragged = false;
-      this.isHorizontalDrag = null;
+      setupAutoplay() {
+        this.element.addEventListener('mouseenter', () => {
+          this.pause.hover = true;
+          this.updateAutoplay();
+        });
 
-      this.startX = event.clientX;
-      this.currentX = event.clientX;
+        this.element.addEventListener('mouseleave', () => {
+          this.pause.hover = false;
+          this.updateAutoplay();
+        });
 
-      this.startY = event.clientY;
-      this.currentY = event.clientY;
+        this.element.addEventListener('focusin', () => {
+          this.pause.focus = true;
+          this.updateAutoplay();
+        });
 
-      this.setTransition(false);
-
-      this.autoplayPaused.drag = true;
-      this.updateAutoplay();
-
-      this.track.setPointerCapture(event.pointerId);
-    }
-
-    handlePointerMove(event) {
-      if (!this.isDragging) {
-        return;
+        this.element.addEventListener('focusout', (event) => {
+          if (!this.element.contains(event.relatedTarget)) {
+            this.pause.focus = false;
+            this.updateAutoplay();
+          }
+        });
       }
 
-      this.currentX = event.clientX;
-      this.currentY = event.clientY;
-
-      const distanceX = this.currentX - this.startX;
-
-      const distanceY = this.currentY - this.startY;
-
-      if (this.isHorizontalDrag === null) {
-        const movementThreshold = 8;
-
-        if (Math.abs(distanceX) < movementThreshold && Math.abs(distanceY) < movementThreshold) {
+      updateAutoplay() {
+        if (!this.autoplayEnabled || this.slides.length < 2) {
+          this.stopAutoplay();
           return;
         }
 
-        this.isHorizontalDrag = Math.abs(distanceX) > Math.abs(distanceY);
+        const shouldPause =
+          this.pause.hover ||
+          this.pause.focus ||
+          this.pause.visibility ||
+          this.pause.drag ||
+          this.prefersReducedMotion ||
+          this.isAnimating;
+
+        if (shouldPause) {
+          this.stopAutoplay();
+          return;
+        }
+
+        this.startAutoplay();
       }
 
-      if (!this.isHorizontalDrag) {
-        return;
+      startAutoplay() {
+        if (this.autoplayTimer) return;
+
+        this.autoplayTimer = window.setTimeout(() => {
+          this.autoplayTimer = null;
+          this.next(false);
+          this.updateAutoplay();
+        }, this.autoplayDelay);
       }
 
-      this.hasDragged = true;
-
-      const viewportWidth = this.viewport.offsetWidth;
-
-      if (viewportWidth === 0) {
-        return;
+      stopAutoplay() {
+        if (!this.autoplayTimer) return;
+        window.clearTimeout(this.autoplayTimer);
+        this.autoplayTimer = null;
       }
 
-      const rawDragPercentage = (distanceX / viewportWidth) * 100;
+      setupVisibility() {
+        document.addEventListener('visibilitychange', this.boundVisibilityChange);
+      }
 
-      const maxDragPercentage = 100;
+      handleVisibilityChange() {
+        this.pause.visibility = document.hidden;
+        this.updateAutoplay();
+      }
 
-      const dragPercentage = Math.max(-maxDragPercentage, Math.min(rawDragPercentage, maxDragPercentage));
+      setupMotionPreference() {
+        if (this.motionQuery.addEventListener) {
+          this.motionQuery.addEventListener('change', this.boundMotionChange);
+        } else {
+          this.motionQuery.addListener(this.boundMotionChange);
+        }
+      }
 
-      const baseOffset = this.visualIndex * -100;
+      handleMotionChange(event) {
+        this.prefersReducedMotion = event.matches;
 
-      const offset = baseOffset + dragPercentage;
+        if (this.prefersReducedMotion) {
+          this.isAnimating = false;
+          this.goToVisualIndex(this.visualIndex, false);
+          this.updateVideos();
+        }
 
-      this.track.style.transform = `translateX(${offset}%)`;
+        this.updateAutoplay();
+      }
+
+      setupResize() {
+        window.addEventListener('resize', this.boundResize, { passive: true });
+      }
+
+      handleResize() {
+        if (this.isDragging) return;
+
+        this.setTransition(false);
+        this.track.style.transform = `translate3d(${this.visualIndex * -100}%, 0, 0)`;
+        void this.track.offsetWidth;
+        this.setTransition(true);
+      }
+
+      setupDrag() {
+        this.track.addEventListener('pointerdown', (event) => {
+          if (this.isAnimating || event.isPrimary === false) return;
+
+          this.isDragging = true;
+          this.hasDragged = false;
+          this.dragAxis = null;
+          this.pointerId = event.pointerId;
+
+          this.startX = this.currentX = event.clientX;
+          this.startY = this.currentY = event.clientY;
+
+          this.setTransition(false);
+
+          this.pause.drag = true;
+          this.updateAutoplay();
+
+          this.track.setPointerCapture(event.pointerId);
+        });
+
+        this.track.addEventListener('pointermove', (event) => {
+          if (!this.isDragging || event.pointerId !== this.pointerId) return;
+
+          this.currentX = event.clientX;
+          this.currentY = event.clientY;
+
+          const distanceX = this.currentX - this.startX;
+          const distanceY = this.currentY - this.startY;
+
+          if (this.dragAxis === null) {
+            if (Math.max(Math.abs(distanceX), Math.abs(distanceY)) < 8) return;
+            this.dragAxis = Math.abs(distanceX) > Math.abs(distanceY) ? 'x' : 'y';
+          }
+
+          if (this.dragAxis !== 'x') return;
+
+          this.hasDragged = true;
+
+          const width = this.viewport.offsetWidth;
+          if (!width) return;
+
+          const percentage = Math.max(
+            -100,
+            Math.min((distanceX / width) * 100, 100)
+          );
+
+          const offset = this.visualIndex * -100 + percentage;
+
+          this.track.style.transform = `translate3d(${offset}%, 0, 0)`;
+        });
+
+        this.track.addEventListener('pointerup', (event) => this.finishDrag(event));
+        this.track.addEventListener('pointercancel', (event) => this.cancelDrag(event));
+        this.track.addEventListener('lostpointercapture', () => {
+          if (this.isDragging) this.cancelDrag();
+        });
+
+        this.track.addEventListener(
+          'click',
+          (event) => {
+            if (!this.hasDragged) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            this.hasDragged = false;
+          },
+          true
+        );
+      }
+
+      finishDrag(event) {
+        if (!this.isDragging) return;
+
+        const distance = this.currentX - this.startX;
+        const horizontal = this.dragAxis === 'x';
+        const threshold = this.viewport.offsetWidth * 0.2;
+
+        this.releasePointer(event.pointerId);
+        this.resetDrag();
+
+        this.pause.drag = false;
+        this.updateAutoplay();
+
+        if (!horizontal || Math.abs(distance) < threshold) {
+          this.snapBack();
+          return;
+        }
+
+        if (distance < 0) this.next();
+        else this.previous();
+      }
+
+      cancelDrag(event) {
+        if (!this.isDragging) return;
+
+        if (event?.pointerId != null) {
+          this.releasePointer(event.pointerId);
+        }
+
+        this.resetDrag();
+        this.pause.drag = false;
+        this.updateAutoplay();
+        this.snapBack();
+      }
+
+      snapBack() {
+        this.isAnimating = false;
+        this.goToVisualIndex(this.visualIndex, !this.prefersReducedMotion);
+      }
+
+      releasePointer(pointerId) {
+        if (pointerId == null) return;
+
+        if (this.track.hasPointerCapture(pointerId)) {
+          this.track.releasePointerCapture(pointerId);
+        }
+
+        this.pointerId = null;
+      }
+
+      resetDrag() {
+        this.isDragging = false;
+        this.dragAxis = null;
+        this.pointerId = null;
+        this.startX = 0;
+        this.currentX = 0;
+        this.startY = 0;
+        this.currentY = 0;
+      }
+
+      destroy() {
+        this.stopAutoplay();
+
+        document.removeEventListener('visibilitychange', this.boundVisibilityChange);
+        window.removeEventListener('resize', this.boundResize);
+
+        this.track?.removeEventListener('transitionend', this.boundTransitionEnd);
+
+        if (this.motionQuery.removeEventListener) {
+          this.motionQuery.removeEventListener('change', this.boundMotionChange);
+        } else {
+          this.motionQuery.removeListener(this.boundMotionChange);
+        }
+
+        this.element.sliderInstance = null;
+      }
     }
 
-    handlePointerUp(event) {
-      if (!this.isDragging) {
-        return;
-      }
+    const initSliders = (container = document) => {
+      container.querySelectorAll('[data-slider]').forEach((element) => {
+        if (!element.sliderInstance) {
+          new HeroSlider(element);
+        }
+      });
+    };
 
-      const distance = this.currentX - this.startX;
+    initSliders();
 
-      const isHorizontal = this.isHorizontalDrag === true;
+    document.addEventListener('shopify:section:load', (event) => {
+      initSliders(event.target);
+    });
 
-      const threshold = this.viewport.offsetWidth * 0.2;
-
-      this.resetDrag();
-
-      if (this.track.hasPointerCapture(event.pointerId)) {
-        this.track.releasePointerCapture(event.pointerId);
-      }
-
-      this.autoplayPaused.drag = false;
-      this.updateAutoplay();
-
-      if (!isHorizontal) {
-        this.snapToVisualIndex(this.visualIndex);
-
-        return;
-      }
-
-      this.setTransition(true);
-
-      if (Math.abs(distance) < threshold) {
-        this.snapToVisualIndex(this.visualIndex);
-
-        return;
-      }
-
-      if (distance < 0) {
-        this.next();
-        return;
-      }
-
-      this.previous();
-    }
-
-    handlePointerCancel(event) {
-      if (!this.isDragging) {
-        return;
-      }
-
-      this.resetDrag();
-
-      if (this.track.hasPointerCapture(event.pointerId)) {
-        this.track.releasePointerCapture(event.pointerId);
-      }
-
-      this.autoplayPaused.drag = false;
-      this.updateAutoplay();
-
-      this.snapToVisualIndex(this.visualIndex);
-    }
-
-    snapToVisualIndex(index) {
-      this.setTransition(true);
-
-      this.goToVisualIndex(index);
-    }
-
-    resetDrag() {
-      this.isDragging = false;
-
-      this.startX = 0;
-      this.currentX = 0;
-
-      this.startY = 0;
-      this.currentY = 0;
-
-      this.isHorizontalDrag = null;
-    }
-  }
-
-  const sliderElements = document.querySelectorAll('[data-slider]');
-
-  sliderElements.forEach((element) => {
-    new Slider(element);
-  });
+    document.addEventListener('shopify:section:unload', (event) => {
+      event.target.querySelectorAll('[data-slider]').forEach((element) => {
+        element.sliderInstance?.destroy();
+      });
+    });
+  })();
 {% endjavascript %}
 
 {% schema %}
@@ -684,6 +992,12 @@
       "content": "Section"
     },
     {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Featured slides"
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
@@ -694,18 +1008,9 @@
       "id": "desktop_height",
       "label": "Desktop height",
       "options": [
-        {
-          "value": "small",
-          "label": "Small"
-        },
-        {
-          "value": "medium",
-          "label": "Medium"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
       ],
       "default": "medium"
     },
@@ -714,20 +1019,27 @@
       "id": "mobile_height",
       "label": "Mobile height",
       "options": [
-        {
-          "value": "small",
-          "label": "Small"
-        },
-        {
-          "value": "medium",
-          "label": "Medium"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
       ],
       "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Autoplay delay",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 5
     }
   ],
   "blocks": [
@@ -739,36 +1051,87 @@
         {
           "type": "select",
           "id": "background_type",
-          "label": "Background Type",
+          "label": "Background type",
           "options": [
-            {
-              "label": "Image",
-              "value": "image"
-            },
-            {
-              "label": "Video",
-              "value": "video"
-            }
-          ]
+            { "label": "Image", "value": "image" },
+            { "label": "Video", "value": "video" }
+          ],
+          "default": "image"
         },
         {
           "type": "image_picker",
           "id": "bg_image",
-          "label": "Background Image",
+          "label": "Desktop image",
           "visible_if": "{{ block.settings.background_type == 'image' }}"
         },
         {
           "type": "image_picker",
           "id": "mobile_image",
-          "label": "Mobile Image",
-          "info": "Optional. If empty, the desktop image will be used on mobile.",
+          "label": "Mobile image",
+          "info": "Optional. If empty, the desktop image is used on mobile.",
           "visible_if": "{{ block.settings.background_type == 'image' }}"
         },
         {
           "type": "video",
           "id": "bg_video",
-          "label": "Background Video",
+          "label": "Background video",
           "visible_if": "{{ block.settings.background_type == 'video' }}"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "center-left", "label": "Center left" },
+            { "value": "center", "label": "Center" },
+            { "value": "center-right", "label": "Center right" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom center" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ],
+          "default": "center-left"
+        },
+        {
+          "type": "header",
+          "content": "Slide content"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "primary_button_label",
+          "label": "Primary button label"
+        },
+        {
+          "type": "url",
+          "id": "primary_button_link",
+          "label": "Primary button link"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_label",
+          "label": "Secondary button label"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link",
+          "label": "Secondary button link"
         }
       ]
     }
