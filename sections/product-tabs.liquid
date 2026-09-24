@@ -17,13 +17,13 @@
 -%}
 
 <div
-  class="product-tabs color-{{ section.settings.color_scheme | default: 'scheme-1' }}"
+  class="product-tabs color-{{ section.settings.color_scheme }}"
   id="product-tabs-{{ section.id }}"
   data-section-id="{{ section.id }}"
   data-section-type="product-tabs"
 >
   <div class="page-width">
-    <div class="product-tabs__header product-tabs__header--{{ section.settings.header_layout }}">
+    <div class="product-tabs__header product-tabs__header--{{ section.settings.header_layout }} product-tabs__header--align-{{ section.settings.vertical_alignment }}">
       {%- if heading_text != blank -%}
         <h2 class="product-tabs__heading product-tabs__heading--{{ section.settings.heading_size }}">
           {{ heading_markup }}
@@ -132,10 +132,37 @@
       "id": "header_layout",
       "label": "Layout",
       "options": [
-        { "value": "vertical", "label": "Vertical" },
-        { "value": "horizontal", "label": "Horizontal" }
+        { 
+          "value": "vertical", 
+          "label": "Vertical" 
+        },
+        { 
+          "value": "horizontal", 
+          "label": "Horizontal" 
+        }
       ],
       "default": "horizontal"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        { 
+          "value": "left", 
+          "label": "Left" 
+        },
+        { 
+          "value": "center", 
+          "label": "Center" 
+        },
+        { 
+          "value": "right", 
+          "label": "Right" 
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.header_layout == 'vertical' }}"
     },
     {
       "type": "text",
@@ -267,6 +294,36 @@
         { "value": "design-2", "label": "Design 2 — Pill" }
       ],
       "default": "design-1"
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     }
   ],
   "blocks": [
