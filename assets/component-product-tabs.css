@@ -1,14 +1,9 @@
-/* ==========================================================================
-   Product Tabs — mobile-first
-   Consumes tokens from css-variables.liquid / base.css. No hardcoded
-   colors, fonts, or widths.
-   ========================================================================== */
-
 .product-tabs {
+  display: block;
   padding-block: clamp(2rem, 5vw, 4rem);
 }
 
-/* ---------- Header ---------- */
+/* Header */
 
 .product-tabs__header {
   display: flex;
@@ -22,15 +17,23 @@
   margin: 0;
 }
 
-.product-tabs__heading--small { font-size: calc(1.5rem * var(--font-heading--scale)); }
-.product-tabs__heading--medium { font-size: calc(2rem * var(--font-heading--scale)); }
-.product-tabs__heading--large { font-size: calc(2.5rem * var(--font-heading--scale)); }
+.product-tabs__heading--small {
+  font-size: calc(1.5rem * var(--font-heading--scale));
+}
+
+.product-tabs__heading--medium {
+  font-size: calc(2rem * var(--font-heading--scale));
+}
+
+.product-tabs__heading--large {
+  font-size: calc(2.5rem * var(--font-heading--scale));
+}
 
 .product-tabs__highlight {
   color: var(--color-primary);
 }
 
-/* ---------- Tab nav ---------- */
+/* Tab nav */
 
 .product-tabs__nav {
   display: flex;
@@ -93,7 +96,7 @@
   border-color: var(--color-btn-primary-border);
 }
 
-/* ---------- View all button ---------- */
+/* View all button */
 
 .product-tabs__view-all-wrap {
   display: flex;
@@ -158,54 +161,14 @@
   color: var(--color-primary);
 }
 
-/* ---------- Grid / swipe ---------- */
+/* Grid */
 
 .product-tabs__grid {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-/* Default (no swipe): CSS grid, mobile column count */
-.product-tabs__grid:not(.product-tabs__grid--swipe) {
   display: grid;
   gap: var(--tabs-row-gap, 24px) var(--tabs-col-gap, 16px);
-}
-
-.product-tabs__grid--cols-mobile-1:not(.product-tabs__grid--swipe) {
-  grid-template-columns: 1fr;
-}
-
-.product-tabs__grid--cols-mobile-2:not(.product-tabs__grid--swipe) {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-/* Swipe mode: horizontal scroll-snap on mobile */
-.product-tabs__grid--swipe {
-  display: flex;
-  gap: var(--tabs-col-gap, 16px);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
-  scrollbar-width: none;
-}
-
-.product-tabs__grid--swipe::-webkit-scrollbar {
-  display: none;
-}
-
-.product-tabs__grid--swipe .product-tabs__item {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-}
-
-.product-tabs__grid--swipe.product-tabs__grid--cols-mobile-1 .product-tabs__item {
-  width: 82%;
-}
-
-.product-tabs__grid--swipe.product-tabs__grid--cols-mobile-2 .product-tabs__item {
-  width: 48%;
 }
 
 .product-tabs__empty {
@@ -216,13 +179,44 @@
   text-align: center;
 }
 
-/* Image ratio is intentionally NOT set here — it's controlled globally by
-   Theme settings → Product Cards → Image ratio (settings.image_ratio),
-   which the card's own component CSS already applies via
-   --product-card-image-ratio. Overriding it per-section would fight the
-   merchant's global choice and break consistency across the theme. */
+@media (max-width: 767px) {
+  .product-tabs__grid:not(.product-tabs__grid--swipe).product-tabs__grid--cols-mobile-1 {
+    grid-template-columns: 1fr;
+  }
 
-/* ---------- Tablet / Desktop ---------- */
+  .product-tabs__grid:not(.product-tabs__grid--swipe).product-tabs__grid--cols-mobile-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-tabs__grid--swipe {
+    display: flex;
+    gap: var(--tabs-col-gap, 16px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .product-tabs__grid--swipe::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-tabs__grid--swipe .product-tabs__item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .product-tabs__grid--swipe.product-tabs__grid--cols-mobile-1 .product-tabs__item {
+    width: 82%;
+  }
+
+  .product-tabs__grid--swipe.product-tabs__grid--cols-mobile-2 .product-tabs__item {
+    width: 48%;
+  }
+}
+
+/* Tablet / Desktop (>= 768px)*/
 
 @media (min-width: 768px) {
   .product-tabs__header--horizontal {
@@ -239,21 +233,28 @@
     display: inline-flex;
   }
 
-  .product-tabs__grid--swipe {
-    display: grid;
-    overflow: visible;
+  .product-tabs__grid--cols-desktop-2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .product-tabs__grid--cols-desktop-2 { grid-template-columns: repeat(2, 1fr); }
-  .product-tabs__grid--cols-desktop-3 { grid-template-columns: repeat(3, 1fr); }
-  .product-tabs__grid--cols-desktop-4 { grid-template-columns: repeat(4, 1fr); }
-  .product-tabs__grid--cols-desktop-5 { grid-template-columns: repeat(5, 1fr); }
-  .product-tabs__grid--cols-desktop-6 { grid-template-columns: repeat(6, 1fr); }
+  .product-tabs__grid--cols-desktop-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-  .product-tabs__grid--swipe .product-tabs__item {
-    width: auto;
+  .product-tabs__grid--cols-desktop-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-tabs__grid--cols-desktop-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .product-tabs__grid--cols-desktop-6 {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   .product-tabs__tab,
