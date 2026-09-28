@@ -1,10 +1,11 @@
 .product-tabs {
   display: block;
-  padding-block: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--pt-padding-top) var(--pt-padding-bottom);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* Header */
-
 .product-tabs__header {
   display: flex;
   flex-direction: column;
@@ -34,7 +35,6 @@
 }
 
 /* Tab nav */
-
 .product-tabs__nav {
   display: flex;
   gap: 0.5rem;
@@ -98,7 +98,6 @@
 }
 
 /* View all button */
-
 .product-tabs__view-all-wrap {
   display: flex;
   justify-content: center;
@@ -163,7 +162,6 @@
 }
 
 /* Grid */
-
 .product-tabs__grid {
   list-style: none;
   margin: 0;
@@ -233,46 +231,7 @@
   }
 }
 
-/* Tablet / Desktop (>= 768px)*/
-
-/* @media (min-width: 768px) {
-  .product-tabs__header--horizontal {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .product-tabs__header--horizontal .product-tabs__nav {
-    margin-inline-start: auto;
-  }
-
-  .product-tabs__view-all--top {
-    display: inline-flex;
-  }
-
-  .product-tabs__grid--cols-desktop-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .product-tabs__grid--cols-desktop-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .product-tabs__grid--cols-desktop-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .product-tabs__grid--cols-desktop-5 {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .product-tabs__grid--cols-desktop-6 {
-    grid-template-columns: repeat(6, 1fr);
-  }
-} */
-
 @media (min-width: 768px) {
-
   /* Desktop: Horizontal layout */
   .product-tabs__header--horizontal {
     flex-direction: row;
@@ -341,16 +300,8 @@
   .product-tabs__grid--cols-desktop-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .product-tabs__grid--cols-desktop-5 {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .product-tabs__grid--cols-desktop-6 {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .product-tabs__tab,
   .button.product-tabs__view-all {

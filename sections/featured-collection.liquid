@@ -11,14 +11,18 @@
   endif
 -%}
 
-<div
-  class="featured-collection color-{{ section.settings.color_scheme }}"
-  style="
-    --fc-columns-desktop: {{ fc_columns_desktop }};
-    --fc-columns-mobile: {{ fc_columns_mobile }};
+{% style %}
+  #FeaturedCollection-{{ section.id }} {
     --fc-padding-top: {{ section.settings.padding_top }}px;
     --fc-padding-bottom: {{ section.settings.padding_bottom }}px;
-  "
+    --fc-columns-desktop: {{ fc_columns_desktop }};
+    --fc-columns-mobile: {{ fc_columns_mobile }};
+  }
+{% endstyle %}
+
+<div
+  class="featured-collection color-{{ section.settings.color_scheme }}"
+  id="FeaturedCollection-{{ section.id }}"
   aria-labelledby="FeaturedCollection-heading-{{ section.id }}"
 >
   <div class="page-width">
@@ -87,8 +91,7 @@
 
 {% stylesheet %}
   .featured-collection {
-    padding-top: var(--fc-padding-top, 48px);
-    padding-bottom: var(--fc-padding-bottom, 48px);
+    padding-block: var(--fc-padding-top) var(--fc-padding-bottom);
     background-color: var(--color-background);
     color: var(--color-foreground);
   }

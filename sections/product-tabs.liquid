@@ -1,3 +1,5 @@
+{{ 'component-product-tabs.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign heading_text = section.settings.heading
   assign highlight = section.settings.heading_highlight
@@ -15,6 +17,15 @@
     assign has_button = true
   endif
 -%}
+
+{% style %}
+  #product-tabs-{{ section.id }} {
+    --pt-padding-top: {{ section.settings.padding_top }}px;
+    --pt-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --tabs-col-gap: {{ section.settings.column_gap }}px;
+    --tabs-row-gap: {{ section.settings.row_gap }}px;
+  }
+{% endstyle %}
 
 <div
   class="product-tabs color-{{ section.settings.color_scheme }}"
@@ -72,30 +83,36 @@
         role="tabpanel"
         aria-labelledby="product-tabs-tab-{{ section.id }}-{{ block.id }}"
         data-tab-panel="{{ block.id }}"
-        {% unless forloop.first %}hidden{% endunless %}
+        {% unless forloop.first %}
+          hidden
+        {% endunless %}
         {{ block.shopify_attributes }}
       >
-        <ul
-          class="product-tabs__grid
-            product-tabs__grid--cols-mobile-{{ section.settings.columns_mobile }}
-            product-tabs__grid--cols-desktop-{{ section.settings.columns_desktop }}
-            {% if section.settings.enable_swipe_mobile %}product-tabs__grid--swipe{% endif %}"
-          style="--tabs-col-gap: {{ section.settings.column_gap }}px; --tabs-row-gap: {{ section.settings.row_gap }}px;"
-        >
+        <ul class="product-tabs__grid product-tabs__grid--cols-mobile-{{ section.settings.columns_mobile }} product-tabs__grid--cols-desktop-{{ section.settings.columns_desktop }} {% if section.settings.enable_swipe_mobile %}product-tabs__grid--swipe{% endif %}">
           {%- if tab_collection != blank -%}
             {%- for product in tab_collection.products limit: section.settings.products_per_tab -%}
               <li class="product-tabs__item">
                 {% render 'product-card', product: product, lazy: forloop.index %}
               </li>
             {%- else -%}
-              <li class="product-tabs__empty">
-                This collection has no products yet.
-              </li>
+              <li class="product-tabs__empty">This collection has no products yet.</li>
             {%- endfor -%}
           {%- else -%}
-            <li class="product-tabs__empty">
-              Select a collection for this tab.
-            </li>
+            {%- for i in (1..4) -%}
+              <li class="product-tabs__item">
+                {{
+                  'product-apparel-'
+                  | append: forloop.index
+                  | placeholder_svg_tag: 'featured-collection__placeholder-svg'
+                }}
+              </li>
+            {%- endfor -%}
+
+            {% comment %}
+              <li class="product-tabs__empty">
+                Select a collection for this tab.
+              </li>
+            {% endcomment %}
           {%- endif -%}
         </ul>
 
@@ -114,7 +131,6 @@
   </div>
 </div>
 
-{{ 'component-product-tabs.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'component-product-tabs.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
@@ -132,13 +148,13 @@
       "id": "header_layout",
       "label": "Layout",
       "options": [
-        { 
-          "value": "vertical", 
-          "label": "Vertical" 
+        {
+          "value": "vertical",
+          "label": "Vertical"
         },
-        { 
-          "value": "horizontal", 
-          "label": "Horizontal" 
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
         }
       ],
       "default": "horizontal"
@@ -148,17 +164,17 @@
       "id": "vertical_alignment",
       "label": "Vertical alignment",
       "options": [
-        { 
-          "value": "left", 
-          "label": "Left" 
+        {
+          "value": "left",
+          "label": "Left"
         },
-        { 
-          "value": "center", 
-          "label": "Center" 
+        {
+          "value": "center",
+          "label": "Center"
         },
-        { 
-          "value": "right", 
-          "label": "Right" 
+        {
+          "value": "right",
+          "label": "Right"
         }
       ],
       "default": "center",
@@ -181,9 +197,18 @@
       "id": "heading_size",
       "label": "Heading size",
       "options": [
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" }
+        { 
+          "value": "small", 
+          "label": "Small" 
+        },
+        { 
+          "value": "medium", 
+          "label": "Medium" 
+        },
+        { 
+          "value": "large", 
+          "label": "Large" 
+        }
       ],
       "default": "medium"
     },
@@ -205,7 +230,7 @@
       "id": "columns_desktop",
       "label": "Columns on desktop",
       "min": 2,
-      "max": 6,
+      "max": 4,
       "step": 1,
       "default": 4
     },
@@ -238,8 +263,14 @@
       "id": "columns_mobile",
       "label": "Columns on mobile",
       "options": [
-        { "value": "1", "label": "1 column" },
-        { "value": "2", "label": "2 columns" }
+        { 
+          "value": "1", 
+          "label": "1 column" 
+        },
+        { 
+          "value": "2", 
+          "label": "2 columns" 
+        }
       ],
       "default": "2"
     },
@@ -275,9 +306,18 @@
       "id": "button_style",
       "label": "Button style",
       "options": [
-        { "value": "primary", "label": "Primary" },
-        { "value": "secondary", "label": "Secondary" },
-        { "value": "link", "label": "Underline" }
+        { 
+          "value": "primary", 
+          "label": "Primary" 
+        },
+        { 
+          "value": "secondary", 
+          "label": "Secondary" 
+        },
+        { 
+          "value": "link", 
+          "label": "Underline" 
+        }
       ],
       "default": "link"
     },
@@ -290,8 +330,14 @@
       "id": "tab_style",
       "label": "Navigation style",
       "options": [
-        { "value": "design-1", "label": "Design 1 — Underline" },
-        { "value": "design-2", "label": "Design 2 — Pill" }
+        { 
+          "value": "design-1", 
+          "label": "Design 1 — Underline" 
+        },
+        { 
+          "value": "design-2", 
+          "label": "Design 2 — Pill" 
+        }
       ],
       "default": "design-1"
     },
@@ -351,9 +397,15 @@
       "name": "Product tabs",
       "category": "Products",
       "blocks": [
-        { "type": "tab" },
-        { "type": "tab" },
-        { "type": "tab" }
+        { 
+          "type": "tab" 
+        }, 
+        { 
+          "type": "tab" 
+        }, 
+        { 
+          "type": "tab" 
+        }
       ]
     }
   ]
