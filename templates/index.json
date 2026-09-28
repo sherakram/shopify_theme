@@ -57,10 +57,55 @@
         "show_button": true,
         "color_scheme": "scheme-1"
       }
+    },
+    "product-tabs": {
+      "type": "product-tabs",
+      "settings": {
+        "header_layout": "horizontal",
+        "vertical_alignment": "center",
+        "heading": "What's hot",
+        "heading_highlight": "Highlight text",
+        "heading_size": "medium",
+        "products_per_tab": 8,
+        "columns_desktop": 4,
+        "column_gap": 16,
+        "row_gap": 32,
+        "columns_mobile": "2",
+        "enable_swipe_mobile": true,
+        "show_button_beside_tabs": true,
+        "button_label": "Shop all products",
+        "button_style": "link",
+        "tab_style": "design-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "tab_1":{
+          "type": "tab",
+          "settings" : {
+            "tab_name": "New tab"
+          }
+        },
+        "tab_2":{
+          "type": "tab",
+          "settings" : {
+            "tab_name": "New tab"
+          }
+        },
+        "tab_3":{
+          "type": "tab",
+          "settings" : {
+            "tab_name": "New tab"
+          }
+        }
+      },
+      "block_order": ["tab_1", "tab_2", "tab_3"]
     }
   },
   "order": [
     "hero",
-    "featured_collection"
+    "featured_collection",
+    "product-tabs"
   ]
 }

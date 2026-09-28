@@ -1,30 +1,21 @@
-class ProductTabs extends HTMLElement {
-  connectedCallback() {
-    this.tabs = Array.from(this.querySelectorAll('[data-tab-trigger]'));
-    this.panels = Array.from(this.querySelectorAll('[data-tab-panel]'));
+(function () {
+  if (window.__productTabsBound) return;
+  window.__productTabsBound = true;
 
-    if (!this.tabs.length) return;
+  function activate(tab) {
+    const root = tab.closest('.product-tabs');
+    if (!root || tab.classList.contains('is-active')) return;
 
-    this.tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => this.activate(index));
-      tab.addEventListener('keydown', (event) => this.onKeydown(event, index));
-    });
-  }
+    const targetId = tab.getAttribute('data-tab-trigger');
 
-  activate(index) {
-    const targetTab = this.tabs[index];
-    if (!targetTab || targetTab.classList.contains('is-active')) return;
-
-    const targetId = targetTab.getAttribute('data-tab-trigger');
-
-    this.tabs.forEach((tab) => {
-      const isTarget = tab === targetTab;
-      tab.classList.toggle('is-active', isTarget);
-      tab.setAttribute('aria-selected', String(isTarget));
-      tab.setAttribute('tabindex', isTarget ? '0' : '-1');
+    root.querySelectorAll('[data-tab-trigger]').forEach((t) => {
+      const isTarget = t === tab;
+      t.classList.toggle('is-active', isTarget);
+      t.setAttribute('aria-selected', String(isTarget));
+      t.setAttribute('tabindex', isTarget ? '0' : '-1');
     });
 
-    this.panels.forEach((panel) => {
+    root.querySelectorAll('[data-tab-panel]').forEach((panel) => {
       const isTarget = panel.getAttribute('data-tab-panel') === targetId;
       panel.classList.toggle('is-active', isTarget);
       if (isTarget) {
@@ -35,32 +26,42 @@ class ProductTabs extends HTMLElement {
     });
   }
 
-  onKeydown(event, index) {
+  document.addEventListener('click', (event) => {
+    const tab = event.target.closest('[data-tab-trigger]');
+    if (tab) activate(tab);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const tab = event.target.closest('[data-tab-trigger]');
+    if (!tab) return;
+
     const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
     if (!keys.includes(event.key)) return;
 
-    event.preventDefault();
+    const root = tab.closest('.product-tabs');
+    const tabs = Array.from(root.querySelectorAll('[data-tab-trigger]'));
+    const index = tabs.indexOf(tab);
     let newIndex = index;
 
     if (event.key === 'ArrowRight') {
-      newIndex = (index + 1) % this.tabs.length;
+      newIndex = (index + 1) % tabs.length;
     } else if (event.key === 'ArrowLeft') {
-      newIndex = (index - 1 + this.tabs.length) % this.tabs.length;
+      newIndex = (index - 1 + tabs.length) % tabs.length;
     } else if (event.key === 'Home') {
       newIndex = 0;
     } else if (event.key === 'End') {
-      newIndex = this.tabs.length - 1;
+      newIndex = tabs.length - 1;
     }
 
-    this.tabs[newIndex].focus();
-    this.activate(newIndex);
-  }
-}
+    event.preventDefault();
+    tabs[newIndex].focus();
+    activate(tabs[newIndex]);
+  });
 
-document.querySelectorAll('.product-tabs').forEach((section) => {
-  if (!section.hasAttribute('data-tabs-initialized')) {
-    section.setAttribute('data-tabs-initialized', 'true');
-    Object.setPrototypeOf(section, ProductTabs.prototype);
-    section.connectedCallback();
-  }
-});
+  document.addEventListener('shopify:block:select', (event) => {
+    const blockId = event.detail && event.detail.blockId;
+    if (!blockId) return;
+    const tab = document.querySelector('[data-tab-trigger="' + CSS.escape(blockId) + '"]');
+    if (tab) activate(tab);
+  });
+})();

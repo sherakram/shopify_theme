@@ -74,7 +74,8 @@
           <ul class="featured-collection__grid featured-collection__grid--placeholder" role="list" aria-hidden="true">
             {%- for i in (1..4) -%}
               <li class="featured-collection__item featured-collection__placeholder">
-                {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'featured-collection__placeholder-svg' }}
+                {% capture placeholder_name %}product-{% cycle 1, 2, 3, 4 %}{% endcapture %}
+                {{ placeholder_name | placeholder_svg_tag: 'featured-collection__placeholder-svg' }}
               </li>
             {%- endfor -%}
           </ul>

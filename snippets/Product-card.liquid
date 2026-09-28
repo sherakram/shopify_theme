@@ -37,9 +37,7 @@
   class="pc{% if sold_out %} pc--sold-out{% endif %}{% if quick_add_hover_only and any_quick_button %} pc--quick-hover{% endif %}"
   aria-label="{{ product.title | escape }}"
 >
-  {{- '<!-- Product Card: ' | append: product.title | append: ' -->' -}}
 
-  {%- comment -%} ── Image ── {%- endcomment -%}
   <a href="{{ product.url }}" class="pc__media" aria-hidden="true" tabindex="-1">
     <div class="pc__image-wrap">
       {%- if product.featured_image -%}
@@ -107,7 +105,6 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} ── Quick add ── {%- endcomment -%}
     {%- if sold_out == false -%}
       {%- if product.variants.size == 1 and show_quick_add -%}
         <div class="pc__quick-add">
@@ -162,7 +159,6 @@
     {%- endif -%}
   </a>
 
-  {%- comment -%} ── Info ── {%- endcomment -%}
   <div class="pc__info">
     {%- if show_vendor and product.vendor != blank -%}
       <p class="pc__vendor">{{ product.vendor }}</p>

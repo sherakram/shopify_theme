@@ -27,9 +27,7 @@
   }
 {% endstyle %}
 
-<div
-  class="product-tabs color-{{ section.settings.color_scheme }}"
-  id="product-tabs-{{ section.id }}"
+<div class="product-tabs color-{{ section.settings.color_scheme }}" id="product-tabs-{{ section.id }}"
   data-section-id="{{ section.id }}"
   data-section-type="product-tabs"
 >
@@ -100,19 +98,14 @@
           {%- else -%}
             {%- for i in (1..4) -%}
               <li class="product-tabs__item">
-                {{
-                  'product-apparel-'
-                  | append: forloop.index
-                  | placeholder_svg_tag: 'featured-collection__placeholder-svg'
-                }}
+                {% capture placeholder_name %}product-{% cycle 1, 2, 3, 4 %}{% endcapture %}
+                {{ placeholder_name | placeholder_svg_tag: 'featured-collection__placeholder-svg' }}
               </li>
             {%- endfor -%}
 
-            {% comment %}
               <li class="product-tabs__empty">
                 Select a collection for this tab.
               </li>
-            {% endcomment %}
           {%- endif -%}
         </ul>
 

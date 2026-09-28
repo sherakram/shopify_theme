@@ -5,27 +5,22 @@
   color: var(--color-foreground);
 }
 
-/* Header */
 .product-tabs__header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
-
 .product-tabs__heading {
   color: var(--color-foreground-heading);
   margin: 0;
 }
-
 .product-tabs__heading--small {
   font-size: calc(1.5rem * var(--font-heading--scale));
 }
-
 .product-tabs__heading--medium {
   font-size: calc(2rem * var(--font-heading--scale));
 }
-
 .product-tabs__heading--large {
   font-size: calc(2.5rem * var(--font-heading--scale));
 }
@@ -34,7 +29,6 @@
   color: var(--color-primary);
 }
 
-/* Tab nav */
 .product-tabs__nav {
   display: flex;
   gap: 0.5rem;
@@ -72,7 +66,6 @@
   border-radius: 2px;
 }
 
-/* Design 1 — underline */
 .product-tabs__nav--design-1 .product-tabs__tab {
   border-bottom: 2px solid transparent;
   padding-bottom: 0.75rem;
@@ -84,7 +77,6 @@
   font-weight: 600;
 }
 
-/* Design 2 — pill */
 .product-tabs__nav--design-2 .product-tabs__tab {
   border: 1px solid var(--color-border);
   border-radius: 999px;
@@ -97,7 +89,6 @@
   border-color: var(--color-btn-primary-border);
 }
 
-/* View all button */
 .product-tabs__view-all-wrap {
   display: flex;
   justify-content: center;
@@ -161,7 +152,6 @@
   color: var(--color-primary);
 }
 
-/* Grid */
 .product-tabs__grid {
   list-style: none;
   margin: 0;
@@ -232,7 +222,6 @@
 }
 
 @media (min-width: 768px) {
-  /* Desktop: Horizontal layout */
   .product-tabs__header--horizontal {
     flex-direction: row;
     align-items: center;
@@ -243,7 +232,6 @@
     margin-inline-start: auto;
   }
 
-  /* Desktop: Vertical layout */
   .product-tabs__header--vertical {
     flex-direction: column;
   }
@@ -286,7 +274,6 @@
     align-self: flex-end;
   }
 
-  /* Show top button on desktop */
   .product-tabs__view-all--top {
     display: inline-flex;
   }
